@@ -1,0 +1,60 @@
+# Operating system and editor metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+**/__MACOSX/
+**/.idea/
+**/.settings/
+**/.classpath
+**/.project
+**/.factorypath
+**/*.iml
+
+# Nested repository metadata preserved while publishing as a monorepo
+**/.git.monorepo-backup/
+
+# Java build outputs and packaged applications
+**/target/
+**/distribution/
+**/*.class
+**/*.jar
+!**/.mvn/wrapper/maven-wrapper.jar
+**/*.war
+**/*.ear
+
+# Private keys and key stores (public certificates may remain tracked)
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+
+# Front-end and mini-program generated files
+**/node_modules/
+**/dist/
+**/miniprogram_npm/
+**/unpackage/
+**/.cache/
+**/project.private.config.json
+
+# Deployment artifacts and local runtime configuration
+deploy/backend-apps/artifacts/
+deploy/backend-apps/*.tar
+**/application-running.properties
+!deploy/backend-apps/config/**/application-running.properties
+**/bin/
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Logs, temporary files and test outputs
+*.log
+*.tmp
+*.bak
+*.swp
+tests/jmeter/results/*
+!tests/jmeter/results/.gitkeep
+tests/jmeter/config/auth.local.properties
+tests/jmeter/data/users.local.csv

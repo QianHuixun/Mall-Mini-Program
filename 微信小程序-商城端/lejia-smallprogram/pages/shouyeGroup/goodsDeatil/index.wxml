@@ -1,0 +1,385 @@
+<!--pages/shouyeGroup/goodsDeatil/index.wxml-->
+<van-config-provider theme-vars="{{ theme }}">
+<view id="goodsDeatil">
+
+	<view class="main" style="padding-bottom:{{goodsInfo.mtype=='INTEGRAL_PRESALE_GOODS'?(goodsInfo.isPresale?(isIphoneX?192:94):0):(goodsInfo.enabled?(isIphoneX?192:94):0)}}rpx">
+		<!-- 商品轮播图 -->
+		<view class="lj-swipe">
+			<swiper circular="true" bindchange="swiperChange">
+				<swiper-item wx:for="{{goodsInfo.photo1}}" bindtap="handlePreviewImage" data-listName="photo1" data-url="{{item}}" wx:key="index">
+					<image src="{{item}}" catchtap="handlePreviewimg" data-url="{{item}}"></image>
+				</swiper-item>
+				<swiper-item wx:if="{{!goodsInfo.photo1||!goodsInfo.photo1.length}}">
+					<image src="/images/no-pic.png"></image>
+				</swiper-item>
+			</swiper>
+
+			<view class="page-view">
+				<text class="page-num">{{swiperCurre}}</text>
+				<text class="page-total-num">/{{swipeTotal}}</text>
+			</view>
+		</view>
+		<!-- 商品价格、名称、销售情况 -->
+		<view class="detail-view">
+			<!-- 积分价格 -->
+			<view class="count-down-item integral" wx:if="{{ goodsInfo.mtype == 'INTEGRAL_GOODS' ||   goodsInfo.mtype == 'INTEGRAL_BNYP_GOODS'}}">
+				<!-- <view>
+					<text class="top-big">{{selectSpaces.point}}</text>
+					<text class="top-small">积分</text>
+					<text class="top-small"> + ￥</text>
+					<text class="top-big">{{selectSpaces.priceBig}}</text>
+					<text class="top-small">{{selectSpaces.priceSmall}}</text>
+					<text class="decoration-b">￥</text>
+					<text class="decoration">{{selectSpaces.priceOld}}</text>
+				</view>
+				<view class="sales-condition">
+					<text>剩余{{selectSpaces.kcNum}}</text>
+					<text>已销{{goodsInfo.xsNum}}笔</text>
+				</view> -->
+				<view class="detail-view-name">
+					<image src="/images/goodsDetail/point_back.png" />
+					<view class="count-down-item_detail">
+						<view class="price-cell">
+              <text class="top-small">￥</text>
+							<text class="top-big">{{selectSpaces.priceBig}}</text>
+							<text class="top-small">{{selectSpaces.priceSmall}}</text>
+							<text class="top-small" wx:if="{{selectSpaces.point}}">+</text>
+              <text class="top-big" wx:if="{{selectSpaces.point}}">{{selectSpaces.point}}</text>
+							<text class="top-small" wx:if="{{selectSpaces.point}}">积分</text>
+							
+							<text class="decoration-b">￥</text>
+							<text class="decoration">{{selectSpaces.priceOld}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="sales-condition">
+					<view>
+						<van-tag custom-class="tag-type" size="large">
+							{{goodsInfo.mtypeName}}
+						</van-tag>
+					</view>
+					<view>
+						<!-- <text>剩余{{selectSpaces.kcNum}}</text>
+						<text>已销{{goodsInfo.xsNum}}笔</text> -->
+					</view>
+				</view>
+			</view>
+			<!-- 拼团价格、预售价格与特价价格 -->
+			<view class=" count-down-item" wx:elif="{{ goodsInfo.mtype == 'COLLAGE_GOODS' || goodsInfo.mtype == 'SPECIAL_GOODS' ||goodsInfo.mtype == 'INTEGRAL_PRESALE_GOODS'}}">
+				<view class="detail-view-name">
+					<image wx:if="{{!time}}" src="/images/goodsDetail/unactive_back.png" />
+					<image wx:else src="/images/goodsDetail/active_back.png" />
+					<view class="count-down-item_detail">
+						<view class="price-cell">
+							<text class="top-small">￥</text>
+							<text class="top-big">{{selectSpaces.priceBig}}</text>
+							<text class="top-small">{{selectSpaces.priceSmall}}</text>
+							<view class="collage-price-box">
+								<view class="collage-price" wx:if="{{goodsInfo.mtype == 'COLLAGE_GOODS'}}">拼团价</view>
+								<view>
+									<text class="decoration-b">￥</text>
+									<text class="decoration">{{selectSpaces.priceOld}}</text>
+								</view>
+							</view>
+						</view>
+						<van-count-down wx-if="{{time}}" use-slot time="{{ time }}" bind:change="onChange">
+							<view class="time-tips">{{ goodsInfo.mtype == 'COLLAGE_GOODS'?'拼团剩余':(goodsInfo.mtype == 'INTEGRAL_PRESALE_GOODS'?'距离预售结束还有':'距离结束还有')}}</view>
+							<text wx:if="{{ timeData.days != 0 && timeData.days }}" class="time-top-item-text day">{{ timeData.days }}天</text>
+							<text class="time-top-item">{{ timeData.hours? timeData.hours:0}}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{ timeData.minutes?timeData.minutes:0 }}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{ timeData.seconds?timeData.seconds:0 }}</text>
+						</van-count-down>
+						<view class="end-time" wx:elif="{{goodsInfo.endDate}}">
+							<view class="time-tips">结束时间</view>
+							<view>{{goodsInfo.endDate+' 23:59:59'}}</view>
+						</view>
+					</view>
+				</view>
+				<view class="sales-condition">
+					<view>
+						<van-tag custom-class="tag-type" size="large">
+							{{goodsInfo.mtypeName=='团购'?'拼团':goodsInfo.mtypeName}}
+						</van-tag>
+					</view>
+					<view>
+						<!-- <text>剩余{{selectSpaces.kcNum}}</text>
+						<text>已销{{goodsInfo.xsNum}}笔</text> -->
+					</view>
+				</view>
+			</view>
+			<!-- 其他 -->
+			<view class="detail-view-top-box" wx:else>
+				<view class="detail-view-top">
+					<view>
+                        <van-icon wx:if="{{goodsInfo.mtype == 'INTEGRAL_MSD_GOODS'}}" name="/images/heart.png" size="45rpx" />
+						<text class="top-small" wx:if="{{goodsInfo.mtype !== 'INTEGRAL_MSD_GOODS'}}">￥</text>
+						<text class="top-big">{{selectSpaces.priceBig}}</text>
+						<text class="top-small">{{selectSpaces.priceSmall}}</text>
+						<text class="decoration-b" wx:if="{{goodsInfo.mtype !== 'INTEGRAL_MSD_GOODS'}}">￥</text>
+						<text class="decoration">{{selectSpaces.priceOld}}</text>
+					</view>
+					
+					<!-- <van-icon name="{{!goodsInfo.collection ? 'like-o' : 'like'}}"
+						color="{{!goodsInfo.collection ? '#5C5C5C' : '#f24539'}}" size="35rpx" bindtap="addCollection" /> -->
+				</view>
+				<!-- 会员价格 -->
+				<view class="price-mermber" wx:if="{{ selectSpaces.priceMember&&selectSpaces.priceMember!=null  }}">
+					<text class="price-mermber-txt">￥<text>{{selectSpaces.priceMember}}</text></text>
+					<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+				</view>
+				<!--end 会员价格 -->
+			</view>
+			<!--销售情况 -->
+			<view class="detail-view-center">
+			<van-tag plain type="success" custom-class="tag" color="{{theme.primary}}" wx:if="{{goodsInfo.tag}}">{{goodsInfo.tag}}</van-tag>{{goodsInfo.title }}
+			</view>
+     
+      <!--销售情况 -->
+			<view class="detail-view-desc" wx:if="{{goodsInfo.description}}">
+				{{goodsInfo.description}}
+			</view>
+      <view class="detail-view-points" wx:if="{{goodsInfo.sellingPoints.length}}">
+        <view class="detail-view-points-item" wx:for="{{goodsInfo.sellingPoints}}" wx:key="index">
+          <view class="detail-view-points-item_point">
+            <view class="text-ellipsis">{{item.content}}</view>
+          </view>
+          <view  class="detail-view-points-item_tips">
+            <view class="text-ellipsis">{{item.name}}</view>
+          </view>
+        </view>
+      </view>
+      <!-- 商户 -->
+      <view class="detail-view-shop">
+        <view class="detail-view-shop_name">
+          <block  wx:if="{{goodsInfo.vendorName && marketType === 'VENDOR_SHOPPING_MALL'}}">
+            <van-image src="/images/classification/i_cat_shop.png" width="48rpx" height="30rpx"></van-image> {{goodsInfo.vendorName}}
+          </block>
+          <block  wx:if="{{goodsInfo.supplierName && marketType === 'VENDOR_SHOPPING_MALL'}}">
+            <van-image src="/images/classification/i_cat_shop_bak.png" width="48rpx" height="30rpx"></van-image> {{goodsInfo.supplierName}}
+          </block>
+        </view>
+        <view class="sales-condition">
+          	<text>销量:{{goodsInfo.xsNum}}</text>
+						<text>库存:{{selectSpaces.kcNum}}</text>	
+				</view>
+
+      </view>
+		</view>
+		<!-- 商品规格 -->
+		<view class="specificatSelect">
+			<view class="num_cell">商品规格</view>
+			<view class="space-tag">
+				<van-tag bindtap="tagClick" data-id='{{item}}' wx:for="{{goodsInfo.spaces}}" wx:key="index" custom-class="tag-space {{item.pkey == selectSpaces.pkey ? 'tag-space-active' : ''}} {{theme.value}}  {{item.kcNum < 1 ? 'noNum' : ''}}" size="large">
+					{{item.space}} | {{goodsInfo.mtype == 'INTEGRAL_MSD_GOODS' ? '' : '￥'}}{{item.price}}
+				</van-tag>
+			</view>
+      <view wx:if="{{goodsInfo.processLines.length > 0}}">
+          <view class="wrapper-container_main_title">加工服务</view>
+          <view class="wrapper-container_main_tip">免烧菜，二楼加工点为您完成加工</view>
+          <van-radio-group value="{{ ProcessRadio }}" >
+          <view class="process_list">      
+           <view class="process_item {{item.process == ProcessRadio ? 'checked' : ''}}" wx:for="{{goodsInfo.processLines}}"  wx:key="index" bindtap="handleProcessChecked" data-process="{{item.process}}">
+            <van-image src="{{item.photo}}" width="128rpx" height="128rpx"/>
+            <view class="process_item_title">{{item.processName}}</view>
+            <view class="process_item_price">
+              <view class="process_item_price__left">
+              ￥{{ item.price }}
+              </view>
+              <view class="process_item_price__right">
+                <van-radio name="{{item.process}}" size="40rpx" checked-color="#0DAE4E"></van-radio>
+              </view>
+            </view>
+           </view>
+        
+          </view>
+        </van-radio-group>
+        </view>
+			<view class="num_cell">
+				<view class="title">数量</view>
+				<van-stepper value="{{ goodsInfo.num }}" custom-class="space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" disable-input bind:change="stepChange" min="1" max="{{goodsInfo.mtype=='GIFT_GOODS'?1:selectSpaces.kcNum}}" integer disabled="{{ goodsInfo.mtype=='CUT_GOODS' }}" style="z-index:0" button-size="64rpx" />
+			</view>
+			<view class="num_cell" wx:if="{{goodsInfo.presaleStartDate}}">
+				<view class="title">发货时间</view>
+				<view>{{goodsInfo.presaleStartDate == goodsInfo.presaleEndDate ? goodsInfo.presaleStartDate : goodsInfo.presaleStartDate + '~' + goodsInfo.presaleEndDate}}</view>
+			</view>
+		</view>
+        <view class="merchant" wx:if="{{ goodsInfo.vendor }}" data-pkey="{{goodsInfo.vendor}}" bindtap="goMerchantDetail">
+            <view class="merchant-info">
+                <view class="merchant-head">
+                    <van-image src="{{ goodsInfo.vendorHeadIcon || '/images/classification/merchant-noPic.png'}}"></van-image>
+                </view>
+                <view class="merchant-booth">
+                    <view class="merchant-booth-name">{{goodsInfo.vendorName }}</view>
+                    <view class="merchant-booth-num">{{goodsInfo.vendorBooth}}</view>
+                </view>
+            </view>
+            <view class="merchant-sale">在售：{{ goodsInfo.vendorGoodsNum }} ></view>
+        </view>
+        <view class="recommending-goods" wx:if="{{recommendGoods && recommendGoods.length}}">
+            <view class="recommending-goods-title">为你推荐</view>
+            <view class="recommending-goods-list">
+                <view class="goods-list-item" wx:for="{{recommendGoods}}" data-pkey="{{item.pkey}}" wx:key="index" bindtap="goRecommendGoods">
+                    <view class="goods-list-item-image">
+                        <van-image width="100%" height="100%" src="{{item.wrapperPhoto}}"></van-image>
+                    </view>
+                    <view class="goods-list-item-name">{{item.title}}</view>
+                    <view class="goods-list-item-price">￥{{ item.price }}</view>
+                    <view class="goods-list-item-buy" data-goods="{{item}}" data-index="{{index}}" catchtap="addRecommendGoodsByBuyCar">
+                        <van-icon name="/images/carAdd_plus_{{theme.value}}.png" size="44rpx" info="{{item.gwcNum || ''}}" />
+                        <!-- <van-icon name="/images/classification/i-cart.png" size="70rpx" color="#7f7f7f" info="{{gwcNum?(gwcNum>99?'99+':gwcNum):''}}" /> -->
+                    </view>
+                </view>
+            </view>
+        </view>
+		<!-- 相关菜谱 -->
+		<view class="recipe-container" wx:if="{{recipeList.length}}">
+			<view class="recipe-container-title">相关菜谱</view>
+			<view class="recipe-list">
+				<view class="recipe-list-item" wx:for="{{recipeList}}" wx:key="index" data-pkey="{{item.pkey}}" bindtap="goRecipe">
+					<van-image custom-class="recipe-list-item_img" src="{{item.photo}}" width="162rpx" height="162rpx" catchtap="handlePreviewimg" data-url="{{item.photo}}" />
+					<view class="item-bottom">
+						{{item.name}}
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 商品描述 -->
+    <van-tabs custom-class="specificat-tabs" nav-class="specificat-tabs-nav" tab-class="specificat-tabs-tab" line-width="0" border="{{false}}" active="{{ tabActive }}" bind:change="onTabChange">
+      <van-tab title="图文详情">
+        <view class="image-box">
+          <mp-html content="{{goodsInfo.content2 || '<div style=\"padding: 12px\">无</div>'}}" />
+        </view>
+      </van-tab>
+  <van-tab title="评价" wx:if="{{enableComment}}">
+    <!-- 评价区 -->
+  <view class="look-evaluate-main"> 
+    <!-- 商品模块 -->
+      <view class="look-evaluate-item" wx:for="{{commentList}}" wx:key="index">
+        <!-- 商品信息、五星栏 -->
+        <view class="look-evaluate-item_top">
+          <van-image src="{{ item.memberPhoto ||'/images/no-pic.png' }}" custom-class="top-image"></van-image>
+          <view class="look-evaluate-item_top__right">
+            <view class="look-evaluate-item_top__right___top">{{item.memberNameSecret}}</view>
+            <view class="look-evaluate-item_top__right___bottom">
+              <van-rate color="#FCCF0A" void-color="#FEF1B5" gutter="8rpx" size="28rpx" value="{{ item.score }}" bind:change="onChange" readonly="{{true}}" /> 
+            </view>
+          </view>
+        </view>
+        <!-- end 商品信息、五星栏 -->
+        <!-- 评论文本区 -->
+        <view class="look-evaluate_item__middle">
+          {{item.content || '无评价信息' }}
+        </view>
+        <!-- end 评论文本区 -->
+        <!-- 图片上传区 -->
+        <view class="look-evaluate_item__third">
+          <van-image src="{{ subItem ||'/images/no-pic.png' }}" custom-class="item-image" wx:for="{{item.photo}}" wx:key="subIndex" wx:for-item="subItem" wx:for-index="subIndex" bind:tap="handlePreview" data-images="{{item.photo}}" data-image="{{subItem}}"></van-image>
+        </view>
+        <!-- end 图片上传区 -->
+        <!-- 回复区 -->
+        <view class="look-evaluate_item__bottom {{item.replyContent ? '' : 'hidden'}}" >
+          <text class="text-content {{item.isExpand ? 'ellipsis' : 'unellipsis'}}">{{item.replyContent}}
+          </text>
+          <view 
+        wx:if="{{item.showExpandBtn}}" 
+        bindtap="toggleExpand" 
+        data-index="{{index}}"
+        class="toggle-btn"
+      >
+        <view wx:if="{{item.isExpand}}">...展开<van-icon name="arrow-down" size="26rpx"/></view>
+      </view>
+        </view>
+        <!-- end 回复区 -->
+      </view>
+      <van-divider contentPosition="center" fontSize="24rpx" borderColor="#fff">
+      <van-loading wx:if="{{isLoading && hasMore}}" />
+      <view wx:if="{{!commentList.length && !isLoading}}">无评价信息</view>
+      <view wx:elif="{{!hasMore}}">已加载全部</view> 
+      </van-divider>
+    <!-- end 商品模块 -->
+  </view>
+  <!-- end 评论区 -->
+  </van-tab>
+</van-tabs>
+	
+    <!-- end 商品描述 -->
+        <!-- 市场logo -->
+        <view class="footer-logo" wx:if="{{ascription == 22 || ascription == 13}}">
+            <van-image src="/images/tj-logo.png" width="233rpx" height="42rpx"></van-image>
+        </view>
+	</view>
+	<!-- 底部提交栏 -->
+	<view class="footer" style="padding-bottom:{{isIphoneX?68:0}}rpx" wx:if="{{ goodsInfo.mtype=='INTEGRAL_PRESALE_GOODS'?goodsInfo.isPresale:goodsInfo.enabled}}">
+		<view class="bottom">
+			<!-- 购物车按钮 -->
+			<view class="car-view" bindtap="goCart" wx:if="{{goodsInfo.mtype !== 'INTEGRAL_PRESALE_GOODS'}}">
+				<van-icon name="/images/classification/i-cart_{{theme.value}}.png" size="70rpx" color="#7f7f7f" info="{{gwcNum?(gwcNum>99?'99+':gwcNum):''}}" />
+        购物车
+			</view>
+			<!-- 收藏按钮 -->
+			<view class="favorite-view" bindtap="addCollection">
+				<van-icon name="{{goodsInfo.collection?'/images/goodsDetail/favorite.png':'/images/goodsDetail/unfavorite.png'}}" size="48rpx" />
+        收藏
+			</view>
+			<!-- 砍价按钮 -->
+			<view class="btn-cut-box" wx:if="{{ goodsInfo.mtype=='CUT_GOODS'}}">
+				<van-button wx:if="{{goodsInfo.rcutAmt!=0}}" color="#63BF57" custom-class="btn-cut" catchtap="goSubmit">
+					<view class="btn-cut_num">{{goodsInfo.isCut?'已砍￥'+goodsInfo.cutAmt:'￥'+goodsInfo.spaces[0].priceOld}}
+					</view>
+					<view class="btn-cut_tit">直接购买</view>
+				</van-button>
+				<van-button wx:if="{{goodsInfo.rcutAmt==0}}" color="#f24539" custom-class="btn-cut but-cut-success collage-buy-btn" bindtap="goSubmit">砍价成功，￥{{goodsInfo.spaces[0].price}}直接购买</van-button>
+				<button wx:else class="btn-cut-container" open-type="getUserInfo" catchtap="stopBubble" bind:getuserinfo="handlePopup" data-pkey="{{goodsInfo.spaces[0].pkey}}" data-img="{{goodsInfo.photo1[0]}}">{{goodsInfo.isCut?'继续砍价':'发起砍价'}}</button>
+
+			</view>
+			<!-- 各类按钮 -->
+			<view class="btn-box" wx:else>
+				<van-button color="#FFA21D" custom-class="car-btn" round bindtap="handleAddTOCart" wx:if="{{ goodsInfo.mtype != 'INTEGRAL_PRESALE_GOODS' &&  goodsInfo.mtype != 'COLLAGE_GOODS'&&goodsInfo.mtype != 'GIFT_GOODS'&&goodsInfo.mtype != 'COUPON_GOODS'}}">
+					加入购物车</van-button>
+				<van-button color="{{goodsInfo.mtype == 'COLLAGE_GOODS'?'#FF3A3A':theme.primary}}" custom-class="buy-btn {{goodsInfo.mtype == 'COLLAGE_GOODS'?'collage-buy-btn':(goodsInfo.mtype == 'INTEGRAL_PRESALE_GOODS'||goodsInfo.mtype == 'GIFT_GOODS'||goodsInfo.mtype == 'COUPON_GOODS')?'presale-buy-btn':''}}" round bind:click="goSubmit" catchtap="stopBubbling" disabled="{{false}}">
+					{{ goodsInfo.mtype == 'COLLAGE_GOODS' ? '立即拼团' : '立即购买' }}</van-button>
+			</view>
+
+			<!-- 分享按钮 -->
+			<view class="share-btn-box" wx:if="{{(goodsInfo.mtype == 'SHARE_GOODS'||goodsInfo.mtype == 'COLLAGE_GOODS')&&hasShare}}">
+				<view class="pop" style="bottom:{{isIphoneX?168:100}}rpx" wx:if="{{goodsInfo.mtype == 'SHARE_GOODS'}}">
+					<image src="/images/goodsDetail/share_pop.png"></image>
+					<view class="share-btn-content">返￥{{selectSpaces.comm}}</view>
+					<van-icon color="#fff" custom-class="close-icon" name="cross" size="20rpx" catchtap="handleColseShare" />
+					<van-button custom-class="share-btn" round color="#fd7549" open-type="share" data-pkey="{{ pkey }}"></van-button>
+				</view>
+				<view class="pop" style="bottom:{{isIphoneX?168:100}}rpx" wx:if="{{goodsInfo.mtype == 'COLLAGE_GOODS'}}">
+					<image src="/images/goodsDetail/collage_pop.png"></image>
+					<van-icon color="#fff" custom-class="close-icon" name="cross" size="20rpx" catchtap="handleColseShare" />
+					<view class="clloage-number">{{goodsInfo.extendCon}}人团</view>
+					<van-button custom-class="share-btn" n size="small" round color="#fd7549" open-type="share" data-pkey="{{ pkey }}" wx:if="{{ userInfo }}"></van-button>
+					<van-button wx:else custom-class="share-btn" size="small" round color="#fd7549" bind:click="handleGetuserinfo"></van-button>
+				</view>
+			</view> 
+
+			<!-- <van-icon name="" size="24px" custom-class="share-icon" open-type="share"/> -->
+		</view>
+	</view>
+	<!-- 砍价弹窗 -->
+	<van-popup show="{{ show }}" bind:close="onClose" round closeable close-icon-position="top-right" custom-class="van-popup">
+		<view class="popup-box">
+			<view class="img-box">
+				<image src="{{imgUrl + 'cut_share.png'}}" mode="aspectFit"></image>
+			</view>
+			<view class="label">
+				分享砍价，可多砍一刀
+			</view>
+			<button open-type="share" class="share-btn">邀请好友去砍价</button>
+		</view>
+	</van-popup>
+    <!-- 规格选择框 -->
+    <space-dialog id="spaceView" isShow="{{ isSpaceShow }}" bind:refresh="handleAddRecommendTOCart" isbindAddCart="{{true}}"></space-dialog>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+
+</view>
+</van-config-provider>

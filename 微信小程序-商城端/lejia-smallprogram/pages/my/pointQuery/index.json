@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  },
+  "navigationBarBackgroundColor": "#dab987",
+  "navigationBarTitleText": "积分查询"
+}

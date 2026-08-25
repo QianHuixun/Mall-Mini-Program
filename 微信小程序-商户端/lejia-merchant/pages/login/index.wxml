@@ -1,0 +1,22 @@
+<!-- 
+@url: pages/login/index.wxml
+@description: 登录页
+@author: sx
+@date: 2020-07-29
+ -->
+<view id="login">
+	<van-image width="100" height="100" round src="{{AppInfo.photo}}" />
+  <van-cell-group border="{{ false }}">
+	<van-field value="{{ phone }}" clearable placeholder="请输入手机号" type="number" bind:change="onPhoneChange" />
+	<van-field value="{{ sms }}" center clearable placeholder="请输入短信验证码" bind:change="onSmsChange" use-button-slot>
+		<van-button bind:click="sendCode" disabled='{{getyzmDisabled}}' slot="button" color="linear-gradient(-49deg, #45d282 0%, #21ce92 100%, #3fda86 100%, #5de67a 100%), linear-gradient(#fb5858, #fb5858);" round size="small" type="primary">{{getyzmText}}</van-button>
+	</van-field>
+  </van-cell-group>
+  <view class="describe">
+    <van-checkbox custom-class="checked-box" catchtap="openNote" value="{{ checked }}" shape="square" icon-size="20px">
+    </van-checkbox>
+    勾选代表你已同意<text class="txt" ><text class="tit" >{{AppInfo.vendorName}}</text></text>
+    <text class="txt" bindtap="routerTo" data-url="/pages/userAgreement/userAgreement">用户协议</text>、<text class="txt" bindtap="routerTo" data-url="/pages/privacy/index">隐私协议</text>
+  </view>
+  <van-button type="primary" color="linear-gradient(-49deg, #45d282 0%, #21ce92 100%, #3fda86 100%, #5de67a 100%), linear-gradient(#fb5858, #fb5858);" round block open-type='getUserInfo' bindgetuserinfo='setUserInfo' disabled="{{!checked}}">登录</van-button>
+</view>

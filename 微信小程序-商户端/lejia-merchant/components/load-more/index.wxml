@@ -1,0 +1,5 @@
+<!--components/load-more/index.wxml-->
+<view class="loadmore" hidden='{{!showThis}}' bindtap='clickLoadMore'>
+	<text wx:if="{{!hasMore}}">{{text}}</text>
+	<van-loading size="24px" wx:if="{{hasMore}}">{{text}}</van-loading>
+</view>

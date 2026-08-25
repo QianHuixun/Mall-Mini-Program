@@ -1,0 +1,30 @@
+<!--components/presale-mall/index.wxml-->
+<!--components/points-mall/index.wxml-->
+<view class="points-mall" wx:if="{{goodsList.length}}">
+  <image class="points-mall-back" src="/images/memberBenefits/points_mall_bg.png"></image>
+  <view class="points-mall-title" catchtap="goIntegral">
+    <view class="title-left">预售专区</view>
+    <view class="title-right">更多
+      <van-icon name="arrow" size="16rpx" />
+    </view>
+  </view>
+  <view class="points-mall-box">
+    <view class="points-mall-container">
+      <view class="points-mall-box-item" wx:for="{{goodsList}}" wx:key="pkey" data-id='{{item}}' bind:tap="goodsClick">
+        <view class="points-mall-box-image">
+          <van-image src="{{item.wrapperPhoto ? (item.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}" lazy-load="{{true}}" custom-class="images"></van-image>
+        </view>
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-desc">
+          <view class="num-view">
+            <text class="price">￥{{item.price}}</text>
+            <text class="points" wx:if="{{item.point}}">+{{item.point}}积分</text>
+            <text class="num-ori">￥{{item.priceOld}}</text>
+          </view>
+          <!-- <van-icon color="#d7a73c" size="66rpx" name="/images/memberBenefits/memberBenefits_car.png" data-id="{{item}}" data-pkey="{{item.pkey}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" /> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"></space-dialog>

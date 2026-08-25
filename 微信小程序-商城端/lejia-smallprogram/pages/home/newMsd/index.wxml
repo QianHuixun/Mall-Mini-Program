@@ -1,0 +1,175 @@
+<view id="integral-zone" class="{{theme.value}}">
+    <drag-ball type="SELF_EMPLOYED"></drag-ball>
+    <!-- 搜索 -->
+    <view class="search-bar">
+        <view class="search-bar-box">
+            <search-bar mType="INTEGRAL_MSD_GOODS" style="width: 100%;"></search-bar>
+        </view>
+    </view>
+    <!-- 专区广告轮播 -->
+    <swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+        <swiper-item wx:for="{{imageList}}" wx:key="pkey">
+            <van-image src="{{item.photo}}" data-url="{{item.objKey}}" data-urltype="{{item.urlType}}"
+                data-istabbar="{{item.isTabbar}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+        </swiper-item>
+    </swiper>
+    <!-- 商品 -->
+    <view class="goods-container">
+        <!-- 一级分类 -->
+        <view class="first-classify-contianer">
+            <scroll-view class="first-scroll" scroll-with-animation scroll-into-view="{{scrollActiveClassify}}"
+                enhanced="{{true}}" show-scrollbar="{{false}}" scroll-x="true">
+                <view wx:for="{{classifyList}}" wx:key="index" id="scroll-{{item.pkey}}" data-pkey="{{item.pkey}}"
+                    bind:tap="firstClassifyTab"
+                    class="scroll-{{item.pkey}} item {{activeClassify == item.pkey ? 'active' : ''}}">
+                    <van-image src="{{item.photo ? item.photo : '/images/no-pic.png'}}"
+                        custom-class="first-classify-img"></van-image>
+                    <text class="classify-name">{{ item.name }}</text>
+                </view>
+            </scroll-view>
+            <view class="first-classify-all" bind:tap="showAllClassify">
+                <view class="first-classify-all_main">
+                    <van-icon name="arrow-down" color="#333" size="16rpx">
+                    </van-icon>
+                    <view>全部</view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 全部分类 -->
+        <view class="all-classify" wx:if="{{isShowAllClassify}}">
+            <view class="all-classify-container">
+                <scroll-view class="first-scroll" scroll-with-animation enhanced="{{true}}" show-scrollbar="{{false}}">
+                    <view wx:for="{{classifyList}}" wx:key="index" id="scroll-{{item.pkey}}" data-pkey="{{item.pkey}}"
+                        bind:tap="firstClassifyTab"
+                        class="scroll-{{item.pkey}} item {{activeClassify == item.pkey ? 'active' : ''}}">
+                        <van-image src="{{item.photo ? item.photo : '/images/no-pic.png'}}"
+                            custom-class="first-classify-img"></van-image>
+                        <text class="classify-name">{{ item.name }}</text>
+                    </view>
+                </scroll-view>
+                <view class="hidden-bar" bind:tap="hideAllClassify">
+                    收起 <van-icon name="arrow-up" color="#999" size="24rpx"></van-icon>
+                </view>
+            </view>
+            <view class="all-classify-cover" catch:tap="hideAllClassify"></view>
+        </view>
+        <!-- end 全部 -->
+
+        <!-- 左侧2级分类 -->
+        <view class="wx_left" style="height: calc( 100vh - {{statusBarHeight + 52}}px - 88rpx - 107rpx - 88rpx);">
+            <scroll-view class="first-classify second-scroller" scroll-with-animation
+                scroll-into-view="{{ scrollActiveClassifyTwo}}" scroll-y="true" enhanced="{{true}}"
+                show-scrollbar="{{false}}">
+                <view wx:for="{{classifyTwoList}}" wx:key="index" id="scroll-{{activeClassify}}-{{item.pkey}}"
+                    data-pkey="{{item.pkey}}" bind:tap="secondClassifyTab"
+                    class="scroll-{{activeClassify}}-{{item.pkey}} item {{ activeClassifyTwo == item.pkey  ? 'active' : ''}}">
+                    {{ item.name }}
+                </view>
+            </scroll-view>
+        </view>
+        <!-- 右侧商品 -->
+        <view class="wx_right" style="height: calc( 100vh - {{statusBarHeight + 52}}px - 88rpx - 107rpx - 88rpx);">
+            <!-- 销量价格栏 -->
+            <view class="goods_popup_sort">
+                <view></view>
+                <view class="goods_popup_delivery">
+                    <view class="goods_popup_sort__item {{goodsSortType == 'SALED' ? 'checked' : ''}}" data-type="SALED"
+                        bind:tap="handleSort">
+                        销量
+                        <van-icon name="/images/classification/i-sort.png" size="18rpx"
+                            wx:if="{{goodsSortType != 'SALED' || hotSort == 0}}" />
+                        <van-icon name="/images/classification/i-sort-desc.png" size="18rpx"
+                            wx:if="{{goodsSortType == 'SALED' && hotSort == 1}}" />
+                        <van-icon name="/images/classification/i-sort-asc.png" size="18rpx"
+                            wx:if="{{goodsSortType == 'SALED' && hotSort == 2}}" />
+                    </view>
+                    <view class="goods_popup_sort__item {{goodsSortType == 'PRICE' ? 'checked' : ''}}" data-type="PRICE"
+                        bind:tap="handleSort">
+                        价格
+                        <van-icon name="/images/classification/i-sort.png" size="18rpx"
+                            wx:if="{{goodsSortType != 'PRICE' || priceSort == 0}}" />
+                        <van-icon name="/images/classification/i-sort-desc.png" size="18rpx"
+                            wx:if="{{goodsSortType == 'PRICE' && priceSort == 1}}" />
+                        <van-icon name="/images/classification/i-sort-asc.png" size="18rpx"
+                            wx:if="{{goodsSortType == 'PRICE' && priceSort == 2}}" />
+                    </view>
+                </view>
+            </view>
+            <!-- 商品滚动框 -->
+            <scroll-view bind:scroll="onScroll" scroll-y id="scroller" class="scroller" custom-class="scoller"
+                scroll-top="{{scrollTop}}" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd"
+                enable-back-to-top="{{false}}" bindscrolltolower="scrollGoodsBottom" enhanced="{{true}}"
+                show-scrollbar="{{false}}">
+                <view class="scroller-container">
+                    <!-- 分类广告 -->
+                    <view class="classify-images" wx:if="{{classifyImageList.length}}">
+                        <swiper class="ads-swiper" indicator-dots="true" circular="true"
+                            indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#FFFFFF" autoplay>
+                            <swiper-item wx:for="{{classifyImageList}}" wx:key="imageIndex" wx:key-="imageIndex"
+                                wx:for-item="imageItem" wx:for-index="imageIndex">
+                                <van-image src="{{imageItem.photo}}" data-url="{{imageItem.objKey}}"
+                                    data-jump="{{imageItem.jump}}" data-urltype="{{imageItem.urlType}}" bindtap="goAds"
+                                    lazy-load="{{ true }}" show-loading />
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                    <!-- 商品列表 -->
+                    <view class="goodItem">
+                        <view class="goods_list" wx:for="{{goodsList}}" wx:key="{{item.pkey}}" catchtap="goDetail"
+                            data-index="{{index}}" wx:for-item="subItem" wx:for-index="subIndex"
+                            data-pkey="{{subItem.pkey}}" data-source="{{subItem.source}}">
+                            <view class="goods_list_container">
+                                <van-image
+                                    src="{{subItem.wrapperPhoto ? (subItem.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}"
+                                    custom-class="goods_photo" />
+                                <view class="goods_detail">
+                                    <view class="goods_title">
+                                        <view class="title">
+                                            {{subItem.title}}
+                                        </view>
+                                        <view class="num ellipsis" wx:if="{{subItem.sellingPoints.length}}">
+                                            <text wx:for="{{subItem.sellingPoints}}" wx:key="pointsIndex"
+                                                wx:for-index="pointsIndex"
+                                                wx:for-item="pointsItem">{{pointsItem}}{{pointsIndex ==
+                                                subItem.sellingPoints.length-1 ? '' : " | "}}</text>
+                                        </view>
+                                        <view class="item-tag" wx:if="{{subItem.tag}}">{{subItem.tag}}</view>
+                                    </view>
+                                    <view class="goods_price">
+                                        <view class="price">
+                                            <view class="big-price-box">
+                                                <van-icon name="/images/heart.png" size="30rpx" />
+                                                {{subItem.bigPrice}}.{{subItem.smallPrice}}
+                                            </view>
+                                            <view class="del_price" wx:if="{{subItem.source != 'JD'}}">￥{{ subItem.priceOld }}</view>
+                                        </view>
+                                        <van-icon color="#d7a73c" size="47rpx" name="/images/carAdd_plus_{{theme.value}}.png"
+                                            data-id="{{subItem}}" data-pkey="{{subItem.pkey}}" data-space="{{subItem.spaces[0].pkey}}"
+                                            data-source="{{subItem.source}}" info="{{subItem.gwcNum || ''}}"
+                                            catchtap="getSpaceNumber" data-index="{{subIndex}}" />
+                                    </view>
+                                </view>
+                                <view wx:if="{{subItem.kcNum <= 0}}" class="sold-out">已售罄</view>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 商品底部文字 -->
+                    <van-divider contentPosition="center" fontSize="24rpx" borderColor="#fff">
+                        <view wx:if="{{isLoading}}">加载中...</view>
+                        <view wx:if="{{showHint && !isLoading}}">
+                            <view wx:if="{{!isEnd}}" class="switch-hint">
+                                上拉切换分类
+                            </view>
+                            <view wx:if="{{isEnd}}">已加载全部</view>
+                        </view>
+                    </van-divider>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+
+<!-- 规格选择弹出层 -->
+<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+    isbindAddCart="{{true}}"></space-dialog>

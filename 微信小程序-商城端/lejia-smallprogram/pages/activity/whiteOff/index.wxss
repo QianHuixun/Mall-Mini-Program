@@ -1,0 +1,58 @@
+/* pages/activity/whiteOff/index.wxss */
+#whiteOff {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient( 0deg, #FFF5EB 0%, #FFE4C5 100%);
+}
+
+.whiteOff_title {
+  padding-top: 340rpx;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36rpx;
+  color: #A56D41;
+}
+
+.whiteOff_button {
+  padding: 112rpx 96rpx 0 96rpx;
+}
+.whiteOff_button .van-button--disabled {
+  background: #CCCCCC !important;
+  border-color: #CCCCCC !important;
+  opacity: 1 !important;
+}
+
+.whiteOff_tips {
+  margin-top: 32rpx;
+  font-weight: 500;
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 36rpx;
+  text-align: center;
+}
+
+.whiteOff_popup {
+  position:fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #F2F4F7;
+}
+
+.whiteOff_popup {
+  padding-top: 144rpx;
+  text-align: center;
+}
+
+.success_text {
+  padding-top: 32rpx;
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #0DAE4E;
+  line-height: 36rpx;
+}
+
+.whiteOff_popup .whiteOff_title {
+  padding-top: 80rpx;
+}

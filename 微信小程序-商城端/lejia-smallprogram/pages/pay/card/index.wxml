@@ -1,0 +1,54 @@
+<!--pages/my/card1/index.wxml-->
+<view id="card">
+    <van-tabs active="{{ active }}" bind:change="onChange">
+        <van-tab title="可用({{cardNum}})" name="{{true}}"></van-tab>
+        <van-tab title="不可用({{cardNotNum}})" name="{{false}}"></van-tab>
+    </van-tabs>
+    <view class="scroll-view-box">
+        <view class="scroll-view">
+            <block wx:if="{{datalist.length > 0}}">
+                <van-radio-group value="{{ selectCard }}">
+                    <view class="['card-item', {{active === true ? '' : 'disabled'}}]" wx:for="{{datalist}}" wx:key="index">
+                        <view class="card-box {{item.invalid||item.status!='UNUSED'?'card-invalid':''}}">
+                            <view class="card-price">
+                                <view class="card-price-title">
+                                    <view class="unit">￥</view>
+                                    <view>{{item.cost}}</view>
+                                </view>
+                                <view class="card-price-label">满{{item.limitCost}}元可用</view>
+                            </view>
+                            <view class="card-info">
+                                <view class="card-title">{{item.title}} </view>
+                                <view class="card-time">
+                                    {{item.startDate==null?'有效期至'+item.endDate:'有效期为'+item.startDate+'至'+item.endDate}}
+                                </view>
+                                <view class="card-rule">
+                                    <view class="card-rule-title" data-index="{{index}}" catchtap="ruleChange">
+                                        <text>使用规则</text>
+                                        <van-icon name="arrow-down" size="16rpx" custom-class="{{item.rule?'rule':''}}" />
+                                    </view>
+                                </view>
+
+                            </view>
+                            <view class="card-noactive">
+                                <van-radio name="{{item.pkey}}" checked-color="#07c160" catchtap="handleRadio" data-pkey="{{item.pkey}}" disabled="{{!active}}"></van-radio>
+                            </view>
+                        </view>
+                        <wxs module="filter" src="./index.wxs"></wxs>
+                        <view class="card-rule-box {{item.rule?'not-collapse':''}}">
+                            <view wx:for="{{item.rules}}" wx:key="index">{{index+1}}.{{item}}</view>
+                        </view>
+                        <view class="unusable-tips" wx:if="{{active === false}}">{{item.notAvailable}}</view>
+                    </view>
+                </van-radio-group>
+            </block>
+            <view class="nodata-back" wx:else>
+                <image src="/images/card/no_data.png"></image>
+                <view>暂无可用的优惠券</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer-bottom" wx:if="{{active === true}}">
+        <van-button type="primary" round block color="#0DAE4E" bind:click="handleSubmit">确定</van-button>
+    </view>
+</view>

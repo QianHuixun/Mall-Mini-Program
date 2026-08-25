@@ -1,0 +1,50 @@
+/* pages/my/prize/index.wxss */
+
+page {
+  background: #f9f9f9;
+}
+
+.prize_list {
+  padding: 0 20rpx;
+  background: #fff;
+}
+
+.prize_cell {
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.cell_r {
+  flex: 1;
+}
+
+.cell_l {
+  margin-right: 16rpx;
+}
+
+.new-image {
+  border-radius: 10rpx;
+  display: block;
+}
+
+.cell_r .date {
+  font-size: 24rpx;
+}
+
+.cell_r_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24rpx;
+}
+
+.cell_r_bottom {
+  font-size: 24rpx;
+  color: #666666;
+}
+.cell_r_bottom_btn{
+  font-size: 24rpx !important;
+  padding:0rpx 16rpx !important;
+  border-radius: 10rpx !important;
+}

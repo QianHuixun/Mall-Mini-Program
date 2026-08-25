@@ -1,0 +1,28 @@
+/* pages/activity/couponTwo/index.wxss */
+#couponTwo {
+  min-height: 100vh;
+  background-color: #FEA1A9;
+}
+body {
+  background: #FEA1A9;
+}
+.btn-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 750rpx;
+  height: 116rpx;
+
+}
+.btn-confirm {
+  margin: 10rpx 24rpx;
+  width: 702rpx;
+  height: 96rpx !important;
+  background: #FF4C61 !important;
+  border-radius: 48rpx;
+  font-weight: 800;
+  font-size: 34rpx !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+}

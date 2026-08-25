@@ -1,0 +1,14 @@
+<!--pages/my/dispatchSlip/index.wxml-->
+<view class="dispatch-slip">
+    <view class="dispatch-slip-content">
+        <van-field label="快递单号" value="{{ courierNumber }}" placeholder="输入快递单号后自动匹配快递公司" bind:blur="handleCourierNumberInput" />
+        <van-field label="快递公司" value="{{ courierCompany }}" readonly right-icon="arrow" placeholder="请选择快递公司" bind:click-input="handleComanyClick" />
+        <van-field label="运费" value="{{ postage }}" placeholder="输入快递运费" border="{{false}}" bind:change="handlePostageInput"/>
+    </view>
+    <van-button custom-class="dispatch-slip-btn" type="primary" block bind:click="handleSubmit">保存</van-button>
+</view>
+
+<!-- 快递公司选择框 -->
+<van-popup show="{{ show }}" position="bottom" round bind:close="handleClose">
+    <van-picker columns="{{ columns }}" show-toolbar bind:confirm="handlePopupconfirm" bind:cancel="handleClose" />
+</van-popup>

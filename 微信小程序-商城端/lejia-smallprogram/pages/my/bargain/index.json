@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-count-down":"@vant/weapp/count-down/index",
+    "van-popup":"@vant/weapp/popup/index"
+  },
+  "navigationBarTitleText": "我的砍价"
+}

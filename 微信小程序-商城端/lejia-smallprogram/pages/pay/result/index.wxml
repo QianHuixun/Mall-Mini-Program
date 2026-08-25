@@ -1,0 +1,29 @@
+<!-- 
+@url: pages/pay/result/index.wxml
+@description: 订单结果页
+@author: sx
+@date: 2020/08/03
+ -->
+
+<view id="result" class="{{result=='success' ? 'success' : 'fail'}}">
+	<van-image width="264rpx" height="231rpx" src="{{result=='success' ? '/images/pay/pay_success.png' : '/images/pay/pay_fail.png'}}" custom-class="xcx-image" />
+	<view class="title">
+		{{result=='success' ? '支付成功' : '支付失败'}}
+	</view>
+	<view class="button-cell">
+		<van-button round type="info" color="{{result=='success' ? '#4dce78' : '#fd7549'}}" custom-class="lj-button round-button" bind:click="goDetail">查看订单</van-button>
+		<van-button plain round type="info" color="{{result=='success' ? '#4dce78' : '#fd7549'}}" custom-class="lj-button plain-button" bind:click="goIndex">返回首页</van-button>
+  </view>
+   <!-- -->
+	<view class="popon" wx:if="{{display  && type == 'COLLAGE_ORDER' }}">
+		<view class="content">
+			<image src="{{imgUrl + 'i_groupon.png'}}" mode="widthFix"></image>
+			<view wx:if="{{goodsInfo.remainingGroupNum>0}}" class="title">恭喜参与拼团</view>
+      <view class="title" wx:if="{{goodsInfo.remainingGroupNum<=0}}">拼团成功</view>
+      <view class="descript" wx:if="{{goodsInfo.remainingGroupNum>0}}">还差<text>{{goodsInfo.remainingGroupNum}}</text>人，赶紧邀请好友来拼团吧</view>
+			<van-button wx:if="{{goodsInfo.remainingGroupNum>0}}" type="danger" round color="linear-gradient(180deg, 	#fe8523 0%, #f4672d 58%, 	#e94837 100%), linear-gradient( #f3652d, #f3652d);" open-type="share" >邀请好友拼团</van-button>
+      <van-icon name="cross" color="#f3652d" size="40rpx" bind:click="closePopon"/>
+		</view>
+		<view class="cover"></view>
+	</view>
+</view>

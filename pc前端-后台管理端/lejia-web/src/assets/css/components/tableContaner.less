@@ -1,0 +1,236 @@
+.table-container {
+  & > .title {
+    height: 38px;
+    margin: 10px 10px 0 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+  }
+
+  & > .el-radio-group {
+    margin: 10px;
+  }
+
+  & > .search-box {
+    display: flex;
+    margin: 0 10px;
+    padding: 5px;
+    border: 1px solid @color-line;
+    border-radius: 5px;
+
+    & > .search-box-form {
+      flex: 1;
+
+      & > .el-select {
+        width: 110px;
+        margin: 5px;
+
+        .el-input__icon {
+          line-height: 36px;
+        }
+      }
+
+      & > .el-date-editor {
+        margin: 5px;
+        bottom: -2px;
+      }
+
+      .el-input__inner {
+        height: 36px;
+
+        line-height: 36px;
+      }
+    }
+
+    .upload-demo {
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    & > .search-box-button {
+      margin: 5px;
+    }
+  }
+
+  & > .table-box {
+    margin: 10px;
+
+    .el-table {
+      table {
+        min-width: 100%;
+
+        td,
+        th {
+          padding: 8px 0;
+
+          .el-button {
+            margin-right: 5px;
+          }
+
+          .el-button--small,
+          .el-button--small.is-round {
+            padding: 5px 0;
+          }
+
+          .el-button--mini,
+          .el-button--mini.is-round {
+            padding: 5px 5px;
+          }
+
+          img {
+            font-size: 0;
+            line-height: 0;
+            vertical-align: bottom;
+            border: 1px solid #e5e4e9;
+          }
+        }
+      }
+
+      tbody .cell {
+        font-size: 13px;
+
+        .table_list_li {
+          border-bottom: 1px solid #ebeef5;
+          height: 40px;
+          line-height: 40px;
+          white-space: nowrap;
+          margin-left: -10px;
+          margin-right: -10px;
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .table_list_li:first-child {
+          margin-top: -8px;
+        }
+
+        .table_list_li:last-child {
+          border-bottom: 0;
+          margin-bottom: -8px;
+        }
+      }
+
+      // .el-table
+      .el-table {
+        .el-table__header-wrapper {
+          display: none;
+        }
+
+        .el-table__body {
+          tr:last-child {
+            td {
+              border-bottom: 0;
+            }
+          }
+
+          td:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      .el-table__expanded-cell {
+        padding: 0;
+        border-bottom: 0;
+      }
+    }
+  }
+
+  .el-pagination {
+    margin: 15px auto;
+
+    text-align: center;
+  }
+
+  .form-box {
+    width: 500px;
+    margin: 50px auto;
+
+    .el-form-title {
+      font-size: 18px;
+      padding: 20px 0;
+    }
+
+    .el-form-item--submit {
+      margin: 50px 0;
+
+      .el-form-item__content {
+        text-align: center;
+      }
+    }
+
+    .el-form-item_btn {
+      .el-form-item__content {
+        display: flex;
+        -webkit-display: flex;
+        -moz-display: flex;
+        line-height: 36px;
+
+        .el-input {
+          flex: 1;
+        }
+
+        button {
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .el-input {
+      height: 36px;
+
+      .el-input__inner {
+        height: 36px;
+        line-height: 36px;
+      }
+    }
+
+    .el-select {
+      width: 100%;
+
+      .el-select__caret {
+        line-height: 36px;
+      }
+    }
+
+    .el-date-editor {
+      width: 100%;
+      height: 36px;
+      line-height: 36px;
+
+      .el-range__icon {
+        line-height: 30px;
+      }
+
+      .el-range-separator {
+        width: 20px;
+        line-height: 30px;
+      }
+    }
+
+    button {
+      &.el-button--primary,
+      &.el-button--default {
+        height: 36px;
+        padding: 8px 10px;
+      }
+    }
+  }
+}
+
+.el-popconfirm__main {
+  margin: 10px 0;
+}
+.el-date-editor .el-range-separator {
+  box-sizing: content-box;
+  height: auto !important;
+}
+
+//修复table列fixed高度没有填满的问题
+
+/deep/ .el-table__fixed-right {
+  height: 100% !important;
+}
+
+/deep/ .el-table__fixed {
+  height: 100% !important;
+}

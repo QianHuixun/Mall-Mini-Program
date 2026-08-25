@@ -1,0 +1,59 @@
+<!-- 
+@url: pages/my/msdQuery/index.wxml
+@description: 热力豆查询
+ -->
+<view id="pointQuery">
+    <!-- 头部积分数 -->
+    <view class="header-cell">
+        <view class="tips">热力豆余额</view>
+        <view class="flex">
+          <view class="point">{{balance}}</view>
+        <van-button custom-class="btn-confirm" round bind:click="showPopup">卡密充值</van-button>
+        </view>
+        
+    </view>
+    <!-- 积分记录 -->
+    <view class="list-cell">
+        <view class="list-container">
+            <view class="list-li" wx:for="{{datalist}}" wx:key="index">
+                <view class="list-l">
+                    <view class="list-l_title">
+                        <text>{{item.operationTypeName}}</text>
+                    </view>
+                    <view class="list-l_tips">
+                        <view class="list-l_tips__date gray_clr">{{item.createdTime}}</view>
+                        <view class="list-l_tips_code gray_clr">{{item.remark || ''}}</view>
+                    </view>
+                </view>
+                <view class="list-r {{item.direct ? 'plus' : 'minus'}}">
+                    {{item.direct ? '+' : '-'}}{{item.amt}}
+                    <view class="balance">余额：{{item.balance}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 加载更多 -->
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+    <van-popup show="{{ show }}" round close-on-click-overlay="{{ false }}" bind:close="onClose">
+        <view class="recharge-popup">
+            <view class="recharge-popup-title">卡密充值</view>
+            <view class="recharge-popup-content">
+                <view class="recharge-popup-conten_bar">
+                    <text class="recharge-popup-conten_bar__label">卡号</text>
+                    <van-field value="{{ cardNumber }}" placeholder="请输入充值卡号" border="{{ false }}" data-name="cardNumber" custom-style="{{customStyle}}" placeholder-style="color: #999999" bind:change="onChange" />
+                </view>
+                <view class="recharge-popup-conten_bar">
+                    <text class="recharge-popup-conten_bar__label">卡密</text>
+                    <van-field value="{{ cardPassword }}" placeholder="请输入充值卡密" border="{{ false }}" data-name="cardPassword" custom-style="{{customStyle}}" placeholder-style="color: #999999" bind:change="onChange" />
+                </view>
+            </view>
+            <view class="recharge-popup-botton">
+                <van-button custom-class=".recharge-popup-botton__btn cancel" round bind:click="onClose">取消</van-button>
+                <van-button custom-class=".recharge-popup-botton__btn" round loading="{{loading}}" bind:click="handleRechargeCard">充值</van-button>
+            </view>
+        </view>
+    </van-popup>
+    <!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+    <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,603 @@
+/* pages/buyCar/index.wxss */
+page {
+  background: #f6f6f6;
+  padding-bottom: 160rpx;
+}
+
+#buyCar {
+  padding: 20rpx 24rpx 0 24rpx;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.buyCar_list {
+  margin-bottom: 16rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.buyCar_list .buyCar_title {
+  /* height: 64rpx; */
+  padding: 24rpx 24rpx 0 24rpx;
+  background: #fff;
+  position: relative;
+
+}
+
+.buyCar_list .buyCar_title .title-back {
+  width: 100%;
+  height: 132rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.buyCar_list .buyCar_title .van-checkbox {
+  position: relative;
+}
+
+.buyCar_list .buyCar_content,
+.unactive .buyCar_content {
+  position: relative;
+  width: 100%;
+  padding-bottom: 32rpx;
+  box-sizing: border-box;
+}
+.unactive .buyCar_content{
+  background: #fff;
+  border-radius: 24rpx;
+}
+.buyCar_list .buyCar_title .van-checkbox__label {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.buyCar_content .wx_card {
+  display: flex;
+  padding: 32rpx 24rpx 0 24rpx;
+  box-sizing: border-box;
+}
+
+.buyCar_content .wx_card .card_l {
+  padding: 35rpx 0;
+}
+
+.buyCar_content .wx_card .card_c {
+  margin-left: 24rpx;
+  margin-right: 16rpx;
+  position: relative;
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.buyCar_content .wx_card .card_r {
+  flex: 1;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buyCar_content .tips {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 24rpx 32rpx 24rpx;
+  justify-content: space-between;
+}
+
+.buyCar_content .tips .tips-left {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #333333;
+
+}
+
+.buyCar_content .tips .tips-right {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #63BF57;
+  display: flex;
+  align-items: center;
+}
+
+.buyCar_content .tips .tips-right text {
+  padding-right: 12rpx;
+}
+
+.card_c .tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+#buyCar .card_img {
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 16rpx;
+}
+
+.card_r_b {
+  display: flex;
+}
+
+.card_r_b .card_price {
+  flex: 1;
+  font-size: 30rpx;
+  line-height: 30px;
+  color: #f22005;
+}
+
+.card_step .van-stepper__minus {
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #999999;
+}
+
+.card_step .van-stepper__plus,
+.card_step .van-stepper__minus {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 0;
+}
+
+.card_step .van-stepper__plus {
+  border-radius: 50%;
+  /* background: #4dce78;
+  border: 1px solid #4dce78; */
+  color: #fff;
+
+}
+
+.card_step .van-stepper__minus {
+  border-color: #4dce78;
+  color: #4dce78;
+
+}
+
+.card_step .van-stepper__input {
+  background: #fff;
+  color: #333333;
+  height: 36rpx;
+  width: 52rpx;
+  line-height: 36rpx;
+  padding: 0;
+}
+
+.card_step .delete-btn {
+  width: 50rpx;
+  height: 50rpx;
+
+}
+
+.buycar-checkbox .van-checkbox__label {
+  padding: 0;
+}
+
+
+.card_r .card_title {
+  font-size: 28rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.card_r .card-space {
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+  overflow: hidden;
+  height: 32rpx;
+}
+
+.unactive .card_r .card-space {
+  opacity: 0.5;
+}
+
+.card_r .price-cell {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.card_r .price-sum {
+  width: 168rpx;
+  height: 40rpx;
+  background: #F7F7F7;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+}
+
+.card_r .price-sum text {
+  display: inline-block;
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  padding-left: 10rpx;
+}
+
+.card_r .price-cell .normal-price {
+  display: flex;
+  align-items: flex-end;
+}
+
+.card_r .price-cell .price_clr {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-right: 12rpx;
+}
+
+.card_r .price-cell .price_clr .unit {
+  display: inline-block;
+  margin-right: 8rpx;
+}
+
+.card_r .price-cell .price_clr .price_txt {
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+
+.unactive .card_r .price-cell .price_clr {
+
+  color: #999999;
+}
+
+.card_r .price-cell .price-old {
+  font-size: 24rpx;
+  font-weight: 500;
+  text-decoration: line-through;
+  color: #999999;
+  line-height: normal;
+}
+
+.unactive .card_r .price-cell .price-old {
+  color: #BDBDBD;
+}
+
+/**会员价格与原价*/
+.card_r .price-mermber {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  font-size: 26rpx;
+  margin-top: 16rpx;
+  color: #4dce78;
+}
+
+.card_r .price-mermber .price-mermber-txt {
+  display: inline-block;
+  margin-right: 16rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  font-weight: bold;
+  color: #885F1A;
+}
+
+.card_r .price-mermber .price-mermber-txt .unit {
+
+  font-size: 24rpx;
+  font-weight: bold;
+  padding-right: 6rpx;
+}
+
+.card_r .price-mermber-tag {
+  width: 96rpx;
+  height: 26rpx;
+}
+
+/**end 会员价格与原价*/
+.no-data {
+  margin-top: 100rpx;
+  margin-bottom: 74rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.no-data image {
+  width: 164rpx;
+  height: 204rpx;
+  margin-bottom: 38rpx;
+}
+
+.no-data view {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #BDBDBD;
+  line-height: 36rpx;
+}
+
+
+.icon-type {
+  margin-right: 10rpx;
+  white-space: nowrap;
+}
+
+.icon-type .icon-type_tag {
+  white-space: nowrap;
+  font-size: 20rpx;
+  line-height: 20rpx;
+  font-weight: 500;
+  padding: 6rpx 8rpx;
+}
+
+.unactive .icon-type {
+  opacity: 0.5;
+}
+
+.buyCar_list .buyCar_content .card_r .card_title_txt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  line-height: 30rpx;
+  padding-top: 8rpx;
+  padding-bottom: 16rpx;
+}
+
+.unactive .buyCar_content .card_r .card_title_txt {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #999999;
+  line-height: 28rpx;
+  padding-top: 8rpx;
+  padding-bottom: 16rpx;
+}
+.unactive .buyCar_content .card_r .card_title {
+  margin-bottom: 8rpx;
+}
+
+
+.van-swipe-cell__right {
+  height: 100%;
+}
+
+.van-swipe-cell__right .van-button {
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  width: 110rpx;
+  height: 100% !important;
+  font-size: 26rpx;
+}
+
+.unactive {
+  width: 100%;
+  margin-top: 32rpx;
+}
+
+.unactive .title {
+  display: flex;
+  justify-content: center;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  font-weight: 500;
+  color: #999999;
+  margin-bottom: 40rpx;
+}
+
+.unactive .title text {
+  display: inline-flex;
+  align-items: center;
+}
+
+.unactive .title text::after {
+  content: '';
+  display: inline-block;
+  width: 262rpx;
+  height: 2rpx;
+  background: #E6E6E6;
+  line-height: 22rpx;
+  margin-left: 18rpx;
+
+}
+
+.unactive .title text::before {
+  content: '';
+  display: inline-block;
+  width: 262rpx;
+  height: 2rpx;
+  background: #E6E6E6;
+  line-height: 22rpx;
+  margin-right: 18rpx;
+}
+
+.van-submit-bar .van-submit-bar__bar {
+  height: 100rpx;
+  padding-right: 0rpx;
+  padding-left: 24rpx;
+  border-top: 1px solid #e6e6e6;
+}
+
+.van-submit-bar .van-submit-bar__text {
+  padding-right: 16rpx;
+}
+
+.van-submit-bar .van-button--normal {
+  height: 76rpx !important;
+  width: 200rpx !important;
+  border-radius: 38rpx;
+  border: none;
+  /* background: #63BF57; */
+}
+
+.van-submit-bar .van-button--normal .van-button__text {
+  line-height: normal;
+}
+
+.buycar-submit-bar.van-submit-bar .van-checkbox__label {
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+
+.buycar-submit-bar.van-submit-bar .van-submit-bar__button {
+  height: 76rpx !important;
+  width: 200rpx;
+  margin-right: 24rpx;
+}
+
+.buycar-submit-bar.van-submit-bar .delete-btn {
+  background: #FFF0ED !important;
+  border: 1px solid #ED4528 !important;
+  border-radius: 20px;
+  padding: 8rpx 16rpx;
+  color: #ED4528 !important;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  min-width: 80rpx;
+  height: 40rpx;
+  margin-left: 24rpx;
+}
+
+.new-buycar-submit-bar.van-submit-bar {
+    bottom: 140rpx;
+}
+
+.new-buycar-submit-bar .van-submit-bar__bar {
+    background: #f6f6f6;
+}
+
+.new-buycar-submit-bar .content {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.new-buycar-submit-bar .content .price {
+    color: #ee0a24;
+    font-size: 24rpx;
+}
+
+.new-buycar-submit-bar .content .price .price-integer {
+    font-size: 28rpx;
+    font-weight: 500;
+}
+
+.new-buycar-submit-bar.van-submit-bar .delete-btn {
+    background: #FFF0ED !important;
+    border: 1px solid #ED4528 !important;
+    border-radius: 20px;
+    padding: 8rpx 16rpx;
+    color: #ED4528 !important;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    min-width: 80rpx;
+    height: 40rpx;
+    margin-left: 24rpx;
+  }
+
+.dissatisfy.van-submit-bar .van-button--normal {
+  background: #CACACA;
+  color: #fff;
+}
+
+.collect-bill-box {
+  margin: 10rpx 0 0 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  position: relative;
+}
+
+.collect-bill-box .tag-title {
+  margin-left: 20rpx;
+
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.collect-bill-box .flex-layout {
+  display: flex;
+  align-items: center;
+}
+
+.collect-bill-box .flex-layout .tag {
+  border-radius: 8rpx;
+  padding: 8rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 20rpx;
+}
+
+.collect-bill-box .flex-layout text {
+  display: block;
+}
+
+.collect-bill-box .flex-layout:last-child text {
+  color: #63BF57;
+  padding-right: 12rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+}
+
+/* 规格 */
+.space-card {
+  padding: 8rpx 24rpx 0 76rpx;
+}
+
+.space-card .wx_card .card_l {
+  padding: 26rpx 0;
+}
+
+.space-card #swipe-cell .card_img {
+  display: block;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 12rpx;
+}
+
+.space-card .card_r .card_title {
+  margin-bottom: 16rpx;
+}
+
+.space-card .wx_card {
+  padding: 16rpx 0 0 0;
+}
+
+.space-card .wx_card .card_c {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.space-card .wx_card .card_c .tip {
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+/*end 规格 */
+#buyCar .van-submit-bar__safe {
+  height: 0;
+}

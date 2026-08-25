@@ -1,0 +1,56 @@
+<van-popup show="{{ show }}" position="bottom" safe-area-inset-top round bind:close="handleClose">
+    <view class="specs">
+        <view class="specs-selected">
+            <view class="specs-selected-image">
+                <van-image src="{{selectedSpecs.photo1[0]}}" width="100%" height="100%"></van-image>
+            </view>
+            <view class="specs-selected-info">
+                <view class="specs-selected-info__amt">
+                    <van-icon name="/images/heart.png" size="45rpx" />
+                    <text class="top-big">{{selectedSpecs.price}}</text>
+                </view>
+                <view class="specs-selected-info__bottom">
+                    <view class="specs-selected-info__number">编号：107890455432</view>
+                    <view class="specs-selected-info_count">
+                        <van-stepper value="{{ count }}" min="{{selectedSpecs.lowestBuy || 1}}" plus-class="stepper-plus-btn" minus-class="stepper-minus-btn" integer disable-input bind:change="onChange">
+                            <image class="stepper-btn" slot="minus" src="{{ count > (selectedSpecs.lowestBuy || 1) ? '/images/goodsDetail/minus.png' : '/images/goodsDetail/minus-disabled.png'}}"/>
+                            <image class="stepper-btn" slot="plus" src="/images/goodsDetail/plus.png"/>
+                        </van-stepper>
+                        <view class="specs-selected-info_count__lowest" wx:if="{{selectedSpecs.lowestBuy}}">{{selectedSpecs.lowestBuy}}件起购</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="specs-view" wx:for="{{flexibleColumns}}">
+            <block wx:if="{{index == 0}}">
+                <view class="specs-title">{{item.label}}</view>
+                <view class="specs-items-view">
+                    <view class="specs-item {{ selectedSpecs.pkey == specs.pkey ? 'selected' : '' }}" wx:for="{{specs[item.key]}}"
+                        wx:for-item="specs" data-specs="{{specs}}" bind:tap="handleSpecsTap">
+                        <view class="specs-item-image">
+                            <van-image src="{{specs.img}}" width="100%" height="100%"></van-image>
+                        </view>
+                        <view class="specs-item-name">{{specs.name}}</view>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="specs-version">
+                    <view class="specs-version-title">{{item.label}}</view>
+                    <view class="specs-version-items__view">
+                        <view class="specs-version-item {{ selectedSpecs.pkey == specs.pkey ? 'selected' : '' }}"
+                            wx:for="{{specs[item.key]}}" wx:for-item="specs" data-specs="{{specs}}" bind:tap="handleSpecsTap">
+                            {{specs.name}}
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="popup-close" bind:tap="handleClose">
+            <van-icon name="cross" color="#333" size="40rpx" />
+        </view>
+    </view>
+    <view class="footer">
+        <van-button type="primary" custom-class="footer-button" block bind:click="handleConfirm">确定</van-button>
+    </view>
+</van-popup>

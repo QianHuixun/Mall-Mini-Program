@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+      "van-image": "@vant/weapp/image/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "订单详情"
+}

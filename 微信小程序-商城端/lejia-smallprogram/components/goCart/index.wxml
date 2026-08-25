@@ -1,0 +1,13 @@
+<!--components/goCart/index.wxml-->
+<cover-view class="dot" animation='{{ani}}'
+	style="z-index:999;top: 0;left: 0;position: fixed;width: 30rpx;height: 30rpx;border-radius: 50%;background: #07c160; display: flex;flex-direction: row;justify-content: center;align-items: center;"
+	wx:if="{{showdot}}"></cover-view>
+<view class="shopcar" id="shopcar"
+	style="position: fixed;width: 50px;height: 50px;opacity: {{showdot ? 1 : 0}};right: 20px;bottom: 20px;border-radius: 50%;background:#fff"
+	wx:if="{{ isIcon }}">
+	<van-icon name="cart-circle" size="50" color="#01a04c" />
+</view>
+<view class="shopcar" id="shopcar"
+	style="position: fixed;width: 50px;height: 50px;opacity: 0;right: 60px;bottom: -50px;border-radius: 50%;background:blue"
+	wx:if="{{ isIcon == false }}">
+</view>

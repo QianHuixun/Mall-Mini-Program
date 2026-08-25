@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>lejia-server-api</artifactId>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>cn.tofocus.lejia</groupId>
+		<artifactId>lejia</artifactId>
+		<version>4.2.20.Dev-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-account-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>cn.tofocus.lejia</groupId>
+			<artifactId>lejia-common</artifactId>
+		</dependency>
+
+		<!-- 显式声明下 javax.servlet -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

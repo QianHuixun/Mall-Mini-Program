@@ -1,0 +1,43 @@
+<!-- 
+@url: components/login/index.wxml
+@description: 登录
+@author: sx
+@date: 2020/07/15
+ -->
+ <view class='Popup' hidden='{{iShidden}}'>
+ <view class="auth_title">
+  <view class="auth_title_main">请先登录</view>
+  <view class="auth_title_tips">登录后享受更多优质服务</view>
+ </view>
+	<view class="auth">
+		<!-- <image src="{{AppInfo.photo}}" class="img" mode="aspectFill" wx:if="{{AppInfo.photo}}"></image> -->
+    <view class="title">{{AppInfo.userName}}</view>
+    <button class="btn" type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{checked}}">手机号一键登录</button>
+    <button class="btn" type="primary"  bindtap="showTips" wx:else="">手机号一键登录</button>
+   
+	
+  </view>
+  <view class="describe">
+			<van-checkbox custom-class="checked-box" catchtap="openNote" value="{{ checked }}" shape="square" icon-size="40rpx">
+			</van-checkbox>
+			已阅读并同意{{AppInfo.userName}}<text class="txt" bindtap="routerTo" data-url="/pages/my/privacyUser/index">《用户协议》</text><text class="txt" bindtap="routerTo" data-url="/pages/my/privacy/index">《隐私协议》</text>
+		</view>
+
+	<van-dialog
+		use-slot
+		title="用户协议"
+		show="{{ show }}"
+		show-cancel-button
+		confirmButtonText="同意"
+		cancelButtonText="不同意"
+		bind:confirm="onConfirm"
+		bind:cancel="onCancel"
+		>
+		<view class="dialog-content">
+			尊敬的用户您好，欢迎使用{{AppInfo.userName}}商城小程序/APP！请您在使用我们的产品服务前，务必仔细阅读《用户服务协议》及<text class="privacy-policy" bindtap="routerTo" data-url="/pages/my/privacy/index">《{{AppInfo.userName}}隐私政策》</text>。在阅读《{{AppInfo.userName}}用户服务协议》及<text class="privacy-policy" bindtap="routerTo" data-url="/pages/my/privacy/index">《{{AppInfo.userName}}隐私政策》</text>时请您重点关注以加粗字体标识出的关于{{AppInfo.userName}}及您重大的权益规则，该等规则可能涉及相关方的责任免除或限制、法律适用于争议解决条款。在阅读<text class="privacy-policy" bindtap="routerTo" data-url="/pages/my/privacy/index">《{{AppInfo.userName}}隐私政策》</text>时请您重点关注{{AppInfo.userName}}收集、使用、保护您个人信息等加粗的条款。请您在使用{{AppInfo.userName}}商城小程序/APP之前确认对以下协议内容及各项服务均已知晓、理解并接受，并已同意将其作为确定双方权利义务的依据。
+		</view>
+	</van-dialog>
+    <van-icon custom-class="popup_close" name="cross" color="#333333" size="40rpx" bind:click="handleClose" />
+    
+</view>
+<view class="popup_cover" hidden='{{iShidden}}'></view>

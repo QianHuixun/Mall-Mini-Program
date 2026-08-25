@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index"
+  },
+  "navigationBarBackgroundColor": "#f5f5f5",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "邀请有礼"
+}

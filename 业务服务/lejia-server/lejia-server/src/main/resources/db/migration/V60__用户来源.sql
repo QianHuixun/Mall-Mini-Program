@@ -1,0 +1,1 @@
+ALTER TABLE `mkt_member` ADD COLUMN `source` varchar(200)  DEFAULT NULL COMMENT '用户来源'  AFTER `tjv_time`;

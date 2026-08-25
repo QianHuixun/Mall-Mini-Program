@@ -1,0 +1,29 @@
+<!-- 
+@url: pages/my/offlineOrder/index.wxml
+@description: 线下订单查询
+@author: sx
+@date: 2020/07/25
+ -->
+<view id="offlineOrder">
+	<view class="order_list">
+		<view class="order_cell">
+			<view class="title">市场</view>
+			<view class="con">
+				<view class="line gray_clr">
+					下单时间：<text class="black_clr">94959:0394:992</text>
+				</view>
+				<view class="line gray_clr">
+					总价：<text class="price_clr">￥5969</text>
+				</view>
+				<view class="line gray_clr">
+					获得积分：<text class="orange_clr">188积分</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

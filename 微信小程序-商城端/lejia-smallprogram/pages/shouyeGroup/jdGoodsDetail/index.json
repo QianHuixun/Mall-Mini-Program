@@ -1,0 +1,26 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-tag": "@vant/weapp/tag/index",
+      "van-stepper": "@vant/weapp/stepper/index",
+      "van-count-down": "@vant/weapp/count-down/index",
+      "van-popup":"@vant/weapp/popup/index",
+      "mp-html": "/components/mp-html/index",
+      "van-radio": "@vant/weapp/radio/index",
+      "van-radio-group": "@vant/weapp/radio-group/index",
+      "van-tab": "@vant/weapp/tab/index",
+      "van-tabs": "@vant/weapp/tabs/index",
+      "van-rate": "@vant/weapp/rate/index",
+      "van-loading":"@vant/weapp/loading/index",
+      "van-divider": "@vant/weapp/divider/index",
+      "space-dialog":"/components/space/index",
+      "van-config-provider": "@vant/weapp/config-provider/index",
+      "specs-dialog": "/components/jd-specs/index"
+    },
+    "navigationBarTitleText": "商品详情",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50 
+  }

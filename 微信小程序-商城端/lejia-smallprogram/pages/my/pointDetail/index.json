@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index"
+  },
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "我的钱包",
+  "navigationBarTextStyle": "black"
+}

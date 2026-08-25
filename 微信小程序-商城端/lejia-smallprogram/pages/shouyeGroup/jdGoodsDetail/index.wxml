@@ -1,0 +1,98 @@
+<!--pages/shouyeGroup/goodsDeatil/index.wxml-->
+<van-config-provider theme-vars="{{ theme }}">
+    <view id="goodsDeatil">
+        <view class="main" style="padding-bottom: 192rpx">
+            <!-- 商品轮播图 -->
+            <view class="lj-swipe">
+                <swiper circular="true" autoplay bindchange="swiperChange">
+                    <swiper-item wx:for="{{selectedSpecs.photo1}}" bindtap="handlePreviewImage" data-listName="photo1" data-url="{{item}}" wx:key="index">
+                        <image src="{{item}}" catchtap="handlePreviewimg" data-url="{{item}}"></image>
+                    </swiper-item>
+                    <swiper-item wx:if="{{!selectedSpecs.photo1||!selectedSpecs.photo1.length}}">
+                        <image src="/images/no-pic.png"></image>
+                    </swiper-item>
+                </swiper>
+
+                <view class="page-view">
+                    <text class="page-num">{{swiperCurre}}</text>
+                    <text class="page-total-num">/{{selectedSpecs.photo1.length}}</text>
+                </view>
+            </view>
+            <!-- 商品规格 -->
+            <view class="specs-view">
+                <view class="specs-item-scroll">
+                    <view class="specs-item {{selectedSpecs.pkey == item.pkey ? 'selected' : ''}}" wx:for="{{specs.space1}}" wx:key="pkey" data-item="{{item}}" bind:tap="handleSpecsChange">
+                        <view class="specs-item-name">{{item.name}}</view>
+                        <view class="specs-item-price">￥{{item.price}}</view>
+                    </view>
+                </view>
+                <view class="specs-total" data-type="normal" bind:tap="handleSpecsDialogShow">
+                    共{{skuList.length}}款
+                    <van-icon name="arrow" color="#000" size="24rpx" style="margin-left: 4rpx;"></van-icon>
+                </view>
+            </view>
+            <!-- 商品价格、名称、销售情况 -->
+            <view class="detail-view">
+                <view class="detail-view-top-box">
+                    <view class="detail-view-top">
+                        <view>
+                            <van-icon name="/images/heart.png" size="45rpx" />
+                            <text class="top-big">{{selectedSpecs.price}}</text>
+                            <!-- <text class="decoration-b" wx:if="{{selectedSpecs.mtype !== 'INTEGRAL_MSD_GOODS'}}">￥</text> -->
+                        </view>
+                    </view>
+                </view>
+                <!--标题名称 -->
+                <view class="detail-view-center">
+                    <van-tag plain type="success" custom-class="tag" color="{{theme.primary}}" wx:if="{{selectedSpecs.tag}}">{{selectedSpecs.tag}}</van-tag>{{selectedSpecs.title }}
+                </view>
+            </view>
+            <!-- 商品描述 -->
+            <van-tabs custom-class="specificat-tabs" nav-class="specificat-tabs-nav" tab-class="specificat-tabs-tab" line-width="0" border="{{false}}" active="{{ tabActive }}">
+                <van-tab title="图文详情">
+                    <view class="goods-service">
+                        <view style="font-size: 28rpx;">服务</view>
+                        <view class="goods-service-view" wx:if="{{serviceContent && serviceContent.length}}">
+                            <view class="goods-service-item" wx:for="{{serviceContent}}" wx:key="index">
+                                <van-icon name="/images/goodsDetail/bang.png" size="28rpx" style="margin-right: 6rpx" />
+                                {{item}}
+                            </view>
+                        </view>
+                    </view>
+                    <view class="image-box">
+                        <!-- {{selectedSpecs.introduceWechat}} -->
+                        <image src="{{item}}" wx:for="{{detailsImgs}}" style="width: 100%;" mode="widthFix"></image>
+                    </view>
+                </van-tab>
+            </van-tabs>
+            <!-- end 商品描述 -->
+            <!-- 市场logo -->
+            <view class="footer-logo" wx:if="{{ascription == 22 || ascription == 13}}">
+                <van-image src="/images/tj-logo.png" width="233rpx" height="42rpx"></van-image>
+            </view>
+        </view>
+        <!-- 底部提交栏 -->
+        <view class="footer" style="padding-bottom:{{isIphoneX?68:0}}rpx">
+            <view class="bottom">
+                <!-- 购物车按钮 -->
+                <view class="car-view" bindtap="goCart">
+                    <van-icon name="/images/classification/i-cart_{{theme.value}}.png" size="70rpx" color="#7f7f7f" info="{{gwcNum?(gwcNum>99?'99+':gwcNum):''}}" />
+                    购物车
+                </view>
+                <!-- 各类按钮 -->
+                <view class="btn-box">
+                    <van-button color="#FFA21D" custom-class="car-btn" round data-type="gwc" bind:click="handleSpecsDialogShow">
+                        加入购物车</van-button>
+                    <van-button color="{{theme.primary}}" custom-class="buy-btn" round data-type="buy" bind:click="handleSpecsDialogShow">
+                        立即购买
+                    </van-button>
+                </view>
+            </view>
+        </view>
+        <!-- 规格选择框 -->
+        <specs-dialog show="{{showSpecsDialog}}" specs="{{specs}}" skuList="{{skuList}}" selectedSpecs="{{selectedSpecs}}" flexibleColumns="{{flexibleColumns}}" bind:close="handleSpecsDialogClose" bind:change="handleSpecsChange" bind:confirm="handleSpecsDialogConfirm"></specs-dialog>
+        <!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+        iShidden=true 隐藏授权 -->
+        <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+    </view>
+</van-config-provider>

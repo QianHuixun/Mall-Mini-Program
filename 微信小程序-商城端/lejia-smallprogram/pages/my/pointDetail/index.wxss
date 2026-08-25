@@ -1,0 +1,46 @@
+/* pages/my/pointDetail/index.wxss */
+
+page {
+  background: #f9f9f9;
+}
+
+.active-tab {
+  color: #4dce78;
+}
+
+.list-li {
+  display: flex;
+  align-items: center;
+  padding: 35rpx 45rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.list-l {
+  flex: 1;
+}
+
+.list-l_tips__date,
+.list-l_tips_code {
+  font-size: 25rpx;
+  line-height: 36rpx;
+}
+
+.list-r {
+  font-size: 38rpx;
+}
+
+.list-r.plus {
+  color: #4dce78;
+}
+
+.list-r.minus {
+  color: #fd7549;
+}
+
+.tab_content {
+  background: #fff;
+}
+
+.no_tips {
+  background: #f9f9f9
+}

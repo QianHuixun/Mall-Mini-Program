@@ -1,0 +1,74 @@
+<!--pages/shouyeGroup/recipe/index.wxml-->
+<view id="recipe">
+  <view class="top">
+    <van-search disabled bindtap="searfocus" value="{{ value }}" shape="round" placeholder="豆腐" style="flex: 1;" />
+    <view class="top-rig" bindtap="collectClick">
+      <van-icon name="like" color="red" size="18px" />
+      <text>收藏</text>
+    </view>
+  </view>
+  <swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+		<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+			<image src="{{item.photo}} " data-urltype="{{item.urlType}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" bindtap="goAds"></image>
+		</swiper-item>
+	</swiper>
+  <!-- <view class="recom">
+    <view class="recom-top">
+      <view class="recom-top-tag"></view>
+      <text>今日推荐</text>
+    </view>
+    <view class="recom-content">
+      <view wx:for="{{todayList}}" wx:key="index" bindtap="caipuClick" data-id='{{item}}' class="recom-content-item">
+        <van-image src="{{item.wrapperPhoto}}">
+        </van-image>
+        <view class="img-bottom">
+          <text class="title">{{item.name}}</text>
+          <text class="num">{{item.collCount}}</text>
+          <van-icon name="like" color="red" size="12px" />
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view class="recom">
+    <view class="recom-top">
+      <view class="recom-top-tag"></view>
+      <text>热门推荐</text>
+    </view>
+    <view class="recom-content">
+      <view wx:for="{{hotList}}" wx:key="index" bindtap="caipuClick" data-id='{{item}}' class="recom-content-item">
+        <van-image src="{{item.wrapperPhoto}}">
+        </van-image>
+        <view class="img-bottom">
+          <text class="title">{{item.name}}</text>
+          <text class="num">{{item.collCount}}</text>
+          <van-icon name="like" color="red" size="12px" />
+        </view>
+      </view>
+
+    </view>
+  </view> -->
+  <view class="seg-view">
+    	<view class="seg">
+				<van-image src="/images/seg_green_left.png" width="216rpx" height="29rpx" />
+			</view>
+    <text>菜谱大全</text>
+    	<view class="seg">
+				<van-image src="/images/seg_green_right.png" width="216rpx" height="29rpx" />
+			</view>
+  </view>
+  <view class="classify class-tab">
+    <view class="class-tab-item {{ctype=='' ? 'active' : ''}}" data-pkey="" bindtap="handleTab">全部</view>
+    <view class="class-tab-item {{ctype==item.pkey ? 'active' : ''}}" wx:key="index" wx:for="{{classList}}" data-pkey="{{item.pkey}}" bindtap="handleTab">{{item.name}}</view>
+  </view>
+  <view class="content">
+    <view class="item" wx:for="{{caipuList}}" wx:key="index" bindtap="caipuClick" data-id='{{item}}'>
+      <van-image src="{{item.wrapperPhoto}}"/>
+      <view class="item-bottom">
+        <text class="item-bottom-title">{{item.name}}</text>
+        <view class="item-bottom-num">{{item.collCount}} <van-icon name="like" color="red" size="24rpx"/></view> 
+      </view>
+    </view>
+  </view>
+ <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

@@ -1,0 +1,72 @@
+<!-- 
+@url: pages/integral/index.wxml
+@description: 积分商城
+@author: zs
+ -->
+<view id="integral-zone" class="{{theme.value}}">
+    <drag-ball type="SELF_EMPLOYED"></drag-ball>
+    <van-sticky>
+        <view class="search-bar">
+            <view class="search-bar-box">
+                <search-bar mType="JD_GOODS" style="width: 100%;"></search-bar>
+            </view>
+        </view>
+    </van-sticky>
+    <swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+        <swiper-item wx:for="{{imageList}}" wx:key="pkey">
+            <van-image src="{{item.photo}}" data-url="{{item.objKey}}" data-urltype="{{item.urlType}}" data-istabbar="{{item.isTabbar}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+        </swiper-item>
+    </swiper>
+    <van-sticky offset-top="{{ 44 }}">
+        <view class="type-view">
+            <view class="{{gtype == item.pkey ? 'type-sub-view type-select' : 'type-sub-view'}}" wx:for="{{gtypeList}}" wx:if="{{index < 8}}" bindtap="handleGTypeChange" data-id='{{item.pkey}}'>
+                {{item.categoryName}}
+            </view>
+            <view class="more-view" wx:if="{{gtypeList.length > 8}}" bindtap="showTypePopup">
+                <text>更多</text>
+                <van-icon name="arrow-down" size="25rpx" />
+            </view>
+        </view>
+    </van-sticky>
+    <view class="content" wx:if="{{goodsList && goodsList.length}}">
+        <view class="item" wx:for="{{goodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+            <van-image width="90%" height="{{height}}px" src="{{item.photo1[0]||'/images/no-pic.png'}}" lazy-load="{{true}}" />
+            <view class="item-title">{{item.title}}</view>
+            <view class="item-selling_points">
+                <view class="selling-points" wx:for="{{item.sellingPoints}}" wx:for-item="sellingPoint">{{sellingPoint}}</view>
+            </view>
+            <view class="item-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+            <view class="num-view">
+                <van-icon name="/images/heart.png" size="36rpx" />
+                <text class="price">{{item.price}}</text>
+            </view>
+            <view class="num-car">
+                <text class="num-ori">{{item.priceOld}}</text>
+                <van-icon color="#d7a73c" size="47rpx" name="/images/carAdd_plus_{{theme.value}}.png" data-id="{{item}}" data-pkey="{{item.pkey}}" data-space="{{item.spaces[0].pkey}}" info="{{item.gwcNum || ''}}" catchtap="handleAddTOCart" />
+            </view>
+        </view>
+    </view>
+    <view class="no-goods" wx:if="{{!gtypeList.length}}">
+        <van-image width="473rpx" height="288rpx" src="/images/no-goods.png" lazy-load="{{true}}" />
+        <view>您好，您无兑换权限</view>
+    </view>
+    <!-- 分类更多 -->
+    <van-popup show="{{ typeShow }}" custom-style="width: 100%" position="top" round bind:close="onTypeClose">
+        <view class="type-view">
+            <view class="type-title-view">
+                <text>全部分类</text>
+                <van-icon name="cross" size="40rpx" bindtap="onTypeClose" />
+            </view>
+            <view class="{{gtype == item.pkey ? 'type-sub-view type-select' : 'type-sub-view'}}" wx:for="{{gtypeList}}" bindtap="handleGTypeChange" data-id='{{item.pkey}}'>{{item.categoryName}}</view>
+        </view>
+    </van-popup>
+    <!-- 加载更多数据 -->
+    <load-more id="loadMoreView" bindloadMoreListener='loadData' bindclickLoadMore='loadData'></load-more>
+    <!-- 加入购物车 动画效果 -->
+    <!-- <go-cart id="goCartView"></go-cart> -->
+    <!-- 规格选择弹出层 -->
+    <space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"></space-dialog>
+    <!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+    <!-- <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}"  wx:if="{{ isLogin }}"></authorize> -->
+</view>

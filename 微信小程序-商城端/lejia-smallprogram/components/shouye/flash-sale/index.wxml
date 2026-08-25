@@ -1,0 +1,31 @@
+<!--components/shouye/flash-sale/index.wxml-->
+<view class="flash-sale" wx:if="{{list && list.length}}" bind:tap="goPresell">
+    <view class="title-bar">
+        <view class="title">{{ displayName }}</view>
+        <view class="countdown">
+            <van-count-down use-slot time="{{ time }}" bind:change="onChange">
+                <text wx:if="{{ timeData.days != 0 }}" class="time-top-item">{{ timeData.days }}</text>
+                <text wx:if="{{ timeData.days != 0 }}" class="time-top-item-text">天</text>
+                <text class="time-top-item">{{ timeData.hours }}</text>
+                <text class="time-top-item-text">:</text>
+                <text class="time-top-item">{{ timeData.minutes }}</text>
+                <text class="time-top-item-text">:</text>
+                <text class="time-top-item">{{ timeData.seconds }}</text>
+            </van-count-down>
+        </view>
+    </view>
+    <view class="content">
+        <view class="item-container">
+            <view class="item" wx:for="{{displayChunks}}" data-pkey="{{item.pkey}}" bind:tap="goPresell">
+                <view class="item-image">
+                    <image class="image" src="{{item.wrapperPhoto ? (item.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}" mode=""/>
+                </view>
+                <view class="item-discount_price">
+                    <view class="amt"><text class="yuan-sign-20">￥</text>{{item.price}}</view>
+                    <image class="image" src="../../../images/shouye/rush.png" mode=""/>
+                </view>
+                <view class="item-original_price"><text class="yuan-sign-20">￥</text>{{item.priceOld}}</view>
+            </view>
+        </view>
+    </view>
+</view>

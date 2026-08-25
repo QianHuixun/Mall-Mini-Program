@@ -1,0 +1,54 @@
+<!--pages/my/cardWhiteOff/index.wxml-->
+<view id="cardWhiteOff">
+<view class="card-container" wx:if="{{!isError}}">
+  <view class="card-success" wx:if="{{isSuccess}}">
+    <van-icon name="checked" size="80rpx" color="#0DAE4E"/>
+    <view class="card-success-msg">
+      核销成功
+    </view>
+  </view>
+  <view class="card-item"> 
+   <view class="card-box">
+    <view class="card-price" wx:if="{{type == 'CARD'}}">
+       <view class="card-price-title">
+          <view class="unit" wx:if="{{ !cardData.avoidPostage }}">￥</view>
+              <view class="{{cardData.avoidPostage ? 'free' : ''}}">{{cardData.avoidPostage ?  '免配送费' : cardData.cost}}</view>
+         </view>
+         <view class="card-price-label">满{{cardData.limitCost}}元可用</view>
+       </view>
+      <van-image src="{{cardData.giftPicture}}" width="160rpx" height="160rpx" radius="16rpx" wx:else></van-image>
+      <view class="card-info">
+        <view class="card-title">{{cardData.giftTitle || cardData.title}} </view>
+          <view class="card-time">
+            {{cardData.startDate==null?'有效期至'+cardData.endDate:'有效期为'+cardData.startDate+'至'+cardData.endDate}}
+          </view>
+          <view class="card-rule">
+            <view class="card-rule-title" catchtap="ruleChange">
+              <text>使用规则</text>
+              <van-icon name="arrow-down" size="16rpx" custom-class="{{cardData.rule ? 'rule':''}}" />
+            </view>
+          </view>
+
+        </view>
+      </view>
+      <view class="card-rule-box {{cardData.rule ? 'not-collapse height-auto':''}}">
+        <text wx:if="{{ type == 'GIFT'}}">{{cardData.giftContent}}</text>    
+        <view wx:else>
+          <view wx:for="{{cardData.rules}}" wx:key="index">{{index+1}}. {{item}}</view>
+        </view>         
+      </view>
+    </view>
+    <view class="card-button">
+      <van-button type="primary" color="#0DAE4E" round block bind:click="handleWhiteOff"  wx:if="{{!isSuccess}}">确认核销</van-button>
+      <van-button round block bind:click="handleWhiteOff" custom-style="width: 430rpx" bind:click="handleBack" wx:else>返回首页</van-button>
+    </view>
+  </view>
+    <view class="card-error" wx:if="{{isError}}">
+      <van-icon name="clear" size="80rpx" color="#666666"/>
+      <view class="card-error-msg">
+      {{errorMsg}}
+      </view>
+    </view>  
+    <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false,iShidden=true 隐藏授权 -->
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

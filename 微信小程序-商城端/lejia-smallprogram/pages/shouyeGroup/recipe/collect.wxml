@@ -1,0 +1,19 @@
+<!--pages/shouyeGroup/recipe/collect.wxml-->
+<view id="collect-view">
+<scroll id="scroll" requesting="{{requesting}}" end="{{end}}" listCount="{{dataList.length}}" bind:refresh="refresh" bind:more="more">
+  <view class="item" wx:for="{{dataList}}" wx:key="index" bindtap="caipuClick" data-id='{{item}}' >
+    <van-image width="65" height="65" src="{{item.photo}}" />
+    <view class="content">
+      <text>{{item.name}}</text>
+      <view class="lick-view">
+        <van-icon name="like" color="red" size="21px"/>
+        <text class="num">{{item.collCount}}</text>
+      </view>
+    </view>
+    <van-icon name="arrow" color="#5C5C5C" />
+  </view>
+</scroll>
+<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

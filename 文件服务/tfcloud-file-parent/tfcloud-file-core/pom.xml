@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-file-core</artifactId>
+	<packaging>jar</packaging>
+	<version>1.2.2</version>
+
+	<name>tfcloud-file-core</name>
+	<description>tfcloud-file-core</description>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-file-parent</artifactId>
+		<version>3.5.14</version>
+	</parent>
+
+	<properties>
+	</properties>
+
+	<build>
+	</build>
+
+	<dependencies>
+
+		<!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-util</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>ch.ethz.ganymed</groupId>
+					<artifactId>ganymed-ssh2</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		<!-- 本地项目依赖 结束 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

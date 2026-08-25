@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-file-embed-example</artifactId>
+	<packaging>jar</packaging>
+	<version>1.1.1</version>
+
+	<description>文件服务</description>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-boot</artifactId>
+		<version>3.4.0</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+	</properties>
+
+	<dependencies>
+		<!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-db-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-util</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-spring-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-feign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-web</artifactId>
+		</dependency>
+		<!-- 本地项目依赖 结束 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>report-aggregate</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report-aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

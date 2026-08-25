@@ -1,0 +1,126 @@
+<!--pages/shouyeGroup/merchant/index.wxml-->
+<van-config-provider theme-vars="{{ theme }}">
+<view id="merchant" class="{{theme.value}}">
+<!-- 顶部信息栏 -->
+  <view class="merchant-top">
+    <!-- 背景 -->
+    <van-image src="{{imgUrl + 'my_bg.png'}}" custom-class="page-bg" ></van-image>
+    <!-- 标题栏 -->
+    <!-- <view class="merchant-top-title">
+    <van-icon name="arrow-left" size="28rpx" bind:click="goBack"></van-icon>
+      {{merchantInfo.name}}
+    </view> -->
+    <!-- end 标题栏 -->
+    <!-- 商户信息 -->
+    <view class="merchant-top-info">
+      <van-image src="{{merchantInfo.headIcon ? merchantInfo.headIcon : '/images/classification/merchant-noPic.png'}}" width="96rpx" height="96rpx" bind:tap="showPopup"></van-image>
+      <view class="merchant-top-info_right">
+        <view class="merchant-top-info_right__name">
+          <view class="merchant-top-info_right__name___left">{{merchantInfo.name}}</view>
+          <view class="merchant-top-info_right__name___right" catch:tap="addCollection">    
+            <van-image src="/images/classification/i-yishoucang.png" width="142rpx" height="48rpx" wx:if="{{merchantInfo.isCollection }}"/>
+            <van-image src="/images/classification/i-shoucang.png" width="142rpx" height="48rpx" wx:else/>
+          </view>
+        </view>
+        <view class="merchant-top-info_right__staff">
+          <view class="merchant-top-info_right__staff___left">摊位号：{{merchantInfo.booth}}</view>
+          <view class="merchant-top-info_right__staff___right">在售:{{merchantInfo.goodsNum}}</view>
+        </view>
+        <view class="merchant-top-info_right__tags">
+          <van-tag plain type="success" wx:for="{{merchantInfo.businessScopesName}}" wx:key="index">{{item}}</van-tag>
+        </view>
+        <view class="merchant-top-info_right__img" wx:if="{{merchantInfo.files.length}}">
+            <van-image class="img" wx:for="{{merchantInfo.files}}" src="{{item.url}}" data-index="{{index}}" width="104rpx" height="104rpx" bind:tap="handlePreviewImage"></van-image>
+        </view>
+      </view>
+    </view>
+    <!-- end 商户信息 -->
+    <!-- 搜索栏 -->
+ <view class="merchant-center-search">
+      <van-search value="{{value}}" shape="round" placeholder="搜索店内商品" bind:tap="onSearch"  disabled='{{true}}'/>
+      <view class="merchant-center-search_right">
+        <view class="merchant-center-search_right__item {{sortType === 'num' && sortValue !== '' ? 'active' : ''}}" data-type='num' bind:tap="handleSortClick">
+          销量
+        </view>
+        <view class="merchant-center-search_right__item {{sortType === 'price' && sortValue !== '' ? 'active' : ''}}" data-type='price' bind:tap="handleSortClick">
+          价格
+          <van-icon wx:if="{{sortType === 'price' && sortValue === true}}" name="/images/classification/i-sort-desc.png" size="18rpx"/>
+          <van-icon wx:elif="{{sortType === 'price' && sortValue === false}}" name="/images/classification/i-sort-asc.png" size="18rpx"/>
+          <van-icon wx:else name="/images/classification/i-sort.png" size="18rpx"/>
+        </view>
+       
+      </view>
+    </view>
+    <!-- end 搜索栏 -->
+</view>
+<!-- end 顶部信息栏 -->
+ 
+    <!-- 商品区 -->
+    <view class="merchanmt-goods"  style="top: {{topContentHeight}}px; height: calc(100% - {{topContentHeight}}px - 116rpx);">
+        <!-- 左侧分类 -->
+        <view class="wx_left">
+          <scroll-view class="first-classify" scroll-with-animation scroll-into-view="scroll-{{activeClassify}}" scroll-y="true" enhanced="{{true}}" show-scrollbar="{{false}}">  
+          <view wx:for="{{classifyList}}" wx:key="index" id="scroll-{{item.pkey}}" data-pkey="{{item.pkey}}" bind:tap="sidebarTab" class="item {{activeClassify == item.pkey ? 'active' : ''}}">
+              {{  item.name }}
+              </view>  
+          </scroll-view>
+          </view>
+          <!-- 右侧商品 -->
+          <view class="wx_right" >
+            <scroll-view bind:scroll="onScroll" scroll-y id="scroller" style="height: 100%;" 	enable-back-to-top="{{false}}" bindscrolltolower="scrollGoodsBottom"  enhanced="{{true}}" show-scrollbar="{{false}}">
+              <view wx:for="{{goodsList}}" wx:key="index" data-pkey="{{item.group.key}}" class="goodItem" id="scroll-{{ item.group.key  }}">     
+                <view class="group-title">{{item.group.value}}</view>   
+            <block wx:if="{{ goodsList.length > 0 }}">
+                <view class="goods_list" wx:for="{{item.data}}"data-index="{{index}}" wx:key="index" wx:key="subIndex" wx:for-item="subItem" wx:for-index="subIndex" data-pkey="{{subItem.pkey}}"  catchtap="goDetail">
+                  <view class="goods_list_container">
+                    <van-image src="{{subItem.wrapperPhoto||'/images/no-pic.png'}}" custom-class="goods_photo"   />
+                    <view class="goods_detail">
+                      <view class="goods_title">
+                        <view class="title">
+                          {{subItem.title}}
+                        </view>
+                        <view class="num">
+                          销量：{{subItem.xsNum}}  库存：{{subItem.kcNum}}
+                        </view>
+                      </view>
+
+                      <view class="goods_price">
+                        <view class="price">
+                          <text class="big-price-box">￥{{subItem.bigPrice}}.{{subItem.smallPrice}}</text>
+                          <text class="del_price">￥{{ subItem.priceOld }}</text>
+                          <view class="member_price" wx:if="{{subItem.priceMember}}"><text class="member_price_txt">￥{{subItem.priceMember}}</text><image class="member_price_tag" src="/images/member_price_tag.png" /></view>
+                        </view>
+                        <van-icon wx:if="{{subItem.spaces.length>1||(subItem.spaces.length==1&&!subItem.gwcNum)||(subItem.spaces.length==1&&!subItem.spaces[0].kcNum)}}" custom-class="cara-dd-icon" name="/images/carAdd_plus_{{theme.value}}.png" color="#449C55" size="64rpx" data-pkey="{{subItem.pkey}}" data-index="{{index}}" data-subindex="{{subIndex}}" data-space="{{subItem.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                         <!--   防止van-stepper冒泡 -->
+                         <view catchtap="catchTap" style="position:absolute;right:24rpx;" wx:else > 
+                        <van-stepper value="{{ subItem.gwcNum }}" min="0" max="{{subItem.spaces[0].kcNum}}" custom-class="classify-space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" data-index="{{index}}"
+                        data-subIndex="{{subIndex}}" bind:change="stepChange" disable-input async-change integer button-size="64rpx" />
+                        </view>
+                      </view>
+                    </view>
+                    <view wx:if="{{subItem.kcNum <= 0}}" class="sold-out">已售罄</view>
+                  </view>
+                  
+                </view>
+            </block>
+              </view>
+              <van-divider contentPosition="center" wx:if="{{!hasMore}}" fontSize="24rpx" borderColor="#fff">暂无其他数据</van-divider>
+            </scroll-view>
+          </view>
+    </view>
+    <!-- end 商品区 -->
+    <!-- 底部操作栏 -->
+    <view class="merchant-submit-bar" style="padding-bottom:{{isIphoneX?68:0}}rpx">
+      <van-icon name="/images/classification/i-cart_{{theme.value}}.png" info="{{buycarNum}}" size="70rpx" bind:tap="goBuyCar"/>
+      <view class="price">￥{{buycarPrice}}</view>
+      <van-button bind:tap="goBuyCar">去结算</van-button>
+    </view>
+    <!-- end 底部操作栏 -->
+    <!-- 显示商户店铺图片 -->
+    <van-popup show="{{ show }}" bind:close="onClose">
+      <van-image src="{{merchantInfo.headIcon ? merchantInfo.headIcon : '/images/classification/merchant-noPic.png'}}" width="600rpx" height="600rpx" bind:tap="showPopup"></van-image>
+    </van-popup>
+     <!-- 规格选择弹出层 -->
+     <space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart" isbindAddCart="{{true}}"></space-dialog>
+</view>
+</van-config-provider>

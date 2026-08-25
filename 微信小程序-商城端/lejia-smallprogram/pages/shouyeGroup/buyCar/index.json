@@ -1,0 +1,19 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-card": "@vant/weapp/card/index",
+      "drag-ball": "/components/dragBall/index",
+      "van-tag": "@vant/weapp/tag/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+      "van-stepper": "@vant/weapp/stepper/index",
+      "van-checkbox": "@vant/weapp/checkbox/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+      "van-submit-bar": "@vant/weapp/submit-bar/index",
+      "van-toast": "@vant/weapp/toast/index",
+      "recommending-goods": "/components/recommending-goods/index",
+      "van-config-provider": "@vant/weapp/config-provider/index"
+    },
+    "navigationBarTitleText": "购物车"
+  }

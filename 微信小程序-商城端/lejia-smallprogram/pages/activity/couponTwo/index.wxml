@@ -1,0 +1,10 @@
+<!--pages/activity/couponTwo/index.wxml-->
+<view id="couponTwo">
+<van-image src="{{imgUrl +'couponTwo_main.png'}}" width="750rpx" height="1264rpx"></van-image>
+<view class="btn-bar">
+    <van-button custom-class="btn-confirm" round bind:click="goReceive">立即领取</van-button>
+  </view>
+  <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

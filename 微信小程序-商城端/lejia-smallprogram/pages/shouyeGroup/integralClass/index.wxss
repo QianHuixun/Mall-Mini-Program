@@ -1,0 +1,187 @@
+/* pages/classification/index.wxss */
+.wx_top {
+  z-index: 70;
+  position: fixed;
+  width: 100%;
+  border-bottom: 1px solid #f6f6f6;
+  top: 0;
+  left: 0;
+}
+
+#calssify .calssify-search {
+  padding: 22rpx 24rpx;
+  background-color: #fff;
+
+}
+
+.calssify-search .calssify-search-box {
+  height: 64rpx;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32rpx;
+}
+
+.calssify-search .calssify-search-box text {
+  padding-left: 12rpx;
+  font-size: 26rpx;
+  line-height: 26rpx;
+  font-weight: 500;
+  color: #999999;
+}
+
+.wx_left {
+  z-index: 50;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 108rpx;
+  padding-bottom: 110rpx;
+  width: 150rpx;
+  height: 100%;
+  overflow-y: scroll;
+  background: #f6f6f6;
+}
+
+.wx_left .van-sidebar {
+  width: 100%;
+}
+
+.wx_right {
+  padding-top: 108rpx;
+  padding-left: 150rpx;
+  padding-bottom: 110rpx;
+  /* width: 100%; */
+  box-sizing: border-box;
+}
+
+.goods_photo {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right: 10rpx;
+}
+
+.new_siderbar .van-sidebar-item {
+  background: #f6f6f6;
+  /* border-top: 1px solid #d9d9d9; */
+  border-bottom: 0;
+  padding: 20rpx;
+}
+
+.new_siderbar .van-sidebar-item .van-sidebar-item__text {
+  font-size: 24rpx;
+}
+
+.new_siderbar .van-sidebar-item--selected {
+  border-left: 2px solid #4dce78;
+  background: #fff;
+  color: #4dce78;
+}
+
+.goods_list {
+  display: flex;
+  margin-left: 20rpx;
+  border-bottom: 1px solid #f6f6f6;
+  padding: 10rpx 0;
+}
+
+.goods_title {
+  /* height: 70rpx; */
+  margin-right: 20rpx;
+  line-height: 36rpx;
+  overflow: hidden;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+
+.goods_detail {
+  flex: 1;
+}
+
+.goods_list .num {
+  font-size: 28rpx;
+}
+
+.goods_price {
+  display: flex;
+  color: #f22005;
+  /* margin-top: 10rpx; */
+}
+
+.goods_price .price {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.del_price {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+
+.goods_price .price .big_price {
+  font-size: 34rpx;
+}
+
+.goods_price .point_price {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.goods_price .btn {
+  padding: 0 20rpx;
+}
+
+#calssify .lj-search {
+  position: fixed;
+  padding: 20rpx 28rpx;
+  width: 100%;
+  top: 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+#calssify .lj-search .van-cell {
+  height: 60rpx;
+  padding: 10rpx 20rpx 10rpx 0 !important;
+  line-height: 40rpx;
+  color: #999999;
+}
+
+#calssify .lj-search .van-cell .van-field__input {
+  height: 40rpx;
+  min-height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+#calssify .lj-search .van-cell__left-icon-wrap,
+.van-cell__right-icon-wrap {
+  height: 40rpx;
+}
+
+
+
+#calssify .van-icon__image {
+  display: block;
+}
+
+/**会员价格*/
+.member_price {
+  font-size: 26rpx;
+  color: #4dce78;
+}
+
+.member_price_txt {
+  display: inline-block;
+  margin-right: 16rpx;
+  vertical-align: middle;
+
+}
+
+.member_price_tag {
+  width: 80rpx;
+  height: 30rpx;
+  vertical-align: middle;
+}
+
+/**end 会员价格*/

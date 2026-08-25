@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+        "van-image": "@vant/weapp/image/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "space-dialog": "/components/space/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "drag-ball": "/components/dragBall/index",
+        "search-bar": "/components/search-bar/index",
+        "van-divider": "@vant/weapp/divider/index",
+        "van-stepper": "@vant/weapp/stepper/index"
+    },
+    "navigationBarTitleText": "民生专区",
+    "disableScroll": true
+}

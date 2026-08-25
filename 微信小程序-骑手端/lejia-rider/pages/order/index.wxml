@@ -1,0 +1,78 @@
+<!-- 
+@url: pages/order/index.wxml
+@description: 订单首页
+@author: zs
+ -->
+<view id="order-index">
+	<van-tabs active="{{ active }}" bind:change="onChange" sticky nav-class="tabs" tab-active-class="tab-active" color="white">
+		<van-tab title="待取货" name="pickup" info="{{pickupCount}}">
+		</van-tab>
+		<van-tab title="配送中" name="distribution" info="{{distributionCount}}"></van-tab>
+	</van-tabs>
+	<scroll-view class="scroll-view" scroll-y scroll-top='{{topNum}}' scroll-anchoring upper-threshold="0" bindscrolltolower="bindscrollbottom">
+		<view class="item" bindtap="itemClick" data-id='{{item}}' data-index='{{index}}' wx:for="{{active == 'pickup' ? pickupList : distributionList}}" wx:key="index">
+			<view class="item-ticket" wx:if="{{item.smallTicket && item.smallTicket !='undefined'}}"><text>#</text>{{item.smallTicket}}</view>
+      <view class="item-code">
+				<text class="code">订单：{{item.code}} <text class="{{item.statusName=='拣货中'?'red-font':(item.statusName=='拣货完成'?'green-font':'blue-font')}}">({{item.statusName}})</text></text>
+				<text>订单详情</text>
+				<van-icon name="arrow" />
+			</view>
+			<view class="info">
+				<view class="info-item">
+					<view class="addr-box">
+						<van-icon name="location" color="#ec8343" />
+						<text class="phone" catchtap="addrClick" data-id='{{item}}'>{{item.addr}}</text>
+					</view>
+					<van-icon name="arrow"  size="28rpx" color="#57CCFA"/>
+				</view>
+				<view class="info-item">
+					<van-icon name="phone" color="#ec8343" />
+					<text>{{item.name}}</text>
+					<text class="phone" catchtap="phoneClick" data-id='{{item}}'>{{item.mobile}}</text>
+				</view>
+			</view>
+			<view class="order-info">
+				<text>下单时间：{{item.orderTime}}</text>
+				<text>商品重量：{{item.weight}}kg</text>
+			</view>
+			<view class="sub-info">
+				<text>期望送达：</text>
+				<text class="time">{{item.pstime}}</text>
+				<text class="subCom" wx:if="{{active == 'pickup'}}" catchtap="subComClick" data-id='{{item}}' data-index='{{index}}'>确认揽货</text>
+        <text class="subCom" wx:else catchtap="DeliveryClick" data-id='{{item}}' data-index='{{index}}'>确认送达</text>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="refresh-btn" bindtap="refreshData">
+		<van-icon name="replay" />
+	</view>
+	<van-dialog id="van-dialog" />
+  <van-popup show="{{ deliveryShow }}" bind:close="onDeliveryClose">
+    <view class="popup-title">确认订单已送达</view>
+    <view class="popup-ticket" wx:if="{{deliveryData.smallTicket && deliveryData.smallTicket !='undefined'}}">
+    <text>#</text>{{deliveryData.smallTicket}}
+    </view>
+    <view class="popup-address">
+      <view class="bold">{{deliveryData.addr}}</view>
+      <view>{{deliveryData.name}} 	<text class="phone" catchtap="phoneClick" data-id='{{deliveryData}}'>{{deliveryData.mobile}}</text></view>
+    </view>
+    <view class="popup-image">
+      <view class="popup-image-title">上传菜品存放位置照片</view>
+      <van-uploader
+        file-list="{{ deliveryPhoto }}"
+        deletable="{{ true }}" 
+        max-count="3"
+        bind:after-read="afterRead"
+        bind:delete="uploaderDelete"
+      > 
+        <view slot="" class="upload-icon">
+          <van-icon name="plus" size="50rpx"/>
+        </view>
+      </van-uploader>
+    </view>
+    <view class="popup-button">
+      <van-button plain type="default" bind:tap="onDeliveryClose">取消</van-button>
+      <van-button type="warning" color="#EC8343" bind:tap="delivery">确认送达</van-button>
+    </view>
+  </van-popup>
+</view>

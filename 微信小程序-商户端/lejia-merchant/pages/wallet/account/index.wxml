@@ -1,0 +1,95 @@
+<!--pages/wallet/account/index.wxml-->
+<view id="wallet-account">
+  <van-cell-group>
+    <van-field
+    model:value="{{ bankname }}"
+    label="提现银行"
+    disabled
+    clickable
+    placeholder="请选择提现银行"
+    input-align="right"
+    icon="arrow"
+    bind:tap="onPopShow"
+    bind:click-icon="onPopShow"
+  />
+  <van-field
+  model:value="{{ bankcard }}"
+    label="银行卡号"
+    type="number"
+    placeholder="请输入银行卡号"
+    input-align="right"
+  />
+  <van-field
+  model:value="{{ bankBranchName }}"
+    label="开户支行"
+    placeholder="请输入开户支行"
+    input-align="right"
+  />
+  <van-field
+    model:value="{{ bankuser }}"
+    label="持卡人姓名"
+    placeholder="请输入持卡人姓名"
+    input-align="right"
+  />
+  <view class="wallet-account-tips">提现账户信息错误会导致提现失败，请仔细核对</view>
+  <van-field
+  model:value="{{ mobile }}"
+    label="手机号"
+    disabled
+    placeholder="请输入手机号"
+    input-align="right"
+  />
+  <van-field
+  model:value="{{ code }}"
+    center
+    clearable
+    maxlength="4"
+    label="验证码"
+    placeholder="请输入验证码"
+    border="{{ false }}"
+    use-button-slot
+    input-align="right"
+  >
+    <van-button slot="button" size="small" type="primary" custom-class="code-button" disabled="{{isDisabled}}" bind:click="getCode">
+      {{codeText}}
+    </van-button>
+  </van-field>
+</van-cell-group>
+<view class="button-bar">
+  <van-button bind:click="submitCheck">保存</van-button>
+</view>
+
+<!-- 银行卡选择 -->
+<van-action-sheet show="{{ show }}">
+<view class="action-sheet-container">
+  <view class="action-sheet_header">
+    <view class="action-sheet_left" bind:tap="onActionClose">取消</view>
+    <view class="action_sheet_title">选择到账银行卡</view>  
+    <view class="action-sheet_right" bind:tap="onChange">确定</view>
+  </view>
+    <van-radio-group value="{{ radio }}">
+      <van-cell-group>
+        <van-cell title="{{item.text}}" clickable data-name="{{item.text}}" bind:click="onCellClick" wx:for="{{ list }}" wx:key="index">
+          <van-radio slot="right-icon" name="{{item.text}}"  checked-color="#5B94E1"/>
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+  </view>
+</van-action-sheet>
+
+<van-dialog
+  use-slot
+  title="确认提现账户"
+  show="{{ dialogShow }}"
+  show-cancel-button
+  bind:close="onDialogClose"
+  bind:confirm="onSubmit"
+>
+  <view class="info-container">
+    <view>银行卡号：{{bankcard}}</view>
+    <view>所属银行：{{bankname}}</view>
+    <view>开户支行：{{bankBranchName}}</view>
+    <view>持卡人姓名：{{bankuser}}</view>
+    </view>
+</van-dialog>
+</view>

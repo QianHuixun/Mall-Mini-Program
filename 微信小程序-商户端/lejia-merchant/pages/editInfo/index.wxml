@@ -1,0 +1,65 @@
+<!--pages/editInfo/index.wxml-->
+<view>
+  <!-- 头部 -->
+  <view class="top_container">
+    <view class="avatar_box">
+      <view class="cell" bindtap="onEditAvatar">
+        <van-image wx:if="{{ !avatar }}" round width="180rpx" height="180rpx" src="/images/deafult_logo.png" />
+        <van-image wx:else round width="180rpx" height="180rpx" src="{{avatar}}" />
+      </view>
+      <view class="cell flex_cell">
+        <view class="editName" bindtap="onEidtName" wx:if="{{!editName}}">
+          <text>{{ name }}</text>
+          <van-icon name="edit" />
+        </view>
+        <van-field wx:else focus="{{editNameFocus}}" value="{{ name }}" placeholder="请输入用户名"  border="{{ false }}" bind:blur="onEditNameBlur" bind:confirm="onEditNameConfirm" />
+      </view>
+    </view>
+    <image src="/images/my/my_bg.png" class="my_bg" mode="widthFix"></image>
+  </view>
+
+  <!-- 信息栏 -->
+  <view class="info_container">
+    <view class="info_title">基本信息</view>
+    <view class="info_item" wx:for="{{infoList}}" wx:key="key">
+      <van-cell-group>
+        <van-cell title="{{item.name}}" value="{{item.value}}" border="{{ false }}" wx:if="{{item.show}}" data-key="{{item.key}}" bindtap="onCellClick" />
+        <van-field wx:else focus="{{item.focus}}" bind:input="inputFormat"  data-key="{{item.key}}" value="{{ item.value }}" label="{{ item.name }}" placeholder="{{ '请输入' + item.name }}" error-message="{{item.error}}" border="{{ false }}"  data-key="{{item.key}}" bind:blur="onBlur" bind:confirm="onConfirm" />
+      </van-cell-group>
+    </view>
+  </view>
+  <!-- 商户风采 -->
+  <view class="mien_container">
+    <view class="mien_title">商户风采</view>
+    <view class="mien_video">
+      <view>
+        <text class="mien_video_title">宣传视频</text>
+        <text class="mien_video_suggest">建议比例：16:9</text>
+      </view>
+      <view>
+        <button v-if="{{videoLink}}"  class="look_video btn" bindtap="onLookVideo">查看</button>
+      </view>
+    </view>
+    <view class="mien_image">
+      <view>
+        <text class="mien_video_title">个性宣传图片</text>
+        <text class="mien_video_suggest">建议比例：16:9</text>
+      </view>
+      <view>
+        <button disabled="{{ hasUpload }}" class="upload_img btn" bindtap="onUploadImg" wx:if="{{background.length<5&&!disabled}}" >上传</button>
+      </view>
+    </view>
+    <swiper indicator-dots="{{ true }}" autoplay="{{ true }}">
+        <block wx:for="{{background}}" wx:key="index">
+          <swiper-item>
+            <image src="{{item.url}}" data-pkey="{{item.pkey}}" bindtap="onChangeSwiperImg"></image>
+          </swiper-item>
+        </block>
+    </swiper>
+  </view>
+  <video  class="{{showVideo?'show':'hide'}}"  src="{{videoLink}}" direction="0" controls="true" id="videoId" bindfullscreenchange="leaveVideo" ></video>
+  <van-toast id="van-toast" />
+  <!-- <van-popup show="{{ showVideo }}" bind:close="onClose">
+    <video src="{{videoLink}}" direction="0" controls="true" id="videoId" bindfullscreenchange="leaveVideo" class='videoCenter'></video>
+  </van-popup> -->
+</view>

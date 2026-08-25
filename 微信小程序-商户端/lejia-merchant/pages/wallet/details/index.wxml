@@ -1,0 +1,16 @@
+<!--pages/wallet/details/index.wxml-->
+<view id="wallet-details">
+  <scroll-view id="scroll" scroll-y bind:scroll="onScroll" style="height:100%" 	enable-back-to-top="{{false}}" bindscrolltolower="scrollBottom"  enhanced="{{true}}" show-scrollbar="{{false}}">
+     <view class="list-item" wx:for="{{list}}" wx:key="index">
+      <view class="list-item-line item-first">
+        <view class="list-item-line_left">{{item.orderType}}</view>
+        <view class="list-item-line_right {{item.source =='WITHDRAWAL' ? '' : 'color-blue'}}">{{item.source =='WITHDRAWAL' ? '-' : '+'}}{{item.orderAmount}}</view>
+      </view>
+      <view class="list-item-line item-second">
+        <view class="list-item-line_left">{{item.settlementTime}}</view>
+        <view class="list-item-line_right {{item.status === '提现成功' ? 'color-green' : 'color-orange'}}" wx:if="{{item.status}}">{{item.status}}</view>
+      </view>
+     </view>
+     <van-divider contentPosition="center" wx:if="{{last}}"  customStyle="border:0;" fontSize="24rpx" textColor="#dddddd" borderColor="#dddddd">暂无其他数据</van-divider>
+    </scroll-view>
+</view>

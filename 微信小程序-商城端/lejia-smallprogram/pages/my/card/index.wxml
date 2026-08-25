@@ -1,0 +1,108 @@
+<!--pages/my/card/index.wxml-->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view id="card">
+  <van-tabs custom-class="card-gift-tabs" active="{{ topActive }}" bind:change="tabTopChange">
+        <van-tab title="优惠券" name="CARD"></van-tab>
+        <van-tab title="礼品券" name="GIFT"></van-tab>
+    </van-tabs>
+    <van-tabs custom-class="card-tabs" active="{{ active }}" bind:change="tabChange">
+        <van-tab title="未使用" name="UNUSED"></van-tab>
+        <van-tab title="已使用" name="USED"></van-tab>
+        <van-tab title="不可用" name="EXPIRED"></van-tab>
+    </van-tabs>
+    <view class="scroll-view-box">
+        <scroll-view class="scroll-view" scroll-y scroll-anchoring style="height:{{  scrollHeight+'px' }}" upper-threshold="0">
+            <block wx:if="{{datalist.length > 0}}">
+                <view class="card-item" wx:for="{{datalist}}" wx:key="index"  catchtap="handleShow" data-item="{{item}}">
+                    <view class="card-box {{item.invalid||item.status=='USED'||item.status=='EXPIRED'?'card-invalid':''}}">
+                        <view class="card-price" wx:if="{{topActive == 'CARD'}}">
+                            <view class="card-price-title">
+                                <view class="unit" wx:if="{{ !item.avoidPostage }}">￥</view>
+                                <view class="{{item.avoidPostage ? 'free' : ''}}">{{item.avoidPostage ?  '免配送费' : item.cost}}</view>
+                            </view>
+                            <view class="card-price-label">满{{item.limitCost}}元可用</view>
+                        </view>
+                        <van-image src="{{item.picture}}" width="160rpx" height="160rpx" radius="16rpx" wx:else></van-image>
+                        <view class="card-info">
+                            <view class="card-title">{{item.title}} </view>
+                            <view class="card-time">
+                                {{item.startDate==null?'有效期至'+item.endDate:'有效期为'+item.startDate+'至'+item.endDate}}
+                            </view>
+                            <view class="card-rule">
+                                <view class="card-rule-title" data-index="{{index}}" catchtap="ruleChange">
+                                    <text>使用规则</text>
+                                    <van-icon name="arrow-down" size="16rpx" custom-class="{{item.rule ? 'rule':''}}" />
+                                </view>
+                                <van-button bind:click="handleUse" data-pkey="{{item.userType}}" round type="primary" custom-class="card-button" wx:if="{{!item.invalid&&item.status=='UNUSED'&&topActive=='CARD'}}">立即使用</van-button>
+                                <van-button bind:click="handleShow" data-item="{{item}}" round type="primary" custom-class="card-button" wx:elif="{{!item.invalid&&item.status=='UNUSED'&&topActive=='GIFT'}}">线下核销</van-button>
+                            </view>
+
+                        </view>
+                        <view class="card-noactive" wx:if="{{item.invalid}}">
+                            <image src="/images/card/card_invalid.png"></image>
+                        </view>
+                        <view class="card-noactive" wx:elif="{{item.status=='USED'}}">
+                            <image src="/images/card/card_used.png"></image>
+                        </view>
+                        <view class="card-noactive" wx:elif="{{item.status=='EXPIRED'}}">
+                            <image src="/images/card/card_expired.png"></image>
+                        </view>
+                    </view>
+                  
+                    <view class="card-rule-box {{item.rule?'not-collapse':''}}" wx:if="{{topActive == 'CARD'}}">
+                      <view wx:for="{{item.rules}}" wx:key="index">{{index+1}}.{{item}}</view>                  
+                    </view>
+                    <view class="card-rule-box {{item.rule?'not-collapse height-auto':''}}" wx:else>
+                    <text>{{item.content}}</text>             
+                </view>
+                </view>
+                
+            </block>
+            <view class="nodata-back" wx:else>
+                <image src="/images/card/no_data.png"></image>
+                <view>暂无可用的{{topActive == 'CARD' ? '优惠券' : '礼品券'}}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="popup-gift" wx:if="{{giftShow}}">
+      <view class="popup-container">
+          <view class="popup-main">
+            <view class="popup-main-top">
+              <view class="popup-main-top__left">
+                <view class="card-price" wx:if="{{topActive == 'CARD'}}">
+                            <view class="card-price-title">
+                                <view class="unit" wx:if="{{ !popupData.avoidPostage }}">￥</view>
+                                <view class="{{popupData.avoidPostage ? 'free' : ''}}">{{popupData.avoidPostage ?  '免配送费' : popupData.cost}}</view>
+                            </view>
+                            <view class="card-price-label">满{{popupData.limitCost}}元可用</view>
+                        </view>
+                <van-image src="{{popupData.picture}}" width="128rpx" height="128rpx" radius="16rpx" wx:else></van-image>
+              </view>
+              <view class="popup-main-top__right">
+                <view class="popup-main-top__right__title">
+                  {{popupData.title}} 
+                </view>
+                <view class="popup-main-top__right__tips">
+                  {{popupData.startDate==null?'有效期至'+popupData.endDate:'有效期为'+popupData.startDate+'至'+popupData.endDate}}
+                </view>
+              </view>
+            </view>
+            <view class="popup-main-middle">
+              <!-- <van-image src="" width="438rpx" height="438rpx" radius="16rpx"></van-image> -->
+              <canvas style="width: 219px; height: 219px;" canvas-id="myQrcode{{popupData.pkey}}{{index}}"></canvas>
+            </view>
+            <view class="popup-main-bottom">
+              <text wx:if="{{ topActive == 'GIFT'}}">{{popupData.content}}</text>
+              <view wx:else>
+              <view wx:for="{{popupData.rules}}" wx:key="index">{{index+1}}. {{item}}</view>
+            </view>
+            </view>
+          </view>
+          <view class="popup-close">
+          <van-icon name="close" color="#fff" size="86rpx" bind:tap="handleHide"/>
+        </view>
+      </view>
+      
+      <view class="popup-cover"></view>
+    </view>
+</view>

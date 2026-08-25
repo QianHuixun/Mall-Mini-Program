@@ -1,0 +1,10 @@
+<!--components/search-bar/index.wxml-->
+<view class="search-bar-container" bindtap="searfocus">
+  <van-icon size="22rpx" name="/images/search_btn.png" />
+  <view wx:if="{{list && list.length}}" class="search-tips-scroll">
+    <swiper class="search-tips-scroll-container" vertical="true" autoplay interval="3000" circular="true" bindchange="handleChange">
+      <swiper-item class="search-tips-scroll-item search-tips" wx:for="{{list}}" wx:key="index">{{item}}</swiper-item>
+    </swiper>
+  </view>
+  <view wx:else class="search-tips">搜索商品 </view>
+</view>

@@ -1,0 +1,96 @@
+<view id="groupon">
+	<van-tabs active="{{ active }}" bind:change="tabChange" sticky>
+		<van-tab title="正在拼团" custom-class="tab-box">
+			<view wx:for="{{collageData.notGroups}}" wx:key="index" class="item-box" data-id='{{item}}' catchtap="goodsClick">
+				<view class="item-top">
+					<view class="market">{{item.farmerName}} </view>
+					<view wx:if="{{item.remainingGroupNum}}">待分享，差
+						<text class="focus">{{item.remainingGroupNum}}</text>人 </view>
+				</view>
+				<view class="item-center">
+					<view class="item-left">
+						<van-image src="{{item.wrapperPhoto}}" width="100%" height="100%"></van-image>
+					</view>
+					<view class="item-right">
+						<view class="name">{{item.title}} </view>
+						<view class="label">实付：￥<text class="focus">{{item.amtn}}</text> </view>
+					</view>
+				</view>
+				<view class="item-bottom">
+					<view>
+						<van-count-down use-slot time="{{ item.remainingTime }}" bind:change="onChange" data-index='{{index}}' data-type="notGroups" wx:if="{{item.remainingTime}}">
+							<text class="time-top-item" wx:if="{{item.coutDown.days}}">{{ item.coutDown.days<10?'0'+item.coutDown.days:item.coutDown.days }}</text>
+							<text class="time-top-item-text" wx:if="{{item.coutDown.days}}">天</text>
+							<text class="time-top-item">{{ item.coutDown.hours<10?'0'+item.coutDown.hours:item.coutDown.hours }}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{item.coutDown.minutes<10?'0'+item.coutDown.minutes:item.coutDown.minutes}}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{ item.coutDown.seconds<10?'0'+item.coutDown.seconds:item.coutDown.seconds }}</text>
+							<text class="time-top-item-text" style="margin-left:16rpx">后结束</text>
+						</van-count-down>
+						<view style="color: #f24539;" wx:else> {{item.remainingGroupNum? '拼团失败':'拼团成功'}}</view>
+					</view>
+					<view class="btn-box">
+						<button class="btn" wx:if="{{userInfo}}" open-type="share" data-pkey="{{item.pkey}}" catchtap="stopBubble" data-img="{{item.wrapperPhoto}}" disabled="{{item.remainingTime<1||!item.remainingGroupNum}}">
+							{{item.remainingTime<1?'拼团失败':(item.remainingGroupNum?'邀请好友拼单':'拼团成功')}}
+						</button>
+						<button class="btn" wx:else open-type="getUserInfo"   catch:getuserinfo="handleGetuserinfo" catchtap="stopBubble"   data-pkey="{{item.pkey}}" data-img="{{item.wrapperPhoto}}" disabled="{{item.remainingTime<1||!item.remainingGroupNum}}">
+							{{item.remainingGroupNum?(item.remainingTime<1?'拼团失败': '邀请好友拼单' ) :'拼团成功'}}
+						</button>
+					</view>
+				</view>
+			</view>
+			<load-more id="loadMoreView_not" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+
+
+		</van-tab>
+		<van-tab title="已拼团" custom-class="tab-box">
+			<view wx:for="{{collageData.infoGroups}}" wx:key="index" class="item-box" data-id='{{item}}' catchtap="goodsClick">
+				<view class="item-top">
+					<view class="market">{{item.farmerName}} </view>
+					<view wx:if="{{item.remainingGroupNum}}">待分享，差
+						<text class="focus">{{item.remainingGroupNum}}</text>人 </view>
+				</view>
+				<view class="item-center">
+					<view class="item-left">
+						<van-image src="{{item.wrapperPhoto}}" width="100%" height="100%"></van-image>
+					</view>
+					<view class="item-right">
+						<view class="name">{{item.title}} </view>
+						<view class="label">实付：￥<text class="focus">{{item.amtn}}</text> </view>
+					</view>
+				</view>
+				<view class="item-bottom">
+					<view class="count-down">
+						<van-count-down use-slot time="{{ item.remainingTime }}" bind:change="onChange" data-index='{{index}}' data-type="infoGroups" wx:if="{{item.remainingTime}}">
+							<text class="time-top-item" wx:if="{{item.coutDown.days}}">{{ item.coutDown.days<10?'0'+item.coutDown.days:item.coutDown.days }}</text>
+							<text class="time-top-item-text" wx:if="{{item.coutDown.days}}">天</text>
+							<text class="time-top-item">{{ item.coutDown.hours<10?'0'+item.coutDown.hours:item.coutDown.hours }}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{item.coutDown.minutes<10?'0'+item.coutDown.minutes:item.coutDown.minutes}}</text>
+							<text class="time-top-item-text">:</text>
+							<text class="time-top-item">{{ item.coutDown.seconds<10?'0'+item.coutDown.seconds:item.coutDown.seconds }}</text>
+							<text class="time-top-item-text" style="margin-left:16rpx">后结束</text>
+						</van-count-down>
+						<view style="color: #f24539;" wx:else> {{item.remainingGroupNum? '拼团失败':'拼团成功'}}</view>
+					</view>
+
+					<view class="btn-box">
+						<button class="btn" wx:if="{{userInfo}}" open-type="share" data-pkey="{{item.pkey}}" data-img="{{item.wrapperPhoto}}" catchtap="stopBubble" disabled="{{item.remainingTime<1||!item.remainingGroupNum}}">
+							{{item.remainingGroupNum?(item.remainingTime<1?'拼团失败': '邀请好友拼单' ) :'拼团成功'}}
+						</button>
+						<button class="btn" wx:else open-type="getUserInfo"   catch:getuserinfo="handleGetuserinfo" catchtap="stopBubble"   data-pkey="{{item.pkey}}" data-img="{{item.wrapperPhoto}}" disabled="{{item.remainingTime<1||!item.remainingGroupNum}}">
+							{{item.remainingGroupNum?(item.remainingTime<1?'拼团失败': '邀请好友拼单' ) :'拼团成功'}}
+						</button>
+					</view>
+				</view>
+			</view>
+			<load-more id="loadMoreView_info" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+		</van-tab>
+	</van-tabs>
+
+
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+
+
+</view>

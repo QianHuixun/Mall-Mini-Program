@@ -1,0 +1,29 @@
+<!--components/shouye/coupon-center/coupon-center.wxml-->
+<view class="coupon" wx:if="{{couponData.length}}">
+    <view class="coupon-title" catchtap="handleCoupon">
+        <view class="title-left">领券购买 · 优惠多多</view>
+        <view class="title-right">领券中心
+            <van-icon name="arrow" size="24rpx" />
+        </view>
+    </view>
+    <view class="coupon-box">
+        <view class="coupon-container">
+            <view class="coupon-box-item" wx:for="{{couponData}}" wx:key="index" catchtap="handleGetCoupon" data-pkey="{{item.pkey}}" data-index="{{index}}">
+                <image class="item-back" src="/images/card/coupon_item_back.png"></image>
+                <image wx:if="{{item.isReceive}}" class="item-back-unactive" src="/images/coupon_item_unactive.png"></image>
+                <view wx:if="{{item.isReceive}}" class="item-back-unactive">已领取 </view>
+                <view class="item-cost" style="font-size: 26rpx;padding-top: 30rpx;" wx:if="{{item.avoidPostage}}">
+                    免配送费
+                </view>
+                <view class="item-cost" style="font-size:{{filter.getStringLen(item.cost)>3?32:50}}rpx;padding-top: {{filter.getStringLen(item.cost)>3?36:16}}rpx;" wx:else>
+                    <text>￥</text>{{item.cost}}
+                </view>
+
+                <view class="item-limitcost">满{{item.limitCost}}可用</view>
+            </view>
+        </view>
+        <!-- <image class="coupon-item-more" hidden="{{couponData.length<5}}" src="/images/coupon_item_more.png" /> -->
+        <image wx:if="{{!isCouponOver}}" class="coupon-btn" src="{{imgUrl +'coupon_btn.gif'}}" catchtap="handleGetCoupon" />
+        <image wx:else class="coupon-btn coupon-unactive-btn" src="/images/coupon_unactive_btn.png" catchtap="handleGetCoupon" />
+    </view>
+</view>

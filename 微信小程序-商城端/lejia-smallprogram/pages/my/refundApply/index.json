@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+      "van-image": "@vant/weapp/image/index",
+      "van-checkbox": "@vant/weapp/checkbox/index",
+      "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+      "van-stepper": "@vant/weapp/stepper/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "选择退款商品"
+}

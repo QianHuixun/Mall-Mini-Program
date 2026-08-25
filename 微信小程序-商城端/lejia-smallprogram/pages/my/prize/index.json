@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"../../../components/load-more/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index"
+  },
+  "navigationBarTitleText": "我的奖品"
+}

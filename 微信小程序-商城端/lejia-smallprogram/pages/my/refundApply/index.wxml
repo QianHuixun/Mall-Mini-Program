@@ -1,0 +1,68 @@
+<!--pages/my/refundApply/index.wxml-->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view id="refund_apply">
+  <van-checkbox-group value="{{ checkResult }}" bind:change="onChange">
+  <view class="goods_list_card" wx:key="index" wx:for="{{orderInfo.infos}}">
+    <view class="goods_list_card_item">
+      <view class="goods_list_card_main">
+        <van-checkbox name="{{item.orderLinePkey}}" custom-class="custom-radio" icon-size="40rpx" wx:if="{{item.lines.length === 1}}" disabled="{{(item.num - item.refundNum) < 1}}"></van-checkbox>
+        <view class="goods_image_container">
+          <van-image src="{{ item.photo ||'/images/no-pic.png' }}" custom-class="goods_photo"  width="120rpx" height="120rpx" radius="16rpx"></van-image>
+          <view class="is_none" wx:if="{{ item.wholeRefund  }}">已退完</view>
+      </view>
+        <view class="goods_list_card_center">
+          <view class="goods_list_card_center__title">{{item.goodsName}}</view>
+          <view class="goods_list_card_center__space">{{item.spaceName}} x{{item.num}}</view>
+          <view class="goods_list_card_center__price" wx:if="{{item.lines.length === 1}}">
+            实付￥{{filter.valueFormat(item.couponAmt )}}{{item.point ? '+'+filter.valueFormat_1(item.point)+'积分' : ''}} <text class="color_red"   wx:if="{{item.refundAmt}}">已退￥{{item.refundAmt}}{{item.refundPoint ? '+'+filter.valueFormat_1(item.refundPoint)+'积分' : ''}} </text>
+          </view>
+          <view class="goods_list_card_center__price xiaoji" wx:else>
+            小计 <text class="color_price">￥{{filter.valueFormat(item.sales)}}</text>
+          </view>
+        </view>
+        <view class="goods_list_card_right">
+          <van-stepper value="{{item.newRefundNum}}" min="0" max="{{item.num - item.refundNum}}" data-pkey="{{item.orderLinePkey}}"
+          custom-class="space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" bind:change="stepChange" disable-input integer wx:if="{{item.lines.length === 1}}" button-size="64rpx"/>
+          <view class="goods_residue" wx:if="{{item.lines.length === 1}}">剩余{{item.num - item.refundNum}}件可退</view>
+        </view>
+      </view>
+      <!-- 规格 -->
+      <view class="goods_list_card_subItem" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="subIndex" wx:if="{{item.lines.length>1}}">
+        <view class="goods_list_card_main">
+        <van-checkbox name="{{subItem.pkey}}" custom-class="custom-radio" icon-size="40rpx" disabled="{{(subItem.num - subItem.refundNum) < 1}}"></van-checkbox>
+        <view class="goods_image_container">
+          <van-image src="{{ subItem.photo ||'/images/no-pic.png' }}" custom-class="goods_photo"  width="90rpx" height="90rpx" radius="12rpx"></van-image>
+          <view class="is_none" wx:if="{{ subItem.wholeRefund  }}">已退完</view>
+      </view>
+        <view class="goods_list_card_center">
+          <view class="goods_list_card_center__space">{{subItem.spaceName}} x{{subItem.num}}</view>
+          <view class="goods_list_card_center__price">
+            实付￥{{filter.valueFormat(subItem.couponAmt)}}{{subItem.point ? '+'+filter.valueFormat_1(subItem.point) + '积分' : ''}} <text class="color_red"  wx:if="{{subItem.refundAmt}}">已退￥{{subItem.refundAmt}}{{subItem.refundPoint ? '+'+filter.valueFormat_1(subItem.refundPoint)+'积分' : ''}}</text>
+          </view>
+        </view>
+        <view class="goods_list_card_right">
+          <van-stepper value="{{subItem.newRefundNum}}" min="0" max="{{subItem.num - subItem.refundNum}}"  disabled="{{(subItem.num - subItem.refundNum) < 1}}" data-pkey="{{subItem.pkey}}" custom-class="space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" bind:change="stepChange" disable-input integer button-size="64rpx" />
+          <view class="goods_residue">剩余{{subItem.num - subItem.refundNum}}件可退</view>
+        </view>
+      </view>
+      </view>
+    </view>
+  </view>
+</van-checkbox-group>
+<!-- 提示 -->
+<view class="refund_tips" wx:if="{{orderInfo.distributionType !== 'PICKUP' && (orderInfo.status === 'SHIPPED_ORDER' || orderInfo.status === 'ARRIVED_ORDER')}}">
+  <van-icon name="warning" size="28rpx" color="#FFA21D"/>
+  已发货的订单配送费不可退回
+</view>
+<!-- 按钮栏 -->
+<view class="refund_button">
+  <view class="refund_button_left">
+    <van-checkbox value="{{ allCheck }}" bind:change="allCheckChange" custom-class="custom-radio" icon-size="40rpx">全选</van-checkbox>
+</view>
+  <view class="refund_button_right">
+    <text>退款合计 </text>
+    <text class="refund_price"> ￥{{filter.valueFormat(allRefundAmt)}}{{allRefundPoint ? '+'+filter.valueFormat_1(allRefundPoint) : ''}}</text>
+    <van-button type="primary" color="#0DAE4E" round bind:tap="handleRefundGoods">完成</van-button>
+  </view>
+</view>
+</view>

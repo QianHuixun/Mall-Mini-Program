@@ -1,0 +1,29 @@
+var filter = {
+  /**
+   * @desc 获取小数点前的整数
+   * @param value 数字
+   */
+  pointAfter: function (value) {
+    return value.split('.')[1]
+  },
+  /**
+   * @desc 获取小数点后的数值
+   * @param value 数字
+   */
+  pointFront: function (value) {
+    return value.split('.')[0]
+  },
+ /**
+   * @desc 将购物车全部商品金额正确数字化 
+   * @param value 数字
+   */
+  formatValue: function (value) {
+    return Number((value/100).toFixed(2));
+  },
+}
+
+module.exports = {
+  pointAfter: filter.pointAfter,
+  pointFront: filter.pointFront,
+  formatValue:filter.formatValue
+}

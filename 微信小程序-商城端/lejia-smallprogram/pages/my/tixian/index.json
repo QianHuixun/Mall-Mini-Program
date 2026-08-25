@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "authorize": "/components/login/index",
+    "van-cell": "@vant/weapp/cell/index"
+  },
+  "navigationBarTitleText": "我要提现",
+  "navigationBarTextStyle":"white",
+  "navigationBarBackgroundColor": "#1989fa"
+}

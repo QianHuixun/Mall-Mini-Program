@@ -1,0 +1,39 @@
+<!--pages/merMien/merchantList/index.wxml-->
+<view id="merchant-list">
+  <view class="nav-bar">
+    <van-nav-bar custom-class="navbar" title="商家风采"  left-arrow bind:click-left="onClickLeft" />
+    <van-search value="{{ keywords }}" placeholder="请输入商户名称进行搜索" background="transparent" shape="round"
+      bind:cancel="onCancel" bind:search="onChange">
+    </van-search>
+    <van-tabs active="{{ tabKey }}" bind:change="tabChange">
+      <van-tab title="全部商家" name="-1"></van-tab>
+      <van-tab wx:for="{{ tabList }}" wx:key="index" title="{{item.name}}" name="{{item.name}}"></van-tab>
+    </van-tabs>
+  </view>
+  <view class="marchant-main" style="height:{{windowHeight-140}}px;margin-top:{{statusBarHeight+54+44+44+10}}px">
+    <block wx:if="{{ merchantList.length > 0 }}">
+      <view class="merchant-box">
+        <view class="merchant-row" wx:for="{{merchantList}}" wx:key="index" catchtap="handleDetail"
+          data-pkey="{{item.pkey}}">
+          <van-image wx:if="{{item.files[0].url}}" width="90" height="90" src="{{item.files[0].url}}" />
+          <van-image wx:else width="90" height="90" src="/images/deafult_logo.png" />
+          <view class="row-right">
+            <view class="row-right-top">
+              <text class="row-name">{{item.name}}</text>
+            </view>
+            <view class="row-tag">
+              <van-tag  wx:for="{{item.businessScopesName}}" wx:for-item='tagItem'
+                wx:for-index='tagIndex' wx:key="tagIndex" type="primary" color="#f2f2f2" size="medium">{{tagItem}}
+              </van-tag>
+            </view>
+            <view class="row-right-bottom">
+              <text>{{item.shortContent || ''}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- 加载更多数据 -->
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+  </view>
+</view>

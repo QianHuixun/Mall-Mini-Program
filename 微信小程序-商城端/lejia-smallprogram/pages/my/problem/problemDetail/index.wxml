@@ -1,0 +1,10 @@
+<!--pages/my/problem/problemDetail/index.wxml-->
+<view class="problemDetail">
+  <van-collapse accordion value="{{ activeName }}" bind:change="onChange">
+    <van-collapse-item content-class="content___class" name="{{item.pkey}}" wx:for="{{list}}" wx:key="pkey">
+      <view slot="title" class="title {{item.pkey === activeName ? 'active' : ''}}">{{item.name}}</view>
+      <rich-text nodes="{{item.answer}}"/>
+      <!-- {{item.answer}} -->
+    </van-collapse-item>
+  </van-collapse>
+</view>

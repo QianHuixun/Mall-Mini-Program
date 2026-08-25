@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-file-api</artifactId>
+	<packaging>jar</packaging>
+	<version>1.3.3</version>
+
+	<name>tfcloud-file-api</name>
+	<description>tfcloud file api</description>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-file-parent</artifactId>
+		<version>3.4.3</version>
+	</parent>
+
+	<properties>
+	</properties>
+
+	<build>
+	</build>
+
+	<dependencies>
+
+		<!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-common</artifactId>
+		</dependency>
+		<!-- 本地项目依赖 结束 -->
+
+		<dependency>
+			<groupId>net.sf.jmimemagic</groupId>
+			<artifactId>jmimemagic</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-file-accessLog-es</artifactId>
+	<packaging>jar</packaging>
+	<version>1.2.1</version>
+
+	<name>tfcloud-file-accessLog-es</name>
+	<description>tfcloud file accessLog es</description>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-file-parent</artifactId>
+	  <version>3.5.4</version>
+	</parent>
+
+	<properties>
+	</properties>
+
+	<build>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-db-es</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-db-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nl.basjes.parse.useragent</groupId>
+			<artifactId>yauaa</artifactId>
+			<version>6.7</version>
+		</dependency>
+	</dependencies>
+
+</project>

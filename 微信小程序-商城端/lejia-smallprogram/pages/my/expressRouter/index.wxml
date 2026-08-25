@@ -1,0 +1,30 @@
+<!--pages/my/expressRouter/index.wxml-->
+<view class="jd-header" wx:if="{{orderType == 'INTEGRAL_JD_ORDER'}}">
+    <view class="jd-header-item" wx:for="{{logisticInfoList}}">
+        {{item.deliveryCarrier || ''}}：{{item.deliveryOrderId || ''}}
+        <view class="copy" data-deliveryOrderId="{{item.deliveryOrderId}}" bind:tap="handleJDCopy">复制</view>
+    </view>
+</view>
+<view class="header" wx:else>
+    {{orderInfo.logistics}}：{{orderInfo.kdCode}}
+    <view class="copy" bind:tap="handleCopy">复制</view>
+</view>
+
+<view class="content" wx:if="{{orderType == 'INTEGRAL_JD_ORDER'}}">
+    <view class="steps">
+        <view class="steps-item" wx:for="{{steps}}" wx:key="pkey">
+            <view class="steps-item-point"></view>
+            <view class="steps-title">{{item.trackMsgTime}}</view>
+            <view class="steps-desc">{{item.trackContent}}</view>
+        </view>
+    </view>
+</view>
+<view class="content" wx:else>
+    <view class="steps">
+        <view class="steps-item" wx:for="{{steps}}" wx:key="pkey">
+            <view class="steps-item-point"></view>
+            <view class="steps-title">{{item.time}}</view>
+            <view class="steps-desc">{{item.description}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,56 @@
+<!-- 
+@url: pages/shouyeGroup/goodsList/index.wxml
+@description: 分类商品列表 
+@author: sx
+@date: 2020/08/01
+ -->
+<view id="googsList">
+	<van-dropdown-menu active-color="#4dce78">
+		<van-dropdown-item value="{{ hotSort }}" options="{{ option1 }}" bind:change="onHotChange" />
+		<van-dropdown-item value="{{ priceSort }}" options="{{ option2 }}" bind:change="onPriceChange" />
+	</van-dropdown-menu>
+
+	<view class="goodslist">
+		<!-- <view class="no_tips" wx:if="{{ goodsList.length == 0 }}">暂无数据</view> -->
+		<view class="goods-cell" wx:for="{{ goodsList }}" wx:key="index">
+			<view class="goods-con" data-id='{{item.pkey}}' bindtap="goodsClick">
+				<van-image custom-class="goods-image" src="{{item.wrapperPhoto}}" />
+				<view class="title-cell">
+					{{item.title}}
+				</view>
+				<view class="price-cell">
+					<view class=" price_clr price">
+						<view class="price_box">
+							<view  wx:if="{{mType=='INTEGRAL_GOODS'}}">
+								<text>{{item.point}}</text>积分<text>+</text>
+							</view>
+							<view >
+								￥<text>{{item.price}}</text>
+							</view>
+						</view>
+						<van-icon  wx:if="{{mType=='INTEGRAL_GOODS'}}"  name="/images/carAdd.png" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+					</view>
+					<!-- 会员价与原价 -->
+					<view class="price_clr price" wx:if="{{mType!='INTEGRAL_GOODS'}}">
+						<view class="price_clr_item price_old" >
+							￥{{item.priceOld}}
+						</view>
+						<!-- <view class="price_clr_item price_member" wx:else> 
+							￥<text class="price_member_txt">{{item.priceMember}}</text>
+							<image class="price_member_tag" src="/images/member_price_tag.png" />
+						</view> -->
+						<van-icon   name="/images/carAdd.png" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+					</view>
+					<!--end 会员价与原价 -->
+
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 加入购物车 动画效果 -->
+	<!-- <go-cart id="goCartView" isIcon="{{ true }}"></go-cart> -->
+	<!-- 规格选择弹出层 -->
+	<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+	isbindAddCart="{{true}}"></space-dialog>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

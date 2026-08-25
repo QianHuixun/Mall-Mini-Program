@@ -1,0 +1,43 @@
+/* pages/my/address/edit/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+.van-cell-group:last-child {
+  margin-top: 16rpx;
+}
+
+.van-goods-action {
+  height: 120rpx;
+  padding: 0 30rpx;
+}
+
+.action_container {
+  box-sizing: border-box;
+  width: 100vw;
+  padding-top: 80rpx;
+  padding-left: 48rpx;
+  padding-right: 48rpx;
+  text-align: center;
+}
+
+.action_container .van-button {
+  width: 100%;
+}
+.action_container .van-button--normal {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}
+
+.action_container .action_del {
+  padding-top: 40rpx;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #999999;
+
+}
+.icon-box {
+  color: #0DAE4E;
+  font-size: 30rpx;
+}

@@ -1,0 +1,245 @@
+<!--pages/pay/comboPay/index.wxml-->
+<view class="combo-pay" style="padding-top:{{statusBarHeight+46}}px; width: 100vw;">
+  <wxs module="filter" src="./index.wxs"></wxs>
+  <view class="van-nav-box">
+    <van-nav-bar custom-class="pay-navbar" title="支付订单" left-arrow bind:click-left="onClickLeft" />
+  </view>
+  <view class="top-back">
+    <image src="{{imgUrl+'top_back.png'}}"></image>
+  </view>
+  <view class="addr">
+    <view class="addr-title">收货地址</view>
+    <view class="addr-detailed" bindtap="handleChangeAddr">
+      <text>{{ orderInfo.addr || '请选择地址' }}</text>
+      <van-icon name="arrow" size="32rpx" color="#999999" />
+    </view>
+    <view class="addr-tips" wx:if="{{!orderInfo.addr}}">自提可不选择地址</view>
+    <view class="addr-contacts" wx:else>
+      <view class="addr-contacts-name">{{ orderInfo.name || '' }}</view>
+      <view class="addr-contacts-phone">{{ orderInfo.mobile || '' }}</view>
+    </view>
+  </view>
+  <view class="order-card" wx:for="{{ orderInfo.infos }}" wx:key="index">
+    <view class="order-card-title">{{item.farmerName || item.supplierName}}</view>
+    <view class="order-card-row" style="margin-top: 8px; padding-right: 12rpx;">
+      <view class="order-card-index">包裹{{index + 1}}</view>
+      <view class="order-card-method" data-item="{{item}}" data-index="{{index}}" bind:tap="handleMethodsChang">
+        <view
+          class="order-card-method-item {{ item.distributionType === 'IMMEDIATELY' || item.distributionType === 'ORDERED' ? 'active' : ''}}"
+          wx:if="{{item.delivery}}"
+          data-type="IMMEDIATELY"
+        >配送</view>
+        <view
+          class="order-card-method-item {{ item.distributionType === 'PICKUP' ? 'active' : '' }}"
+          wx:if="{{item.pickup}}"
+          data-type="PICKUP"
+        >自提</view>
+      </view>
+    </view>
+    <view class="order-card-goods">
+      <view class="order-card-goods-list">
+        <view class="order-card-goods-list-item" wx:for="{{item.goodsList}}" wx:for-item="goods" wx:key="index">
+          <image src="{{goods.photo || '/images/no-pic.png' }}"></image>
+        </view>
+      </view>
+      <view class="order-card-goods-count" bindtap="handleLookspace" data-goods="{{ item.goodsList }}">
+        <view>共{{ item.goodsList.length }}种
+          <van-icon name="arrow" size="24rpx" color="#333333" />
+        </view>
+        <view class="order-card-goods-amt">{{mtype == 'INTEGRAL_MSD_GOODS' || mtype == 'JD_GOODS' ? '' : '￥'}}{{ filter.formatValue(item.sales) }}</view>
+      </view>
+    </view>
+    <view class="order-card-row" wx:if="{{item.distributionType !== 'PICKUP'}}" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">配送费 <span class="card-postage" wx:if="{{ item.cardPostageUsable }}">{{item.cardPostageAmt}}元配送优惠券</span></view>
+      <view class="order-card-row-value" style="padding-right: 12rpx;">
+        <span class="card-postage-amt" wx:if="{{ item.cardPostageUsable }}">￥{{filter.formatValue(item.originPostage)}}</span>
+        ￥{{ filter.formatValue(item.postage || 0) }}
+      </view>
+    </view>
+    <view class="order-card-row" wx:if="{{item.distributionType === 'PICKUP'}}" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">自提地点</view>
+      <view class="order-card-row-value" style="padding-right: 12rpx;" data-index="{{index}}" bind:tap="goPickupAddr">
+        {{item .pickupAddr || '请选择自提地点'}}
+        <van-icon name="arrow" size="26rpx" color="#999999" />
+      </view>
+    </view>
+    <view class="order-card-row" wx:if="{{!item.allowedPickPstime}}" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">{{item.distributionType === 'PICKUP' ? '提货时间' : '发货时间'}}</view>
+      <view class="order-card-row-value">{{item.pstime}}</view>
+    </view>
+    <view class="order-card-row" wx:elif="{{item.distributionType === 'PICKUP' || (item.farmer && item.farmerName)}}" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">{{item.distributionType === 'PICKUP' ? '自提时间' : '配送时间'}}</view>
+      <view class="order-card-row-value" style="color: #0DAE4E" data-item="{{item}}" data-index="{{index}}" bind:tap="handleTimeChange">
+        <text wx:if="{{item.distributionType !== 'PICKUP' && item.pstime}}">{{item.distributionType === 'IMMEDIATELY' ? '立即送出' : '预约配送'}} </text>
+        <text>{{ item.pstime || (item.distributionType == 'PICKUP' ? '请选择自提时间' : '请选择配送时间') }}</text>
+        <van-icon name="arrow" size="26rpx" color="#999999" />
+      </view>
+    </view>
+    <view class="order-card-row" wx:if="{{mtype != 'INTEGRAL_MSD_GOODS' && mtype != 'JD_GOODS'}}" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">优惠券</view>
+      <view class="order-card-row-value" data-index="{{index}}" bind:tap="goCard">
+        <text class="card-price" wx:if="{{item.cardUsable}}">-￥{{filter.formatValue(item.cardAmt)}}</text>
+        <text class="no-card" wx:else>暂无可用</text>
+        <van-icon name="arrow" size="16rpx" color="#999999" custom-class="new_icon" />
+      </view>
+    </view>
+    <!-- 去除民生专区只能自提的限制，地址切换成顶部统一配置 -->
+    <!-- <view class="order-card-row"  wx:if="{{mtype == 'INTEGRAL_MSD_GOODS'}}" style="margin-top: 24rpx;">
+        <view class="order-card-row-label">自提联系人</view>
+        <view class="order-card-row-value" data-isPickup="true" bindtap="handleChangeAddr">
+            <text wx:if="{{ orderInfo.name || orderInfo.mobile }}">
+                <text>{{ orderInfo.name || '' }} </text>
+                <text>{{ orderInfo.mobile || '' }}</text>
+            </text>
+            <text wx:else>请选择自提联系人</text>
+            <van-icon name="arrow" size="26rpx" color="#999999" />
+        </view>
+    </view> -->
+    <view class="order-card-row" style="margin-top: 24rpx;">
+      <view class="order-card-row-label">订单备注</view>
+      <view class="order-card-row-value">
+        <van-field
+          custom-class="input"
+          value="{{ item.remark }}"
+          placeholder="可添加备注"
+          input-align="right"
+          right-icon="edit"
+          border="{{ false }}"
+          data-index="{{index}}"
+          bind:change="filedChange"
+        />
+      </view>
+    </view>
+  </view>
+  <view class="price-card">
+    <van-cell title="商品金额" value-class="value-class" value="{{mtype == 'INTEGRAL_MSD_GOODS' || mtype == 'JD_GOODS' ? '' : '￥'}}{{filter.formatValue(orderInfo.goodsSumAmto)}}" />
+    <van-cell title="积分" value-class="value-class" wx:if="{{orderInfo.sumPointn}}" value="{{orderInfo.sumPointn}}积分" />
+    <view class="price-card-cell">
+      <view class="cell-content">
+        <view class="cell-title">配送费</view>
+        <view class="value-class">￥{{filter.formatValue(orderInfo.sumPostage)}}</view>
+      </view>
+      <view class="cell-bottom"></view>
+    </view>
+    <!-- <van-cell title="优惠券" is-link value-class="value-class red" bind:click="goCard">
+      <view slot="">
+        <text wx:if="{{orderInfo.cardUsable}}">-￥{{filter.formatValue(orderInfo.cardAmt)}}</text>
+        <text class="no-card" wx:else>暂无可用</text>
+      </view>
+    </van-cell> -->
+    <div class="price-card-total">
+      合计
+      <text class="price-card-total-amt">{{mtype == 'INTEGRAL_MSD_GOODS' || mtype == 'JD_GOODS' ? '' : '￥'}}{{filter.formatValue(orderInfo.goodsSumAmtn)}}<text wx:if="{{orderInfo.sumPointn}}">+{{ orderInfo.sumPointn }}积分</text></text>
+    </div>
+  </view>
+  <view class="paytype-card">
+    <van-radio-group value="{{ orderInfo.payType }}">
+			<van-cell-group custom-class="new-cell-group">
+        <van-cell  wx:if="{{orderInfo.msdPay || orderInfo.unpayType ==='MSD_COMBINATION'}}" title="热力豆支付(余额：{{orderInfo.myMsd || 0}})" data-amt="{{orderInfo.myMsd || 0}}" clickable data-name="MSD_COMBINATION" bind:click="paytypeChange" custom-class="new-cell">
+          <text wx:if="{{orderInfo.unpayType}}">{{orderInfo.otherAmt ? '-'+orderInfo.otherAmt : ''}}</text>
+          <van-radio slot="right-icon" name="MSD_COMBINATION" checked-color="#3ccf8a"  wx:else/>
+        </van-cell>
+				<van-cell wx:if="{{(mtype != 'INTEGRAL_MSD_GOODS' && mtype != 'JD_GOODS')  || orderInfo.unpayType ==='ELECTRONIC_ACCOUNT_COMBINATION' }}" title="{{walletName}}支付(余额：{{orderInfo.myCommn || 0}})" clickable data-name="ELECTRONIC_ACCOUNT_COMBINATION" data-amt="{{orderInfo.myCommn || 0}}"  bind:click="paytypeChange" custom-class="new-cell">
+          <text wx:if="{{orderInfo.unpayType }}">{{orderInfo.otherAmt ? '-'+orderInfo.otherAmt : ''}}</text>
+          <van-radio slot="right-icon" name="ELECTRONIC_ACCOUNT_COMBINATION" checked-color="#3ccf8a"  wx:else/>
+        </van-cell>
+        <van-cell wx:if="{{ mtype != 'INTEGRAL_MSD_GOODS' && mtype != 'JD_GOODS' && memberBalance !== null }}" title="会员支付(余额：{{memberBalance}})"  clickable data-name="NM_MEMBER"  data-amt="{{memberBalance}}" bind:click="paytypeChange" custom-class="new-cell">
+          <van-radio slot="right-icon" name="NM_MEMBER" checked-color="#3ccf8a" />
+        </van-cell>      
+			</van-cell-group>
+		</van-radio-group>
+    <van-radio-group value="{{ payType }}">
+      <van-cell-group custom-class="new-cell-group">
+        <van-cell title="微信支付" icon="/images/pay/i_weixin.png" label="推荐微信用户支付" clickable data-name="ORDER_WEIXIN" bind:click="paytypeChange" custom-class="new-cell">
+          <van-radio slot="right-icon" name="ORDER_WEIXIN" checked-color="#3ccf8a" />
+        </van-cell>
+        <!-- <van-cell wx:if="{{mtype != 'INTEGRAL_MSD_GOODS' && mtype != 'JD_GOODS'}}" title="微信支付" icon="/images/pay/i_weixin.png" label="推荐微信用户支付" clickable data-name="ORDER_WEIXIN" bind:click="paytypeChange" custom-class="new-cell">
+          <van-radio slot="right-icon" name="ORDER_WEIXIN" checked-color="#3ccf8a" />
+        </van-cell> -->
+      </van-cell-group>
+    </van-radio-group>
+  </view>
+  <!-- 如果订单的unpayType不为null，说明这是未支付订单二次支付，则显示weixinAmt(未支付微信金额)，否则显示计算的payAmt -->
+  <van-submit-bar
+    class="submit-bar"
+    loading="{{loading}}"
+    disabled="{{disabled}}"
+    label="支付金额："
+    currency="{{mtype == 'INTEGRAL_MSD_GOODS' || mtype == 'JD_GOODS' ? '' : '¥'}}"
+    price="{{ (orderInfo.unpayType ? orderInfo.weixinAmt : payAmt) * 100 }}"
+    suffix-label="{{orderInfo.sumPointn ? '+' + orderInfo.sumPointn + '积分' : ''}}"
+    button-text="提交订单"
+    bind:submit="onSubmit"
+  />
+  <!-- <van-submit-bar
+    class="submit-bar"
+    loading="{{loading}}"
+    disabled="{{disabled}}"
+    label="支付金额："
+    currency="{{mtype == 'INTEGRAL_MSD_GOODS' || mtype == 'JD_GOODS' ? '' : '¥'}}"
+    price="{{ orderInfo.goodsSumAmtn * 100 }}"
+    suffix-label="{{orderInfo.sumPointn ? '+' + orderInfo.sumPointn + '积分' : ''}}"
+    button-text="提交订单"
+    bind:submit="onSubmit"
+  /> -->
+</view>
+<!-- 商品列表 -->
+<van-popup show="{{ spaceShow }}" lock-scroll round position="bottom" custom-style="height: 660rpx" bind:close="spaceClose">
+  <view class="space-pop">
+    <view class="space-pop-title">共{{spaceGoods.length}}种商品</view>
+    <view class="space-pop-box">
+      <view wx:for="{{spaceGoods}}" wx:key="index" class="goods_group ">
+        <van-card wx:if="{{item.spaceList.length ==1}}" num="{{item.spaceList[0].num}}" title="{{item.goodsName}}" price="{{filter.formatValue(item.price)}}" desc="规格:{{item.spaceList[0].spaceName}}" thumb="{{ item.photo ||'/images/no-pic.png' }}" custom-class="new-card">
+          <view slot="origin-price" wx:if="{{item.spaceList[0].point}}" class="goods-point">
+            + {{item.spaceList[0].point}} 积分
+          </view>
+          <view slot="bottom">
+            <view class="price-mermber" wx:if="{{item.priceMember}}">
+              <text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+              <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+            </view>
+          </view>
+        </van-card>
+        <view class="spaces-card-box" wx:else>
+          <van-card title="{{item.goodsName}}" thumb="{{ item.photo ||'/images/no-pic.png' }}" custom-class="new-card">
+            <view class="new-card-price" slot="price">
+              小计
+              <text>￥{{filter.formatValue(item.price)}}</text>
+            </view>
+          </van-card>
+          <van-card wx:for="{{item.spaceList}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="subIndex" num="{{subItem.num}}" title="{{subItem.mtypeName == '加工商品' ? '加工:'+subItem.associationName : '规格:'+subItem.spaceName}}" price="{{filter.formatValue(subItem.price)}}" thumb="{{ subItem.photo ||'/images/no-pic.png' }}" custom-class="new-card space-card">
+            <view slot="origin-price" wx:if="{{item.spaceList[0].point}}" class="goods-point">
+            + {{subItem.point}} 积分
+          </view>
+            <view slot="bottom">
+              <view class="price-mermber" wx:if="{{subItem.priceMember}}">
+                <text class="price-mermber-txt"><text class="unit">￥</text>{{subItem.priceMember}}</text>
+                <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+              </view>
+            </view>
+          </van-card>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-popup>
+<!-- 配送时间 -->
+<van-popup show="{{ timeShow }}" lock-scroll round position="bottom" custom-style="height: 660rpx" bind:close="onClose">
+  <view class="abholungtime">
+    <view class="abholungtime_titile">请选择{{selectInfo.distributionType == 'PICKUP' ? '自提时间' : '送达时间'}}</view>
+    <view class="abholungtime_subTitile" wx:if="{{isReservation}}">{{ isReservation }}</view>
+    <view class="time_container">
+      <van-tree-select
+        items="{{ timeItems }}"
+        main-active-index="{{ mainActiveIndex }}"
+        active-id="{{ activeId }}"
+        active-type="{{ shoptype }}"
+        bind:click-nav="onClickNav"
+        bind:click-item="onClickItem"
+        style="width: 100%"
+      />
+    </view>
+  </view>
+</van-popup>
+
+<van-dialog id="van-dialog" />

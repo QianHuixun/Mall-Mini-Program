@@ -1,0 +1,60 @@
+<!--pages/my/refundOrder/index.wxml-->
+<view id="refund_order">
+    <view class="card_list">
+        <view class="card_cell" wx:for="{{datalist}}" wx:key="index" wx:for-item="item">
+            <view class="card_title">
+                <view class="card_icon">
+                    <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+                    <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+                    <view class="tag tag-green" wx:else>配送</view>
+                </view>
+                <view class="card_l">
+                    订单号：<text class="gray_clr">{{item.code}}</text></view>
+                <view class="card_r">
+                    <text class="color_red" wx:if="{{item.status === 'REFUND_REFUSE'}}">退款失败</text>
+                    <text class="color_orange" wx:elif="{{item.status === 'REFUND_APPLYING'}}">待处理</text>
+                    <text class="color_green" wx:elif="{{item.status === 'REFUND_FINAL'}}">退款成功</text>
+                    <text wx:else>{{item.statusName}}</text>
+                </view>
+            </view>
+            <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{ item.list.length > 1}}">
+                <view class="card_goods_list_multi">
+                    <van-image custom-class="goods_image" src="{{subitem.photo || '/images/no-pic.png'}}" wx:for="{{ item.list }}" wx:key="index" wx:for-item="subitem"></van-image>
+                </view>
+                <view class="card_goods_amt">
+                    <view class="card_goods_amt_price">￥{{item.refundAmt}}</view>
+                    <view class="card_goods_amt_num">共{{item.num}}件</view>
+                </view>
+            </view>
+
+            <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list.length == 1}}">
+
+                <view class="card_goods_list" wx:for="{{ item.list}}" wx:if="{{item.list.length == 1}}" wx:key="index" wx:for-item="subitem">
+                    <view class="card_l">
+                        <van-image custom-class="goods_image" src="{{subitem.photo || '/images/no-pic.png'}}"></van-image>
+                    </view>
+                    <view class="card_c">
+                        {{subitem.goodsName}}
+                        <view class="card_c_specs">
+                            规格:{{subitem.spaceName}}
+                        </view>
+                    </view>
+                    <view class="card_r">
+                        <view class="price_clr">￥{{item.sumAmt}}</view>
+                        <view class="gray_clr">共{{item.num}}件</view>
+                    </view>
+                </view>
+            </view>
+            <view class="card_date">
+                <view class="card_date_left">{{item.createdTime}}</view>
+                <view class="card_date_right">
+                </view>
+            </view>
+
+        </view>
+    </view>
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+    <!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+    <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-file-server</artifactId>
+	<packaging>jar</packaging>
+	<version>1.8.3</version>
+
+	<description>文件服务</description>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-boot</artifactId>
+		<version>3.5.14</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+	</properties>
+
+	<dependencies>
+		<!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-mq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-file-core</artifactId>
+		</dependency>
+		<!-- 本地项目依赖 结束 -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-excel</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sejda.imageio</groupId>
+			<artifactId>webp-imageio</artifactId>
+			<version>0.1.6</version>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>hasLog</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>cn.tofocus</groupId>
+					<artifactId>tfcloud-server-log</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>cn.tofocus</groupId>
+					<artifactId>tfcloud-file-accessLog-es</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>noLog</id>
+		</profile>
+	</profiles>
+
+</project>

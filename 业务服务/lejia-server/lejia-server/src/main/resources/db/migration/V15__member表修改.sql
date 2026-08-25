@@ -1,0 +1,1 @@
+alter table mkt_member change name name varchar(20) character set 'utf8mb4'

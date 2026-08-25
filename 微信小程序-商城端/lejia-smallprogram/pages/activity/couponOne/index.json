@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-icon": "@vant/weapp/icon/index"
+    },
+    "navigationBarTitleText": "菜市场云漫游指南"
+}

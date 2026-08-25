@@ -1,0 +1,47 @@
+{
+    "pages": [
+        "pages/introduce/introduce",
+        "pages/cardScan/index",
+        "pages/my/index",
+        "pages/login/index",
+        "pages/cancelRecord/index",
+        "pages/point/index",
+        "pages/order/index",
+        "pages/editInfo/index",
+        "pages/userAgreement/userAgreement",
+        "pages/privacy/index",
+        "pages/wallet/myWallet/index",
+        "pages/wallet/billDetails/index",
+        "pages/wallet/withdraw/index",
+        "pages/wallet/account/index",
+        "pages/wallet/details/index",
+        "pages/wallet/orderDetail/index",
+        "pages/goodsManage/index",
+        "pages/vendor/index",
+        "pages/verification/index"
+    ],
+    "usingComponents": {
+        "van-icon": "@vant/weapp/icon/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+        "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+        "van-dialog": "@vant/weapp/dialog/index",
+        "van-toast": "@vant/weapp/toast/index",
+        "van-stepper": "@vant/weapp/stepper/index"
+    },
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "菜篮商户",
+        "navigationBarTextStyle": "black"
+    },
+    "sitemapLocation": "sitemap.json"
+}

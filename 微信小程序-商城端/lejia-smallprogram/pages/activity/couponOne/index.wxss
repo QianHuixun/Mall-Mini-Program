@@ -1,0 +1,112 @@
+/* pages/activity/couponOne/index.wxss */
+#couponOne {
+  min-height: 100vh;
+  background-color: #FEA1A9;
+}
+
+.coupon-card {
+  position: relative;
+  margin: 10rpx 24rpx 30rpx 24rpx;
+  text-align: center;
+}
+
+.coupon-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.btn-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 750rpx;
+  height: 116rpx;
+
+}
+.btn-confirm {
+  margin: 10rpx 24rpx;
+  width: 702rpx;
+  height: 96rpx !important;
+  background: #FF4C61 !important;
+  border-radius: 48rpx;
+  font-weight: 800;
+  font-size: 34rpx !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+}
+
+.notice_coupon {
+  position: fixed;
+  left: 80rpx;
+  top: 408rpx;
+  width: 590rpx;
+  height: 456rpx;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 32rpx;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.notice_title {
+  position: relative;
+  font-weight: bold;
+  font-size: 34rpx;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 32rpx 0;
+}
+
+.notice_title .van-icon {
+  position: absolute;
+  right: 0;
+  top: 32rpx;
+}
+
+.notice_cell {
+  display: flex;
+  margin-bottom: 32rpx;
+}
+
+.notice_cell_left {
+  width: 124rpx;
+  height: 40rpx;
+  background: #FCE299;
+  border-radius: 8rpx;
+  text-align: center;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #000000;
+  line-height: 40rpx;
+  margin-right: 20rpx;
+  position: relative;
+}
+.notice_cell_left::after{
+  z-index: -1;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -4rpx;
+  right: -4rpx;
+  background: #63BA71;
+  width: 124rpx;
+  height: 40rpx;
+  border-radius: 8rpx;
+}
+
+.notice_cell_right {
+  flex: 1;
+  font-weight: bold;
+  font-size: 26rpx;
+  color: #FFFFFF;
+}
+
+.notice_tips {
+  font-weight: 400;
+  font-size: 26rpx;
+  color: #FFFFFF;
+  line-height: 39rpx;
+  padding-bottom: 38rpx;
+  text-align: justify;
+}
+

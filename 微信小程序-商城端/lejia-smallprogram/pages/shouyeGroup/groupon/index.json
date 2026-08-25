@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "load-more":"/components/load-more/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tag": "@vant/weapp/tag/index"
+  },
+  "navigationBarTitleText": "拼团专区"
+}

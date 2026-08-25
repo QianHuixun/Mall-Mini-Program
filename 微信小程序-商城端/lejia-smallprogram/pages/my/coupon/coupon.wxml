@@ -1,0 +1,32 @@
+<view class="coupon" style="height:{{windowHeight}}px">
+  <view class="content">
+    <view class="card-box" wx:for="{{cardData}}" wx:key="index">
+      <view class="left">
+        <view class="tit" >
+         {{item.title}}
+        </view>
+        <view class="atm">
+          ¥<text class="num">{{item.cost}} </text>
+        </view>
+        <view class="label">
+         满{{item.limitCost}}减{{item.cost}}   <text>有效期：{{item.expireChoose?'领取后'+item.effective+'天':item.startDate+'-'+item.endDate}}</text> 
+        </view>
+      </view>
+      <view class="right">
+        <button wx:if="{{!item.isReceive&&item.count}}" data-pkey="{{item.pkey}}" data-index="{{index}}" catchtap="handleGetcoupon" >立即领取</button>
+        <image wx:elif="{{!item.isReceive&&!item.count}}" src="/images/my/coupon_count_over.png"></image>
+        <image wx:else src="/images/my/coupon_over.png"></image>
+
+      </view>
+
+    </view>
+
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+
+  </view>
+
+
+
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+
+</view>

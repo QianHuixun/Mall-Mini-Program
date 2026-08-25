@@ -1,0 +1,14 @@
+<!--pages/pay/pickupAddr/index.wxml-->
+<view class="list">
+  <wxs module="filter" src="./index.wxs"></wxs>
+  <view class="list-item" wx:for="{{splList}}" data-item="{{item}}" bind:tap="handleItemClick">
+    <view class="check-box">
+      <van-icon name="checked" wx:if="{{pickupPkey === item.pkey}}" color="#3ccf8a" size="40rpx" />
+      <van-icon name="circle" wx:else size="40rpx"/>
+    </view>
+    <view>
+      <view class="address">{{item.address}}</view>
+      <view class="distance">距您{{filter.formatValue(item.distance)}}km</view>
+    </view>
+  </view>
+</view>

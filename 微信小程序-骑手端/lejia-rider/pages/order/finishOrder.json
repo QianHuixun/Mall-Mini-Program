@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "scroll": "../../component/scroll/index"
+  },
+  "navigationBarTitleText": "已完成订单"
+}

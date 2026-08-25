@@ -1,0 +1,244 @@
+/* components/space/index.wxss */
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.wrapper-container {
+  position: relative;
+  width: 690rpx;
+  min-height: 300rpx;
+  max-height: 800rpx;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.wrapper-container_header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 96rpx;
+  padding: 0 10px;
+  box-sizing: border-box;
+  text-align: center;
+  /* border-bottom: 1px solid #f6f6f6; */
+  line-height: 45px;
+}
+
+.wrapper-container_header .title {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 70%;
+  text-overflow: ellipsis;
+  font-size: 34rpx;
+  line-height: 96rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.wrapper-container_header .van-icon {
+  position: absolute;
+  right: 10px;
+}
+
+.wrapper-container_main {
+  height: 100%;
+  padding: 110rpx 20rpx 120rpx 32rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.wrapper-container_main_tip {
+  font-size: 12px;
+color: #999999;
+}
+
+.wrapper-container_footer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  height: 100rpx;
+  width: 100%;
+  padding: 7px 15px;
+  box-sizing: border-box;
+  border-top: 1px solid #f6f6f6;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.footer_price {
+  flex: 1;
+  line-height: 48rpx;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ED4528;
+}
+
+.footer_price .symbol {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #ED4528;
+}
+
+.new_van_button {
+  height: 30px !important;
+  padding: 0 10px !important;
+  font-size: 13px !important;
+}
+
+.wrapper-container_main_title {
+  height: 35px;
+  line-height: 35px;
+  font-size: 13px;
+  color: #333;
+}
+
+.space_li {
+  display: inline-block;
+  line-height: 64rpx;
+  padding: 0 16rpx;
+  font-size: 26rpx;
+  color: #333333;
+  height: 64rpx;
+  background: #FFFFFF;
+  border: 2rpx solid #F0F0F0;
+  border-radius: 32rpx;
+}
+
+.space_li {
+  margin-right: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.space_li.noNum {
+  background: #F0F0F0;
+  color: #999999;
+}
+.space-stepper{
+  white-space: nowrap;
+}
+.space-stepper_minus{
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #999999;
+}
+
+ .space-stepper_plus,
+ .space-stepper_minus {
+  width:50rpx;
+  height: 50rpx;
+  margin: 0;
+}
+
+.space-stepper_plus {
+  border-radius: 50%;
+  background: #0DAE4E;
+  border: 1px solid #0DAE4E;
+  color: #fff;
+
+}
+
+.space-stepper_minus{
+  border-color: #0DAE4E;
+  color: #0DAE4E;
+
+}
+
+.space-stepper_input {
+  background: #fff;
+  color: #333333;
+  height: 36rpx;
+  width: 52rpx;
+  line-height: 36rpx;
+  padding: 0;
+}
+.van-stepper .van-stepper__minus--disabled,.van-stepper .van-stepper__plus--disabled {
+  border-color: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  color: #cccccc !important;
+}
+
+.checked {
+  border-color: #0DAE4E;
+  background: rgba(13, 174, 78, 0.05);
+  color: #0DAE4E;
+}
+
+
+.wrapper  .close-btn-box {
+  text-align: center;
+  padding-top: 80rpx;
+}
+
+
+.close-btn-box .close-btn {
+  padding: 10rpx;
+  background: transparent;
+  border: 4rpx solid #fff;
+  border-radius: 50%;
+  color: #fff;
+}
+van-stepper{
+  display: flex;
+  align-items: center;
+}
+
+.process_list {
+  display: flex;
+  margin-top: 12rpx;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.process_item {
+  border: 1px solid #F7F7F7;
+  border-radius: 8rpx;
+  width: 144rpx;
+  height: 250rpx;
+  margin-right: 14rpx;
+  margin-top: 12rpx;
+  padding: 8rpx 8rpx 24rpx 8rpx;
+  box-sizing: border-box;
+  background: #F7F7F7;
+}
+
+.process_item.checked {
+  border: 1px solid #0DAE4E;
+  background:  rgba(13,174,78,0.05);
+}
+
+.process_item_title {
+  font-size: 26rpx;
+  color: #333333;
+  line-height: 30rpx;
+  margin-bottom: 12rpx;
+}
+.process_item.checked .process_item_title  {
+  color: #0DAE4E;
+}
+.process_item_price {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.process_item_price__left {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333333;
+}
+.process_item.checked .process_item_price__left  {
+  color: #0DAE4E;
+}
+
+.process_item_price__right {
+  width: 40rpx;
+}

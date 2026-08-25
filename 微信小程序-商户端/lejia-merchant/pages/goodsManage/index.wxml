@@ -1,0 +1,85 @@
+<!--pages/goodsManage/index.wxml-->
+<view class="goods-manage" style="padding-bottom:{{isIphoneX?68:0}}rpx">
+    <van-sticky>
+        <view class="goods-search-view">
+            <view class="search-view">
+                <van-search value="{{ title }}" placeholder="请输入商品名称" shape="round" clearable="{{false}}" bind:blur="searchClick" />
+            </view>
+            <view class="status-view" bindtap="statusSearchClick">
+                <text>{{statusName}}</text>
+                <van-icon name="arrow-down" />
+            </view>
+        </view>
+    </van-sticky>
+    <view class="goods-list">
+        <view class="goods-item" wx:for="{{datalist}}" wx:key="index">
+            <view class="item-content">
+                <van-image width="120rpx" height="120rpx" radius="8" src="{{item.photo1 && item.photo1.length > 0 ? item.photo1[0] : ''}}" />
+                <view class="content">
+                    <view class="content-line">
+                        <text class="title van-ellipsis">{{item.title}}</text>
+                        <text class="{{item.statusName == '在售商品' ? 'status-on' : 'status'}}">{{item.statusName}}</text>
+                    </view>
+                    <view class="content-line">
+                        <text class="price">￥{{item.price == item.maxPrice ? item.price : item.price + ' ~ ' + item.maxPrice}}</text>
+                        <text class="kcNum">库存：{{item.kcNum}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="btn-view">
+                <view class="edit-btn" data-value="{{item}}" bindtap="editClick">库存&价格</view>
+                <view class="status-btn {{item.enabled ? '' : 'status-btn-down'}}" data-value="{{item}}" bindtap="statusClick">{{item.enabled ? '下架' : '上架'}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 商品状态弹框 -->
+    <van-popup show="{{ statusShow }}" position="bottom" round>
+        <van-picker columns="{{ columns }}" show-toolbar title="商品状态" confirm-button-text="确定" bind:cancel="cancle" bind:confirm="confirm" />
+    </van-popup>
+    <!-- 库存价格修改弹框 -->
+    <van-popup show="{{ editShow }}" round>
+        <view class="edit-view">
+            <view class="title">修改库存&价格</view>
+            <view class="edit-content">
+                <view class="edit-item" wx:for="{{selectItem.spaces}}" wx:key="index">
+                    <view class="edit-top-view">
+                        <view class="tag-view"></view>
+                        <view class="space">规格{{index + 1}}:{{item.space}}</view>
+                    </view>
+                    <view class="edit-price-view">
+                        <view class="edit-price-item-view">
+                            <text>售价</text>
+                            <van-field class="{{(inputData.index == index && inputData.type=='price' ) ? 'highlight' : ''}}" type="digit" model:value="{{ item.price }}" placeholder="请输入售价" border="{{ false }}" data-id="{{index}}" data-value="price" bind:change="priceChange" use-button-slot bind:focus="onFocus" bind:blur="onBlur">
+                                <view slot="button" style="color:#333333;font-weight: bold;font-size: 26rpx;">
+                                    元
+                                </view>
+                            </van-field>
+                        </view>
+                        <view class="edit-price-item-view">
+                            <text>原价</text>
+                            <van-field class="{{(inputData.index == index && inputData.type=='priceOld' ) ? 'highlight' : ''}}" type="digit" model:value="{{ item.priceOld }}" placeholder="请输入原价" border="{{ false }}" data-id="{{index}}" data-value="priceOld" bind:change="priceOldChange" use-button-slot bind:focus="onFocus" bind:blur="onBlur">
+                                <view slot="button" style="color:#333333;font-weight: bold;font-size: 26rpx;">
+                                    元
+                                </view>
+                            </van-field>
+                        </view>
+                    </view>
+                    <view class="kc-view">
+                        <text>库存</text>
+                        <van-stepper model:value="{{ item.kcNum }}" data-id="{{index}}" min="0" bind:change="kcNumChange" />
+                    </view>
+                    <view class="edit-kc-view">
+                        <view data-id="{{index}}" bindtap="clearClick">清零</view>
+                        <view data-id="{{index}}" bindtap="fillClick">置满(9999)</view>
+                    </view>
+                </view>
+            </view>
+            <view class="bottom">
+                <view class="cancle" bindtap="editCancleClick">取消</view>
+                <view class="comfirm" bindtap="editComfirmClick">确认</view>
+            </view>
+        </view>
+    </van-popup>
+    <!-- 加载更多 -->
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

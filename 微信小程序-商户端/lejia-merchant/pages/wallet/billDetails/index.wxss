@@ -1,0 +1,174 @@
+/* pages/wallet/billDetails/index.wxss */
+body,#bill-details {
+  background: #F2F4F7;
+}
+
+.top-container {
+    padding: 40rpx 24rpx 0 24rpx;
+}
+
+.top-container::before {
+    content: "";
+    background: #0092FF;
+    display: block;
+    width: 100vw;
+    height: 196rpx;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+  }
+
+  .top-container__number{
+    padding: 12px;
+    padding-top: 0px;
+    background: white;
+    border-radius: 8rpx;
+    position:relative;
+    z-index: 1;
+  }
+
+  .van-cell{
+    padding-left: 0 !important;
+  }
+
+.list-container {
+  background: #fff;
+  margin-top: 20rpx;
+  padding: 0 24rpx;
+}
+
+.date-bar {
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.date-bar .date-bar_text {
+  flex: 1;
+  text-align: right;
+  font-size: 24rpx;
+}
+
+.date-bar .van-cell__value {
+  color: #333;
+  font-size: 30rpx;
+}
+
+.money-bar {
+  border-top:1px solid #ebedf0;
+  text-align: center;
+  padding: 0 24rpx;
+}
+
+.money-bar_title {
+  font-size: 26rpx;
+  padding: 32rpx 0 20rpx 0;
+  color: #5B94E1;
+}
+
+.money-bar_num {
+    font-size: 64rpx;
+    color: #333333;
+    font-weight: 800;
+    padding-bottom: 18rpx;
+}
+
+.money-pack-bar{
+    border-top:1px solid #ebedf0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.money-pack-bar .left .money-bar_title_sub{
+    font-size: 12px;
+    color: #666666;
+}
+
+.money-pack-bar .right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.money-pack-bar .right .money-bar_num_sub{
+    font-size: 13px;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+.list-header-item {
+  display: flex;
+}
+.list-table-item {
+  border-bottom: 1px solid #ebedf0;
+}
+.list-table-item {
+  padding: 24rpx 0;
+}
+
+.list-header-item .list-item-cell {
+  padding-top: 24rpx;
+}
+
+.list-item-line {
+  display: flex;
+}
+
+.list-header-item {
+  font-weight: 800;
+  font-size: 30rpx;
+}
+
+.list-header-item .list-item-cell {
+  font-size: 26rpx;
+  color: #999999;
+  font-weight: 400;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.list-item-cell  {
+  display: flex;
+  width: 100px;
+}
+.list-item-cell:last-child  {
+    display: flex;
+    justify-content: flex-end; /* 使子元素向右对齐 */
+  }
+.list-table-item {
+  font-size: 28rpx;
+}
+
+.list-table-item:last-child {
+  border-bottom: 0;
+}
+.list-table-item .list-item-cell {
+  color: #333333;
+}
+
+.list-table-item .list-item-line .date {
+  font-size: 26rpx;
+  color: #999999;
+  margin-top: 12rpx;
+}
+
+.list-item-cell van-icon {
+  margin-left: 12rpx;
+}
+
+.color-orange {
+  color: #ED7228;
+}
+
+.color-green {
+  color: #06B671;
+}
+
+.unFlex {
+  display: block;
+}

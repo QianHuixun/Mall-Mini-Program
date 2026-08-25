@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "space-dialog":"/components/space/index",
+    "go-cart": "/components/goCart/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index"
+  },
+  "navigationBarTitleText": "会员专区"
+}

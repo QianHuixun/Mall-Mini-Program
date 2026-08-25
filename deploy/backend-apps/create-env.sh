@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+APP_DIR="${APP_DIR:-/srv/lejia-apps}"
+INFRA_ENV="${INFRA_ENV:-/srv/lejia-infra/.env}"
+
+if [[ ! -f "$INFRA_ENV" ]]; then
+  echo "基础设施密钥文件不存在：$INFRA_ENV" >&2
+  exit 1
+fi
+
+set -a
+# shellcheck disable=SC1090
+source "$INFRA_ENV"
+set +a
+
+required=(
+  ACCOUNT_DB_NAME ACCOUNT_DB_USER ACCOUNT_DB_PASSWORD
+  FILE_DB_NAME FILE_DB_USER FILE_DB_PASSWORD
+  BUSINESS_DB_NAME BUSINESS_DB_USER BUSINESS_DB_PASSWORD
+  REDIS_PASSWORD RABBITMQ_USER RABBITMQ_PASSWORD RABBITMQ_VHOST
+)
+
+for name in "${required[@]}"; do
+  if [[ -z "${!name:-}" ]]; then
+    echo "基础设施密钥文件缺少变量：$name" >&2
+    exit 1
+  fi
+done
+
+umask 077
+mkdir -p "$APP_DIR"
+jasypt_password="$(openssl rand -hex 24)"
+
+cat > "$APP_DIR/.env" <<EOF
+APP_RELEASE_ID=unbuilt
+ACCOUNT_DB_NAME=$ACCOUNT_DB_NAME
+ACCOUNT_DB_USER=$ACCOUNT_DB_USER
+ACCOUNT_DB_PASSWORD=$ACCOUNT_DB_PASSWORD
+FILE_DB_NAME=$FILE_DB_NAME
+FILE_DB_USER=$FILE_DB_USER
+FILE_DB_PASSWORD=$FILE_DB_PASSWORD
+BUSINESS_DB_NAME=$BUSINESS_DB_NAME
+BUSINESS_DB_USER=$BUSINESS_DB_USER
+BUSINESS_DB_PASSWORD=$BUSINESS_DB_PASSWORD
+REDIS_PASSWORD=$REDIS_PASSWORD
+RABBITMQ_USER=$RABBITMQ_USER
+RABBITMQ_PASSWORD=$RABBITMQ_PASSWORD
+RABBITMQ_VHOST=$RABBITMQ_VHOST
+JASYPT_ENCRYPTOR_PASSWORD=$jasypt_password
+EOF
+
+chmod 600 "$APP_DIR/.env"
+echo "已生成 $APP_DIR/.env（未输出密钥内容）。"

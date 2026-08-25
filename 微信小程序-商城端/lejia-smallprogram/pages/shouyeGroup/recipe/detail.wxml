@@ -1,0 +1,81 @@
+<!--pages/shouyeGroup/recipe/detail.wxml-->
+<view id="recipe-detail">
+	<view class="recipe-detail-main ">
+		<view class="lj-swipe">
+			<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78">
+				<swiper-item wx:for="{{photo1}}" wx:key="index">
+					<image src="{{item}}"></image>
+				</swiper-item>
+			</swiper>
+
+			<view class="like-view"  bindtap="addCollection">
+				<van-icon wx:if="{{!collection}}" name="like-o" color="white" size="16px" />
+				<van-icon wx:else name="like" color="#f24539" size="16px" bindtap="deleteCollection" />
+				<text class="like-num">{{collCount}}</text>
+			</view>
+		</view>
+		<text class="title">{{name}}</text>
+		<text class="content">{{descp}}</text>
+		<view class="seg-view">
+			<view class="seg">
+				<van-image src="/images/seg_green_left.png" width="216rpx" height="29rpx" />
+			</view>
+			<text>食材清单</text>
+			<view class="seg">
+				<van-image src="/images/seg_green_right.png" width="216rpx" height="29rpx" />
+			</view>
+		</view>
+		<!-- <view style="text-align: right;">
+      <van-button color="#4dce78" round custom-class="btn" bind:click="noClick">采购全部</van-button>
+    </view> -->
+
+		<view class="goods-view" wx:for="{{lines}}" bindtap="goodsClick" data-id='{{item}}' wx:key="index">
+			<view class="goods-view-top">
+				<text class="goods-view-top_name">{{item.goodsName}}</text>
+				<!-- <text></text> -->
+			</view>
+			<view class="goods-view-bottom">
+				<van-image width="85" height="85" src="{{item.wrapperPhoto}}" />
+				<view class="goods-view-bottom-rig">
+					<view class="van-multi-ellipsis--l2 like-content-title rig-title">
+						<!-- {{item.goodsName}}{{item.num}}{{item.spaceName}} -->
+						{{item.goodsName}}
+					</view>
+					<view class="rig-label">规格：{{item.spaceName}}</view>
+					<view class="goods-view-bottom-rig-bottom">
+						<text class="goods-view-bottom-rig-bottom-small">￥</text>
+						<text class="goods-view-bottom-rig-bottom-big" style="flex:1;">{{item.price}}</text>
+						<!-- <text class="goods-view-bottom-rig-bottom-small" style="flex:1;">.99</text> -->
+						<view class="stepper">
+							<!-- <van-icon name="/images/sub.png" color="#d9d9d9" size="20px" bind:click="subClick" data-id='{{index}}'/> -->
+							<text class="stepper-num">X{{item.num}}</text>
+							<!-- <van-icon name="add" color="#4dce78" size="20px" bind:click="addClick" data-id='{{index}}'/> -->
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<view class="seg-view">
+			<view class="seg"></view>
+			<text>菜品步骤</text>
+			<view class="seg"></view>
+		</view>
+
+		<view class="steps-view" wx:for="{{content}}" wx:key="index">
+			<text class="steps-view-title">第{{index + 1}}步:</text>
+			<text class="steps-view-content">{{item}}</text>
+		</view>
+
+	</view>
+	<view class="buy-view" style="padding-bottom:{{isIphoneX?68:0}}rpx">
+		<view class="car-view" bindtap="carClick">
+			<van-icon name="shopping-cart-o" size="20px" color="#5C5C5C" />
+			<text class="car-view-text">购物车</text>
+		</view>
+		<van-button color="{{theme.primary}}" custom-class="buy-btn" style="flex:1;" bind:click="goCart">一键加入购物车</van-button>
+	</view>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,27 @@
+{
+    "usingComponents": {
+      "category-2layer": "/components/classification/category-2layer/index",
+      "category-3layer": "/components/classification/category-3layer/index",
+      "authorize": "/components/login/index",
+      "space-dialog":"/components/space/index",
+      "drag-ball": "/components/dragBall/index",
+      "load-more":"/components/load-more/index",
+      "go-cart": "/components/goCart/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-sidebar": "@vant/weapp/sidebar/index",
+      "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+      "van-search": "@vant/weapp/search/index",
+      "van-button": "@vant/weapp/button/index",
+      "van-tag": "@vant/weapp/tag/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-stepper": "@vant/weapp/stepper/index",
+      "van-tabs": "@vant/weapp/tabs/index",
+      "van-divider": "@vant/weapp/divider/index",
+      "van-tab": "@vant/weapp/tab/index",
+      "van-sticky": "@vant/weapp/sticky/index",
+      "search-bar": "/components/search-bar/index"
+    },
+    "navigationBarTitleText": "分类",
+    "navigationStyle":"custom"
+}

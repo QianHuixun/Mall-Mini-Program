@@ -1,0 +1,146 @@
+name: lejia-infra
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: lejia-mysql
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      BUSINESS_DB_NAME: ${BUSINESS_DB_NAME}
+      BUSINESS_DB_USER: ${BUSINESS_DB_USER}
+      BUSINESS_DB_PASSWORD: ${BUSINESS_DB_PASSWORD}
+      ACCOUNT_DB_NAME: ${ACCOUNT_DB_NAME}
+      ACCOUNT_DB_USER: ${ACCOUNT_DB_USER}
+      ACCOUNT_DB_PASSWORD: ${ACCOUNT_DB_PASSWORD}
+      FILE_DB_NAME: ${FILE_DB_NAME}
+      FILE_DB_USER: ${FILE_DB_USER}
+      FILE_DB_PASSWORD: ${FILE_DB_PASSWORD}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+      - --max-connections=220
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 18
+      start_period: 40s
+    mem_limit: 1536m
+    cpus: 2.0
+    networks:
+      - lejia
+
+  redis:
+    image: redis:7.2
+    container_name: lejia-redis
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command:
+      - sh
+      - -c
+      - exec redis-server --appendonly yes --appendfsync everysec --requirepass "$${REDIS_PASSWORD}" --maxmemory 384mb --maxmemory-policy allkeys-lru
+    ports:
+      - 127.0.0.1:6379:6379
+    volumes:
+      - ./data/redis:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" ping 2>/dev/null | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    mem_limit: 512m
+    cpus: 1.0
+    networks:
+      - lejia
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: lejia-rabbitmq
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+    ports:
+      - 127.0.0.1:5672:5672
+      - 127.0.0.1:15672:15672
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 15s
+      timeout: 10s
+      retries: 12
+      start_period: 30s
+    mem_limit: 768m
+    cpus: 1.0
+    networks:
+      - lejia
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.29
+    container_name: lejia-elasticsearch
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms768m -Xmx768m
+    ports:
+      - 127.0.0.1:9200:9200
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:9200/_cluster/health >/dev/null"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 60s
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 1536m
+    cpus: 2.0
+    networks:
+      - lejia
+
+  eureka:
+    build:
+      context: ./eureka
+    container_name: lejia-eureka
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 127.0.0.1:20000:20000
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:20000/actuator/info"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 45s
+    mem_limit: 512m
+    cpus: 1.0
+    networks:
+      - lejia
+
+networks:
+  lejia:
+    name: lejia-infra
+    driver: bridge
+

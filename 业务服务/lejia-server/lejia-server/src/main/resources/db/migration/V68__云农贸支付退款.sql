@@ -1,0 +1,1 @@
+ALTER TABLE `mkt_order` ADD COLUMN `xasz_consumption` int comment '心安食足支付流水表主键' AFTER `pickup_flag`;

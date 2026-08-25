@@ -1,0 +1,213 @@
+/* components/recommending-goods/index.wxss */
+.recommending-goods-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx 0;
+    font-weight: bold;
+    font-size: 24rpx;
+    color: #333333;
+}
+
+.recommending-goods-title::after {
+    content: '';
+    width: 262rpx;
+    height: 1rpx;
+    margin-left: 18rpx;
+    background: #E5E5E5;
+}
+
+.recommending-goods-title::before {
+    content: '';
+    width: 262rpx;
+    height: 1rpx;
+    margin-right: 18rpx;
+    background: #E5E5E5;
+}
+
+.recommending-goods-title image {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 10rpx;
+}
+
+.goodslist {
+    /* display: flex;
+    flex-wrap: wrap;
+    padding: 5rpx; */
+    padding: 0 24rpx;
+    /* column-count: 2;
+    column-gap: 18rpx; */
+    display: flex;
+    box-sizing: border-box;
+}
+
+/* 左右两个容器 */
+.left-container {
+    display: flex;
+    margin-right: 18rpx;
+    flex-direction: column;
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.goods-cell {
+    width: 342rpx;
+    box-sizing: border-box;
+    height: auto;
+    /* margin: 10rpx; */
+    margin-bottom: 18rpx;
+    border-radius: 20rpx;
+    overflow: hidden;
+    break-inside: avoid;
+    box-sizing: border-box;
+
+}
+
+.goods-con {
+    background: #fff;
+    padding-bottom: 24rpx;
+}
+
+.goods-cell .goods-image {
+    width: 342rpx;
+    height: 342rpx;
+}
+
+.goods-content {
+    padding: 0 24rpx;
+    position: relative;
+}
+
+.item-selling_points {
+    width: 100%;
+    margin: 12rpx 0;
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    overflow: hidden;
+}
+
+.selling-points {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #999999;
+}
+
+.selling-points + .selling-points::before {
+    content: '';
+    display: block;
+    margin: 0 12rpx;
+    width: 1px;
+    height: 20rpx;
+    background-color: #999999;
+}
+
+.item-tag {
+    width: fit-content;
+    padding: 2rpx 12rpx;
+    font-size: 24rpx;
+    background: transparent;
+    color: #0DAE4E;
+    border: 1px solid #0DAE4E;
+    border-radius: 12rpx;
+}
+
+.title-cell {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-height: 74rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333333;
+    line-height: 38rpx;
+
+    margin-top: 24rpx;
+    margin-bottom: 10rpx;
+}
+
+.price-cell {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.price-cell .normal-price {
+    display: flex;
+    align-items: flex-end;
+}
+
+.price-cell .price_clr {
+    font-size: 24rpx;
+    font-weight: bold;
+    color: #ED4528;
+    margin-right: 10rpx;
+}
+
+.price-cell .price_clr .unit {
+    display: inline-block;
+    margin-right: 8rpx;
+}
+
+.price-cell .price_clr .price_txt {
+    font-size: 32rpx;
+}
+
+.price-cell .price-old {
+    font-size: 24rpx;
+    font-weight: 500;
+    text-decoration: line-through;
+    color: #999999;
+    line-height: normal;
+}
+
+.price-cell .car-num .van-info {
+    background: #ED4528;
+    font-size: 20rpx;
+    font-weight: 500;
+    color: #FFFFFF;
+    padding: 4rpx;
+}
+
+/**会员价格与原价*/
+.price-mermber {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    font-size: 28rpx;
+    color: #4dce78;
+}
+
+.price-mermber .price-mermber-txt {
+    display: inline-block;
+    margin-right: 16rpx;
+    font-size: 26rpx;
+    font-weight: bold;
+    color: #885F1A;
+}
+
+.price-mermber .price-mermber-txt .unit {
+
+    font-size: 24rpx;
+    font-weight: bold;
+    padding-right: 6rpx;
+}
+
+.price-mermber-tag {
+    width: 86rpx;
+    height: 26rpx;
+}
+
+/**end 会员价格与原价*/
+
+.buycar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

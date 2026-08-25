@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-account</artifactId>
+	<packaging>pom</packaging>
+	
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tofocus-cloud</artifactId>
+		<version>3.5.4</version>
+		<relativePath>..</relativePath>
+	</parent>
+	
+	<modules>
+		<module>tfcloud-account-api</module>
+		<module>tfcloud-account-dao</module>
+		<module>tfcloud-account-server</module>
+		<module>tfcloud-account-util</module>
+	</modules>
+</project>

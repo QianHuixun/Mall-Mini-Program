@@ -1,0 +1,1 @@
+ALTER TABLE `mkt_order` ADD COLUMN `third_party_status` tinyint(4) DEFAULT NULL COMMENT '第三方配送状态'  AFTER `status`;

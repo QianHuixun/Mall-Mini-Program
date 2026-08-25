@@ -1,0 +1,30 @@
+<view id="widthdraw">
+  <van-cell-group>
+  <van-cell title="提现至" is-link clickable value="{{bankInfo.bankname}}({{shortBankCard}})" bind:click="goAccount" wx:if="{{bankInfo.bankcard}}"/>
+  <van-cell title="添加提现账户" is-link value="" bind:click="goAccount" wx:else/>
+</van-cell-group>
+  <view class="withdraw-field">
+    <view class="withdraw-field-title">提现金额</view>
+    <view class="withdraw-field-box">
+      <view class="withdraw-field-box_icon">￥</view>
+      <view class="withdraw-field-box_field">
+        <van-field type="digit" value="{{ amount }}" placeholder="" border="{{ false }}" bind:input="checkMoney"/>
+      </view>
+      <view class="withdraw-field-box_all" bind:tap="getAllAmount">
+        全部提现
+      </view>
+    </view>
+    <view class="withdraw-field-tips">可提现金额￥{{walletAmt}}</view>
+  </view>
+  <view class="withdraw-button">
+    <van-button bind:click="onSubmit" loading="{{loading}}" disabled="{{!bankInfo.bankcard || !amount || amount<0.01}}">确认提现</van-button>
+  </view>
+  <view class="withdraw-tips">温馨提示：提现申请发起后，预计3个工作日内到账。</view>
+
+<!-- 弹出提示 -->
+<van-popup show="{{ popShow }}" round closeable bind:close="onPopClose" custom-class="custom-popup" close-on-click-overlay>
+  <van-icon name="todo-list-o" color="#000" size="150rpx"/>
+  <view class="custom-popup-title">提现已申请</view>
+  <view class="custom-popup-tips">预计3个工作日内到账</view>  
+</van-popup>
+</view>

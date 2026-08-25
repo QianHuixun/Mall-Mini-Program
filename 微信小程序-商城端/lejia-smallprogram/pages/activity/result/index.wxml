@@ -1,0 +1,16 @@
+<!--pages/activity/result/index.wxml-->
+<view id="activity-result">
+  <van-icon name="checked" size="80rpx" color="#0DAE4E"/>
+    <view class="success_text">领取成功</view>
+    <view class="coupon_box">
+      <view class="coupon_box_left">
+        <view class="coupon_box_left__price"><text>￥</text>{{cost}}</view>
+        <view class="coupon_box_left__tips">{{limitCost ? '满'+limitCost+ '元可用' : '无门槛'}}</view>
+      </view>
+      <view class="coupon_box_right">
+        <view class="coupon_box_right__title">{{title}}</view>
+        <view class="coupon_box_right__date">有效期至{{endDate ||  '2024-04-30'}}</view>
+      </view>
+    </view>
+    <van-button type="primary" bind:click="handeBack" round custom-class="back-btn">进入店铺小程序</van-button>
+</view>

@@ -1,0 +1,52 @@
+<!--pages/shouyeGroup/marketDetail/index.wxml-->
+<view>
+    <swiper class="swiper" autoplay>
+        <block wx:for="{{background}}" wx:key="*this">
+            <swiper-item>
+                <van-image custom-class="swiper-item-image" src="{{item}}" lazy-load="{{ true }}" show-loading />
+                {{item.photo}}
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+
+<view class="market">
+    <view class="market-name">{{market.name}}</view>
+    <view class="market-datetime">
+       <view>{{market.weekTime}} {{market.dayTime}}</view>
+       <wxs module="filter" src="./index.wxs"></wxs>
+       <view style="flex-shrink: 0;">距离{{filter.mToKm(market.distance)}}km</view>
+    </view>
+    <view class="market-addr">
+        <view style="display: flex; align-items: center;">
+            <view class="market-addr__text">
+                {{market.config.addr}}
+            </view>
+        </view>
+        
+        <view class="market-addr-nav" bind:tap="openLocation">
+            <view class="market-addr-nav__icon">
+                <van-icon name="/images/shouye/navigation.png" size="44rpx" />
+            </view>
+            <view class="market-addr-nav__text">导航</view>
+        </view>
+    </view>
+</view>
+
+<view class="market-contact">
+    <view class="market-contact-item" bind:tap="callPhone">
+        <van-icon class="market-contact-item__icon" name="/images/shouye/phone.png" size="54rpx" />
+        <view class="market-contact-item__text">市场电话：{{market.mobile}}</view>
+        <van-icon class="market-contact-item__arrow" name="/images/shouye/arrow.png" size="32rpx" />
+    </view>
+    <view class="market-contact-item" wx:if="{{market.config.customerServiceLink}}" bind:tap="handleCustomer">
+        <van-icon class="market-contact-item__icon" name="/images/shouye/customer.png" size="54rpx" />
+        <view class="market-contact-item__text">在线客服</view>
+        <van-icon class="market-contact-item__arrow" name="/images/shouye/arrow.png" size="32rpx" />
+    </view>
+</view>
+
+<view class="market-introduction" wx:if="{{market.content}}">
+    <view class="market-introduction-title">市场介绍</view>
+    <view class="market-introduction-text">{{market.content}}</view>
+</view>

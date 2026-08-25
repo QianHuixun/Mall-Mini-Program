@@ -1,0 +1,13 @@
+var filter = {
+    /**
+     * @desc 获取小数点前的整数
+     * @param value 数字
+     */
+    valueFormat: function (value) {
+      return value!=null?value.toFixed(2):value
+    },
+  }
+  
+  module.exports = {
+    valueFormat: filter.valueFormat,
+  }

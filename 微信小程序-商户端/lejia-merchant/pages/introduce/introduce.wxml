@@ -1,0 +1,13 @@
+<!-- 
+@url: pages/introduce/introduce.wxml
+@description: 引导页
+@author: zs
+ -->
+ <view class="introduce-page">
+  <image class="bg-image" src="/images/introduce.jpg" bindtap="logClick" mode="scaleToFill">
+  </image>
+  <view class="font-content" bindtap="logClick">
+    <view class="title">{{AppInfo.userName}}商户</view>
+    <view class="tips">该小程序主要为{{AppInfo.userName}}商户使用</view>
+  </view>
+</view>

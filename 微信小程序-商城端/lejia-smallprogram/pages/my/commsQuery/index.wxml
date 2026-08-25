@@ -1,0 +1,42 @@
+<!--pages/my/CommsQuery/index.wxml-->
+<view class="comms-query">
+    <view class="content-view">
+        <view class="phone-view van-hairline--bottom">
+            <van-icon name="/images/my/CommsQuery_phone.png" size="32rpx" color="#01a04c" />
+            <text class="phone-text">{{mobile}}</text>
+            <view class="comms-view">
+                <text>余额</text>
+                <text class="comms-text">{{purse}}</text>
+            </view>
+        </view>
+        <view class="amt-view">
+            <view class="amt-title">充值金额</view>
+            <view class="nums-view">
+                <van-button wx:for="{{amtList}}" wx:key="index" custom-class="{{selectAmt == item ? 'button-view select-btn' : 'button-view'}}" data-value="{{item}}" bindtap="amtClick">{{item}}元</van-button>
+            </view>
+        </view>
+        <view class="recharge-btns">
+            <van-button custom-class="btn-confirm" round bind:click="goPay">{{'￥'+selectAmt+' 立即充值'}}</van-button>
+            <van-button custom-class="btn-confirm btn-card" round bind:click="showPopup">卡密充值</van-button>
+        </view>
+    </view>
+    <van-popup show="{{ show }}" round close-on-click-overlay="{{ false }}" bind:close="onClose">
+        <view class="recharge-popup">
+            <view class="recharge-popup-title">卡密充值</view>
+            <view class="recharge-popup-content">
+                <view class="recharge-popup-conten_bar">
+                    <text class="recharge-popup-conten_bar__label">卡号</text>
+                    <van-field value="{{ cardNumber }}" placeholder="请输入充值卡号" border="{{ false }}" data-name="cardNumber" custom-style="{{customStyle}}" placeholder-style="color: #999999" bind:change="onChange" />
+                </view>
+                <view class="recharge-popup-conten_bar">
+                    <text class="recharge-popup-conten_bar__label">卡密</text>
+                    <van-field value="{{ cardPassword }}" placeholder="请输入充值卡密" border="{{ false }}" data-name="cardPassword" custom-style="{{customStyle}}" placeholder-style="color: #999999" bind:change="onChange" />
+                </view>
+            </view>
+            <view class="recharge-popup-botton">
+                <van-button custom-class=".recharge-popup-botton__btn cancel" round bind:click="onClose">取消</van-button>
+                <van-button custom-class=".recharge-popup-botton__btn" round loading="{{loading}}" bind:click="handleRechargeCard">充值</van-button>
+            </view>
+        </view>
+    </van-popup>
+</view>

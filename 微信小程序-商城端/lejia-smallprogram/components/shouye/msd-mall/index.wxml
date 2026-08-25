@@ -1,0 +1,18 @@
+<!--components/shouye/msd-mall/index.wxml-->
+<view class="points-mall" wx:if="{{list.length}}" bind:tap="goPresell">
+    <view class="title-bar">
+        <view class="title">{{ displayName }}</view>
+    </view>
+    <view class="content">
+        <view class="item-container">
+            <view class="item" wx:for="{{displayChunks}}" data-gtype="{{item.gtype}}" data-pkey="{{item.pkey}}" bind:tap="goPresell">
+                <view class="item-image">
+                    <image class="image" src="{{item.wrapperPhoto ? (item.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}" mode=""/>
+                </view>
+                <view class="item-price">
+                    <van-icon name="/images/heart.png" size="21rpx" />{{item.price}}
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

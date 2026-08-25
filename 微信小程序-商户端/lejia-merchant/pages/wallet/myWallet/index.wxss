@@ -1,0 +1,196 @@
+/* pages/wallet/myWallet/index.wxss */
+.flex-1 {
+  flex: 1;
+}
+
+#my-wallet,body {
+  background: #F2F4F7;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.my-wallet_top {
+  padding: 40rpx 24rpx 0 24rpx;
+}
+
+.my-wallet_top__number {
+  background: linear-gradient( 180deg, #EDF0F6 0%, #FFFFFF 100%);
+  border-radius: 8rpx;
+}
+
+.my-wallet_top::before {
+  content: "";
+  background: #0092FF;
+  display: block;
+  width: 100vw;
+  height: 196rpx;
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+}
+.my-wallet_top__number {
+  position:relative;
+  z-index: 1;
+  padding: 0 24rpx;
+}
+.my-wallet_top__number___title,
+ .my-wallet_top__number___num {
+  display: flex;
+  align-items: center;
+}
+.my-wallet_top__number___title {
+  font-size: 26rpx;
+  padding: 32rpx 0;
+  color: #666666;
+}
+
+.my-wallet_top__number___title .arrow-right {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #5B94E1;
+}
+
+.my-wallet_top__number___num {
+  padding-bottom: 48rpx;
+}
+
+.my-wallet_top__number___num .flex-1 {
+  display: flex;
+  align-items: center;
+}
+
+.my-wallet_top__number___num .num {
+  font-size: 64rpx;
+  color: #333333;
+  font-weight: 800;
+}
+
+.my-wallet_top__number___num .detail {
+  background: rgba(161, 177, 191, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24rpx;
+  width: 104rpx;
+  height: 48rpx;
+  font-size: 24rpx;
+  color: #333333;
+  text-align: center;
+  margin-left: 24rpx;
+}
+
+.my-wallet_top__number___num .van-button {
+  width: 144rpx;
+  height: 54rpx;
+  background: #5B94E1;
+  border-radius: 4rpx;
+  padding: 0;
+}
+
+.top-button .van-button__text {
+  font-size: 26rpx;
+  color: #FFFFFF;
+}
+
+#scroll {
+  height: 100%;
+}
+.my-wallet_list {
+  box-sizing: border-box;
+  padding: 20rpx 24rpx;
+}
+
+.my-wallet_list_container__title {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333333;
+  padding: 24rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.my-wallet_list_container__title .text {
+  flex: 1;
+}
+
+.my-wallet_list_container__title .van-cell {
+  background: none;
+  padding: 0;
+}
+
+.my-wallet_list_item {
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8rpx;
+  padding: 24rpx;
+  font-size: 30rpx;
+}
+
+.my-wallet_list_item:last-child {
+  margin-bottom: 0;
+}
+
+.my-wallet_list_item__left {
+  flex: 1;
+}
+
+.my-wallet_list_item__left .date,
+.my-wallet_list_item__right .num {
+  font-size: 26rpx;
+  color: #999999;
+  margin-top: 12rpx;
+  font-weight: 400;
+}
+
+.my-wallet_list_item__right {
+  color: #5B94E1;
+  font-weight: bold;
+  margin-right: 8rpx;
+}
+
+.blue-color {
+  color: #0990FF !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.my-wallet_top__number___settled {
+  border-top: 1rpx solid #F0F0F1;
+  height: 66rpx;
+  margin-left: -24rpx;
+  margin-right: -24rpx;
+  display: flex;
+}
+
+.my-wallet_top__number___settled_item {
+  display: flex;
+  line-height: 66rpx;
+  padding: 0 24rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.my-wallet_top__number___settled_item:first-child {
+  border-right: 1px solid #F0F0F1;
+  min-width: 240rpx; 
+}
+
+.my-wallet_top__number___settled_item .num {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333333;
+  line-height: 66rpx;
+  margin-left: 16rpx;
+}
+
+.my-wallet_top__number___settled_item .link {
+  font-size: 24rpx;
+  color: #5B94E1;
+  margin-left: 24rpx;
+}

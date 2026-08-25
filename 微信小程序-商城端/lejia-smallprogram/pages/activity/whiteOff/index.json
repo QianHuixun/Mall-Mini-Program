@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-icon":"@vant/weapp/icon/index",
+      "van-button":"@vant/weapp/button/index"
+    },
+    "navigationBarBackgroundColor": "#FFE4C5",
+    "navigationBarTitleText": "活动核销"
+}

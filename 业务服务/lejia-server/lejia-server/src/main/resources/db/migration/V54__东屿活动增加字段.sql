@@ -1,0 +1,2 @@
+ALTER TABLE `mkt_member_card` ADD COLUMN `user_merchant` int DEFAULT NULL COMMENT '心安食足商户主键' AFTER `user_vendor`;
+ALTER TABLE `mkt_member_card` ADD COLUMN `user_merchant_name` varchar(200) DEFAULT NULL COMMENT '心安食足商户名称' AFTER `user_merchant`;

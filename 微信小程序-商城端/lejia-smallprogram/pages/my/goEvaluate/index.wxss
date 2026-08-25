@@ -1,0 +1,103 @@
+/* pages/my/goEvaluate/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
+.go-evaluate {
+  padding: 0 24rpx 138rpx 24rpx;
+}
+/* 标题栏 */
+.go-evaluate_title {
+  display: flex;
+  align-items: center;
+  margin: 16rpx 0;
+ }
+
+.go-evaluate_title__left {
+  flex:1;
+  font-size: 26rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.button {
+  background-color: none;
+  height: 52rpx;
+}
+/* end 标题栏 */
+/* 评论区 */
+
+/* 商品模块 */
+.go-evaluate-item {
+  background: #fff;
+  border-radius: 20rpx;
+  padding : 24rpx;
+  margin-top: 24rpx;
+}
+
+.go-evaluate-item_top {
+ display: flex;
+ align-items: center;
+}
+
+.go-evaluate-item_top .top-image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.go-evaluate-item_top__right {
+  flex: 1;
+  width: 0;
+}
+
+.go-evaluate-item_top__right___top {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.go-evaluate-item_top__right___bottom text {
+  color: #666;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+}
+/* end 商品模块 */
+/* 评论文本 */
+.go-evaluate_item__middle {
+  margin-top: 16rpx;
+}
+/* end 评论文本 */
+
+/* 图片上传 */
+.go-evaluate_item__bottom {
+  margin-top: 32rpx;
+}
+/* end 图片上传 */
+
+/* end 评论区 */
+
+/* 提交按钮栏 */
+.go-evaluate_buttonBar {
+  z-index: 100;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top:  1px  solid #F1F1F1;
+  padding: 18rpx 24rpx;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 96rpx;
+}
+/* end 提交按钮栏 */

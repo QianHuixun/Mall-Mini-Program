@@ -1,0 +1,14 @@
+/* pages/my/privacy/index.wxss */
+.privacy {
+    font-size: 28rpx;
+    padding: 24rpx;
+}
+.title {
+    text-align: center;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+}
+.subtitle {
+    font-weight: bold;
+}

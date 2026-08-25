@@ -1,0 +1,56 @@
+/* pages/wallet/details/index.wxss */
+body,#wallet-details {
+  height: 100vh;
+  overflow: hidden;
+  background: #F2F4F7;
+}
+
+#scroll {
+  box-sizing: border-box;
+  padding: 20rpx 24rpx;
+}
+
+.list-item {
+  padding: 24rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  margin: 20rpx 0;
+}
+
+.list-item-line {
+  display: flex;
+}
+.list-item-line {
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.list-item-line_left {
+  flex: 1;
+}
+
+.item-first {
+  font-weight: bold;
+}
+
+.item-first .list-item-line_right.color-blue {
+  color: #5B94E1;
+} 
+
+.item-second {
+  font-size: 26rpx;
+  margin-top: 12rpx;
+  line-height: 36rpx;
+}
+
+.item-second .list-item-line_left {
+  color: #999999;
+}
+
+.color-orange {
+  color: #ED7228;
+}
+
+.color-green {
+  color: #06B671;
+}

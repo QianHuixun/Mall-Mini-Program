@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"../../../components/load-more/index"
+  },
+  "navigationBarTitleText": "线下订单查询"
+}

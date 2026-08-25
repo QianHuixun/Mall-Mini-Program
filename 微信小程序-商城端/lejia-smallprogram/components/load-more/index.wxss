@@ -1,0 +1,14 @@
+/* components/load-more/index.wxss */
+.van-loading {
+  display: flex !important;
+}
+
+.loadmore {
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.loadmore text {
+  font-size: 24rpx;
+  color: #ddd;  
+}

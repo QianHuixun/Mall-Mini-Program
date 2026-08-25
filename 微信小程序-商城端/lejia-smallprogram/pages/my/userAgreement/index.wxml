@@ -1,0 +1,4 @@
+<!--pages/my/userAgreement/index.wxml-->
+<view class="user-agreement">
+    尊敬的用户您好，欢迎使用商城小程序/APP! 请您在使用我们的产品服务前，务必仔细阅读《{{userName}}服务协议》及<text class="link" bindtap="routerTo">《{{userName}}隐私政策》</text>。在阅读《{{userName}}服务协议》及<text class="link" bindtap="routerTo">《{{userName}}隐私政策》</text>时请您重点关注以加粗字体标识出的关于及您重大的权益规则，该等规则可能涉及相关方的责任免除或限制、法律适用于争议解决条款。在阅读<text class="link" bindtap="routerTo">《{{userName}}隐私政策》</text>时请您重点关注朱家角户端收集、使用、保护您个人信息等加粗的条款。请您在使用商城小程序/APP之前确认对以下协议内容及各项服务均已知晓、理解并接受，并已同意将其作为确定双方权利义务依据。
+</view>

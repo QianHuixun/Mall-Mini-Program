@@ -1,0 +1,21 @@
+<!-- 
+@url: pages/order/detail.wxml
+@description: 订单详情
+@author: zs
+ -->
+<view id="detail">
+ <van-cell-group>
+	<van-cell title="{{inputModel.addr}}" icon="location" />
+  <van-cell title="订单号" value="{{inputModel.code}}" />
+  <van-cell title="收货人" value="{{inputModel.name}}" />
+  <van-cell title="电话" value="{{inputModel.mobile}}" />
+</van-cell-group>
+ <van-cell-group>
+	<van-cell title="派送时间" value="{{inputModel.pstime}}" size="large" />
+  <van-cell title="" value="" label="{{inputModel.remark || '暂无备注'}}" border="{{ false }}" />
+</van-cell-group>
+<van-cell-group>
+	<van-cell wx:for="{{orderLines}}" wx:key="index" title="{{item.goodsName}}" value="X{{item.num}}" />
+</van-cell-group>
+
+</view>

@@ -1,0 +1,81 @@
+/* pages/my/pointQuery/index.wxss */
+page {
+  background: #f9f9f9;
+}
+
+.header-cell {
+  position: relative;
+  padding: 60rpx 80rpx;
+  color: #fff;
+}
+
+.header-cell .header-bg {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.header-cell  .tips {
+  font-size: 26rpx;
+}
+
+.header-cell .point {
+  font-size: 72rpx;
+  font-weight: bold;
+}
+
+.icon-cell {
+  margin: 30rpx 65rpx;
+  display: flex;
+}
+
+.icon-cell .icon-li {
+  flex: 1;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.list-cell {
+  margin: 30rpx 44rpx;
+  background: #fff;
+}
+
+.new-active .van-ellipsis {
+  color: #d7a73c
+}
+
+.list-li {
+  display: flex;
+  align-items: center;
+  padding: 35rpx 45rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.list-l {
+  flex: 1;
+}
+
+.list-l_title {
+  font-size: 28rpx;
+}
+
+.list-l_tips__date,
+.list-l_tips_code {
+  font-size: 25rpx;
+  line-height: 36rpx;
+}
+
+.list-r {
+  font-size: 38rpx;
+}
+
+.list-r.plus {
+  color: #d7a73c;
+}
+
+.list-r.minus {
+  color: #999;
+}

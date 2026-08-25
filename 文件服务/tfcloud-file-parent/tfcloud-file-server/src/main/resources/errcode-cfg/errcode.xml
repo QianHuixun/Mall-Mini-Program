@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constants>
+	<string id="00300001">文件不存在，秒传失败，请使用普通上传</string>
+	<string id="00300002">文件MD5校验失败</string>
+	<string id="00300003">下载文件失败</string>
+
+</constants>

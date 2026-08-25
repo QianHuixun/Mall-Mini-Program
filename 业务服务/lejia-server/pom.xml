@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-dependencies</artifactId>
+		<version>3.5.21.hotfix1</version>
+		<relativePath />
+	</parent>
+	
+	<!-- 项目唯一标识 -->
+	<groupId>cn.tofocus.lejia</groupId>
+	<!-- 项目名称 -->
+	<artifactId>lejia</artifactId>
+	<!-- 打包方式 -->
+	<packaging>pom</packaging>
+	<!-- 版本 -->
+	<version>4.2.20.Dev-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+			
+		
+<!-- 
+		spring-boot版本号
+		<spring-boot.version>2.7.10</spring-boot.version>
+		spring-cloud版本号
+		<spring-cloud.version>2021.0.7</spring-cloud.version>
+		云平台版本号
+		<tofocus-cloud.version>3.3.3</tofocus-cloud.version> -->
+		
+		<!-- 账号服务端口 -->
+<!-- 		<tofocus.account.port>21001</tofocus.account.port>
+		<tofocus.authentication.port>21000</tofocus.authentication.port> -->
+
+		<lejia-common.version>4.2.20.Dev-SNAPSHOT</lejia-common.version>
+		<lejia-core.version>4.2.20.Dev-SNAPSHOT</lejia-core.version>
+		<lejia-server-api.version>4.2.20.Dev-SNAPSHOT</lejia-server-api.version>
+
+		<!-- plugins -->
+ 		<maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version> 
+		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
+	 	<maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version> 
+ 	 	<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+<!-- 		<tofocus.prefix>${env.COMPUTERNAME}_${env.USERNAME}</tofocus.prefix> -->
+		<eureka.port>20000</eureka.port>
+
+		<!-- 开发 环境配置 -->
+		<eureka.hostname.local>localhost</eureka.hostname.local>
+		<tofocus.authentication.host.local>localhost</tofocus.authentication.host.local>
+
+		<mq.addresses.local>192.168.128.91:5672</mq.addresses.local>
+		<mq.username.local>${env.MQ_USERNAME}</mq.username.local>
+		<mq.password.local>${env.MQ_PASSWORD}</mq.password.local>
+
+		<redis.host.local>192.168.128.91</redis.host.local>
+		<redis.port.local>6379</redis.port.local>
+		<redis.password.local>${env.REDIS_PASSWORD}</redis.password.local>
+
+		<es.cluster-name.local>elk</es.cluster-name.local>
+		<es.cluster-nodes.local>192.168.128.91:9300</es.cluster-nodes.local>
+		<es.rest.local>http://192.168.128.91:9200</es.rest.local>
+
+		<!-- 测试 环境配置 -->
+		<eureka.hostname.test>192.168.128.91</eureka.hostname.test>
+		<tofocus.authentication.host.test>192.168.128.91</tofocus.authentication.host.test>
+
+		<mq.addresses.test>192.168.128.91:5672</mq.addresses.test>
+		<mq.username.test>${env.MQ_USERNAME}</mq.username.test>
+		<mq.password.test>${env.MQ_PASSWORD}</mq.password.test>
+
+		<redis.host.test>192.168.128.91</redis.host.test>
+		<redis.port.test>6379</redis.port.test>
+		<redis.password.test>${env.REDIS_PASSWORD}</redis.password.test>
+
+		<es.cluster-name.test>elk</es.cluster-name.test>
+		<es.cluster-nodes.test>192.168.128.91:9300</es.cluster-nodes.test>
+		<es.rest.test>http://192.168.128.91:9200</es.rest.test>
+
+		<mysql.url.test>jdbc:mysql://192.168.128.91</mysql.url.test>
+		<mysql.username.test>${env.MYSQL_USERNAME}</mysql.username.test>
+		<mysql.password.test>${env.MYSQL_PASSWORD}</mysql.password.test>
+
+		<wei.xin.config.app.id.test>wxf68391ecba8ae098</wei.xin.config.app.id.test>
+		<wei.xin.config.mch.id.test>1601449652</wei.xin.config.mch.id.test>
+		<wei.xin.config.re.url.test>https://www.lejiaxianda.com/lejia/v1/wx/pay/reurl</wei.xin.config.re.url.test>
+		<wei.xin.config.app.name.test>wxf68391ecba8ae098</wei.xin.config.app.name.test>
+
+		<zx.pay.notify.url.test>https://wxtest.tofocus.cn/zyysc/</zx.pay.notify.url.test>
+
+		<tofocus.file.baseUrl.test>https://filetest.xinanshizu.com/file/</tofocus.file.baseUrl.test>
+		<!-- 内测 环境配置 -->
+		<eureka.hostname.release>192.168.128.94</eureka.hostname.release>
+		<tofocus.authentication.host.release>192.168.128.94</tofocus.authentication.host.release>
+
+		<mq.addresses.release>192.168.128.93:5672</mq.addresses.release>
+		<mq.username.release>${env.MQ_USERNAME}</mq.username.release>
+		<mq.password.release>${env.MQ_PASSWORD}</mq.password.release>
+
+		<redis.host.release>192.168.128.96</redis.host.release>
+		<redis.port.release>6379</redis.port.release>
+		<redis.password.release>${env.REDIS_PASSWORD}</redis.password.release>
+
+		<es.cluster-name.release>elk</es.cluster-name.release>
+		<es.cluster-nodes.release>192.168.128.91:9300</es.cluster-nodes.release>
+		<es.rest.release>http://192.168.128.91:9200</es.rest.release>
+		<tofocus.file.baseUrl.release>https://apitest.xinanshizu.com/file/</tofocus.file.baseUrl.release>
+
+		<!-- 生产 环境配置 -->
+		<eureka.hostname.product>127.0.0.1</eureka.hostname.product>
+		<tofocus.authentication.host.product>127.0.0.1</tofocus.authentication.host.product>
+
+		<mq.addresses.product>127.0.0.1:5672</mq.addresses.product>
+		<mq.username.product>${env.MQ_USERNAME}</mq.username.product>
+		<mq.password.product>${env.MQ_PASSWORD}</mq.password.product>
+
+		<redis.host.product>127.0.0.1</redis.host.product>
+		<redis.port.product>6379</redis.port.product>
+		<redis.password.product>${env.REDIS_PASSWORD}</redis.password.product>
+
+		<es.cluster-name.product>elk</es.cluster-name.product>
+		<es.cluster-nodes.product>127.0.0.1:9300</es.cluster-nodes.product>
+		<es.rest.product>http://127.0.0.1:9200</es.rest.product>
+
+		<mysql.url.product>jdbc:mysql://rm-bp1iu19cle5ir47ir.mysql.rds.aliyuncs.com</mysql.url.product>
+		<mysql.username.product>${env.MYSQL_USERNAME}</mysql.username.product>
+		<mysql.password.product>${env.MYSQL_PASSWORD}</mysql.password.product>
+
+		<tofocus.file.baseUrl.product>https://www.lejiaxianda.com/file/</tofocus.file.baseUrl.product>
+
+		<!-- 独立部署 环境配置 -->
+		<eureka.hostname.singleton>192.168.128.96</eureka.hostname.singleton>
+		<tofocus.authentication.host.singleton>192.168.128.96</tofocus.authentication.host.singleton>
+
+		<mq.addresses.singleton>192.168.128.91:5672</mq.addresses.singleton>
+		<mq.username.singleton>${env.MQ_USERNAME}</mq.username.singleton>
+		<mq.password.singleton>${env.MQ_PASSWORD}</mq.password.singleton>
+
+		<redis.host.singleton>192.168.128.91</redis.host.singleton>
+		<redis.port.singleton>6379</redis.port.singleton>
+		<redis.password.singleton>${env.REDIS_PASSWORD}</redis.password.singleton>
+
+		<zipkin.url.singleton>http://192.168.128.94:9411</zipkin.url.singleton>
+
+		<es.cluster-name.singleton>elk</es.cluster-name.singleton>
+		<es.cluster-nodes.singleton>192.168.128.91:9300</es.cluster-nodes.singleton>
+		<es.rest.singleton>http://192.168.128.91:9200</es.rest.singleton>
+
+		<mysql.url.singleton>jdbc:mysql://192.168.128.91</mysql.url.singleton>
+		<mysql.username.singleton>${env.MYSQL_USERNAME}</mysql.username.singleton>
+		<mysql.password.singleton>${env.MYSQL_PASSWORD}</mysql.password.singleton>
+
+		<tofocus.file.baseUrl.singleton>https://single.xinanshizu.com/file/</tofocus.file.baseUrl.singleton>
+	</properties>
+
+	<!-- 编译子项目 -->
+	<modules>
+		<module>lejia-server-api</module>
+		<module>lejia-server</module>
+		<module>lejia-common</module>
+		<module>lejia-core</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>lejia</id>
+			<properties>
+				<eureka.hostname.singleton>127.0.0.1</eureka.hostname.singleton>
+				<tofocus.authentication.host.singleton>127.0.0.1</tofocus.authentication.host.singleton>
+
+				<mq.addresses.singleton>127.0.0.1:5672</mq.addresses.singleton>
+				<mq.username.singleton>${env.MQ_USERNAME}</mq.username.singleton>
+				<mq.password.singleton>${env.MQ_PASSWORD}</mq.password.singleton>
+
+				<redis.host.singleton>127.0.0.1</redis.host.singleton>
+				<redis.port.singleton>6379</redis.port.singleton>
+				<redis.password.singleton>${env.REDIS_PASSWORD}</redis.password.singleton>
+
+				<zipkin.url.singleton>http://127.0.0.1:9411</zipkin.url.singleton>
+
+				<es.cluster-name.singleton>elk</es.cluster-name.singleton>
+				<es.cluster-nodes.singleton>127.0.0.1:9300</es.cluster-nodes.singleton>
+				<es.rest.singleton>http://127.0.0.1:9200</es.rest.singleton>
+
+				<mysql.url.singleton>jdbc:mysql://rm-bp1iu19cle5ir47ir.mysql.rds.aliyuncs.com</mysql.url.singleton>
+				<mysql.username.singleton>${env.MYSQL_USERNAME}</mysql.username.singleton>
+				<mysql.password.singleton>${env.MYSQL_PASSWORD}</mysql.password.singleton>
+
+				<wei.xin.config.app.id.lejia>wxf68391ecba8ae098</wei.xin.config.app.id.lejia>
+				<wei.xin.config.mch.id.lejia>1601449652</wei.xin.config.mch.id.lejia>
+				<wei.xin.config.re.url.lejia>https://www.lejiaxianda.com/lejia/v1/wx/pay/reurl</wei.xin.config.re.url.lejia>
+				<tofocus.file.baseUrl.singleton>https://www.lejiaxianda.com/file/</tofocus.file.baseUrl.singleton>
+			</properties>
+		</profile>
+		<profile>
+			<id>wsale</id>
+			<properties>
+				<eureka.hostname.singleton>127.0.0.1</eureka.hostname.singleton>
+				<tofocus.authentication.host.singleton>127.0.0.1</tofocus.authentication.host.singleton>
+
+				<mq.addresses.singleton>172.30.51.110:5672</mq.addresses.singleton>
+				<mq.username.singleton>${env.MQ_USERNAME}</mq.username.singleton>
+				<mq.password.singleton>${env.MQ_PASSWORD}</mq.password.singleton>
+
+				<redis.host.singleton>172.30.51.110</redis.host.singleton>
+				<redis.port.singleton>6379</redis.port.singleton>
+				<redis.password.singleton>${env.REDIS_PASSWORD}</redis.password.singleton>
+
+				<zipkin.url.singleton>http://127.0.0.1:9411</zipkin.url.singleton>
+
+				<es.cluster-name.singleton>wsale</es.cluster-name.singleton>
+				<es.cluster-nodes.singleton>172.30.51.110:9300</es.cluster-nodes.singleton>
+				<es.rest.singleton>http://172.30.51.110:9200</es.rest.singleton>
+
+				<mysql.url.singleton>jdbc:mysql://wsale-single.mysql.rds.aliyuncs.com</mysql.url.singleton>
+				<mysql.username.singleton>${env.MYSQL_USERNAME}</mysql.username.singleton>
+				<mysql.password.singleton>${env.MYSQL_PASSWORD}</mysql.password.singleton>
+
+				<wei.xin.config.app.id.ymkt>wx279ad6dedc826a21</wei.xin.config.app.id.ymkt>
+				<wei.xin.config.mch.id.ymkt>1498860722</wei.xin.config.mch.id.ymkt>
+				<wei.xin.config.re.url.ymkt>https://ymkt.xinanshizu.com/zyysc/v1/wx/pay/reurl</wei.xin.config.re.url.ymkt>
+				<zx.pay.notify.url.singleton>https://ymkt.xinanshizu.com/zyysc/</zx.pay.notify.url.singleton>
+
+				<tofocus.file.baseUrl.singleton>https://wsale.xinanshizu.com/file/</tofocus.file.baseUrl.singleton>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<!-- 启动配置与POM参数映射 -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>application*.properties</include>
+					<include>application*.yml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>application*.properties</exclude>
+					<exclude>application*.yml</exclude>
+				</excludes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+<!--  				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot.version}</version>
+				</plugin>  -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<useSystemClassLoader>false</useSystemClassLoader>
+						<forkMode>once</forkMode>
+						<reuseForks>true</reuseForks>
+						<testFailureIgnore>true</testFailureIgnore>
+						<excludes>
+							<exclude>**/Manual*Test.java</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.8.7</version>
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>post-unit-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<dataFile>target/jacoco.exec</dataFile>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			 	<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin> 
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.flywaydb</groupId>
+					<artifactId>flyway-maven-plugin</artifactId>
+					<version>7.2.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+<!-- 			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+ -->
+			<!-- 商城项目依赖 -->
+			<dependency>
+				<groupId>cn.tofocus.lejia</groupId>
+				<artifactId>lejia-common</artifactId>
+				<version>${lejia-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.tofocus.lejia</groupId>
+				<artifactId>lejia-core</artifactId>
+				<version>${lejia-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cn.tofocus.lejia</groupId>
+				<artifactId>lejia-server-api</artifactId>
+				<version>${lejia-server-api.version}</version>
+			</dependency>
+			<!-- log4j漏洞修复,tofocus如果是最新的 需要添加 -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>2.15.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.15.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>user release</name>
+			<url>http://192.168.128.85:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>user snapshot</name>
+			<url>http://192.168.128.85:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

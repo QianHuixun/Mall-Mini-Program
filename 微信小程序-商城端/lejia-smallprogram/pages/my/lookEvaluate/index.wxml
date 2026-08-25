@@ -1,0 +1,49 @@
+<!--pages/my/lookEvaluate/index.wxml-->
+<view class="look-evaluate">
+
+  <!-- 评价区 -->
+  <view class="look-evaluate-main">
+    <!-- 商品模块 -->
+    <view class="look-evaluate-item" wx:for="{{commentList}}" wx:key="index">
+      <!-- 商品信息、五星栏 -->
+      <view class="look-evaluate-item_top">
+        <van-image src="{{ item.goodsPhoto ||'/images/no-pic.png' }}" custom-class="top-image"></van-image>
+        <view class="look-evaluate-item_top__right">
+          <view class="look-evaluate-item_top__right___top name-ellipsis">{{item.goodsName}}</view>
+          <view class="look-evaluate-item_top__right___bottom">
+            <van-rate color="#FCCF0A" void-color="#FEF1B5" gutter="8rpx" size="28rpx" value="{{ item.score }}" bind:change="onChange" readonly="{{true}}" /> 
+            <text>{{storeText[item.score]}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- end 商品信息、五星栏 -->
+      <!-- 评论文本区 -->
+      <view class="look-evaluate_item__middle">
+        {{item.content || '无评价信息'}}
+      </view>
+      <!-- end 评论文本区 -->
+      <!-- 图片上传区 -->
+      <view class="look-evaluate_item__third">
+        <van-image src="{{subItem}}" custom-class="item-image" wx:for="{{item.photo}}" wx:key="subIndex" wx:for-item="subItem" wx:for-index="subIndex" bind:tap="handlePreview" data-images="{{item.photo}}" data-image="{{subItem}}"></van-image>
+       
+      </view>
+       <!-- end 图片上传区 -->
+       <!-- 回复区 -->
+       <view class="look-evaluate_item__bottom" wx:if="{{item.replyContent}}">
+        <text class="text-content {{item.showEllipsis ? 'ellipsis' : 'unellipsis'}}">{{item.replyContent}}
+        </text>
+        <view 
+      wx:if="{{item.showButton}}" 
+      bindtap="toggleEllipsis" 
+      data-index="{{index}}"
+      class="toggle-btn"
+    >
+      <view wx:if="{{item.showEllipsis}}">...展开<van-icon name="arrow-down" size="26rpx"/></view>
+    </view>
+       </view>
+       <!-- end 回复区 -->
+    </view>
+    <!-- end 商品模块 -->
+  </view>
+  <!-- end 评论区 -->
+</view>

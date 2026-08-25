@@ -1,0 +1,13 @@
+var filter = {
+  /**
+    * @desc 米转千米，保留一位 
+    * @param value 数字
+    */
+   formatValue: function (value) {
+     return value!=null?(value/1000).toFixed(1):value
+   },
+ }
+ 
+ module.exports = {
+   formatValue:filter.formatValue
+ }

@@ -1,0 +1,13 @@
+{
+    "usingComponents": {
+      "drag-ball": "/components/dragBall/index",
+        "space-dialog":"/components/space/index",
+        "van-image": "@vant/weapp/image/index",
+        "van-icon": "@vant/weapp/icon/index",
+        "coupon-center": "/components/shouye/coupon-center/index"
+    },
+    "navigationBarBackgroundColor": "#f5f5f5",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "会员福利",
+  "navigationStyle":"custom"
+}

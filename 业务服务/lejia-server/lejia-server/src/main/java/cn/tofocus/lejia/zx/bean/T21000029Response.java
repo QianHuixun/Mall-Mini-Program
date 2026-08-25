@@ -1,0 +1,58 @@
+package cn.tofocus.lejia.zx.bean;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import cn.tofocus.lejia.zx.bean.T21000029ResponseROW.ROW;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+
+@Data
+public class T21000029Response extends TResponse
+{
+    private String RSP_CODE;
+    
+    private String RSP_MSG;
+    
+    private String REQ_SSN;
+    
+    private String MCHNT_ID;
+    
+    private String USER_ID;
+    
+    private T21000029ResponseROW LIST;
+    
+//    @Data
+//    class T21000029ResponseROW
+//    {
+//        private String USER_NAME;
+//        
+//        private String TRANS_DT;
+//        
+//        private String TRANS_TM;
+//        
+//        private String TRANS_TYPE;
+//        
+//        private String REQ_JRN;
+//        
+//        private String MCHNT_ORDER_ID;
+//        
+//        private String MCHNT_ORDER_SUB_ID;
+//        
+//        private String REGISTER_SSN;
+//        
+//        private BigDecimal TRANS_AMT;
+//        
+//        @Schema(description = "资金方向 C- 账户入金  D- 账户出金")
+//        private String C_D_FLAG;
+//        
+//        private BigDecimal CUR_AMT;
+//        
+//        private String GOAC;
+//        
+//        private String OANM;
+//        
+//        private String DIGEST;
+//    }
+    
+}

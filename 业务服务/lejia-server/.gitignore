@@ -1,0 +1,44 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+dberr
+velocity.*
+
+*.log
+*.bak
+
+/distribution
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.externalToolBuilders
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+logs
+serverId
+
+.attach_pid*
+/.metadata/
+
+# Claude Code
+/CLAUDE.md
+.claude/

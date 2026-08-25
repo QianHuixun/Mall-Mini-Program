@@ -1,0 +1,320 @@
+/* pages/home/memberBenefits/index.wxss */
+#memberBenefits{
+  position: relative;
+  width:100vw;
+  min-height: 100vh;
+  background: #F9EDF1;
+}
+
+page {
+    background: -webkit-linear-gradient(top, #FFFCF9, #F9EDF1);
+    background-repeat: no-repeat;
+}
+
+.my-title {
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+}
+
+.top_container {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.content-container {
+  position: fixed;
+  z-index: 1000;
+  width: 100vw;
+}
+
+.my-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+}
+
+.coupon {
+    box-sizing: border-box;
+    margin: 20rpx 24rpx 0rpx 24rpx;
+    padding: 16rpx 26rpx 10rpx 24rpx;
+    height: 248rpx;
+    position: relative;
+}
+
+.coupon .coupon-back {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.coupon .coupon-title {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5rpx;
+}
+
+.coupon .title-left {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.coupon .title-right {
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #C16025;
+    display: flex;
+    align-items: center;
+}
+
+.coupon .title-right van-icon {
+    margin-left: 8rpx;
+}
+
+.coupon .coupon-box {
+    margin-top: 24rpx;
+    position: relative;
+}
+
+.coupon .coupon-box .coupon-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 524rpx;
+}
+
+.coupon .coupon-box .coupon-btn {
+    position: absolute;
+    top: 8rpx;
+    right: -20rpx;
+    width: 132rpx;
+    height: 132rpx;
+}
+
+.coupon .coupon-box .coupon-unactive-btn {
+    top: 10rpx;
+    right: -8rpx;
+    width: 112rpx;
+    height: 112rpx;
+}
+
+.coupon .coupon-box .coupon-item-more {
+    position: absolute;
+    top: 0rpx;
+    right: -10rpx;
+    width: 122rpx;
+    height: 132rpx;
+}
+
+.coupon .coupon-box .coupon-box-item+.coupon-box-item {
+    margin-left: 12rpx;
+}
+
+.coupon .coupon-box .coupon-box-item {
+    position: relative;
+    width: 122rpx;
+    height: 132rpx;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: top;
+}
+
+.coupon .coupon-box .coupon-box-item .item-back,
+.coupon .coupon-box .coupon-box-item .item-back-unactive {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.coupon .coupon-box .coupon-box-item .item-back-unactive {
+    z-index: 3;
+}
+
+.coupon .coupon-box .coupon-box-item .item-cost {
+    padding-top: 16rpx;
+    font-weight: 800;
+    color: #ED4528;
+    font-size: 50rpx;
+    position: relative;
+    z-index: 1;
+}
+
+.coupon .coupon-box .coupon-box-item .item-cost text {
+    font-size: 24rpx;
+}
+
+.coupon .coupon-box .coupon-box-item .item-limitcost {
+    position: relative;
+    z-index: 1;
+    font-size: 20rpx;
+    font-weight: 500;
+    color: #FF6449;
+    padding-bottom: 12rpx;
+}
+
+.points-mall {
+    box-sizing: border-box;
+    margin: 20rpx 24rpx 0rpx 24rpx;
+    padding: 16rpx 26rpx 10rpx 24rpx;
+    height: 480rpx;
+    position: relative;
+}
+
+.points-mall .points-mall-back {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.points-mall .points-mall-title {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 5rpx;
+}
+
+.points-mall .title-left {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #A56D41;
+}
+
+.points-mall .title-right {
+    font-size: 24rpx;
+    color: #A56D41;
+    display: flex;
+    align-items: center;
+}
+
+.points-mall .title-right van-icon {
+    margin-left: 16rpx;
+}
+
+.points-mall .points-mall-box {
+    margin-top: 24rpx;
+    position: relative;
+}
+
+.points-mall .points-mall-box .points-mall-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.points-mall .points-mall-box .points-mall-container::-webkit-scrollbar {
+    display: none;
+}
+
+.points-mall .points-mall-box .points-mall-box-item+.points-mall-box-item {
+    margin-left: 8rpx;
+}
+
+.points-mall .points-mall-box .points-mall-box-item {
+    box-sizing: border-box;
+    /* position: relative; */
+    width: 208rpx;
+    height: 374rpx;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8rpx;
+    background: #FFFFFF;
+    border-radius: 24rpx;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .points-mall-box-image {
+    width: 192rpx;
+    height: 192rpx;
+    border-radius: 16rpx;
+    overflow: hidden;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .points-mall-box-image .images {
+    width: 100%;
+    height: 100%;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-title {
+    margin-top: 16rpx;
+    color: #333333;
+    width: 100%;
+    font-weight: bold;
+    font-size: 26rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-desc{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 8rpx;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-desc .num-view{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-desc .num-view .points{
+    color: #A56D41;
+    font-size: 28rpx;
+    font-weight: bold;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-desc .num-view .price{
+    color: #A56D41;
+    font-size: 24rpx;
+    font-weight: bold;
+}
+
+.points-mall .points-mall-box .points-mall-box-item .item-desc .num-view .num-ori{
+    color: #999999;
+    font-size: 20rpx;
+    text-decoration: line-through;
+}
+
+.welfare-container {
+  margin: 0 24rpx;
+}
+.welfare-item {
+  margin-top: 10rpx;
+  width: 700rpx;
+  height: 275rpx;
+}

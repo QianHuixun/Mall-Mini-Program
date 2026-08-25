@@ -1,0 +1,30 @@
+<!-- 
+@url: pages/my/scanPay/index.wxml
+@description: 积分扫码支付
+@author: sx
+@date: 2020/07/27
+ -->
+
+<view id="scanPay">
+	<view class="info-cell">
+		<van-image round width="70px" height="70px" src="{{info.url?info.url:'/images/deafult_logo.png'}}" />
+		<view class="nam">{{info.name}}</view>
+	</view>
+	<view class="pay-cell">
+		<view class="title gray_clr">积分支付</view>
+		<view class="input-cell">
+			<van-cell-group>
+				<van-field value="{{ points }}" size="large" type="number" placeholder="请输入积分数量" border="{{ true }}" bind:change="onChange" left-icon="/images/my/i_point.png" input-class="new-input" label-class="new-label"/>
+			</van-cell-group>
+		</view>
+		<view class="descript gray_clr">可用积分{{info.points}}积分</view>
+	</view>
+	<view class="btn-cell">
+		<van-goods-action safe-area-inset-bottom="{{ true }}" custom-class="new-btn">
+			<van-goods-action-button color="#d7a73c" text="确认支付" bind:click="handleSubmit" loading="{{ loading }}" disabled="{{ disabled }}" />
+		</van-goods-action>
+	</view>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,127 @@
+/* pages/shouyeGroup/marketDetail/index.wxss */
+page {
+    background: #F2F4F7;
+}
+
+.swiper {
+    height: 562rpx;
+}
+
+.swiper-item {
+    background-color: #333;
+    height: 100%;
+}
+
+.swiper-item-image {
+    width: 100%;
+    height: 100%;
+}
+
+.market {
+    padding: 20rpx 24rpx 24rpx;
+    background-color: #fff;
+}
+
+.market-name {
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 600;
+    font-size: 32rpx;
+    color: #333333;
+}
+
+.market-datetime {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 14rpx 0;
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 400;
+    font-size: 26rpx;
+    color: #666666;
+}
+
+.market-addr {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx;
+    font-size: 26rpx;
+    color: #666666;
+    background: #F7F7F7;
+}
+
+.market-addr__text {
+    /* height: 80rpx; */
+    line-height: 40rpx;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.market-addr-nav {
+    width: 48rpx;
+    display: flex;
+    margin-left: 16rpx;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.market-addr-nav__text {
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #07BB8D;
+}
+
+.market-contact {
+    margin-top: 20rpx;
+}
+
+.market-contact-item {
+    padding: 22rpx;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.market-contact-item+.market-contact-item {
+    margin-top: 1px;
+}
+
+.market-contact-item__icon {
+    margin-right: 16rpx;
+}
+
+.market-contact-item__text {
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 400;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.market-contact-item__arrow {
+    position: absolute;
+    right: 30rpx;
+}
+
+.market-introduction {
+    margin-top: 20rpx;
+    padding: 22rpx 24rpx 40rpx;
+    background: #FFFFFF;
+}
+
+.market-introduction-title {
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 500;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.market-introduction-text {
+    margin-top: 14rpx;
+    font-family: PingFangSC, PingFang SC;
+    font-weight: 400;
+    font-size: 26rpx;
+    color: #666666;
+}

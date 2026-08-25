@@ -1,0 +1,68 @@
+/**app.wxss**/
+@import "miniprogram_npm/@vant/weapp/common/index.wxss";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+  font-family: 'ceshi-font';
+} 
+
+page{
+  font-family: 'ceshi-font';
+}
+
+.no_tips {
+  color: #ddd;
+  text-align: center;
+  margin: 30px auto;
+  font-size: 12px;
+}
+
+.price_clr {
+  display: inline-block;
+font-size: 32rpx;
+line-height: 32rpx;
+font-family: PingFang SC;
+font-weight: bold;
+color: #ED4528;
+}
+
+.main_clr {
+  color: #3ccf8a;
+}
+
+.orange_clr {
+  color: #d7a73c;
+}
+
+.black_clr {
+  color: #000;
+}
+
+.icon-type {
+  float: left;
+}
+.icon-type:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.icon-type .van-tag {
+  float: left;
+  font-size: 20rpx;
+  padding: 0rpx 12rpx;
+  /* height: 35rpx; */
+}
+
+.space-stepper_plus {
+    background: #09AF84 !important;
+    border-color: #09AF84 !important;
+}
+.space-stepper_minus{
+    border-color: #09AF84 !important;
+    color: #09AF84 !important;
+}

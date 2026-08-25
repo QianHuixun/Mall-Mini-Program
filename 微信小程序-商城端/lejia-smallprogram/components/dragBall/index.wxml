@@ -1,0 +1,62 @@
+<!--可拖动按钮控件表-->
+<!--buttonStart和buttonEnd一定不能用catch事件，否则按钮点击事件会失效-->
+<view wx:if="{{!notShow}}" class="btn_Suspension" catchtouchmove="buttonMove" bindtouchstart="buttonStart" bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+    <view class="Suspension_logo" bindtap="handleClick">
+        <image src="/images/dragBall/ball_icon.png"></image>
+    </view>
+</view>
+
+<van-dialog id="van-dialog" use-slot title="联系我们" show-confirm-button="{{false}}" show="{{ show }}" bind:close="onClose" closeOnClickOverlay>
+    <view class="dialog-market">
+        <view class="dialog-content">
+            <view class="dialog-row">
+                <view class="dialog-row-title">营业时间</view>
+                <view>
+                    <view>{{marketDragBallInfo.days}}</view>
+                    <view wx:if="{{marketDragBallInfo.times.length}}" style="display: flex; flex-wrap: wrap;">
+                        <view wx:for="{{marketDragBallInfo.times}}" wx:key="index">
+                            {{index > 0 ? ',' : ''}}
+                            {{item.startHour < 10 ? '0' : '' }}{{item.startHour}}:{{item.startMinute < 10 ? '0' : '' }}{{item.startMinute}}- {{item.endHour < 10 ? '0' : '' }}{{item.endHour}}: {{item.endMinute < 10 ? '0' : '' }}{{item.endMinute}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="dialog-row">
+                    <view class="dialog-row-title">电话客服</view>
+                    <view>
+                        <view>
+                            <view style="display: flex;" data-tel="{{marketDragBallInfo.tel}}" bind:tap="handleMobile">
+                                {{marketDragBallInfo.tel}}
+                                <van-icon name="/images/dragBall/phone.png" style="margin-left: 6rpx;"></van-icon>
+                            </view>
+                            <view class="dialog-row-tips">线上买菜售后处理电话</view>
+                        </view>
+                        <view class="dialog-row-hr"></view>
+                        <view>
+                            <view style="display: flex;" data-tel="{{operationDragBallInfo.tel}}" bind:tap="handleMobile">
+                                {{operationDragBallInfo.tel}}
+                                <van-icon name="/images/dragBall/phone.png" style="margin-left: 6rpx;"></van-icon>
+                            </view>
+                            <view class="dialog-row-tips">其他专区(自营专区、兑换专区等)咨询电话</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="dialog-row" wx:if="{{hasMarketCustomerService || hasOperationCustomerService}}">
+                    <view class="dialog-row-title">在线客服</view>
+                    <view>
+                        <view wx:if="{{hasMarketCustomerService}}">
+                            <view>市场1对1客服服务，<span class="dialog-row-link" data-type="market" bind:tap="handleCustomer">进入</span></view>
+                            <view class="dialog-row-tips">线上买菜售后处理客服</view>
+                        </view>
+                        <view class="dialog-row-hr" wx:if="{{hasMarketCustomerService && hasOperationCustomerService}}"></view>
+                        <view wx:if="{{hasOperationCustomerService}}">
+                            <view>官方1对1客服服务，<span class="dialog-row-link" data-type="operation" bind:tap="handleCustomer">进入</span></view>
+                        </view>
+                    </view>
+                </view>
+                <!-- <view class="dialog-row">
+                    <van-button custom-style="height:38px;background:#07c160;border:none" round type="info" bind:click="handleMobile" wx:if="{{marketDragBallInfo.tel}}">电话联系</van-button>
+                    <van-button custom-style="height:38px;background:#07c160;border:none" round type="info" bind:click="handleCustomer" wx:if="{{marketDragBallInfo.customerServiceLink}}">在线客服</van-button>
+                </view> -->
+            </view>
+        </view>
+</van-dialog>

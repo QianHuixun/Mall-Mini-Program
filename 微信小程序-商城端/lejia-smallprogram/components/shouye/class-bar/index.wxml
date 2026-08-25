@@ -1,0 +1,19 @@
+<!--components/shouye/class-bar/index.wxml-->
+<view class="class-bar">
+    <view class="top-class">
+        <view class="top-class-item" wx:for="{{topList}}" wx:key="index" data-pkey="{{item.pkey}}" bind:tap="goClassification">
+            <view class="item-icon">
+                <van-image width="100%" height="100%" src="{{item.photo ? item.photo : '/images/no-pic.png'}}"></van-image>
+            </view>
+            <view class="item-name">{{item.name}}</view>
+        </view>
+    </view>
+    <view class="bottom-class" wx:if="{{hasThirdLine}}">
+        <view class="bottom-class-item" wx:for="{{bottomList}}" wx:key="index" data-pkey="{{item.pkey}}" bind:tap="goClassification">
+            <view class="item-icon">
+                <van-image  width="100%" height="100%" src="{{item.photo ? item.photo : '/images/no-pic.png'}}"></van-image>
+            </view>
+            <view class="item-name">{{item.name}}</view>
+        </view>
+    </view>
+</view>

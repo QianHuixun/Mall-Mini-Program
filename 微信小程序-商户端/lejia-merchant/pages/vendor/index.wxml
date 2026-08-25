@@ -1,0 +1,31 @@
+<!--pages/vendor/index.wxml-->
+<!-- 头部 -->
+<view class="top_container">
+  <view class="avatar_bar">
+    <view class="avatar_box">
+      <view class="cell">
+        <van-image wx:if="{{ !supplierInfo.headIcon }}" round width="60rpx" height="60rpx" src="/images/deafult_logo.png" />
+        <van-image wx:else round width="60rpx" height="60rpx" src="{{supplierInfo.headIcon}}" />
+      </view>
+      <view class="cell flex_cell">
+        {{supplierInfo.name}}
+      </view>
+    </view>
+    <van-image src="/images/my/logout.png" width="80rpx" height="80rpx" class="logout" bindtap="handleLogout" />
+  </view>
+</view>
+
+<view class="btn_container">
+  <view class="btn_cell" bindtap="goVerification">
+    <view class="btn_cell__left">
+      <van-icon name="/images/my/i-scan.png" size="48rpx" custom-class="new-icon" />
+    </view>
+    <view class="btn_cell__right">
+      自提订单核销
+    </view>
+  </view>
+</view>
+
+<van-dialog use-slot show="{{ show }}" show-cancel-button bind:confirm="onConfirm">
+    <view class="logout_text">是否确认退出</view>
+</van-dialog>

@@ -1,0 +1,66 @@
+<!-- 
+@url: pages/shouyeGroup/tranceSource/index.wxml
+@description: 食安公示 -- 溯源公示 -- 检测公示 
+@author: sx
+@date: 2020/07/13
+ -->
+<view id="tranceSource">
+	<van-tabs active="{{ active }}" bind:change="onChange">
+		<van-tab title="溯源公示" name="0">
+			<view class="tab_content">
+				<view class="table">
+					<view class="tr bg-w">
+						<view class="th">溯源商户</view>
+						<view class="th">溯源商品</view>
+						<view class="th ">进货时间</view>
+						<view class="th ">供应商</view>
+					</view>
+					<block wx:for="{{sylistData}}" wx:key="{{index}}">
+						<view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+							<view class="td">{{item.merchant}}</view>
+							<view class="td">{{item.goods}}</view>
+							<view class="td">{{item.oriDate}}</view>
+							<view class="td">{{item.vendor}}</view>
+						</view>
+						<view class="tr" wx:else>
+							<view class="td">{{item.merchant}}</view>
+							<view class="td">{{item.goods}}</view>
+							<view class="td">{{item.oriDate}}</view>
+							<view class="td">{{item.vendor}}</view>
+						</view>
+					</block>
+				</view>
+			</view>
+		</van-tab>
+		<van-tab title="检测公示" name="1">
+			<view class="tab_content">
+				<view class="table">
+					<view class="tr thead bg-w">
+						<view class="th">检测商户</view>
+						<view class="th">检测商品</view>
+						<view class="th ">检测项目</view>
+						<view class="th ">检测时间</view>
+						<view class="th ">检测结果</view>
+					</view>
+					<block wx:for="{{jclistData}}" wx:key="{{index}}">
+						<view class="tr tbody bg-g" wx:if="{{index % 2 == 0}}" >
+							<view class="td">{{item.merchant}}</view>
+							<view class="td">{{item.goods}}</view>
+							<view class="td">{{item.entry}}</view>
+							<view class="td">{{item.testDate}}</view>
+							<view class="td {{item.testResult ? 'main_clr':'color_red'}}">{{item.testResult ? "合格" : "不合格"}}</view>
+						</view>
+						<view class="tr tbody" wx:else>
+							<view class="td">{{item.merchant}}</view>
+							<view class="td">{{item.goods}}</view>
+							<view class="td">{{item.entry}}</view>
+							<view class="td">{{item.testDate}}</view>
+							<view class="td {{item.testResult ? 'main_clr':'color_red'}}">{{item.testResult ? "合格" : "不合格"}}</view>
+						</view>
+					</block>
+				</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

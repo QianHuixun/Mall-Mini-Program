@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-rate": "@vant/weapp/rate/index"
+  },
+  "navigationBarBackgroundColor": "#ec8343",
+  "navigationBarTextStyle":"white",
+  "navigationBarTitleText": "我的",
+  "disableScroll": true
+}

@@ -1,0 +1,67 @@
+<!--pages/my/goEvaluate/index.wxml-->
+<view class="go-evaluate">
+  <!-- 标题栏 -->
+  <view class="go-evaluate_title">
+    <view class="go-evaluate_title__left">商品评价</view>
+    <view class="go-evaluate_title__right">
+      <van-button plain hairline round color="#666666" size="small"  bind:click="handleAllGood" custom-style="background-color: #f6f6f6;height: 52rpx;">一键好评</van-button>
+    </view>
+  </view>
+  <!-- end 标题栏 -->
+  <!-- 评价区 -->
+  <view class="go-evaluate-main">
+    <!-- 商品模块 -->
+    <view class="go-evaluate-item" wx:for="{{goodsList}}" wx:key="index">
+      <!-- 商品信息、五星栏 -->
+      <view class="go-evaluate-item_top">
+        <van-image src="{{ item.goodsPhoto ||'/images/no-pic.png' }}" custom-class="top-image"></van-image>
+        <view class="go-evaluate-item_top__right">
+          <view class="go-evaluate-item_top__right___top ellipsis">{{item.goodsName}}</view>
+          <view class="go-evaluate-item_top__right___bottom">
+            <van-rate color="#FCCF0A" void-color="#FEF1B5" gutter="8rpx" size="28rpx" value="{{ item.score }}" bind:change="onScoreChange"  data-index="{{index}}" /> 
+            <text>{{storeText[item.score]}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- end 商品信息、五星栏 -->
+      <!-- 评论文本区 -->
+      <view class="go-evaluate_item__middle">
+        <van-field
+          value="{{ item.content }}"
+          type="textarea"
+          show-word-limit="{{ true }}"
+          maxlength="{{200}}"
+          placeholder="填写评价内容" bind:change="onContentChange"
+          
+          border="{{ false }}" data-index="{{index}}"
+          autosize="{{ {maxHeight: 74, minHeight: 74} }}"
+          custom-style="height: 240rpx; color: #333;background: #F7F7F7;border:1px solid #E2E2E2;font-size: 28rpx;border-radius:20rpx;"
+  />
+      </view>
+      <!-- end 评论文本区 -->
+      <!-- 图片上传区 -->
+      <view class="go-evaluate_item__bottom">
+        <!-- <van-uploader file-list="{{ photo }}" bind:after-read="afterRead" deletable="{{ true }}" multiple="{{true}}" upload-text="最多6张" bind:delete="uploaderDelete"
+         max-count="6" preview-size="140rpx"/> -->
+           <van-uploader
+          file-list="{{ item.photo }}"
+          deletable="{{ true }}" 
+          max-count="6"
+          bind:after-read="afterRead"
+          bind:delete="uploaderDelete"
+          upload-text="最多6张" 
+          preview-size="140rpx"
+          data-index="{{index}}"
+        ></van-uploader>
+      </view>
+       <!-- end 图片上传区 -->
+    </view>
+    <!-- end 商品模块 -->
+  </view>
+  <!-- end 评论区 -->
+  <!-- 提交按钮栏 -->
+  <view class="go-evaluate_buttonBar">
+  <van-button type="primary" color="#0DAE4E" round custom-class="submit-btn" bind:click="handleSubmit" disabled="{{disabled}}" loading="{{loading}}">提交评价</van-button>
+  </view>
+  <!-- end 提交按钮栏 -->
+</view>

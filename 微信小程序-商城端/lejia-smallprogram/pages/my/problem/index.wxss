@@ -1,0 +1,7 @@
+/* pages/my/problem/index.wxss */
+page {
+  background: #f5f5f5;
+}
+.problem {
+  margin-top: 20rpx;
+}

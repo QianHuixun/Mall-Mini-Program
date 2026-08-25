@@ -1,0 +1,410 @@
+/* pages/pay/comboPay/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+.combo-pay {
+  position: relative;
+  padding-bottom: 160rpx;
+}
+
+.combo-pay .pay-navbar {
+  background: #19cf51;
+}
+
+.pay-navbar::after {
+  border-bottom-width: 0px !important;
+}
+
+.combo-pay .van-nav-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.combo-pay .pay-navbar .van-nav-bar__title,
+.combo-pay .pay-navbar .van-nav-bar__left .van-icon {
+  color: #fff !important;
+}
+
+.combo-pay .pay-navbar .van-nav-bar__content::after {
+  border-bottom-width: 0px;
+}
+
+.combo-pay .top-back {
+  position: fixed;
+  height: 420rpx;
+  width: 100vw;
+  top: 0px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.combo-pay .top-back image {
+  width: 100%;
+  height: 100%;
+}
+
+.addr {
+  width: auto;
+  margin: 24rpx;
+  padding: 16rpx 24rpx 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+}
+
+.addr .addr-title {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.addr .addr-detailed {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #333333;
+}
+
+.addr .addr-tips {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 8rpx;
+}
+
+.addr .addr-contacts {
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999999;
+}
+.addr .addr-contacts .addr-contacts-name {
+  margin-right: 24rpx;
+}
+
+.order-card {
+  width: auto;
+  margin: 24rpx;
+  padding: 16rpx 12rpx 24rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-sizing: border-box;
+}
+.order-card-title {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+}
+.order-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.order-card-row-label,
+.order-card-row-value {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.order-card-row-label .card-postage {
+    font-size: 24rpx;
+    color: #999999;
+}
+.order-card-row-value .card-postage-amt {
+    text-decoration: line-through;
+}
+
+.order-card-row-value .van-cell {
+  padding: 0;
+}
+.order-card-row-value .new_icon {
+    display: block;
+    margin-left: 20rpx;
+}
+.order-card-index {
+  font-size: 26rpx;
+  color: #999999;
+}
+.order-card-method {
+  display: flex;
+  align-items: center;
+}
+.order-card-method-item {
+  width: 88rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EEEEEE;
+  border-radius: 8rpx 0 0 8rpx;
+  font-size: 24rpx;
+  color: #333333;
+}
+.order-card-method-item + .order-card-method-item {
+  border-radius: 0 8rpx 8rpx 0;
+}
+.order-card-method-item.only {
+  border-radius: 8rpx;
+}
+.order-card-method-item.active {
+  color: #FFFFFF;
+  background: #0DAE4E;
+}
+.order-card-goods {
+  margin-top: 20rpx;
+  position: relative;
+}
+.order-card-goods-list {
+  display: flex;
+  overflow-x: scroll;
+}
+.order-card-goods-list-item {
+  width: 120rpx;
+  height: 120rpx;
+  flex-shrink: 0;
+  background: #F8F9FC;
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+}
+.order-card-goods-list-item image {
+  width: 100%;
+  height: 100%;
+}
+.order-card-goods-list-item + .order-card-goods-list-item {
+  margin-left: 12rpx;
+}
+.order-card-goods-count {
+  width: 168rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 26rpx;
+  color: #333333;
+  backdrop-filter: blur(10px);
+}
+.order-card-goods-amt {
+  margin-top: 6rpx;
+  font-size: 28rpx;
+}
+.price-card {
+  width: auto;
+  margin: 24rpx;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+.price-card .price-card-cell {
+  line-height: var(--cell-line-height, 24px);
+}
+.price-card-cell .cell-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--cell-vertical-padding, 10px) var(--cell-horizontal-padding, 16px);
+}
+.price-card-cell .cell-bottom {
+  position: relative;
+}
+.price-card .price-card-cell .cell-bottom::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  bottom: 0;
+  left: 16px;
+  border-bottom: 1px solid #ebedf0;
+  transform: scaleY(0.5);
+}
+.price-card .price-card-cell .cell-title {
+  font-size: var(--cell-font-size, 14px);
+}
+.price-card .value-class {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333333;
+}
+.price-card .value-class.red {
+  color: #ED4528;
+}
+.price-card-total {
+  height: 108rpx;
+  padding-right: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 24rpx;
+  color: #333333;
+}
+.price-card-total-amt {
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #ED4528;
+}
+.no-card {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+}
+.paytype-card {
+  width: auto;
+  margin: 24rpx;
+  border-radius: 24rpx;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+.paytype-card .new-cell {
+  align-items: center;
+  height: 130rpx;
+}
+
+.paytype-card .new-cell .van-icon {
+  font-size: 80rpx;
+}
+.combo-pay .van-submit-bar__price,
+.combo-pay .van-submit-bar__suffix-label {
+  margin-left: 0;
+  font-size: 40rpx;
+  color: #ED4528;
+}
+
+/** 商品规格弹窗START */
+.space-pop {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 330px;
+}
+
+.space-pop-box {
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.space-pop-box .goods_group {
+  padding-bottom: 0;
+
+}
+.space-pop-box .goods-point{
+    margin-left: 4rpx;
+    display: inline-block;
+    color: #ee0a24;
+}
+
+.space-pop-title {
+  text-align: center;
+  width: 100%;
+  padding: 16rpx;
+  border-bottom: 2rpx solid #F0F0F0;
+  box-sizing: border-box;
+}
+
+.spaces-card-box .new-card .new-card-price {
+  display: inline-flex;
+  align-items: center;
+  background: #F7F7F7;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  color: #333333;
+  padding: 10rpx 16rpx 10rpx 12rpx;
+  line-height: 26rpx;
+}
+
+.spaces-card-box .new-card .new-card-price text {
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  line-height: 26rpx;
+}
+
+.spaces-card-box .space-card .van-card__thumb {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.spaces-card-box .space-card {
+  padding: 32rpx 30rpx 0 74rpx;
+}
+
+.spaces-card-box .space-card .van-card__content {
+
+  min-height: 90rpx;
+}
+
+.spaces-card-box .space-card .van-card__title {
+  font-size: 22rpx;
+  line-height: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+
+}
+/** 商品规格弹窗END */
+
+/** 时间选择弹窗START */
+.abholungtime_titile {
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+}
+
+.abholungtime_subTitile {
+  height: 32px;
+  line-height: 32px;
+  font-size: 26rpx;
+  color: #0DAE4E;
+  text-align: center;
+  background: #EFFFF5;
+}
+/** 时间选择弹窗END */
+
+#van-dialog .van-goods-action  {
+  padding: 0 24rpx 40rpx 24rpx !important;
+}
+
+#van-dialog .van-dialog__button .van-button--danger {
+  width: 262rpx;
+  height: 76rpx;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  font-weight: bold;
+  font-size: 26rpx;
+  color: #333333;
+  border: 1px solid #CCCCCC;
+}
+
+#van-dialog .van-goods-action {
+  height: 76rpx;
+}
+
+#van-dialog .van-goods-action-button {
+  margin: 0;
+}
+
+#van-dialog .van-goods-action-button--first .van-button--danger {
+  margin-right: 9rpx;
+}
+
+#van-dialog .van-goods-action-button--last .van-button--danger {
+  background: #0DAE4E;
+  color: #fff;
+  border-color: #0DAE4E;
+  margin-left: 9rpx;
+}
+
+#van-dialog .van-popup--center {
+  width: 590rpx;
+}

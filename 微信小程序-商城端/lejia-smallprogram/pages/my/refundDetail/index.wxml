@@ -1,0 +1,210 @@
+<!--pages/my/refundDetail/index.wxml-->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view id="orderDetail">
+  <view class="status_container">
+    <view class="status_cell">
+      <view class="status_cell_status">
+        <text class="status_text">{{refundStatus[orderInfo.status].name}}</text>
+        <text class="delivery_type" wx:if="{{orderInfo.outProcessing}}">订单{{orderInfo.status == 'JD_PENDING_CONFIRM' ? '确认' : '取消'}}处理中</text>
+        <text class="delivery_type" wx:elif="{{orderInfo.status == 'JD_APPROVAL_ACCEPTED'}}">{{orderInfo.jdExpress}}</text>
+        <text class="delivery_type" wx:elif="{{orderInfo.status == 'REFUND_REFUSE' && orderInfo.delDesc}}">理由：{{orderInfo.delDesc}}</text>
+        <text class="delivery_type" wx:elif="{{orderInfo.jdType == 'EXCHANGE'}}">{{refundStatus[orderInfo.status].exchange}}</text>
+        <text class="delivery_type" wx:else>{{refundStatus[orderInfo.status].express}}</text>
+      </view>
+      <image class="delivered_order_img" src="../../../images/my/{{refundStatus[orderInfo.status].image}}.png"></image>
+    </view>
+  </view>
+    <!-- 京东自行寄出 -->
+    <view class="mall-cell" wx:if="{{orderInfo.status == 'JD_APPROVAL_ACCEPTED' && orderInfo.courierType == 'SELF_MAILING' && !orderInfo.courierNumber}}">
+        <view class="mall-cell-title">请选择寄回方式</view>
+        <view class="mall-cell-content">
+            <view class="fill-in-box">
+                <van-image custom-class="fill-in-image" src="/images/my/i-rider.png"></van-image>
+                <view class="fill-in-text">
+                    <view class="fill-in-text__head">自行寄出</view>
+                    <view class="fill-in-text__sub">手动填写运单号</view>
+                </view>
+                <view class="fill-in-btn" bind:tap="handleGoDispatchSlip">去填写</view>
+            </view>
+            <view class="mall-cell-addr">
+                <view class="mall-cell-addr__text">商家地址</view>
+                <view class="mall-cell-addr__copy" bind:tap="handleCopyAfterService">复制</view>
+            </view>
+            <view class="mall-cell-addr-box">
+                <view class="mall-cell-addr-contact">
+                    {{orderInfo.afterService || ''}} {{orderInfo.afterServicePhone || orderInfo.afterServiceTel || ''}}
+                </view>
+                <view class="mall-cell-addr-detail">
+                    {{orderInfo.afterServiceAddr || ''}}
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 自行寄回快递信息 -->
+    <view class="return-logistics" wx:if="{{ orderInfo.courierNumber }}">
+        <view class="return-logistics-title">退货物流</view>
+        <view class="return-logistics-content">
+            <view>快递单号：{{orderInfo.courierNumber || ''}}</view>
+            <view>快递公司：{{orderInfo.courierCompany || ''}}</view>
+        </view>
+    </view>
+  <!-- 商品栏 -->
+	<view class="goods_cell">
+		<view class="card_con">
+			<view class="title">
+			  退款明细
+			</view>
+			<view class="goods-list" style="height:{{isFold?goodsListHeight:foldHeight}}rpx" >
+				<view class="card_goods_list" wx:key="index" wx:for="{{orderInfo.list}}">
+          <view class="card_goods_item" wx:if="{{item.lines.length === 1}}" bind:tap="goGoodsDetails" data-item="{{item}}">
+            <view class="card_goods_item__left">
+              <van-image  width="140rpx" height="140rpx"  radius="16rpx" src="{{ item.photo ||'/images/no-pic.png' }}"></van-image>
+            </view>
+            <view class="card_goods_item__right">
+              <view class="card_goods_item__title">{{item.goodsName}}</view>
+              <view class="card_goods_item__space">
+                <view class="card_goods_item__space__left">{{'规格:'+item.spaceName}}</view>
+                <view class="card_goods_item__space__right">x {{item.num}}</view>
+              </view>
+              <view class="card_goods_item__price">
+                <view class="card_goods_item__price__left">
+                  ￥ {{item.refundAmt}}{{item.refundPoint ? "+"+item.refundPoint+'积分' : ''}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="card_goods_items" wx:else>
+          <view class="card_goods_item" bind:tap="goGoodsDetails" data-item="{{item}}">
+            <view class="card_goods_item__left">
+              <van-image  width="140rpx" height="140rpx" radius="16rpx" src="{{ item.photo ||'/images/no-pic.png' }}"></van-image>
+            </view>
+            <view class="card_goods_item__right">
+              <view class="card_goods_item__title">{{item.goodsName}}</view>
+              <view class="card_goods_item__price">
+                <view class="card_goods_item__price__left">
+                <view class="card_goods_item__price__left___xiaoji">
+                  <text class="fs-22">小计 </text>
+                  <text>￥{{item.refundAmt}}{{item.refundPoint ? "+"+item.refundPoint+'积分' : ''}}</text>
+                </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="card_goods_item_lines" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="subIndex" bind:tap="goGoodsDetails" data-item="{{subItem}}">
+            <view class="card_goods_item_lines___left">
+              <van-image  width="90rpx" height="90rpx" radius="12rpx" src="{{ subItem.photo ||'/images/no-pic.png' }}"></van-image>
+            </view>
+            <view class="card_goods_item_lines___right">
+              <view class="card_goods_item__space">
+                <view class="card_goods_item__space__left">{{'规格:'+subItem.spaceName}}</view>
+                <view class="card_goods_item__space__right">x {{subItem.num}}</view>
+              </view>
+              <view class="card_goods_item__price">
+                <view class="card_goods_item__price__left">
+                ￥ {{subItem.refundAmt}}{{subItem.refundPoint ? "+"+subItem.refundPoint+'积分' : ''}}
+                </view>
+                
+              </view>
+            </view>
+          </view>
+        </view>
+				</view>
+			</view>
+			<view class="look-more" catchtap="handleLookMore" wx:if="{{goodsListHeight!=foldHeight}}">
+				<text>{{isFold?'收起':'查看更多'}}</text>
+				<van-icon name="arrow-down" size="16rpx" custom-class="{{isFold?'fold-icon':''}}" />
+			</view>
+		</view>
+		<view class="card_price">
+			<view class="card_cell">
+				<view class="card_l">退款商品合计</view>
+				<view class="card_r"> 
+        <text>￥{{filter.valueFormat(orderInfo.refundGoodsAmt)}}</text></view>
+			</view>
+      <view class="card_cell">
+				<view class="card_l">积分</view>
+				<view class="card_r"> 
+        <text>{{orderInfo.refundPoint ? filter.valueFormat_1(orderInfo.refundPoint) : 0}}</text></view>
+			</view>
+      <view class="card_cell">
+				<view class="card_l">配送费</view>
+				<view class="card_r"> 
+        <text>￥{{filter.valueFormat(orderInfo.refundPostage)}}</text></view>
+			</view>
+      <view class="card_cell" wx:if="{{orderInfo.refundOtherAmt}}">
+                <view class="card_l">{{payTypeName[orderInfo.payType]}}支付</view>
+                <view class="card_r refund-font-color">-￥{{filter.valueFormat(orderInfo.refundOtherAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.refundWeixinAmt}}">
+                <view class="card_l">微信支付</view>
+                <view class="card_r refund-font-color">-￥{{filter.valueFormat(orderInfo.refundWeixinAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.refundPoint}}">
+                <view class="card_l">积分</view>
+                <view class="card_r refund-font-color">-{{orderInfo.refundPoint}}积分</view>
+            </view>
+      <view class="card_cell">
+				<view class="card_l">退款合计</view>
+				<view class="card_r"> 
+        <text class="color_red">￥{{filter.valueFormat(orderInfo.refundAmt)}}{{orderInfo.refundPoint ? "+"+filter.valueFormat_1(orderInfo.refundPoint)+'积分' : ""}}</text></view>
+			</view>
+      <view class="card_cell">
+				<view class="card_l card_tips" wx:if="{{orderInfo.hasRefundCard || orderInfo.hasRefundCardPostage}}">
+                    本单使用的{{orderInfo.hasRefundCard && orderInfo.hasRefundCardPostage ? 2 : 1}}张优惠券将原路退回
+                </view>
+			</view>
+		</view>
+		
+	</view>
+  	<!-- 订单信息栏 -->
+	<view class="info_cell">
+		<view class="title">
+			订单信息
+		</view>
+		<view class="card_cell">
+			<view class="card_l">订单编号</view>
+			<view class="card_r flex">
+        <view class="card_r_l">{{orderInfo.code}}</view>
+      
+        <view class="card_r_r" bind:tap="goOrderDetail">
+          订单详情 <van-icon name="arrow" size="16rpx" color="#0DAE4E"></van-icon>
+        </view>
+      </view>
+		</view>
+		<view class="card_cell">
+			<view class="card_l">提交时间</view>
+			<view class="card_r">{{orderInfo.createdTime}}</view>
+		</view>
+    <view class="card_cell">
+			<view class="card_l">退款原因</view>
+			<view class="card_r">{{orderInfo.reason}}</view>
+		</view>
+    <view class="card_cell">
+			<view class="card_l">描述凭证</view>
+			<view class="card_r">{{orderInfo.describe || "无"}}</view>
+		</view>
+    <view class="card_cell" wx:if="{{orderInfo.refundPhoto || orderInfo.refundPhoto.length > 0}}">
+			<view class="card_l"></view>
+			<view class="card_r">
+        <van-image  width="90rpx" height="90rpx" radius="12rpx" data-index="{{index}}" wx:key="index" src="{{ item || '/images/no-pic.png' }}" wx:for="{{orderInfo.refundPhoto}}"  bindtap="showImage"></van-image>
+      </view>
+		</view>
+	</view>
+    <view class="btn_cell">
+        <van-button
+            wx:if="{{!orderInfo.outProcessing && (orderInfo.status == 'JD_PENDING_APPROVAL' || (orderInfo.status == 'JD_APPROVAL_ACCEPTED' && !orderInfo.courierNumber)) }}"
+            plain hairline round custom-class="refund_btn" disabled="{{disabled}}" bind:click="cancelAfsApply">取消申请</van-button>
+        <van-button wx:if="{{orderInfo.status == 'JD_PENDING_CONFIRM' && !orderInfo.outProcessing}}" plain hairline round custom-class="refund_btn" disabled="{{disabled}}" bind:click="handConfirmCompleted">确认完成</van-button>
+    </view>
+  <!-- 图片放大功能 -->
+  <van-popup show="{{showPopup}}" bind:close="onClose" position="center">
+      <van-image src="{{orderInfo.refundPhoto[photoIndex]}}" width="540rpx" height="1036rpx" fit="contain" />
+    </van-popup>
+ <view class="info_phone" wx:if="{{ orderInfo.tel }}" bind:tap="phoneClick">
+  售后电话：{{ orderInfo.tel}}
+  <van-icon name="phone" size="40rpx" color="#666666"></van-icon>
+ </view> 
+<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,128 @@
+<!-- 
+@url: pages/my/index.wxml
+@description: 我的
+@author: sx
+@date: 2020/07/17
+ -->
+<view id="my" style="padding-bottom: {{paddingBottom}}rpx">
+    <!-- 头部 -->
+
+    <view class="top_container" style="padding-top:{{statusBarHeight}}px">
+        <van-image src="{{ imgUrl + 'my_bg.png'}}" custom-class="my-bg"></van-image>
+        <view class="my-title">我的</view>
+        <view class="avatar_box">
+            <view class="cell" bindtap="goInfo">
+                <van-image round width="116rpx" height="116rpx" src="{{userData.photo || '/images/my/head_img.png'}}" />
+            </view>
+            <view class="cell flex_cell" bindtap="goInfo">
+                <view class="avatar_name">
+                    <text> {{userData.nickName}}</text>
+                </view>
+                <view class="avatar_phone">{{userData.hideMobile}}</view>
+            </view>
+            <view class="cell" style="color: {{theme.primary}};">
+                <button type="default" round bindtap="goSignIn" wx:if="{{userData.nowDays}}" class='signIned-btn' plain
+                    style="color: {{theme.primary}}; border: 1px solid {{theme.primary}};">已签到</button>
+                <button type="default" round bindtap="goSignIn" wx:else style="background: {{theme.primary}};">签到</button>
+                <view>已连续签到{{userData.signNum}}天</view>
+            </view>
+        </view>
+        <!-- 信息栏 -->
+
+        <view class="info_container">
+            <view class="info-grid-item" data-balance="{{userData.msdBalance}}" bindtap="goMsdQuery">
+                <view class="num">{{userData.msdBalance}}</view>
+                <text class="tips">热力豆</text>
+            </view>
+            <view class="info-grid-item" bindtap="goCommsQuery">
+                <view class="num">{{userData.comms}}</view>
+                <text class="tips">{{walletName}}(元)</text>
+            </view>
+            <view class="info-grid-item" bindtap="goPointQuery">
+                <view class="num">{{userData.points}}</view>
+                <text class="tips">积分</text>
+            </view>
+            <view class="info-grid-item" bindtap="goCard">
+                <view class="num">{{userData.cardNum}}</view>
+                <text class="tips">卡券包</text>
+            </view>
+        </view>
+        <!-- 订单栏 -->
+        <view class="order_container">
+            <view class="info_box">
+                <view class="info_box_button" bindtap="goOrder">全部订单 ></view>
+                <text>我的订单</text>
+            </view>
+            <van-grid column-num="5" border="{{false}}" icon-size="50rpx">
+                <van-grid-item icon="/images/my/i_daifukuan_{{theme.value}}.png" link-type="navigateTo" url="/pages/my/order/index?type=UNPAID_ORDER" text="待付款" badge="{{ orderNumberData.unpaidNum > 99 ? '99+' :  orderNumberData.unpaidNum }}" />
+                <van-grid-item icon="/images/my/i_daifahuo_{{theme.value}}.png" link-type="navigateTo" url="/pages/my/order/index?type=DELIVERED_ORDER" text="待发货" badge="{{orderNumberData.deliveredNum  > 99 ? '99+' :  orderNumberData.deliveredNum  }}"/>
+                <van-grid-item icon="/images/my/i_daishouhuo_{{theme.value}}.png"  link-type="navigateTo" url="/pages/my/order/index?type=SHIPPED_ORDER" text="待收货" badge="{{orderNumberData.shippedNum > 99 ? '99+' :  orderNumberData.shippedNum }}"/>
+                <van-grid-item icon="/images/my/i_yishouhuo_{{theme.value}}.png" link-type="navigateTo" url="/pages/my/order/index?type=CONFIRM_ORDER" text="已收货" />
+                <van-grid-item icon="/images/my/i_tuikuan_{{theme.value}}.png" link-type="navigateTo" url="/pages/my/refundOrder/index" text="退款订单" badge="{{orderNumberData.refundedNum > 99 ? '99+' :  orderNumberData.refundedNum }}"/>
+            </van-grid>
+        </view>
+
+    </view>
+
+
+    <!-- 图标栏 -->
+    <view class="icon_container">
+        <van-grid column-num="4" border="{{false}}" icon-size="100rpx">
+            <!-- <van-grid-item icon="/images/my/i_mingxi.png" icon-size="64rpx" link-type="navigateTo" url="/pages/my/info/index" text="会员信息" />
+            <van-grid-item icon="/images/my/i_hyhd.png" icon-size="64rpx" bind:click="notOpen" text="会员活动" />
+            <van-grid-item icon="/images/my/i_lqzx.png" icon-size="64rpx" link-type="navigateTo" url="/pages/my/coupon/coupon" text="领券中心" /> -->
+            <van-grid-item icon="/images/my/i_shoucang.png" link-type="navigateTo" url="/pages/my/collect/index?active=1" text="商品收藏" />
+            <van-grid-item icon="/images/my/i_shoucang_tanwei.png" link-type="navigateTo" url="/pages/my/collect/index?active=2" text="摊位收藏" />
+            <van-grid-item icon="/images/my/i_dizhi.png" link-type="navigateTo" url="/pages/my/address/list/index" text="收货地址" />
+            <van-grid-item icon="/images/my/i_lianxikefu.png" bind:click="contactService" text="联系客服" />
+        </van-grid>
+    </view>
+    <!-- 列表栏 -->
+    <view class="cell-container">
+        <!-- <van-cell title="邀请有礼" icon="/images/my/i_yaoqinyouli.png" is-link url="/pages/my/invite/index"  /> -->
+       
+        <van-cell title="食安公示" icon="/images/my/i_fenfa.png" is-link url="/pages/shouyeGroup/tranceSource/index" />
+        <van-cell title="活动分发" icon="/images/my/i_fenfa.png" is-link url="/pages/my/distribution/index" wx:if="{{ userData.allowedDistributeActivity }}" />
+        <!-- <van-cell title="积分扫码" icon="/images/my/i_saoma.png" is-link bind:click="scanCode" clickable /> -->
+        <van-cell icon="/images/my/i_fenxiang.png" icon-size="64rpx" is-link title="分享我们">
+            <button open-type="share" type="plain" class="share_btn" style="border:0"></button>
+        </van-cell>
+        <!-- <van-cell title="活动管理" icon="/images/my/i_hdgl.png" is-link url="" bind:click="notOpen"  /> -->
+        <!-- <van-cell title="意见反馈" icon="/images/my/i_yijian.png" is-link url="/pages/my/feedback/index" /> -->
+        <van-cell title="常见问题" icon="/images/my/i_wenti.png" is-link url="/pages/my/problem/index"  /> 
+    </view>
+
+    <view class="cell-container">
+        <!-- <van-cell title="关于我们" icon="/images/my/i_guanyu.png" is-link url="/pages/my/aboutUs/index"  /> -->
+        <!-- <van-cell title="常见问题" icon="/images/my/i_wenti.png" is-link url="/pages/my/problem/index"  /> -->
+    </view>
+
+    <!-- 推荐商品 -->
+    <recommending-goods id="recommendGoods" zone="MINE"></recommending-goods>
+    <!-- 市场logo -->
+    <view class="footer-logo" wx:if="{{ascription == 22 || ascription == 13}}">
+        <van-image src="/images/tj-logo.png" width="233rpx" height="42rpx"></van-image>
+    </view>
+
+    <!-- <van-dialog id="van-dialog" use-slot title="联系我们" show-confirm-button="{{false}}" show="{{ show }}" bind:close="onClose" closeOnClickOverlay>
+        <view class="dialog-market">
+            <view class="dialog-content">
+              <view class="dialog-row">{{type == 'MARKET_MALL' ? '营业时间' : '客服时间'}}</view>
+              <view class="dialog-row" wx:if="{{type == 'MARKET_MALL'}}">{{DragBallInfo.days}}</view>
+              <view class="dialog-row" wx:if="{{DragBallInfo.times.length}}">
+              <view wx:for="{{DragBallInfo.times}}" wx:key="index">
+              {{item.startHour < 10 ? '0' : ''}}{{item.startHour}}:{{item.startMinute < 10 ? '0' : ''}}{{item.startMinute}}- {{item.endHour < 10 ? '0' : ''}}{{item.endHour}}: {{item.endMinute < 10 ? '0' : ''}}{{item.endMinute}}
+              </view>
+            </view>
+            </view>
+            <view class="dialog-row">
+              <van-button custom-style="height:38px;background:#07c160;border:none" round type="info" bind:click="handleMobile"  wx:if="{{DragBallInfo.tel}}">电话联系</van-button>
+              <van-button custom-style="height:38px;background:#07c160;border:none" round type="info" bind:click="handleCustomer"  wx:if="{{DragBallInfo.customerServiceLink}}">在线客服</van-button>
+            </view>
+        </view> 
+    </van-dialog> -->
+    <drag-ball id="DragBall" notShow="{{true}}"></drag-ball>
+    <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+    <authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}" bind:onClose="onAuthClose"></authorize>
+</view>

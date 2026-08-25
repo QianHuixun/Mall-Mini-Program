@@ -1,0 +1,476 @@
+<!-- 
+@url: pages/my/orderDetail/index.wxml
+@description: 我的订单  订单详情
+@author: sx
+@date: 2020/07/25
+ -->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view id="orderDetail" hidden="{{!goodsListHeight}}">
+    <view class="map-container" wx:if="{{(orderInfo.thirdPartyStatus == 'THIRD_PARTY_DELIVERY' || orderInfo.thirdPartyStatus == 'THIRD_PARTY_PICKING_UP') && ( longitude && latitude) }}">
+        <map class="gaode-map" id="map" markers="{{markers}}" longitude="{{longitude}}" polyline="{{polyline}}" latitude="{{latitude}}" scale="14" bind:tap="goMap">
+            <cover-view slot="callout">
+                <cover-view class="customCallout" marker-id="{{1}}">
+                    <cover-view class="content">
+                        <cover-view class="content_title">骑手{{orderInfo.thirdPartyStatus == 'THIRD_PARTY_PICKING_UP' ? '取货中' : '配送中'}}</cover-view>
+                        <cover-view class="content_distance" wx:if="{{distance}}">
+                            距{{orderInfo.thirdPartyStatus == 'THIRD_PARTY_PICKING_UP' ? '商家' : '您'}}
+                            <cover-view class="orange">{{distance > 1000 ? distanceKM+ 'km' : distance + 'm' }}</cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </map>
+        <van-icon name="replay" custom-class="refresh_icon" bind:click="refreshMap" />
+    </view>
+    <!-- 状态栏 -->
+    <view class="{{orderInfo.thirdPartyStatus == 'THIRD_PARTY_DELIVERY' || orderInfo.thirdPartyStatus == 'THIRD_PARTY_PICKING_UP' ? 'hasMap status_container' : 'status_container'}}">
+        <view class="go_map" bind:tap="goMap" wx:if="{{(orderInfo.thirdPartyStatus == 'THIRD_PARTY_DELIVERY' || orderInfo.thirdPartyStatus == 'THIRD_PARTY_PICKING_UP' ) && ( longitude && latitude)}}">
+        </view>
+        <view class="{{ orderInfo.status == 'ARRIVED_ORDER' || orderInfo.status == 'CONFIRM_ORDER' ? 'status_cell_confirm' : 'status_cell'}}">
+            <view class="status_cell_status" wx:if="{{orderInfo.status == 'UNPAID_ORDER'}}">
+                <text class="status_text">未付款</text>
+                <text class="delivery_type">配送方式：{{orderInfo.orderType=='GIFT_ORDER'?'自行兑换':(orderInfo.orderType=='COUPON_ORDER'?'直接送达':(orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')))}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'DELIVERED_ORDER'}}">
+                <text class="status_text">待发货</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'SHIPPED_ORDER'}}">
+                <text class="status_text">待收货</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'ARRIVED_ORDER'}}">
+                <text class="status_text">{{orderInfo.distributionType == 'PICKUP' ? '已核销' : '已到货'}}</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' :(orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'WAIT_ARRIVAL_ORDER'}}">
+                <text class="status_text">待到货</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' :(orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'WAIT_WRITEOFF_ORDER'}}">
+                <text class="status_text">待核销</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' :(orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'CONFIRM_ORDER'&&orderInfo.orderType!= 'GIFT_ORDER'}}">
+                <text class="status_text">已完成</text>
+                <text class="delivery_type">配送方式：{{orderInfo.orderType=='COUPON_ORDER'?'直接送达':(orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送'))}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'CONFIRM_ORDER'&&orderInfo.orderType== 'GIFT_ORDER'&&orderInfo.giftStatus=='USED'}}">
+                <text class="status_text">已核销</text>
+                <text class="delivery_type">配送方式：自行兑换</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'CONFIRM_ORDER'&&orderInfo.orderType== 'GIFT_ORDER'&&orderInfo.giftStatus=='UNUSED'}}">
+                <text class="status_text">未核销</text>
+                <text class="delivery_type">配送方式：自行兑换</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'REFUND_APPLICATION_ORDER'}}">
+                <text class="status_text">退款中</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'VOID_ORDER'}}">
+                <text class="status_text">已作废</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'REFUNDED_ORDER'}}">
+                <text class="status_text">已退款</text>
+                <text class="delivery_type"></text>
+            </view>
+            <view class="status_cell_status" wx:elif="{{orderInfo.status == 'PAYING_ORDER'}}">
+                <text class="status_text">支付受理中</text>
+                <text class="delivery_type">配送方式：{{orderInfo.distributionType == 'PICKUP' ? '自提' : (orderInfo.distributionType == 'DINE_IN' ? '堂食' : '配送')}}</text>
+            </view>
+            <!-- 右侧 -->
+            <!-- 等待 -->
+            <view wx:if="{{orderInfo.distributionType == 'DINE_IN'}}" class="delivered_order_ts">
+                <image src="/images/my/pickup_code.png"></image>
+                <view class="pickupcode" style="color: {{theme.primary}}">{{orderInfo.addr ? orderInfo.addr.addrDetail : "" }}</view>
+                <view class="pickup_name">桌号</view>
+            </view>
+            <image wx:elif="{{ (orderInfo.status == 'UNPAID_ORDER' || orderInfo.status == 'DELIVERED_ORDER' || orderInfo.status == 'SHIPPED_ORDER') && orderInfo.distributionType !== 'PICKUP' && !orderInfo.pickupCode}}" class="delivered_order_img" src="../../../images/my/DELIVERED_ORDER.png"></image>
+            <!-- 已完成 -->
+            <image wx:elif="{{orderInfo.orderType!='GIFT_ORDER'&&((orderInfo.status == 'ARRIVED_ORDER' || orderInfo.status == 'CONFIRM_ORDER') && orderInfo.distributionType != 'PICKUP')}}" class="delivered_order_img" src="../../../images/my/finished.png"></image>
+            <view wx:elif="{{(orderInfo.status == 'SHIPPED_ORDER') && orderInfo.distributionType !== 'PICKUP'}}" class="delivered_order_pickupcode">
+                <image src="/images/my/pickup_code.png"></image>
+                <view class="pickupcode" style="color: {{theme.primary}}">{{orderInfo.pickupCode}}</view>
+                <view class="pickup_name">收货码</view>
+            </view>
+            <view wx:elif="{{(orderInfo.status == 'DELIVERED_ORDER' || orderInfo.status == 'WAIT_ARRIVAL_ORDER' || orderInfo.status == 'WAIT_WRITEOFF_ORDER' || orderInfo.status == 'SHIPPED_ORDER') && orderInfo.distributionType == 'PICKUP'}}" class="delivered_order_pickupcode">
+                <image src="/images/my/pickup_code.png"></image>
+                <view class="pickupcode" style="color: {{theme.primary}}">{{orderInfo.pickupCode}}</view>
+                <view class="pickup_name">自提码</view>
+            </view>
+            <view class="delivered_order_pickupover" wx:elif="{{(orderInfo.status == 'CONFIRM_ORDER' || orderInfo.status == 'ARRIVED_ORDER') && orderInfo.distributionType == 'PICKUP'}}">
+                <image src="/images/my/pickup_code.png"></image>
+                <view class="pickup_name">自提码已核销</view>
+            </view>
+            <button wx:elif="{{orderInfo.orderType=='GIFT_ORDER'}}" class="gift-code" catchtap="checkCode">
+                <van-icon name="eye-o" size="32rpx" /><span>核销码</span>
+            </button>
+            <!-- <image class="delivered_order_pickupover" src="../../../images/my/applied.png"></image> -->
+            <!--已核销 -->
+            <image class="delivered_order_img refund_rorder_img" src="../../../images/my/refund.png" wx:elif="{{orderInfo.status == 'REFUNDED_ORDER'}}"></image> <!-- 已完成 -->
+        </view>
+        <!-- 待收货 骑手提示 -->
+        <!-- <view wx:if="{{(orderInfo.status == 'DELIVERED_ORDER' || orderInfo.status == 'SHIPPED_ORDER') && orderInfo.distributionType == 'PICKUP'}}"> -->
+        <view class="rider_tips" wx:if="{{(orderInfo.status == 'SHIPPED_ORDER') && orderInfo.distributionType !== 'PICKUP' && orderInfo.pickupCode}}">
+            取货时请告知骑手核验
+        </view>
+    </view>
+    <!-- 退款信息 -->
+    <view class="refund_cell" wx:if="{{ orderInfo.refundStatus && orderInfo.orderType != 'INTEGRAL_JD_ORDER' }}">
+        <view class="refund_title">
+            <view class="refund_title_left" style="color: {{theme.primary}}">{{refundStatus[orderInfo.refundStatus]}}</view>
+            <view class="refund_title_right" bind:tap="goRefundList">查看退款记录<van-icon name="arrow" color="#999999" size="16rpx"></van-icon>
+            </view>
+        </view>
+        <view class="refund_form">
+            <view class="refund_form_item">
+                <view class="refund_form_item__left">退款金额</view>
+                <view class="refund_form_item__right">{{orderInfo.refundAmt}}</view>
+            </view>
+            <view class="refund_form_item">
+                <view class="refund_form_item__left">退款原因</view>
+                <view class="refund_form_item__right">{{orderInfo.reason}}</view>
+            </view>
+
+        </view>
+    </view>
+    <!-- 京东退款信息 -->
+    <view class="refund_cell" wx:if="{{ orderInfo.refundStatus && orderInfo.orderType == 'INTEGRAL_JD_ORDER'  }}">
+        <view class="refund_title">
+            <view class="refund_title_left" style="color: {{theme.primary}}">
+                申请{{jdType[[orderInfo.jdType]]}}：{{orderInfo.jdType ==  'EXCHANGE' ? jdExchangeStatusExpress[orderInfo.refundStatus] : jdRefundStatus[orderInfo.refundStatus]}}
+            </view>
+            <view class="refund_title_right" bind:tap="goRefundList">查看售后订单<van-icon name="arrow" color="#999999" size="16rpx"></van-icon>
+            </view>
+        </view>
+        <view class="refund_form">
+            <view class="refund_form_item" style="color: #999999">
+                {{orderInfo.jdExpress || (orderInfo.jdType == 'EXCHANGE' ? jdExchangeStatusExpress[orderInfo.refundStatus] : jdRefundStatusExpress[orderInfo.refundStatus])}}
+            </view>
+            <view class="refund_form_item">
+                <view class="refund_form_item__left">退款原因</view>
+                <view class="refund_form_item__right">{{orderInfo.reason}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 地址物流栏 -->
+    <view class="address_cell" wx:if="{{orderInfo.orderType!='GIFT_ORDER'&&orderInfo.orderType!='COUPON_ORDER'}}">
+        <view class="post-message" wx:if="{{orderInfo.distributionType == 'PICKUP'}}">
+            <view class="title">自提信息</view>
+            <view class="time">
+                <text class="title">自提时间</text>
+                <text class="content" style="color: {{theme.primary}}">{{orderInfo.pstime}}</text>
+            </view>
+            <view class="adress-box">
+                <view class="title">自提地址</view>
+                <view class="content">
+                    <view class="adress">{{pickAdress}}</view>
+                </view>
+            </view>
+            <view class="pickup-person">
+                <text class="title">自提人</text>
+                <text class="content">{{orderInfo.addr.name}} {{orderInfo.addr.mobile}}</text>
+            </view>
+            <view class="verification" wx:if="{{orderInfo.distributionType === 'PICKUP' && (orderInfo.status == 'DELIVERED_ORDER' || orderInfo.status == 'WAIT_ARRIVAL_ORDER' || orderInfo.status == 'WAIT_WRITEOFF_ORDER')}}">
+                <text class="title">核销码</text>
+                <view class="qrcode">
+                    <canvas style="width: 154px; height: 154px;" canvas-id="qrcode"></canvas>
+                    <view class="tips">提货时请出示核销二维码</view>
+                </view>
+            </view>
+        </view>
+        <view class="post-message" wx:elif="{{orderInfo.distributionType != 'DINE_IN'}}">
+            <view class="title">配送信息</view>
+            <view class="time flex" wx:if="{{orderInfo.thirdPartyStatusName}}">
+                <text class="title">派送状态</text>
+                <div class="content flex">
+                    <div style="margin-right: 24rpx;">{{orderInfo.thirdPartyStatusName}} </div>
+                    <van-image width="90rpx" height="90rpx" radius="12rpx" data-index="{{index}}" wx:key="index" src="{{ item || '/images/no-pic.png' }}" wx:for="{{orderInfo.arrivedPhoto}}" bindtap="showImage"></van-image>
+                </div>
+            </view>
+            <view class="time" wx:if="{{orderInfo.pstime}}">
+                <text class="title">{{orderInfo.logistics || orderInfo.orderType === 'INTEGRAL_PRESALE_ORDER'?'发货时间':'送达时间'}}</text>
+                <text class="content">{{orderInfo.pstime}}</text>
+            </view>
+            <view class="adress-box">
+                <view class="title">收货地址</view>
+                <view class="content">
+                    <view class="adress">{{orderInfo.addr.addr || ''}}</view>
+                    <view class="people-info">
+                        <text class="name">{{orderInfo.addr.name}}</text>
+                        <text class="mobile">{{orderInfo.addr.mobile}}</text>
+                    </view>
+
+                </view>
+            </view>
+            <view class="rider-contact" wx:if="{{orderInfo.courierName}}">
+                <view class="title">联系骑手</view>
+                <view class="content" bindtap="riderPhoneClick">
+                    <span>{{orderInfo.courierName}} {{orderInfo.courierMobile}}
+                        <van-icon name="phone" size="40rpx" color="#333333" />
+                    </span>
+                </view>
+            </view>
+
+            <view class="logistics" wx:if="{{orderInfo.logistics && !jdDeliveryInfo}}">
+                <view class="title">快递单号</view>
+                <view class="content">
+                    <view><text style="padding-right: 26rpx;">{{orderInfo.logistics}}</text>{{orderInfo.kdCode}}</view>
+                    <view class="express-routes" wx:if="{{orderInfo.expressType === 'EXPRESS_SF' && orderInfo.expressRoutes.length}}">
+                        <text class="status">运输中</text>
+                        <text class="routes">{{orderInfo.expressRoutes[0].description}}</text>
+                        <view class="button" bind:tap="goExpressRouter">查看物流</view>
+                    </view>
+                </view>
+            </view>
+            <view class="logistics" wx:elif="{{jdDeliveryInfo}}">
+                <view class="title">快递单号</view>
+                <view class="content">
+                    <view wx:for="{{jdDeliveryInfo.logisticInfoList}}">
+                        <text style="padding-right: 26rpx;">{{item.deliveryCarrier || ''}}</text>{{item.deliveryOrderId || ''}}
+                    </view>
+                    <view class="express-routes" wx:if="{{jdDeliveryInfo.trackInfoList && jdDeliveryInfo.trackInfoList.length}}">
+                        <text class="routes">{{jdDeliveryInfo.trackInfoList[0].trackContent}}</text>
+                        <view class="button" bind:tap="goExpressRouter">查看物流</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="address_cell" wx:elif="{{orderInfo.orderType=='GIFT_ORDER'}}">
+        <view class="post-message">
+            <view class="title">配送信息</view>
+            <view>
+                <view class="logistics gift-info">
+                    <text class="title">配送方式</text>
+                    <text class="content">自行兑换</text>
+                </view>
+                <view class="logistics" wx:if="{{orderInfo.giftInfo.address}}">
+                    {{orderInfo.giftInfo.address}}
+                </view>
+                <view class="logistics">
+                    <text class="title">商户名称</text>
+                    <text class="content"> {{orderInfo.giftInfo.verdorName}}</text>
+                </view>
+                <view class="logistics">
+                    <text class="title">联系电话</text>
+                    <text class="content"> {{orderInfo.giftInfo.verdorMobile}}</text>
+                </view>
+                <view class="logistics">
+                    <text class="title">有效期</text>
+                    <text class="content" wx:if="{{orderInfo.giftInfo.startDate}}">{{orderInfo.giftInfo.startDate}} ~ {{orderInfo.giftInfo.endDate}}</text>
+                    <text class="content" wx:else>永久有效</text>
+                </view>
+            </view>
+
+        </view>
+
+
+    </view>
+
+    <!-- 商品栏 -->
+    <view class="goods_cell">
+        <view class="card_con">
+            <view class="title" wx:if="{{orderInfo.orderType == 'INTEGRAL_JD_ORDER'}}">
+                {{jdGoodsDisplayName}}
+            </view>
+            <view class="title" wx:else>
+                {{orderInfo.supplierName || orderInfo.farmerName}}
+            </view>
+            <view class="goods-list " style="height:{{isFold?goodsListHeight:foldHeight}}rpx">
+                <view class="card_goods_list" wx:key="index" wx:for="{{orderInfo.infos}}">
+                    <view class="card_goods_item" wx:if="{{item.lines.length ==1}}" bind:tap="goGoodsDetails" data-item="{{item}}">
+                        <view class="card_goods_item__left">
+                            <van-image width="140rpx" height="140rpx" radius="16rpx" src="{{ item.photo ||'/images/no-pic.png' }}"></van-image>
+                        </view>
+                        <view class="card_goods_item__right">
+                            <view class="card_goods_item__title">{{item.goodsName}}</view>
+                            <view class="card_goods_item__space">
+                                <view class="card_goods_item__space__left">{{item.mtypeName == '加工商品' ? '加工:'+item.associationName : '规格:'+item.spaceName}}</view>
+                                <view class="card_goods_item__space__right">x {{item.num}}</view>
+                            </view>
+                            <view class="card_goods_item__price">
+                                <view class="card_goods_item__price__left">
+                                    {{orderInfo.orderType == 'INTEGRAL_MSD_ORDER' ? '' : '￥'}} {{item.orderType=='CUT_ORDER'?filter.valueFormat(item.amto):filter.valueFormat(item.price)}}
+                                </view>
+                                <view class="card_goods_item__price__right" wx:if="{{item.refundAmt}}">
+                                    已退￥{{item.refundAmt}}{{item.refundPoint ? '+'+item.refundPoint+'积分' : ''}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="card_goods_items" wx:else>
+                        <view class="card_goods_item" bind:tap="goGoodsDetails" data-item="{{item}}">
+                            <view class="card_goods_item__left">
+                                <van-image width="140rpx" height="140rpx" radius="16rpx" src="{{ item.photo ||'/images/no-pic.png' }}"></van-image>
+                            </view>
+                            <view class="card_goods_item__right">
+                                <view class="card_goods_item__title">{{item.goodsName}}</view>
+                                <view class="card_goods_item__price">
+                                    <view class="card_goods_item__price__left">
+                                        <view class="card_goods_item__price__left___xiaoji">
+                                            <text class="fs-22">小计 </text>
+                                            <text>￥{{filter.valueFormat(item.sales)}}</text>
+                                        </view>
+                                    </view>
+                                    <view class="card_goods_item__price__right" wx:if="{{item.wholeRefund}}">
+                                        已退￥{{item.refundAmt}}{{item.refundPoint ? '+'+item.refundPoint+'积分' : ''}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="card_goods_item_lines" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="subIndex"  bind:tap="goGoodsDetails" data-item="{{subItem}}">
+                            <view class="card_goods_item_lines___left">
+                                <van-image width="90rpx" height="90rpx" radius="12rpx" src="{{ subItem.photo ||'/images/no-pic.png' }}"></van-image>
+                            </view>
+                            <view class="card_goods_item_lines___right">
+                                <view class="card_goods_item__space">
+                                    <view class="card_goods_item__space__left">{{subItem.mtypeName == '加工商品' ? '加工:'+subItem.associationName : '规格:'+subItem.spaceName}}</view>
+                                    <view class="card_goods_item__space__right">x {{subItem.num}}</view>
+                                </view>
+                                <view class="card_goods_item__price">
+                                    <view class="card_goods_item__price__left">
+                                        ￥ {{filter.valueFormat(subItem.price)}}
+                                    </view>
+                                    <view class="card_goods_item__price__right" wx:if="{{!item.wholeRefund && subItem.refundAmt}}">
+                                        已退￥{{subItem.refundAmt}}{{subItem.refundPoint ? '+'+filter.valueFormat_1(subItem.refundPoint)+'积分' : ''}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="look-more" catchtap="handleLookMore" wx:if="{{goodsListHeight!=foldHeight}}">
+                <text>{{isFold?'收起':'查看更多'}}</text>
+                <van-icon name="arrow-down" size="16rpx" custom-class="{{isFold?'fold-icon':''}}" />
+            </view>
+        </view>
+        <view class="card_price">
+            <view class="card_cell">
+                <view class="card_l">商品金额</view>
+                <view class="card_r">{{orderInfo.orderType == 'INTEGRAL_MSD_ORDER' ? '' : '￥'}}{{filter.valueFormat(orderInfo.amto)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.distributionType !== 'DINE_IN'}}">
+                <view class="card_l">配送费 <text class="item_l_tips" wx:if="{{orderInfo.cardPostageName}}">{{orderInfo.cardPostageName}}</text></view>
+                <view class="item_r"> <text class="item_r_del" wx:if="{{orderInfo.cardPostageName}}">￥{{filter.valueFormat(orderInfo.oldPostage)}}</text> ￥{{filter.valueFormat(orderInfo.postage)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.pointn != 0}}">
+                <view class="card_l">积分</view>
+                <view class="card_r">{{filter.valueFormat_1(orderInfo.pointn)}}积分</view>
+            </view>
+            <!-- <view class="card_cell" wx:if="{{ orderInfo.reducePrice != null &&orderInfo.reducePrice != 0 }}">
+				<view class="card_l">会员减免</view>
+				<view class="card_r">-￥{{filter.valueFormat(orderInfo.reducePrice)}}</view>
+			</view> -->
+            <view class="card_cell" wx:if="{{orderInfo.cardAmt}}">
+                <view class="card_l">优惠券</view>
+                <view class="card_r price_clr">-￥{{filter.valueFormat(orderInfo.cardAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.otherAmt}}">
+                <view class="card_l">{{payTypeName[orderInfo.payType]}}支付</view>
+                <view class="card_r">￥{{filter.valueFormat(orderInfo.otherAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.weixinAmt}}">
+                <view class="card_l">微信支付</view>
+                <view class="card_r">￥{{filter.valueFormat(orderInfo.weixinAmt)}}</view>
+            </view>
+            <view class="card_cell" style="border-top: 1px solid #f9f9f9; padding-top: 30rpx;font-weight: bold;"  wx:if="{{orderInfo.refundOtherAmt || orderInfo.refundWeixinAmt || orderInfo.refundPoint}}">
+            退款
+            </view>
+
+            <view class="card_cell" wx:if="{{orderInfo.refundOtherAmt}}">
+                <view class="card_l">{{payTypeName[orderInfo.payType]}}支付</view>
+                <view class="card_r refund-font-color">-￥{{filter.valueFormat(orderInfo.refundOtherAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.refundWeixinAmt}}">
+                <view class="card_l">微信支付</view>
+                <view class="card_r refund-font-color">-￥{{filter.valueFormat(orderInfo.refundWeixinAmt)}}</view>
+            </view>
+            <view class="card_cell" wx:if="{{orderInfo.refundPoint}}">
+                <view class="card_l">积分</view>
+                <view class="card_r refund-font-color">-{{orderInfo.refundPoint}}积分</view>
+            </view>
+            
+        </view>
+        <view class="card_footer">
+            <view class="card_l">
+                实付<text class="price_clr"><text class="unit">{{orderInfo.orderType == 'INTEGRAL_MSD_ORDER' ? '' : '￥'}}</text>{{filter.valueFormat(orderInfo.status == 'UNPAID_ORDER' && orderInfo.distributionType == 'PICKUP' ? orderInfo.pickupAmt : orderInfo.amtn) }}<text wx:if="{{orderInfo.pointn != 0}}">+{{filter.valueFormat_1(orderInfo.pointn)}}积分</text></text>
+            </view>
+        </view>
+    </view>
+    <!-- 订单信息栏 -->
+    <view class="info_cell">
+        <view class="title">
+            订单信息
+        </view>
+        <view class="card_cell">
+            <view class="card_l">订单编号</view>
+            <view class="card_r">{{orderInfo.code}}</view>
+        </view>
+        <view class="card_cell">
+            <view class="card_l">下单时间</view>
+            <view class="card_r">{{orderInfo.createdTime}}</view>
+        </view>
+        <view class="card_cell">
+            <view class="card_l">支付方式</view>
+            <view class="card_r">
+                {{orderInfo.payTypeName}}
+            </view>
+        </view>
+        <view class="card_cell">
+            <view class="card_l">备注订单</view>
+            <view class="card_r">{{orderInfo.remark!=null&&orderInfo.remark?orderInfo.remark:'无'}}</view>
+        </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="btn_cell">
+        <van-button custom-class="refund_btn" plain hairline round bindtap="handleRefund" wx:if="{{(orderInfo.status == 'DELIVERED_ORDER' || orderInfo.status == 'SHIPPED_ORDER' || orderInfo.status == 'ARRIVED_ORDER' || orderInfo.status == 'PAYING_ORDER') && orderInfo.orderType != 'INTEGRAL_MSD_ORDER'}}">申请退款</van-button>
+        <van-button custom-class="confirm_btn" plain hairline round bindtap="handleArrived" type="primary" wx:if="{{(orderInfo.status == 'SHIPPED_ORDER' &&  orderInfo.distributionType != 'PICKUP') ||orderInfo.status =='ARRIVED_ORDER' }}">确认收货</van-button>
+        <van-button plain hairline round type="danger" size="small" custom-class="new_btn" wx:if="{{orderInfo.status == 'UNPAID_ORDER'}}" bind:click="handleUnpaid">立即付款</van-button>
+        <van-button plain hairline round custom-class="refund_btn" bind:click="handleEvaluate" wx:if="{{orderInfo.allowedComment && enableComment && !orderInfo.hasComment}}">评价</van-button>
+        <van-button plain hairline round custom-class="refund_btn" bind:click="LookEvaluate" wx:if="{{ orderInfo.allowedComment && enableComment && orderInfo.hasComment}}">查看评价</van-button>
+        <!-- 只有京东专区商品可以申请售后 -->
+        <van-button plain hairline round custom-class="refund_btn" wx:if="{{orderInfo.orderType == 'INTEGRAL_JD_ORDER' && orderInfo.status == 'CONFIRM_ORDER' && !orderInfo.hasApplyingRefund}}" bind:click="handleJDSupport">申请售后</van-button>
+    </view>
+    <van-dialog id="van-dialog"></van-dialog>
+
+    <!-- 图片放大功能 -->
+    <van-popup show="{{showPopup}}" bind:close="onClose" position="center">
+        <van-image src="{{orderInfo.arrivedPhoto[photoIndex]}}" width="540rpx" height="1036rpx" fit="contain" />
+    </van-popup>
+    <!-- 申请退款确认是否到货弹窗 -->
+    <van-popup show="{{showRefundConfirm}}" position="bottom" round z-index="1001">
+        <view class="refund-confirm">
+            <view class="refund-confirm-title">申请退款</view>
+            <view class="refund-confirm-content">
+                <view class="refund-confirm-content__header">您是否已收到货？</view>
+                <view class="refund-confirm-content__choice">
+                    <view class="refund-confirm-content__choice__item {{isReceived ? '' : 'selected'}}" data-receive="{{false}}" bind:tap="handleReceivde">未收货</view>
+                    <view class="refund-confirm-content__choice__item {{isReceived ? 'selected' : ''}}" data-receive="{{true}}" bind:tap="handleReceivde">已收货</view>
+                </view>
+                <view class="refund-confirm-content__choice__tip" wx:if="{{!isReceived}}">您的商品已出库，订单拦截可能不成功</view>
+            </view>
+            <view class="refund-confirm-tips" wx:if="{{isReceived}}">
+                <view>温馨提示：</view>
+                <view>若您对已收到货的商品质量不满意，您可以点击【确认收货】后再进行“申请售后”</view>
+            </view>
+            <view class="refund-confirm-tips" wx:else>
+                <view>温馨提示：</view>
+                <view>1.订单一旦取消，无法恢复</view>
+                <view>2.消费者因个人原因申请退货，包邮商品需承担返回运费，非包邮商品需承担送返两程运费</view>
+            </view>
+            <view class="refund-confirm-bottom">
+                <van-button custom-class="refund-confirm-bottom__btn" round block bind:click="handleRefundConfirm">
+                    {{isReceived ? '确认收货' : '申请退款'}}
+                </van-button>
+            </view>
+            <van-icon custom-class="refund-confirm-close" name="/images/icon/close.png" bind:click="handleCloseRefundConfirm" />
+        </view>
+    </van-popup>
+    <!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+    <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "小区专享秒杀活动"
+}

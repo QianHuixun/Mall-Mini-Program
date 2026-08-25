@@ -1,0 +1,18 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "drag-ball": "/components/dragBall/index",
+    "recommending-goods": "/components/recommending-goods/index"
+  },
+  "navigationBarBackgroundColor": "#f5f5f5",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "我的",
+  "navigationStyle":"custom"
+}

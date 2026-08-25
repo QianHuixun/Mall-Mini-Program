@@ -1,0 +1,49 @@
+/* pages/my/aboutUs/index.wxss */
+#aboutUs .title {
+  margin-bottom: 219rpx;
+ font-size: 58rpx;
+ color: #4d4d4d;
+}
+
+.xcx_header {
+  padding-top: 93rpx;
+  text-align: center;
+}
+
+
+.xcx_header .image {
+  display: inline;
+} 
+
+.xcx_header .title {
+  margin: auto;
+  text-align: center;
+}
+
+.new-panel .van-cell__value {
+  color: #999;
+}
+
+.loginout {
+  margin-top: 80rpx;
+  text-align: center;
+  position: relative;
+  z-index: 9;
+}
+.loginout-btn {
+  width: 280rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+  background: rgba(22, 155, 213, 1);
+}
+
+.xcx_footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 79rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+}

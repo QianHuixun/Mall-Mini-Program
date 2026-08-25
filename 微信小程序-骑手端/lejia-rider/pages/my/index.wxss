@@ -1,0 +1,84 @@
+/* pages/my/index.wxss */
+page {
+  background-color: #F2F2F4;
+  height: 100%;
+}
+
+#my {
+  height: 100%;
+}
+
+.top {
+  width: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 50rpx;
+  padding: 24rpx;
+  padding-left: 50rpx;
+  display: flex;
+  align-items: center;
+}
+
+.top-rig{
+  height: 140rpx;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  font-size: 24rpx;
+}
+
+.center{
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  top: 260rpx;
+  height: 300rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  box-shadow: 0 0 30rpx #F2F2F4;
+  display: flex;
+  align-items: center;
+}
+
+.center .item{
+  flex: 1;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashed{
+  border-right: 1px dashed #a7a8a8;
+}
+
+.content{
+  font-size: 50rpx;
+  color: #ec8343;
+  margin-top: 24rpx;
+}
+
+.item-all{
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  top: 580rpx;
+  height: 90rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+}
+
+.item-all text{
+  flex: 1;
+  margin-left: 24rpx;
+}
+.head-photo-box{
+  background: #fff;
+}

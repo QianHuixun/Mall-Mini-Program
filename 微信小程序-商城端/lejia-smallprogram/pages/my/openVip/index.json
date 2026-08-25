@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "space-dialog":"/components/space/index",
+    "go-cart": "/components/goCart/index"
+
+  },
+  "navigationBarBackgroundColor": "#c0a069",
+  "navigationBarTitleText": "开通会员"
+}

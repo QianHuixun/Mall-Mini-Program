@@ -1,0 +1,65 @@
+<!-- 
+@url: pages/my/bargain/index
+@description: 我的砍价
+@author: crj
+@date: 2020/08/24
+ -->
+<view id="bargain">
+	<!-- <van-image width="100%" fit="widthFix" src="{{imgSrc}}" /> -->
+
+	<!-- <text class="title">分享商品，享佣金</text> -->
+	<view class="item" wx:for="{{goodsList}}" wx:key="index" data-id='{{item}}' bindtap="goodsClick">
+		<view class="item-box">
+			<van-image style="margin: 0 15px;" width="200rpx" height="170rpx" src="{{item.list2[0].photo}}" />
+			<view class="item-right">
+				<view class="item-top">
+					<view style="width:90%" class="van-multi-ellipsis--l2">
+						{{item.list2[0].goodsName}}
+					</view>
+					<view class="item-center">
+						<view class="gray_clr" wx:if="{{item.rcutAmt&&item.time}}">
+							已砍价 <text class="label">{{item.cutAmt}}</text>元，还剩下
+							<text class="label">{{item.rcutAmt}}</text>元
+						</view>
+						<view class="label" wx:else>{{item.label}}</view>
+
+					</view>
+				</view>
+
+
+			</view>
+		</view>
+		<view class="item-bottom">
+			<view wx:if="{{item.time}}">
+				<van-count-down use-slot time="{{ item.time }}" bind:change="onChange" data-index="{{index}}">
+					<text class="time-top-item" wx:if="{{timeList[index].days}}">{{ timeList[index].days<10?'0'+timeList[index].days:timeList[index].days }}</text>
+					<text class="time-top-item-text" wx:if="{{timeList[index].days}}">天</text>
+					<text class="time-top-item">{{ timeList[index].hours<10?'0'+timeList[index].hours:timeList[index].hours }}</text>
+					<text class="time-top-item-text">:</text>
+					<text class="time-top-item">{{timeList[index].minutes<10?'0'+timeList[index].minutes:timeList[index].minutes}}</text>
+					<text class="time-top-item-text">:</text>
+					<text class="time-top-item">{{ timeList[index].seconds<10?'0'+timeList[index].seconds:timeList[index].seconds }}</text>
+					<text class="time-top-item-text" style="margin-left:16rpx">后结束</text>
+				</van-count-down>
+			</view>
+			<view class="time-top-item-text" wx:else>砍价结束</view>
+			<view class="btn-box">
+				<button  hover-class="btn-active" class="btn" open-type="getUserInfo" wx:if="{{item.time>0&&item.rcutAmt}}" catchtap="stopBubble"   data-pkey="{{item.list2[0].space}}" data-img="{{item.list2[0].photo}}" bind:getuserinfo="handlePopup">继续砍价</button>
+				<button hover-class="btn-active" wx:if="{{item.time}}" class="btn"  catchtap="goSubmit" data-pkey="{{item.pkey}}" data-time="{{item.time}}">去支付</button>
+			</view>
+		</view>
+	</view>
+	<van-popup show="{{ show }}" bind:close="onClose" round closeable close-icon-position="top-right" custom-class="van-popup">
+		<view class="popup-box">
+			<view class="img-box">
+				<image src="{{imgUrl + 'cut_share.png'}}" mode="aspectFit"></image>
+			</view>
+			<view class="label">
+				分享砍价，可多砍一刀
+			</view>
+			<button open-type="share" class="share-btn">邀请好友去砍价</button>
+		</view>
+	</van-popup>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

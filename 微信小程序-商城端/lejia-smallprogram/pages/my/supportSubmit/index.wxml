@@ -1,0 +1,178 @@
+<!--pages/my/supportSubmit/index.wxml-->
+<view id="support_submit">
+    <!-- 退款产品 -->
+    <view class="support_goods">
+        <van-cell border="{{false}}">
+            <view slot="title">
+                <view class="van-cell-text">
+                    <text class="icon_star">*</text>
+                    {{ supportStepOneData.returnExchange == 'EXCHANGE' ? '换货' : '退款'}}商品
+                </view>
+            </view>
+            <view>
+                <view class="van-cell-value">
+                    <view class="van-cell-value_flex">
+                        <van-image width="90rpx" height="90rpx" src="{{item.photo || '/images/no-pic.png'}}" wx:for="{{supportStepOneData.lines}}" wx:key="index" wx:if="{{index < 2}}"></van-image>
+                        <text>共{{supportStepOneData.lines.length}}种</text>
+                    </view>
+                </view>
+            </view>
+        </van-cell>
+        <view class="support_goods_tip" wx:if="{{supportStepOneData.returnExchange != 'EXCHANGE'}}">预计退款金额<text class="support_goods_tip_amt">¥{{supportData.refundAmt}}</text>(以实际金额为准)</view>
+    </view>
+    <!-- 原因以及凭证 -->
+    <view class="support_box support_voucher">
+        <van-cell center bind:click="handleShowApplyReason">
+            <view slot="title" style="font-weight: bold;">
+                <text class="icon_star">*</text>
+                申请原因
+            </view>
+            <view style="color: #333">{{reason || '请选择申请原因'}}</view>
+            <van-icon custom-class="icon__arrow-right" slot="right-icon" size="16rpx" name="/images/icon/arrow-right.png" />
+        </van-cell>
+        <view class="support_box_title">
+            <text class="icon_star">*</text>
+            补充描述和凭证
+        </view>
+        <view class="support_box_form">
+            <van-field value="{{describe}}" label="" type="textarea" placeholder="补充详细退款原因，上传商品图片，方便商家更快帮你处理" bind:change="onTextareaChange" border="{{ false }}" />
+            <van-uploader file-list="{{ photo }}" deletable="{{ true }}" max-count="6" bind:after-read="afterRead" bind:delete="uploaderDelete">
+                <view slot="" class="upload-icon">
+                    <van-icon name="photograph" size="36rpx"></van-icon>
+                    <view>上传凭证</view>
+                    <view>（最多6张）</view>
+                </view>
+            </van-uploader>
+        </view>
+    </view>
+    <!-- 返回方式 -->
+    <view class="support_box">
+        <van-cell center border="{{false}}" bind:click="handleShowReturnMethod">
+            <view slot="title">
+                <text class="icon_star">*</text>
+                返回方式
+            </view>
+            <view style="color: #333">{{courierTypeEnum[courierType] || '请选择返回方式'}}</view>
+            <van-icon custom-class="icon__arrow-right" slot="right-icon" size="16rpx" name="/images/icon/arrow-right.png" />
+        </van-cell>
+        <view class="tips">若因您个人原因(不喜欢/无质量问题等)申请售后，审核将不被通过；若因商品问题(破损/商品故障等)申请售后，请您上传照片，经核实属实后，因退换货产生的邮费将由商家承担</view>
+        <van-cell value-class="support_box__cell_value" wx:if="{{courierType != 'SELF_MAILING'}}" center border="{{false}}" data-name="addr" bind:click="handleGoAddr">
+            <view slot="title">取件地址</view>
+            <view class="support_box__cell_value">{{addr ? addr.addrDetail : '请选择取件地址'}}</view>
+            <van-icon custom-class="icon__arrow-right" slot="right-icon" size="16rpx" name="/images/icon/arrow-right.png" />
+        </van-cell>
+        <view class="contact" wx:if="{{courierType != 'SELF_MAILING' && addr}}">
+            <text>{{addr.name}}</text>
+            <text>{{addr.mobile}}</text>
+        </view>
+        <van-cell value-class="support_box__cell_value"  wx:if="{{courierType != 'SELF_MAILING'}}" center border="{{false}}" bind:click="handleShowPickupTime">
+            <view slot="title">取件时间</view>
+            <view class="support_box__cell_value time">{{pickupTimeStr || '请选择取件时间'}}</view>
+            <van-icon custom-class="icon__arrow-right" slot="right-icon" size="16rpx" name="/images/icon/arrow-right.png" />
+        </van-cell>
+    </view>
+    <!-- 收货地址 -->
+    <view class="support_box" wx:if="{{supportStepOneData.returnExchange == 'EXCHANGE'}}">
+        <van-cell value-class="support_box__cell_value" center border="{{false}}" data-name="receiptAddr" bind:click="handleGoAddr">
+            <view slot="title">收货地址</view>
+            <view class="support_box__cell_value">{{receiptAddr ? receiptAddr.addrDetail : '请选择收货地址'}}</view>
+            <van-icon custom-class="icon__arrow-right" slot="right-icon" size="16rpx" name="/images/icon/arrow-right.png" />
+        </van-cell>
+        <view class="contact" wx:if="{{receiptAddr}}">
+            <text>{{receiptAddr.name}}</text>
+            <text>{{receiptAddr.mobile}}</text>
+        </view>
+    </view>
+    <!-- 按钮栏 -->
+    <view class="support_button">
+        <van-button disabled="{{disabled}}" bind:click="handleSubmit" custom-class="support_btn" bind:click="handleSubmit">提交</van-button>
+    </view>
+    <!-- 成功提示 -->
+    <view class="success_tips" wx:if="{{showTips}}">
+        <van-icon name="checked" size="80rpx" color="#0DAE4E" />
+        <view class="success_text">退款申请提交成功</view>
+        <view class="success_wait_text">等待商家处理</view>
+        <van-button type="primary" bind:click="handeBack" round custom-class="back-btn">确 定</van-button>
+    </view>
+</view>
+
+<!-- 退货原因弹窗 -->
+<van-popup show="{{ showApplyReason }}" position="bottom" round bind:close="handleCloseApplyReason">
+    <view class="apply-reason">
+        <view class="apply-reason-title">申请原因</view>
+        <view class="apply-reason-content">
+            <view
+                class="apply-reason-item {{selectReason == item ? 'selected' : ''}}"
+                wx:for="{{ reasonList }}"
+                data-reason="{{ item }}"
+                bind:tap="handleReasonChange"
+            >
+                <view class="apply-reason-item__label">{{ item }}</view>
+                <van-icon custom-class="apply-reason-item__icon" name="/images/icon/{{selectReason == item ? 'selected' : 'unselected'}}.png" />
+            </view>
+        </view>
+        <van-icon custom-class="apply-reason-close" name="/images/icon/close.png" bind:click="handleCloseApplyReason" />
+        <view class="apply-reason-bottom">
+            <van-button custom-class="apply-reason-bottom__btn" round block bind:click="handleReasonConfirm">
+                确定
+            </van-button>
+        </view>
+    </view>
+</van-popup>
+
+<!-- 返回方式弹窗 -->
+<van-popup show="{{ showReturnMethod }}" position="bottom" round bind:close="handleCloseReturnMethod">
+    <view class="return-method">
+        <view class="return-method-title">返回方式</view>
+        <view class="return-method-content">
+            <view class="return-method-item {{selectCourierType == 'JD_DOOR_TO_DOOR_PICKUP' ? 'selected' : ''}}" wx:if="{{supportStepOneData.jdDoor}}" data-type="JD_DOOR_TO_DOOR_PICKUP" bind:tap="handleReturnMethodChange">
+                <van-image custom-class="return-method-item__image" src="/images/my/jd-rider.png" />
+                <view class="return-method-item__content">
+                    <view class="return-method-item__content__name">京东上门取件</view>
+                    <view class="return-method-item__content__tip">预约京东快递上门取件</view>
+                </view>
+                <van-icon custom-class="return-method-item__icon" name="/images/icon/{{selectCourierType == 'JD_DOOR_TO_DOOR_PICKUP' ? 'selected' : 'unselected'}}.png" />
+            </view>
+            <view class="return-method-item {{selectCourierType == 'SELF_MAILING' ? 'selected' : ''}}" wx:if="{{supportStepOneData.selfMailing}}" data-type="SELF_MAILING" bind:tap="handleReturnMethodChange">
+                <van-image custom-class="return-method-item__image" src="/images/my/i-rider.png" />
+                <view class="return-method-item__content">
+                    <view class="return-method-item__content__name">自行寄出</view>
+                    <view class="return-method-item__content__tip">自行寄出商品 > 填写运单号</view>
+                </view>
+                <van-icon custom-class="return-method-item__icon" name="/images/icon/{{selectCourierType == 'SELF_MAILING' ? 'selected' : 'unselected'}}.png" />
+            </view>
+        </view>
+        <van-icon custom-class="return-method-close" name="/images/icon/close.png" bind:click="handleCloseReturnMethod" />
+        <view class="return-method-bottom">
+            <van-button custom-class="return-method-bottom__btn" round block bind:click="handleReturnMethodConfirm">
+                确定
+            </van-button>
+        </view>
+    </view>
+</van-popup>
+
+<!-- 取件时间弹窗 -->
+<van-popup show="{{ showPickupTime }}" position="bottom" round bind:close="handleClosePickupTime">
+    <view class="pickup-time">
+        <view class="pickup-time-title">取件时间</view>
+        <view class="pickup-time-content">
+            <van-tree-select
+                main-item-class="main-item-class"
+                main-active-class="main-active-class"
+                content-item-class="content-item-class"
+                content-active-class="content-active-class"
+                items="{{ timeItems }}"
+                main-active-index="{{ mainActiveIndex }}"
+                active-id="{{ activeId }}"
+                bind:click-nav="handleClickNav"
+                bind:click-item="handleClickItem"
+            />
+        </view>
+        <van-icon custom-class="pickup-time-close" name="/images/icon/close.png" bind:click="handleClosePickupTime" />
+        <view class="pickup-time-bottom">
+            <van-button custom-class="pickup-time-bottom__btn" round block bind:click="handlePickupTimeConfirm">
+                确定
+            </van-button>
+        </view>
+    </view>
+</van-popup>

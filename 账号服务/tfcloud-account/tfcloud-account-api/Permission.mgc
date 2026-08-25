@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="cn.tofocus.domain.user.supervise.SuperviseRoleInstance"
+        x="526" y="753">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.RoleInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.app.AppRole" x="612" y="493">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Role"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.sys.SysAccessInstance" x="294" y="1442">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.sys.SysFunction" x="348" y="1067">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Function"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.app.AppAccessInstance" x="654" y="1341">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.sys.SysRoleInstance" x="260" y="750">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.RoleInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.supervise.SuperviseRole" x="496" y="497">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Role"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.def.AccessInstance" x="453" y="1240">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.def.RoleInstance" x="483" y="634">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class
+        name="cn.tofocus.domain.user.supervise.SuperviseAccessInstance"
+        x="557" y="1515">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.def.Function" x="418" y="897">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.app.AppRoleInstance" x="692" y="752">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.RoleInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.app.AppFunction" x="653" y="1063">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Function"/>
+        <Association
+            destinationClassName="cn.tofocus.domain.user.app.AppFunction.FunctionType"
+            endpointName="funcType" kind="Simple"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.org.OrgAccessInstance" x="361" y="1513">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.AppRoleAccessInstance" x="629" y="1444">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.org.OrgRole" x="414" y="498">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Role"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.supervise.SuperviseFunction"
+        x="526" y="1066">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Function"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.UserPermission" x="70" y="-39">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.RoleInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.Instance" x="321" y="630">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.def.Role" x="386" y="303">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.app.AppFunction.FunctionType"
+        x="692" y="940">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.sys.SysRole" x="320" y="499">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Role"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.org.OrgFunction" x="437" y="1067">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.Function"/>
+    </Class>
+    <Class name="cn.tofocus.domain.cache.user.UserPermissionCache"
+        x="528" y="-41">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.def.AccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.org.OrgAccessInstance"/>
+        <Communication destinationClassName="cn.tofocus.domain.user.supervise.SuperviseAccessInstance"/>
+    </Class>
+    <Class name="cn.tofocus.domain.user.org.OrgRoleInstance" x="385" y="750">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="cn.tofocus.domain.user.def.RoleInstance"/>
+    </Class>
+</ClassDiagram>

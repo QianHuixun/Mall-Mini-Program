@@ -1,0 +1,23 @@
+<!-- 
+@url: pages/point/index.wxml
+@description:客户积分消费记录
+@author: sx
+@date: 2020-07-29
+ -->
+<view id="point">
+    <view class="xcx-list">
+      <view class="list-cell" wx:for="{{datalist}}" wx:key="index">
+      <view class="list-cell__left">
+        <view class="title">用户名：{{item.memberName}}</view>
+        <view class="date">支付时间</view>
+        <view class="date">{{item.createdTime}}</view>
+        </view>
+        <view class="list-cell__right">
+        花费积分：<text>{{item.points}}</text>
+        </view>
+      </view>
+    </view>
+  	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>
+

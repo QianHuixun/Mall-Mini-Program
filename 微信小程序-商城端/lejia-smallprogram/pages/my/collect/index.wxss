@@ -1,0 +1,145 @@
+/* pages/my/collect/index.wxss */
+
+#collect{
+    background: #F2F4F7;
+    height: 100%;
+}
+
+.photo {
+  display: block;
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.wx-cell {
+  display: flex;
+}
+
+.wx-cell .wx-left {
+  margin-right: 20rpx;
+}
+
+.wx-cell .wx-right {
+  flex: 1;
+}
+
+.wx-active {
+  display: flex;
+  height: 48rpx;
+  overflow:hidden;
+}
+
+.wx-active .wx-price {
+  flex: 1;
+}
+
+.wx-title {
+  width: 80%;
+  height: 80rpx;
+  margin-bottom: 8rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  word-break: break-all; 
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.wx-price {
+  color: #f22005;
+  font-size: 28rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+}
+
+.goods_content .van-button--danger {
+  height: 180rpx;
+}
+
+.no_tips {
+  font-size: 26rpx;
+  color: #ddd;
+  text-align: center;
+}
+
+.arrow {
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  margin-top: -18rpx;
+}  
+
+.mar_l_8 {
+  margin-left: 16rpx;
+}
+
+.merchant_list {
+    border-bottom: 1px solid #F0F0F0;
+    padding: 24rpx;
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .merchant_photo {
+    width: 144rpx;
+    height: 144rpx;
+    overflow: hidden;
+    border-radius: 16rpx;
+    margin-right: 16rpx;
+  }
+
+  .merchant_list  .merchant_detail {
+    flex: 1;
+    position: relative;
+    padding-left: 16rpx;
+  }
+
+  .merchant_list .merchant_detail .title {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .merchant_list .merchant_detail .title van-image {
+    float: left;
+    margin-right: 8rpx;
+    margin-top: 2rpx;
+  }
+
+  .merchant_list .merchant_detail .stall {
+    font-size: 24rpx;
+    color: #A56D41;
+    margin-top: 8rpx;
+  }
+
+  .merchant_list .merchant_detail  .sales_volume {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: 12rpx; 
+    background: #FCEAE6;
+    border-radius: 8rpx;
+    overflow: hidden;
+    line-height: 38rpx;
+    height: 38rpx;
+    font-size: 22rpx;
+    color: #ED4528;
+    padding-right: 12rpx;
+  }
+  .merchant_list .merchant_detail  .sales_volume van-image {
+    float: left;
+    margin-right: 12rpx;
+  }
+
+  .booth_content .van-cell {
+    margin: 24rpx;
+    margin-bottom: 0;
+    width: auto !important;
+    padding: 0;
+    border-radius: 24rpx;
+    height: 192rpx;
+}
+
+.booth_content .van-button--danger {
+    height: 192rpx;
+  }

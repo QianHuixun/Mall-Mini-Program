@@ -1,0 +1,112 @@
+/* pages/my/lookEvaluate/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+.name-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
+.look-evaluate {
+  margin: 0 24rpx;
+}
+/* 评论区 */
+.look-evaluate-main {
+  margin-top: 20rpx;
+}
+
+/* 商品模块 */
+.look-evaluate-item {
+  background: #fff;
+  border-radius: 20rpx;
+  padding : 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.look-evaluate-item_top {
+ display: flex;
+ align-items: center;
+}
+
+.look-evaluate-item_top .top-image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+}
+
+.look-evaluate-item_top__right {
+  flex: 1;
+  width: 0;
+}
+
+.look-evaluate-item_top__right___top {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.look-evaluate-item_top__right___bottom text {
+  color: #666;
+  font-size: 24rpx;
+  margin-left: 16rpx;
+}
+/* end 商品模块 */
+/* 评论文本 */
+.look-evaluate_item__middle {
+  margin-top: 16rpx;
+  font-size: 28rpxpx;
+  color: #333333;
+}
+/* end 评论文本 */
+
+/* 图片上传 */
+.look-evaluate_item__third {
+  margin-top: 32rpx;
+}
+
+.item-image {
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin-right: 12rpx;
+}
+
+.look-evaluate_item__third van-image:last-child .item-image {
+  margin-right: 0;
+}
+/* end 图片上传 */
+
+/* 回复区 */
+.look-evaluate_item__bottom {
+  background: #F7F7F7;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  position: relative;
+}
+
+.text-content {
+  line-height: 40rpx; /* 需与JS中行高一致 */
+  font-size: 28rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #666;
+}
+.toggle-btn {
+  color: #333; 
+  font-size: 26rpx;
+  position: absolute;
+  right: 0;
+  top: 56rpx;
+  line-height: 40rpx;
+  background-color: #F7F7F7;
+  width: 4em;
+}
+.ellipsis { -webkit-line-clamp: 2; }  /* 默认显示2行 */
+.unellipsis { -webkit-line-clamp: 0; } /* 0表示无行数限制 */
+/* end 回复区 */
+/* end 评论区 */

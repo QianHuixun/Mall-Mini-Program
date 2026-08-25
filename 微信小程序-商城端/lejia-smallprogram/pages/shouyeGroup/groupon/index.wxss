@@ -1,0 +1,124 @@
+/* pages/shouyeGroup/groupon/index.wxss */
+#groupon swiper {
+  background-color: #fafafa;
+  height: calc( 100vw * 0.4266 );
+}
+
+#groupon swiper swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #ffc428;
+  display: block;
+  text-align: center;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.item {
+  margin-top: 24rpx;
+  display: flex;
+  height: 240rpx;
+  align-items: flex-start;
+}
+
+.item-right {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2rpx solid #d9d9d9;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+.item-right .van-multi-ellipsis--l2 {
+  margin: 17rpx 0 34rpx 0;
+  font-size: 28rpx;
+  height: 76rpx;
+  line-height: 38rpx;
+  overflow: hidden;
+}
+
+.item-center {
+  display: flex;
+  align-items: baseline;
+}
+
+.item-center .gray_clr {
+  text-decoration: line-through;
+}
+
+.item-center-one{
+  font-size: 28rpx;
+}
+
+.item-center-two{
+  font-size: 28rpx;
+  color: #f24539;
+}
+
+.item-center-three{
+  font-size: 40rpx;
+  color: #f24539;
+}
+
+.item-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.item-bottom-left{
+  width: 220rpx;
+  height: 50rpx;
+  position: relative;
+}
+
+.item-bottom-left-title{
+  position: absolute;
+  left: 12rpx;
+  top: 7rpx;
+  color: #ffc428;
+  font-size: 24rpx;
+}
+
+.item-bottom-left-num{
+  position: absolute;
+  right: 12rpx;
+  top: 7rpx;
+  color: #5c5c5c;
+  font-size: 24rpx;
+}
+
+#groupon .btn{
+  height: 57rpx;
+  padding: 0 18rpx;
+  margin-right: 28rpx;
+  line-height: 57rpx;
+  font-size: 23rpx;
+  background: #f24539;
+  color: #fff;
+  border: 0;
+}
+
+#groupon .btn text {
+  font-size: 28rpx;
+}
+
+.item-bottom .gray_clr {
+  font-size: 28rpx;
+}
+
+#groupon .van-tag {
+  position: relative;
+  margin-left: 10rpx;
+  top: -5rpx;
+  background: #fff4e1;
+  border-radius: 8rpx;
+  border: 1px solid #fea372;
+}

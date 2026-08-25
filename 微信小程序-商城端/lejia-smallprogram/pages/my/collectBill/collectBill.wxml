@@ -1,0 +1,45 @@
+<!-- 
+@url:pages/my/collectBill/index.wxml
+@description: 凑单
+@author: crj
+@date: 2020/08/20
+-->
+<view id="collectBill">
+
+	<view>
+		<block wx:if="{{ goodsList.length > 0 }}">
+			<view class="goods_list" wx:for="{{goodsList}}" wx:key="index" data-pkey="{{item.pkey}}" bindtap="goDetail">
+				<!-- <image src="{{ item.photo2 }}" class="goods_photo"></image> -->
+				<van-image src="{{item.photo}}" custom-class="goods_photo" />
+				<view class="goods_detail">
+					<view class="goods_title">
+						
+						{{item.goodsTitle}}
+						<!-- {{item.title}}{{item.title}} -->
+					</view>
+				
+					<view class="goods_price">
+						<view class="price">
+							<text class="price-title">换购价</text>
+							￥<text class="big_price">{{item.bigPrice}}</text>.{{item.smallPrice}}
+							<text class="del_price">￥{{ item.priceOld }}</text>
+						</view>
+						<van-icon name="/images/carAdd.png" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-space="{{item.space}}" catchtap="getSpaceNumber" />
+					</view>
+				</view>
+			</view>
+		</block>
+		<!-- 加载更多数据 -->
+		<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	</view>
+	<!-- 加入购物车 动画效果 -->
+	<!-- <go-cart id="goCartView" isIcon="{{true}}"></go-cart> -->
+	<!-- 规格选择弹出层 -->
+	<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+	isbindAddCart="{{true}}"></space-dialog>
+
+	<view class="buycar-btn" catchtap="goBuycar">
+		<van-icon name="/images/tabbar/car.png" info="{{buycarNum}}"  size="30" />
+	</view>
+
+</view>

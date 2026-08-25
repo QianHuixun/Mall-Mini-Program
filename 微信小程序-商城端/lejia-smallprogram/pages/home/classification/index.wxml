@@ -1,0 +1,72 @@
+<!--pages/home/classification/index/index.wxml-->
+
+
+<view id="calssify" class="classify {{theme.value}}">
+  <drag-ball type="MARKET_MALL"></drag-ball>
+	<!-- 顶部搜索栏-->
+	<view class="wx_container" style="top:{{statusBarHeight}}px; position: relative">
+      <van-tabs id="tabs" active="{{tabActive}}" color="{{theme.primary}}" line-width="44rpx" title-active-color="{{theme.primary}}" title-inactive-color="#000000" bind:click="onTabsClick" >
+        <van-tab title="商品" name="GOODS">    
+            <!-- 动态加载组件 -->
+              <block wx:if="{{currentComponent === 'category-2layer'}}">
+                <category-2layer id="categoryLayer"/>
+              </block>
+              
+              <block wx:else>
+                <category-3layer id="categoryLayer"/>
+              </block>
+       
+        </van-tab>
+        <!-- 商户 -->
+        <van-tab title="摊位号" name="MERCHANT"  wx:if="{{marketType === 'VENDOR_SHOPPING_MALL'}}">
+          <!-- 用于解决婷婷手机空白为题，原因为tab高度为0 -->
+          <view  style="height: 100vh"></view> 
+          <view class="my-bg" style="height: calc({{statusBarHeight + 52}}px + 86rpx);">
+          <van-image src="{{imgUrl + 'my_bg.png'}}"  ></van-image> 
+        </view> 
+          <view class="wx_top"  style="top: {{statusBarHeight + 52 }}px; ">         
+            <view class="calssify-search" bindtap="searchMerchantfocus">
+              <view class="calssify-search-box">
+                <van-icon name="/images/search_btn.png" size="22rpx" color="#999999" />
+                <text>搜索商户</text>
+              </view>
+           </view>
+          </view>
+           <!-- 左侧一级分类 -->
+           <view class="wx_left" style="padding-top: calc({{statusBarHeight + 52}}px + 86rpx);">
+          <scroll-view class="first-classify" scroll-with-animation scroll-into-view="merchant-scroll-{{activeMerchantClassify}}" scroll-y="true"  enhanced="{{true}}" show-scrollbar="{{false}}">  
+          <view wx:for="{{merchantClassifyList}}" wx:key="index" id="merchant-scroll-{{item.pkey}}" data-pkey="{{item.pkey}}" bind:tap="sidebarMerchantTab" class="item {{activeMerchantClassify == item.pkey ? 'active' : ''}}">
+              {{  item.name }}
+              </view>  
+          </scroll-view>
+        </view>
+          <!-- 右侧 商户列表 -->
+            <view class="wx_right" style="top: calc({{statusBarHeight + 52}}px + 86rpx);">
+              <scroll-view bind:scroll="onMerchantScroll" scroll-y id="merchant-scroller"  style="height: calc(100vh - {{statusBarHeight + 52}}px - 110rpx);" 	enable-back-to-top="{{false}}" bindscrolltolower="scrollMerchantBottom"  enhanced="{{true}}" show-scrollbar="{{false}}">
+                <view wx:for="{{merchantList}}" wx:key="index" data-pkey="{{item.group.key}}" class="merchantItem" id="merchant-scroll-{{ item.group.key  }}">     
+                <view class="group-title">{{item.group.value}}</view> 
+                <view class="merchant_list" wx:for="{{item.data}}" wx:key="subIndex" 
+                wx:for-item="subItem" wx:for-index="subIndex" catchtap="goMerchantDetail"  data-pkey="{{subItem.pkey}}" >
+                    <van-image src="{{subItem.headIcon ? (subItem.headIcon + '&thumb=small') : '/images/classification/merchant-noPic.png'}}" custom-class="merchant_photo" data-index="{{subIndex}}" />
+                    <view class="merchant_detail">
+                        <view class="title">
+                          <!-- <van-image width="52rpx" height="36rpx" src="/images/i-shop.png"></van-image> -->
+                          {{subItem.name}}
+                        </view>
+                        <view class="stall">摊位号：{{subItem.booth}}</view>
+                        <view class="sales_volume">
+                          <van-image width="40rpx" height="38rpx" src="/images/classification/i-fire.png" custom-class="merchant-image"></van-image>销量:{{subItem.xsNum}}
+                        </view>
+                  </view>
+                </view>
+              </view>
+              <van-divider contentPosition="center" wx:if="{{!hasMerchantMore}}" fontSize="24rpx" borderColor="#fff">暂无其他数据</van-divider>
+          </scroll-view>
+
+        </view>
+        </van-tab>
+    </van-tabs>
+ 
+         
+  </view>
+</view>

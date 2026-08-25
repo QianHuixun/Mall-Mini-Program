@@ -1,0 +1,23 @@
+/* pages/my/offlineOrder/index.wxss */
+page {
+  background: #f9f9f9;
+}
+
+.order_cell {
+  background: #fff;
+  margin-bottom: 16rpx;
+}
+
+.order_cell .title {
+  padding: 16rpx 30rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.order_cell .con {
+  padding: 30rpx 30rpx;
+}
+
+.order_cell .con .line {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}

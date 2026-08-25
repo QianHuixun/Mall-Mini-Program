@@ -1,0 +1,7 @@
+/* pages/userAgreement/userAgreement.wxss */
+.user-agreement {
+    padding: 48rpx;
+}
+.link {
+    color: #169BD5;
+}

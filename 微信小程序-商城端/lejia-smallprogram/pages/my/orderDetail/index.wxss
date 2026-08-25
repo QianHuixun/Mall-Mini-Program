@@ -1,0 +1,1190 @@
+/* pages/my/orderDetail/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+#orderDetail {
+  padding-bottom: 165rpx;
+}
+
+#orderDetail .rider_tips {
+  color: #333333;
+  line-height: 24rpx;
+  font-size: 26rpx;
+  margin: 0 42rpx 32rpx 24rpx;
+  text-align: right;
+}
+
+.status_cell {
+  background: transparent;
+  margin-bottom: 0;
+  padding: 40rpx 32rpx 40rpx 42rpx;
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status_cell_confirm {
+  background: #F9F9F9;
+  margin-bottom: 0;
+  /* padding: 100rpx 0 30rpx 60rpx; */
+  padding: 42rpx 32rpx 42rpx 41rpx;
+  /* color: #fff; */
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status_cell_status {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.status_cell_status .status_text {
+  font-size: 48rpx;
+  line-height: 48rpx;
+  margin-bottom: 22rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.status_cell_status .delivery_type {
+  font-size: 26rpx;
+  font-size: 13px;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #999999;
+}
+
+.status_cell .delivered_order_img {
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.status_cell_confirm .delivered_order_img {
+  width: 96rpx;
+  height: 96rpx;
+}
+
+.delivered_order_img.refund_rorder_img {
+  width:  120rpx;
+  height: 96rpx;
+}
+
+.status_cell_confirm .delivery_type {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.status_cell .delivered_order_pickupcode,.status_cell .delivered_order_ts {
+  width: 300rpx;
+  height: 120rpx;
+  /* border: 4rpx solid #B5FFCB; */
+  /* background: #0B9936; */
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+
+.status_cell .delivered_order_pickupcode image,.status_cell .delivered_order_ts image,.status_cell_confirm .delivered_order_ts image{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.delivered_order_pickupover {
+  width: 280rpx;
+  height: 120rpx;
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.delivered_order_pickupover image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.status_cell_confirm .delivered_order_pickupcode {
+  width: 220rpx;
+  height: 120rpx;
+  border: 4rpx solid #B5FFCB;
+  background: #0B9936;
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.status_cell_confirm .delivered_order_ts {
+  position:relative;
+  width: 300rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.delivered_order_pickupcode .pickupcode, .delivered_order_ts  .pickupcode{
+  font-size: 48rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #0DAE4E;
+}
+
+.delivered_order_pickupcode .pickup_name,.delivered_order_ts .pickup_name  {
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.goods_cell {
+  margin: 0 24rpx 20rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+}
+
+.card_footer {
+  border-top: 1px solid #f9f9f9;
+  display: flex;
+  align-items: center;
+  padding: 32rpx 24rpx;
+  font-size: 28rpx;
+  text-align: right;
+}
+
+.card_con {
+  padding: 0 24rpx;
+
+}
+
+.card_con>.title {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  padding: 24rpx 0 32rpx 0;
+}
+
+.card_price {
+  margin: 0 26rpx;
+  font-size: 28rpx;
+  padding-bottom: 30rpx;
+  padding-top: 40rpx;
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
+.card_cell {
+  display: flex;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  margin-top: 30rpx;
+}
+
+
+.card_price .card_cell .card_l {
+  flex: 1;
+
+}
+
+
+.card_price .card_cell .strikeout {
+  text-decoration: line-through;
+}
+
+.card_goods_list+.card_goods_list {
+  margin-top: 32rpx;
+}
+
+.card_goods_list .card_c,
+.card_footer .card_l {
+  flex: 1;
+}
+
+.card_footer .card_l {
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  line-height: 24rpx;
+}
+
+.card_footer .card_l .price_clr .unit {
+  font-size: 30rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #ED4528;
+  display: inline-block;
+  padding: 0 10rpx 0 16rpx;
+}
+
+.card_goods_list .card_c {
+  flex: 1;
+  font-size: 28rpx;
+  margin-right: 16rpx;
+}
+
+.card_goods_list .card_c .card_c_name {
+  font-size: 28rpx;
+  line-height: 36rpx;
+  height: 72rpx;
+  overflow: hidden;
+
+}
+
+.card_goods_list .card_c .card_c_space {
+  color: #999;
+}
+
+.card_r .price_clr {
+  line-height: 36rpx;
+  height: 72rpx;
+}
+
+.card_goods_list .card_r {
+  font-size: 24rpx;
+  text-align: right;
+}
+
+.card_goods_list .van-image {
+  display: block;
+  margin-right: 16rpx;
+}
+
+.address_cell {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin: 0 24rpx 20rpx 24rpx;
+  overflow: hidden;
+}
+
+.address_cell .kd_cell {
+  padding: 16rpx 0;
+}
+
+.address_cell .van-cell-text {
+  display: flex;
+}
+
+.van-cell-text .name {
+  flex: 1;
+}
+
+.addr_img {
+  /* position: absolute;
+  bottom: 65px;
+  left: 0; */
+  display: block;
+  width: 100%;
+  height: 6rpx;
+}
+
+#orderDetail .new-cell {
+  align-items: center;
+}
+
+#orderDetail .new-cell .van-icon {
+  font-size: 48rpx;
+}
+
+#orderDetail .pick-cell .van-icon {
+  font-size: 38rpx;
+  margin-right: 10px;
+}
+
+.address_cell .card_cell {
+  padding: 6rpx 20rpx;
+}
+
+.info_cell {
+  padding: 0 24rpx 32rpx 24rpx;
+  margin: 0 24rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}
+
+.info_cell>.title {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  padding: 24rpx 0 24rpx 0rpx;
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
+.info_cell .card_l {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  margin-right: 40rpx;
+  white-space: nowrap;
+}
+
+.info_cell .card_r {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+}
+
+.btn_cell {
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 106rpx;
+  box-sizing: border-box;
+  padding: 16rpx 20rpx;
+  background: #fff;
+  border-top: 1px solid #f9f9f9;
+  text-align: right;
+}
+
+.btn_cell .van-button {
+  margin-right: 15rpx;
+}
+
+.remark_cell {
+  margin-bottom: 10rpx;
+}
+
+.remark_input {
+  text-align: right !important;
+  color: #333 !important;
+}
+
+/* 商户信息以及核销二维码 */
+.wx-panel_item {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.wx-panel_item .wx-panel_item__left {
+  flex: 1;
+  border-right: 2rpx solid #f5f5f5;
+  font-size: 30rpx;
+}
+
+.wx-panel_item .title_cell {
+  margin-bottom: 14rpx;
+}
+
+.wx-panel_item .addr_cell {
+  color: #999;
+  font-size: 26rpx;
+}
+
+.wx-panel_item__right {
+  padding: 0 10rpx 0 40rpx;
+
+}
+
+
+
+.info_cell .wx-panel_cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+}
+
+.info_cell .name-cell {
+  font-size: 32rpx;
+}
+
+.info_cell .img-cell {
+  text-align: center;
+}
+
+.info_cell .tips-cell {
+  text-align: center;
+
+}
+
+.wx-panel {
+  width: 100%;
+  background: #fff;
+}
+
+.wx-panel_title {
+  display: flex;
+  height: 66rpx;
+  font-size: 28rpx;
+  line-height: 66rpx;
+}
+
+.wx-panel_title .wx-panel_title__text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.wx-panel_title .wx-panel_title__line {
+  display: inline-block;
+  width: 6rpx;
+  height: 28rpx;
+  background: #3ccf8a;
+  margin-right: 20rpx;
+}
+
+/* end 商户信息以及核销二维码 */
+
+/* 确认收货按钮 */
+.confirm_btn {
+  height: 76rpx !important;
+  padding: 0 60rpx  !important;
+  border-radius: 38rpx !important;
+  background: #ffffff;
+  color: #0DAE4E !important;
+  font-size: 30rpx !important;
+  border: 1px solid #0DAE4E !important;
+}
+
+.refund_btn {
+  font-weight: 400 !important;
+  font-size: 30rpx !important;
+  color: #333333 !important;
+  height: 76rpx !important;
+  padding: 0 60rpx  !important;
+  border-radius: 38rpx !important;
+  background: #ffffff;
+  border: 1rpx solid #F0F0F0;
+}
+
+.new_btn {
+  height: 76rpx !important;
+  padding: 0 60rpx  !important;
+  border-radius: 38rpx  !important;
+  font-size: 30rpx !important;
+  color: #ED4528 !important;
+  border: 1px solid #ED4528 !important;
+}
+
+.post-message {
+  padding: 0 24rpx 24rpx;
+}
+
+.post-message>.title {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  padding: 24rpx 0 24rpx 0rpx;
+  border-bottom: 2rpx solid #F0F0F0;
+}
+
+.post-message .time {
+  margin-top: 32rpx;
+}
+
+.post-message .time>.title {
+  display: inline-block;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  padding-right: 40rpx;
+  line-height: 28rpx;
+}
+
+.post-message .time>.content {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #0DAE4E;
+  line-height: 28rpx;
+}
+.post-message .time>.content van-image {
+  margin-right: 10rpx;
+  border: 1px solid #F0F0F0;
+  border-radius: 16rpx;
+}
+
+.post-message .adress-box {
+  display: inline-flex;
+  margin-top: 32rpx;
+}
+
+.post-message .adress-box>.title {
+
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  padding-right: 40rpx;
+}
+
+.post-message .adress-box>.content {
+  margin-right: 26rpx;
+}
+
+.post-message .adress-box>.content>.adress {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.post-message .adress-box>.content>.adress {
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  padding-bottom: 16rpx;
+}
+
+.post-message .adress-box>.content>.people-info {
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+  line-height: 26rpx;
+  padding-bottom: 16rpx;
+}
+
+.post-message .adress-box>.content>.people-info>.name {
+  display: inline-block;
+  margin-right: 26rpx;
+}
+.post-message .pickup-person>.title {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  padding-right: 68rpx;
+  line-height: 28rpx;
+}
+.post-message .pickup-person>.content {
+  display: inline-block;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  line-height: 28rpx;
+}
+
+.post-message .verification {
+  display: flex;
+  margin-top: 16rpx;
+  font-size: 28rpx;
+}
+
+.post-message .verification > .title  {
+  padding-right: 68rpx;
+  display: inline-block;
+}
+
+.post-message .verification > .qrcode  {
+  display: inline-block;
+}
+
+.post-message .verification > .qrcode > .tips {
+  font-size: 28rpx;
+  padding-top: 16rpx;
+}
+
+.post-message .rider-contact {
+  display: inline-flex;
+  margin-top: 10rpx;
+}
+
+.post-message .rider-contact>.title {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  padding-right: 40rpx;
+  line-height: 38rpx;
+}
+.post-message .rider-contact>.content {
+  display: inline-block;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  line-height: 38rpx;
+}
+.post-message .rider-contact>.content .van-icon {
+  margin-top: -10rpx;
+}
+
+.post-message .logistics {
+  display: flex;
+  align-items: start;
+  padding-bottom: 32rpx;
+}
+
+.post-message .logistics>.title {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  padding-right: 40rpx;
+  padding-top: 4rpx;
+  line-height: 28rpx;
+}
+
+.post-message .logistics>.content {
+  flex: 1;
+  display: inline-block;
+  font-size: 28rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.post-message .logistics>.content .express-routes {
+  width: 490rpx;
+  margin-top: 8rpx;
+  display: flex;
+  align-items: center;
+  padding: 8rpx 12rpx;
+  border-radius: 8rpx;
+  background: #F7F7F7;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.post-message .logistics>.content .express-routes>.status {
+  margin: 0 12rpx;
+}
+
+.post-message .logistics>.content .express-routes>.routes {
+  margin: 0 12rpx;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #999999;
+}
+
+.post-message .logistics>.content .express-routes>.button {
+  width: 128rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  border: 2rpx solid #F0F0F0;
+  color: #333333;
+}
+
+.new-card {
+  background-color: #fff !important;
+  padding: 0 !important;
+}
+
+.spaces-card-box .new-card .new-card-price {
+  display: inline-flex;
+  align-items: center;
+  background: #F7F7F7;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-family: PingFang SC;
+  color: #333333;
+  padding: 10rpx 16rpx 10rpx 12rpx;
+  line-height: 26rpx;
+}
+
+.spaces-card-box .new-card .new-card-price text {
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+  line-height: 26rpx;
+}
+
+.spaces-card-box .space-card .van-card__thumb {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.spaces-card-box .space-card {
+  padding: 24rpx 0 0 50rpx !important;
+}
+
+.spaces-card-box .space-card .van-card__content {
+
+  min-height: 90rpx;
+}
+
+.spaces-card-box .space-card .van-card__title {
+  font-size: 22rpx;
+  line-height: 22rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+
+}
+
+.new-card .van-card__price text {
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  color: #333333;
+}
+
+.new-card .van-card__price text:first-child {
+  padding-right: 6rpx;
+}
+
+.new-card .van-card__price .van-card__price-integer {
+  font-size: 32rpx;
+}
+
+.new-card .van-card__num {
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #999999;
+}
+
+.goods-list {
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: height 0.3s ease-in-out;
+}
+
+.look-more {
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40rpx;
+}
+
+.look-more text {
+  display: inline-block;
+  margin-right: 10rpx;
+}
+
+.goods-list-fold {
+  height: auto !important;
+
+}
+
+.fold-icon {
+  transform: rotate(180deg);
+}
+.gift-code{
+  border: none;
+  background-color: #1989fa;
+  color: #fff;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.gift-code span{
+  padding-left: 10rpx;
+}
+.gift-info{
+  margin-top:32rpx ;
+}
+
+.map-container {
+  position: relative;
+  width:100%;
+  height: 448rpx;
+}
+
+.gaode-map {
+  width:100%;
+  height:100%;
+}
+
+.refresh_icon {
+  position: absolute !important;
+  box-sizing: border-box;
+  left: 24rpx;
+  bottom: 72rpx;
+  background: #fff;
+  width: 68rpx;
+  height: 68rpx;
+  box-shadow: 0rpx 6rpx 12rpx 2rpx rgba(153,153,153,0.16);
+  border-radius: 16rpx;
+  text-align: center;
+  padding-top: 17rpx;
+  color: #333333;
+  font-size: 32rpx !important;
+}
+
+.status_container {
+  position: relative;
+}
+.hasMap {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F2F4F7 100%);
+  border-radius: 24rpx 24rpx 0rpx 0rpx;
+  margin-top: -48rpx;
+}
+.hasMap .status_cell {
+  padding-top: 58rpx;
+}
+.go_map {
+  position:absolute;
+  width: 100%;
+  height: 42rpx;
+  top: 0;
+  text-align: center;
+}
+.go_map:before {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 60rpx;
+  height: 5rpx;
+  border-radius: 2.5rpx;
+  background-color: #CCCCCC;
+  top: 10rpx;
+  left: calc(50% - 30rpx);
+}
+
+.customCallout {
+  /* position: relative; */
+  background-color: #fff; 
+  box-shadow: 0rpx 6rpx 12rpx 2rpx rgba(153,153,153,0.16);
+  border-radius: 16rpx;
+  padding: 12rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.customCallout:before {
+  /* z-index: 1000; */
+  position: absolute;
+  display: block;
+  content: '';
+  width: 0;
+  height: 0;
+  bottom: -15rpx;
+  left: calc( 50% - 15rpx);
+  border-top: 15rpx solid #fff;
+  border-right: 15rpx solid transparent;
+  border-left: 15rpx solid transparent;
+  border-bottom: 0;
+  box-shadow: 0rpx 6rpx 12rpx 2rpx rgba(153,153,153,0.16);
+}
+
+.content_title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  
+}
+
+.content_distance {
+  font-weight: bold;
+  color: #999999;
+  font-size:24rpx;
+  margin-top: 5rpx;
+  white-space: nowrap;
+
+}
+.content_distance .orange{
+  display: inline;
+  color: #EB8F0B;
+}
+
+.card_goods_item {
+  display: flex;
+}
+
+
+.card_goods_item__title {
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #333333;
+  line-height: 46rpx;
+  height: 46rpx;
+  overflow: hidden;
+}
+
+.card_goods_item__space {
+  font-weight: 400;
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 26rpx;
+  display: flex;
+  align-items: center;
+}
+
+.card_goods_item__space__left {
+  flex: 1;
+}
+
+.card_goods_item__space__right {
+  text-align: right;
+}
+
+.card_goods_item__price {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.card_goods_item__price__left {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 28rpx;
+}
+
+.card_goods_item__price__right {
+  flex: 1;
+  font-weight: 400;
+  font-size: 24rpx;
+  color: #ED4528;
+  line-height: 28rpx;
+  text-align: right;
+}
+
+.card_goods_item__right {
+  flex: 1;
+}
+
+.card_goods_items .card_goods_item__price {
+    margin-top: 58rpx;
+}
+
+.card_goods_items .card_goods_item__price__left .card_goods_item__price__left___xiaoji {
+  display: inline-block;
+  height: 40rpx;
+  background: #F7F7F7;
+  border-radius: 20rpx;
+  line-height: 40rpx;
+  padding: 0 14rpx;
+  font-size: 26rpx;
+}
+
+.fs-22 {
+  font-size: 22rpx;
+  color: #333333;
+}
+
+.card_goods_item_lines {
+  margin-top: 24rpx;
+  margin-left: 50rpx;
+  display: flex;
+}
+
+.card_goods_item_lines___right {
+  flex: 1;
+}
+
+.card_goods_item_lines .card_goods_item__space__left {
+  flex: 1;
+}
+.card_goods_item_lines  .card_goods_item__space {
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 26rpx;
+  display: flex;
+}
+
+.card_goods_item_lines  .card_goods_item__price {
+  margin-top: 16rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 28rpx;
+}
+
+.refund_cell {
+  margin: 0 24rpx 20rpx 24rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 0 24rpx;
+}
+
+.refund_title {
+  min-height: 72rpx;
+  line-height: 72rpx;
+  display: flex;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.refund_title_left {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #0DAE4E;
+  flex: 1;
+}
+
+.refund_title_right {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.refund_title_right .van-icon {
+  margin-left: 2rpx;
+}
+
+.refund_form {
+  padding: 16rpx 0;
+}
+
+.refund_form_item {
+  padding: 8rpx 0;
+  display: flex;
+  font-weight: 500;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.refund_form_item__left {
+  width: 154rpx;
+}
+
+.refund_form_item__right {
+  flex: 1;
+} 
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+.item_l_tips {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.item_r_del {
+  font-size: 24rpx;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.refund-confirm {
+    position: relative;
+    height: auto;
+    color: #333333;
+    font-family: PingFang SC, PingFang SC;
+    background: linear-gradient(180deg, #E5FFF8 0%, #FFFFFF 100%);
+}
+
+.refund-confirm-title {
+    height: 112rpx;
+    line-height: 112rpx;
+    text-align: center;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+
+.refund-confirm-content {
+    margin: 0 24rpx;
+    padding: 0 32rpx;
+    padding-bottom: 32rpx;
+    height: auto;
+    background: #FFFFFF;
+    border-radius: 24rpx 24rpx 24rpx 24rpx;
+}
+
+.refund-confirm-content__header {
+    height: 114rpx;
+    line-height: 114rpx;
+    font-weight: 800;
+    font-size: 36rpx;
+}
+
+.refund-confirm-content__choice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.refund-confirm-content__choice__item {
+    width: 304rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    background: #F7F7F7;
+    border-radius: 40rpx;
+    border: 2rpx solid #F7F7F7;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.refund-confirm-content__choice__item.selected {
+    background: rgba(9, 175, 132, 0.05);
+    border: 2rpx solid #09AF84;
+    color: #09AF84;
+}
+
+.refund-confirm-content__choice__tip {
+    margin-top: 24rpx;
+    font-size: 26rpx;
+    font-weight: 500;
+    color: #09AF84;
+}
+
+.refund-confirm-tips {
+    padding: 24rpx;
+    padding-bottom: 0;
+    line-height: 46rpx;
+    font-weight: 500;
+    font-size: 26rpx;
+    color: #7BA49A;
+}
+
+.refund-confirm-bottom {
+    margin-top: 48rpx;
+    padding: 0 24rpx;
+}
+
+.refund-confirm-bottom .refund-confirm-bottom__btn {
+    height: 76rpx;
+    background: #09AF84;
+    font-weight: bold;
+    font-size: 30rpx;
+    color: #FFFFFF;
+}
+
+.refund-confirm .refund-confirm-close {
+    width: 64rpx;
+    height: 64rpx;
+    position: absolute;
+    top: 12rpx;
+    right: 12rpx;
+}
+
+.refund-font-color {
+  color: #ED4528;
+}

@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "load-more":"../../../components/load-more/index",
+      "van-image": "@vant/weapp/image/index"
+    },
+    "navigationBarTitleText": "退款订单"
+}

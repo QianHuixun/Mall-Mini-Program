@@ -1,0 +1,37 @@
+<!--pages/merMien/merchantDetail/index..wxml-->
+<view id="merchant-detail">
+  <view class="swiper-container">
+     <swiper circular="true" bindchange="swiperChange" autoplay>
+     <swiper-item wx:for="{{swiperList}}" wx:key="index">
+        <van-image wx:if="{{item.type=='PROPAGANDA'}}" width="100%" height="100%" src="{{item.url}}" />
+        <video id="{{'myVideo'+index}}" wx:else src="{{item.url}}" controls="{{false}}" loop
+          muted="{{item.muted}}"></video>
+      </swiper-item>
+
+    </swiper>
+    <view class="sound-view" bindtap="mutedChange" wx:if="{{swiperList[swiperCurre].type=='VIDEO'}}">
+      <van-image wx:if="{{swiperList[swiperCurre].muted}}" width="12" height="12" src="/images/muted.png" />
+      <van-image wx:else width="12" height="12" src="/images/unmuted.png" />
+    </view>
+    <view class="page-view">
+      <text class="page-num">{{swiperList.length?swiperCurre+1:swiperCurre}}</text>
+      <text class="page-total-num">/{{swipeTotal}}</text>
+    </view>
+  </view>
+  <view class="detail-main">
+    <view class="detail-main-box">
+      <van-image class="row-logo" wx:if="{{headIcon}}" width="70" height="70" src="{{headIcon}}" />
+      <van-image class="row-logo" wx:else width="70" height="70" src="/images/deafult_logo.png" />
+      <view class="row-inrto">
+        <view class="row-name">{{inputModel.name}}</view>
+        <view class="row-tag">
+            <van-tag  wx:for="{{inputModel.businessScopesName}}" wx:key="index" type="primary" color="#f2f2f2"
+              size="medium">{{item}}</van-tag>
+        </view>
+      </view>
+      <view class="row-detail">
+        <rich-text nodes="{{inputModel.mktVendorBigData.content}}"></rich-text>
+      </view>
+    </view>
+  </view>
+</view>

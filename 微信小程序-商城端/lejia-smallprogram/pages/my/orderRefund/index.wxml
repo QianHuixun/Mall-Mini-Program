@@ -1,0 +1,48 @@
+<!-- 
+@url: pages/my/orderRefund/index.wxml
+@description: 退款申请
+@author: sx
+@date: 2020/07/25
+ -->
+<view id="refund">
+	<view class="">
+		<view class="goods_cell">
+			<view class="card_con">
+				<view class="card_goods_list" wx:key="index" wx:for="{{ orderInfo.orderOir == 'MARKET_MALL' ? orderInfo.list2 : orderInfo.list1}}">
+					<view class="card_l">
+						<van-image width="50" height="50" src="{{item.photo}}" />
+					</view>
+					<view class="card_c">
+						{{item.goodsName}}
+					</view>
+					<view class="card_r">
+						<view class="price_clr">￥{{item.price}}</view>
+						<view class="gray_clr">x{{item.num}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 退款原因 -->
+		<!-- <van-cell-group>
+			<van-field value="{{ value }}" label="退款原因" placeholder="请填写" input-align="right" bind:change="onChange" />
+			<van-field value="{{ value }}" label="退款金额" placeholder="请输入退款金额" border="{{ false }}" bind:change="onChange" integer 
+input-class="new-field"/>
+		</van-cell-group> -->
+
+		<!-- 退款说明 -->
+		<view class="descript_cell">
+			<view class="title">退款原因</view>
+			<van-cell-group border="{{ false }}">
+				<van-field value="{{ inputModel.reason }}" type="textarea" placeholder="写下您发现的内容" autosize border="{{ false }}" show-word-limit="{{true}}" maxlength="100" bind:change="onChange"/>
+			</van-cell-group>
+		</view>
+		<view class="action_cell">
+			<van-goods-action safe-area-inset-bottom="{{ true }}">
+				<van-goods-action-button icon="plus" color="#3ccf8a" text="申请退款" bind:click="handleSubmit" loading="{{ loading }}" disabled="{{ disabled }}" />
+			</van-goods-action>
+		</view>
+	</view>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

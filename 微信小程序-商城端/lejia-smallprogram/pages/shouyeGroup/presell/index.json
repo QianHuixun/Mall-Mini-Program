@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-count-down": "@vant/weapp/count-down/index",
+    "load-more":"/components/load-more/index",
+    "recommending-goods": "/components/recommending-goods/index"
+  },
+  "disableScroll": true,
+  "navigationStyle":"custom"
+}

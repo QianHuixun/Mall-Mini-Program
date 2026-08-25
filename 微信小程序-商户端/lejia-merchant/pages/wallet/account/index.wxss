@@ -1,0 +1,111 @@
+/* pages/wallet/account/index.wxss */
+body,
+#wallet-account{
+  height: 100vh;
+  overflow: hidden;
+  background: #F2F4F7;
+}
+
+
+#wallet-account .van-button--primary {
+  background: #fff;
+  border: 0;
+  font-size: 30rpx;
+  color: #5B94E1;
+}
+
+#wallet-account .van-field__label--disabled,
+#wallet-account .van-field__label {
+  font-size: 30rpx;
+  color: #666666;
+}
+
+.button-bar {
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 108rpx;
+  width: 100%;
+}
+
+.button-bar .van-button {
+  z-index: 1;
+  background: #5B94E1;
+  margin: 10rpx 24rpx;
+  display: block;
+  color: #fff;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-weight: bold;
+  font-size: 32rpx;
+  border: 0;
+}
+
+.action-sheet-container {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.action-sheet_header {
+  display: flex;
+  background: #fff;
+  width: 100%;
+  z-index: 1;
+  position: absolute !important;
+  left: 0;
+  top: 0;
+  height: 134rpx;
+  line-height: 114rpx;
+  padding: 0 32rpx;
+  border-bottom: 20rpx solid #F7F7F7;
+  box-sizing: border-box;
+}
+
+.action_sheet_title {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36rpx;
+  color: #333333;
+}
+
+.action-sheet_left{
+  font-size: 30rpx;
+  color: #999999;
+}
+
+.action-sheet_right {
+  font-size: 30rpx;
+  color: #333333;
+}
+.van-popup {
+  max-height: 80vh !important;
+}
+.wallet-account-tips {
+  background: #F2F4F7;
+  padding: 24rpx;
+  font-size: 25rpx;
+  color: #999;
+}
+
+
+.action-sheet-container .van-cell-group {
+  padding-top: 134rpx;
+  height: calc( 80vh - 134rpx );
+  overflow: auto;
+}
+.van-field__input,
+.van-field__input--disabled {
+  color: #666666 !important;
+}
+
+.info-container {
+  padding: 24rpx;
+  font-size: 30rpx;
+color: #666666;
+}
+.info-container view {
+  margin-top: 8rpx;
+}

@@ -1,0 +1,66 @@
+<!--pages/shouyeGroup/openBook/index.wxml-->
+<view id="openBook">
+  <!-- <van-image custom-class="top-image" width="100%" fit="widthFix" src="{{imgSrc}}" /> -->
+  <swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+    <swiper-item wx:for="{{imageList}}" wx:key="pkey">
+      <image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}"  data-jump="{{item.jump}}"  bindtap="goAds"></image>
+    </swiper-item>
+  </swiper>
+  <van-tabs tab-active-class="active-tab" active="{{ active }}" bind:change="onChangeTab" color="#f24539" sticky>
+    <van-tab title="正在预售">
+      <view class="new-view">
+        <view class="title">预售商品，抢先拥有</view>
+        <view class="new-content">
+          <view class="new-item" wx:for="{{nowgoodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+            <!-- <van-image fit="widthFix" width="90%" src="{{item.wrapperPhoto}}" /> -->
+            <image style="width: 296rpx; height: 296rpx;" src="{{item.wrapperPhoto ||'/images/no-pic.png'}}" />
+
+            <view class="new-item-title">{{item.title}}</view>
+            <van-count-down use-slot time="{{ item.remainingTime }}" data-id='{{index}}' bind:change="onChange">
+              <view class="new-item-cutdown">
+                <text wx:if="{{ item.remark.days != 0 }}" class="time-top-item">{{ item.remark.days }}</text>
+                <text wx:if="{{ item.remark.days != 0 }}" class="time-top-item-text">天</text>
+                <text class="time-top-item">{{ item.remark.hours }}</text>
+                <text class="time-top-item-text">时</text>
+                <text class="time-top-item">{{ item.remark.minutes }}</text>
+                <text class="time-top-item-text">分</text>
+                <text wx:if="{{ item.remark.days == 0 }}" class="time-top-item">{{ item.remark.seconds }}</text>
+                <text wx:if="{{ item.remark.days == 0 }}" class="time-top-item-text">秒</text>
+              </view>
+            </van-count-down>
+            <text class="new-item-num">已预订{{item.xsNum}}</text>
+            <view class="price-view">
+              <text class="price-view-title">预售价：￥</text>
+              <text class="price-view-num">{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+        <view style="text-align: center;margin: 24rpx;color:#5C5C5C;font-size:24rpx;" class="note_text">
+          <view wx:if="{{nowloadingBom}}">加载中...</view>
+          <view wx:if="{{nownoMoreBom}}">没有更多了</view>
+        </view>
+      </view>
+    </van-tab>
+    <van-tab title="即将预售">
+      <view class="new-view">
+        <view class="title">预售商品，抢先拥有</view>
+        <view class="new-content">
+          <view class="new-item" wx:for="{{willgoodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+            <image style="width: 296rpx; height: 296rpx;" src="{{item.wrapperPhoto ||'/images/no-pic.png'}}" />
+            <view class="new-item-title">{{item.title}}</view>
+            <text class="will-item-time">预售时间</text>
+            <text class="will-item-time">{{item.startDateMd}}~{{item.endDateMd}}</text>
+            <view class="price-view">
+              <text class="price-view-title">预售价：￥</text>
+              <text class="price-view-num">{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style="text-align: center;margin: 24rpx;color:#5C5C5C;font-size:24rpx;" class="note_text">
+        <view wx:if="{{willloadingBom}}">加载中...</view>
+        <view wx:if="{{willnoMoreBom}}">没有更多了</view>
+      </view>
+    </van-tab>
+  </van-tabs>
+</view>

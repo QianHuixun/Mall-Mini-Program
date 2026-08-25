@@ -1,0 +1,36 @@
+/* pages/my/problem/problemDetail/index.wxss */
+page {
+  background: #f5f5f5;
+}
+.problemDetail {
+    margin-top: 20rpx;
+}
+.van-cell__title {
+    width: 100%;
+    overflow: hidden;
+    word-break: break-all;
+}
+.title {
+    position: relative;
+    padding-left: 24rpx;
+}
+.title.active {
+    color: #0DAE4E;
+}
+.title::before {
+    content: '';
+    display: inline-block;
+    width: 6rpx;
+    height: 6rpx;
+    background-color: #000;
+    border-radius: 100%;
+    position: absolute;
+    top: 20rpx;
+    left: 0;
+}
+.title.active::before {
+    background-color: #0DAE4E;
+}
+.van-collapse-item__content {
+    word-wrap: break-word;
+}

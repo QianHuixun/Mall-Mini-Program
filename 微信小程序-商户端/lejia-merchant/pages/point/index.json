@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "load-more":"/components/load-more/index"
+  },
+  "navigationBarTitleText": "客户积分消费记录"
+}

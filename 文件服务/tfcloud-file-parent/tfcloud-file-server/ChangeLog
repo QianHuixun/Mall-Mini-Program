@@ -1,0 +1,13 @@
+tfcloud-logger-server 1.1.1 (2019.4.29)
+
+tfcloud-logger-server 1.1.1
+    
+ ==== 特性 ====                                                          
+
+ * 新增: 开放actuator接口。
+ * 改进: 。
+
+ ==== 状态 ====
+ * 修复bug:  0 个                              
+ * 提交次数: 1 次
+

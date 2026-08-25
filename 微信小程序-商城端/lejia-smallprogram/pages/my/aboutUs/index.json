@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-image": "@vant/weapp/image/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-button": "@vant/weapp/button/index"
+  },
+  "navigationBarBackgroundColor": "#f5f5f5",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "关于我们"
+}

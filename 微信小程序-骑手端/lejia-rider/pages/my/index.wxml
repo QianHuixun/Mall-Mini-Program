@@ -1,0 +1,38 @@
+<!-- 
+@url: pages/my/index.wxml
+@description: 我的
+@author: zs
+ -->
+<view id="my">
+	<van-image width="100%" fit="widthFix" src="/images/my/homeBG.png" />
+	<view class="top">
+			<van-image round custom-class="head-photo-box" width="130rpx" height="130rpx" src="/images/logo.png" />
+		<view class="top-rig">
+			<text>{{inputModel.name}}</text>
+			<van-rate readonly size="{{30}}rpx" color="white" void-color="white" value="{{ score }}" bind:change="onChange" />
+			<text>{{inputModel.farmerName}}</text>
+		</view>
+	</view>
+	<view class="center">
+		<view class="item dashed">
+			<text>今日接单</text>
+			<text class="content">{{inputModel.orderToday}}</text>
+		</view>
+		<view class="item">
+			<text>历史接单</text>
+			<text class="content">{{inputModel.orderHistory}}</text>
+		</view>
+	</view>
+
+	<view class="item-all" bindtap="itemFinishClick">
+		<van-icon size="40rpx" name="/images/tabbar/orderSelect.png" />
+		<text>已完成订单</text>
+		<van-icon name="arrow" />
+	</view>
+
+	<!-- <view class="item-all" bindtap="handleMessage" style="top:690rpx">
+		<van-icon size="40rpx" name="envelop-o" />
+		<text>消息推送</text>
+		<van-icon name="arrow" />
+	</view> -->
+</view>

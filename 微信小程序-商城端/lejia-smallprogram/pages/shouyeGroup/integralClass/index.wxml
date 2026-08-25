@@ -1,0 +1,80 @@
+<!-- 
+@url: pages/classification/index.wxml
+@description: 分类
+@author: sx
+@date: 2020/07/22
+ -->
+<view id="calssify">
+	<!-- 顶部搜索栏 -->
+	<view class="wx_top">
+		<view class="calssify-search" bindtap="searfocus">
+			<view class="calssify-search-box">
+				<van-icon name="search" size="26rpx" color="#999999" />
+				<text>搜一搜</text>
+			</view>
+		</view>
+	</view>
+	<!-- 左侧分类 -->
+	<view class="wx_left">
+		<van-sidebar active-key="{{ activeKey }} " bind:change="onChange" custom-class="new_siderbar">
+			<van-sidebar-item title="{{item.name}}" wx:for="{{classifyList}}" wx:key="index" />
+		</van-sidebar>
+	</view>
+	<!-- 右侧商品 -->
+	<view class="wx_right">
+		<block wx:if="{{ goodsList.length > 0 }}">
+			<view hidden="{{firstLoading}}">
+				<view class="goods_list" wx:for="{{goodsList}}" wx:key="index" data-pkey="{{item.pkey}}" bindtap="goDetail">
+					<!-- <image src="{{ item.photo2 }}" class="goods_photo"></image> -->
+					<van-image src="{{item.wrapperPhoto}}" custom-class="goods_photo" data-index="{{index}}"
+						bindload="imageLoad" />
+					<view class="goods_detail">
+						<view class="goods_title" style="height:{{ item.priceMember?'auto':' 70rpx' }};">
+							<view class="icon-type">
+								<van-tag color="#f86166" plain round text-color="#f86166"
+									wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'}}">扶贫</van-tag>
+								<!-- <van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'MEMBER_GOODS'}}">会员
+								</van-tag> -->
+								<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SPECIAL_GOODS'}}">特价
+								</van-tag>
+								<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SHARE_GOODS'}}">分享
+								</van-tag>
+								<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'CUT_GOODS'}}">砍价
+								</van-tag>
+								<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'COLLAGE_GOODS'}}">团购
+								</van-tag>
+								<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'PRESALE_GOODS'}}">预售
+								</van-tag>
+							</view>
+							{{item.title}}
+						</view>
+						<view class="num gray_clr">
+							销量: {{ item.xsNum }}
+						</view>
+						<view class="goods_price">
+							<view class="price">
+								<view class="point_price"> <text class="big_price">{{item.point}}</text>积分+￥<text class="big_price">{{item.price}}</text>
+								</view>
+								<text class="del_price">￥{{ item.priceOld }}</text>
+								<!-- wx:if="{{!item.priceMember}}" -->
+								<!-- <view class="member_price" wx:else><text class="member_price_txt">￥{{item.priceMember}}</text><image class="member_price_tag" src="/images/member_price_tag.png" /></view> -->
+							</view>
+							<van-icon wx:if="{{classifyList[activeKey].name!='礼券'&&classifyList[activeKey].name!='优惠券'}}" name="/images/carAdd.png" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" 
+								data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+		<!-- 加载更多数据 -->
+		<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	</view>
+	<!-- 加入购物车 动画效果 -->
+	<!-- <go-cart id="goCartView"></go-cart> -->
+	<!-- 规格选择弹出层 -->
+	<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+		isbindAddCart="{{true}}"></space-dialog>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<!-- <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}" wx:if="{{ isLogin }}"></authorize> -->
+</view>

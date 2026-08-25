@@ -1,0 +1,43 @@
+<!--pages/shouyeGroup/search/index.wxml-->
+<view id="search">
+	<van-search value="{{ value }}" placeholder="{{placeholder || '请输入搜索关键词'}}" focus show-action bind:cancel="onCancel" bind:change="onChange" bind:search="onSearch" use-action-slot>
+   <view slot="action" bind:tap="onSearch">搜索</view>
+	</van-search>
+	<view class="hot-view" wx:if="{{hotList && hotList.length}}">热门搜索</view>
+	<van-tag bindtap="hotClick" data-id='{{item}}' wx:for="{{hotList}}" wx:if="{{hotList && hotList.length}}" wx:key="index" color="#f6f6f6" text-color="#333" size="large" custom-class="hot_tag">{{item.descp}} </van-tag>
+	<view class="his-view" wx:if="{{hisList && hisList.length}}">
+		<text class="his-view-text">历史记录</text>
+		<van-icon name="delete" color="#5C5C5C" size="18px" bind:tap="onDelete" />
+	</view>
+	<van-tag plain bindtap="hisClick" data-text='{{item.descp}}' text-color="#5C5C5C" size="large" wx:for="{{ hisList }}" wx:key="index" custom-class='his_tag'>{{item.descp}}</van-tag>
+	<scroll-view class="sear-good-view" scroll-y scroll-anchoring upper-threshold="0" bindscrolltolower="bindscrollbottom" wx:if="{{isShowGood}}">
+		<view class="sear-good-view-topseg"></view>
+		<view class="good-view" wx:for="{{goodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+			<van-image width="112rpx" height="112rpx" fit="cover" src="{{item.wrapperPhoto ||'/images/no-pic.png'}}" />
+			<view class="goods_detail">
+			<view class="cell-title">
+				<view class="icon-type">
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'}}">扶贫</van-tag>
+					<!-- <van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'MEMBER_GOODS'}}">会员</van-tag> -->
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SPECIAL_GOODS'}}">特价</van-tag>
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SHARE_GOODS'}}">分享</van-tag>
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'CUT_GOODS'}}">砍价</van-tag>
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'COLLAGE_GOODS'}}">团购</van-tag>
+					<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'PRESALE_GOODS'}}">预售</van-tag>
+				</view>
+				{{item.title}}
+				</view>
+				<view class="price_clr price">
+					￥<text>{{item.price}}</text>
+				</view>
+			</view>
+
+			<van-icon name="arrow" color="#999999" />
+		</view>
+		<view style="text-align: center;margin: 12px;color:#5C5C5C;font-size:12px;" class="note_text">
+			<view wx:if="{{loadingBom}}">加载中...</view>
+			<view wx:if="{{noMoreBom}}">没有更多了</view>
+		</view>
+
+	</scroll-view>
+</view>

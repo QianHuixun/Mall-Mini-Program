@@ -1,0 +1,1 @@
+ALTER TABLE `mkt_order_line` ADD COLUMN `weight` decimal(16,2) comment '合计毛重' AFTER `goods_name`;

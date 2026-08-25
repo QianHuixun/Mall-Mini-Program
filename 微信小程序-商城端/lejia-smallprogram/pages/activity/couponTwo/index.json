@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "van-image": "@vant/weapp/image/index",
+      "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "社群专属满减券"
+}

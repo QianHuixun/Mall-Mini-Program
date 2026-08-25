@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+      "van-search": "@vant/weapp/search/index",
+      "van-tag": "@vant/weapp/tag/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-image": "@vant/weapp/image/index"
+    },
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "商户搜索",
+    "disableScroll": true
+}

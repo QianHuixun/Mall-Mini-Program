@@ -1,0 +1,389 @@
+<!-- 
+@url: pages/my/order/index.wxml
+@description: 我的订单
+@author: sx
+@date: 2020/07/24
+ -->
+<view id="order">
+	<van-tabs active="{{ active }}" bind:change="onChange" swipe-threshold="6" color="{{theme.primary}}" title-active-color="{{theme.primary}}">
+		<!-- 全部 -->
+		<van-tab title="全部" name="0">
+			<!-- <view class="no_tips" wx:if="{{datalist1.length == 0}}">暂无订单</view> -->
+			<view class="card_list">
+				<view class="card_cell" wx:for="{{datalist1}}" wx:key="index" wx:for-item="item">
+					<view class="card_title">
+            <view class="card_icon">
+              <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+              <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+              <view class="tag tag-green" wx:else>配送</view>
+            </view>
+						<view class="card_l">
+            订单号：<text class="gray_clr">{{item.code}}</text></view>
+						<view class="card_r">
+							<text wx:if="{{item.status == 'UNPAID_ORDER'}}" class="color_red">未付款</text>
+							<text wx:elif="{{item.status == 'DELIVERED_ORDER'}}"  class="color_orange">待发货</text>
+							<text wx:elif="{{item.status == 'SHIPPED_ORDER'}}"  class="color_green">待收货</text>
+							<text wx:elif="{{item.status == 'ARRIVED_ORDER'}}" class="color_green">{{ item.distributionType === 'PICKUP' ? '已核销' : '已到货'}}</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType!= 'GIFT_ORDER'}}" class="color_gray">已完成</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='USED'}}" class="color_gray">已核销</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='UNUSED'}}"  class="color_red">未核销</text>
+							<text wx:elif="{{item.status == 'REFUND_APPLICATION_ORDER'}}"  class="color_orange">退款中</text>
+							<text wx:elif="{{item.status == 'REFUNDED_ORDER'}}" class="color_gray">已退款</text>
+							<text wx:elif="{{item.status == 'VOID_ORDER'}}" class="color_gray">已作废</text>
+							<text wx:else class="color_gray">{{item.statusName}}</text>
+						</view>
+					</view>
+          <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length > 1 || item.list2.length > 1}}">
+            <view class="card_goods_list_multi" >
+              <van-image custom-class="goods_image" src="{{subitem.photo || '/images/no-pic.png'}}" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}" wx:key="index" wx:for-item="subitem"></van-image>
+            </view>
+            <view class="card_goods_amt">
+              <view class="card_goods_amt_price">￥{{item.amtn}}</view>
+              <view class="card_goods_amt_num">共{{item.orderNum}}件</view>
+            </view>
+          </view>
+
+					<view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail"  wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	>
+         
+						<view class="card_goods_list" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}" wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	wx:key="index" wx:for-item="subitem">
+							<view class="card_l">
+								<van-image custom-class="goods_image" src="{{subitem.photo || '/images/no-pic.png'}}"></van-image>
+							</view>
+							<view class="card_c">
+								{{subitem.goodsName}}
+                <view class="card_c_specs" wx:if="{{subitem.spaceName}}">
+                  规格:{{subitem.spaceName}}
+                </view>
+							</view>
+							<view class="card_r">
+                <view class="price_clr">￥{{subitem.price}}</view>
+								<view class="gray_clr">x{{subitem.num}}</view>
+							</view>
+						</view>
+					</view>
+          <view class="card_date">
+            <view class="card_date_left">{{item.createdTime}}</view>
+            <view class="card_date_right" wx:if="{{item.distributionType !== 'PICKUP' && item.status == 'SHIPPED_ORDER' && item.pickupCode}}">
+            <text>收货码</text> 
+            <text class="code_green">{{item.pickupCode}}</text>
+            </view>
+          </view>
+          <!-- <view class="card_refund">
+            退款成功 退款成功￥8.00
+          </view> -->
+					<view class="card_footer">
+						<view class="card_l">
+							<!-- 合计：<text class="price_clr">￥{{item.amtn}}</text> -->
+						</view>
+						<view class="card_r">
+            	<van-button plain hairline round type="default" size="small" custom-class="new_btn"
+								wx:if="{{item.status == 'UNPAID_ORDER'}}" data-pkey="{{item.pkey}}" data-index="{{index}}"
+								bind:click="handleCancel">取消订单</van-button>
+							<van-button plain hairline round type="primary" size="small" custom-class="new_btn"
+								wx:if="{{(item.status == 'SHIPPED_ORDER' &&  item.distributionType != 'PICKUP') ||item.status =='ARRIVED_ORDER'}}" data-pkey="{{item.pkey}}" data-transactionid="{{item.transactionId}}" data-openbusinessview ="{{item.openBusinessView }}"
+								data-index="{{index}}" bind:click="handleArrived">确认收货</van-button>
+							<van-button hairline round type="primary" size="small" custom-class="new_btn"
+								wx:elif="{{item.status == 'UNPAID_ORDER'}}" data-pkey="{{item.pkey}}" data-index="{{index}}"
+								bind:click="handleUnpaid">立即付款</van-button>
+						
+						</view>
+					</view>
+				</view>
+			</view>
+		</van-tab>
+		<!-- 待付款 -->
+		<van-tab title="待付款" name="UNPAID_ORDER">
+			<!-- <view class="no_tips" wx:if="{{datalist2.length == 0}}">暂无订单</view> -->
+			<view class="card_list">
+				<view class="card_cell" wx:for="{{datalist2}}" wx:key="index" wx:for-item="item">
+					<view class="card_title">
+            <view class="card_icon">
+              <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+              <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+              <view class="tag tag-green" wx:else>配送</view>
+              <!-- <view class="tag tag-orange">自提</view> -->
+            </view>
+						<view class="card_l">订单号：<text class="gray_clr">{{item.code}}</text></view>
+						<view class="card_r gray_clr">
+							<text wx:if="{{item.status == 'UNPAID_ORDER'}}"  class="color_red">未付款</text>
+							<text wx:elif="{{item.status == 'DELIVERED_ORDER'}}" class="color_orange">待发货</text>
+							<text wx:elif="{{item.status == 'SHIPPED_ORDER'}}" class="color_orange">待收货</text>
+							<text wx:elif="{{item.status == 'ARRIVED_ORDER'}}"  class="color_green">已到货</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType!= 'GIFT_ORDER'}}" class="color_gray">已完成</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='USED'}}" class="color_gray">已核销</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='UNUSED'}}"  class="color_red">未核销</text>
+							<text wx:elif="{{item.status == 'REFUND_APPLICATION_ORDER'}}" class="color_orange">退款中</text>
+							<text wx:elif="{{item.status == 'REFUNDED_ORDER'}}" class="color_gray">已退款</text>
+							<text wx:elif="{{item.status == 'VOID_ORDER'}}" class="color_gray">已作废</text>
+						</view>
+					</view>
+          <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length > 1 || item.list2.length > 1}}">
+						<view class="card_goods_list_multi" >
+							<van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" wx:for="{{ item.orderOir == 'MARKET_MALL' && item.orderType != 'INTEGRAL_JD_ORDER' ? item.list2 : item.list1}}"	wx:key="index" wx:for-item="subitem"/>
+						</view>
+            <view class="card_goods_amt">
+              <view class="card_goods_amt_price">￥{{item.amtn}}</view>
+              <view class="card_goods_amt_num">共{{item.orderNum}}件</view>
+            </view>
+					</view>
+					<view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	>
+						<view class="card_goods_list" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}"
+							wx:key="index" wx:for-item="subitem">
+							<view class="card_l">
+								<van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" />
+							</view>
+							<view class="card_c">
+								{{subitem.goodsName}}
+                <view class="card_c_specs" wx:if="{{subitem.spaceName}}">
+                  规格:{{subitem.spaceName}}
+                </view>
+							</view>
+							<view class="card_r">
+								<view class="price_clr">￥{{subitem.price}}</view>
+								<view class="gray_clr">x{{subitem.num}}</view>
+							</view>
+						</view>
+					</view>
+          <view class="card_date">
+            <view class="card_date_left">{{item.createdTime}}</view>
+            <view class="card_date_right" wx:if="{{item.distributionType !== 'PICKUP' && item.status == 'SHIPPED_ORDER' && item.pickupCode}}">
+            <text>收货码</text> 
+            <text class="code_green">{{item.pickupCode}}</text>
+            </view>
+          </view>
+          <!-- <view class="card_refund">
+            退款成功 退款成功￥8.00
+          </view> -->
+					<view class="card_footer">
+						<view class="card_l">
+							<!-- 合计：<text class="price_clr">￥{{item.amtn}}</text> -->
+						</view>
+						<view class="card_r">
+            	<van-button plain hairline round type="default" size="small" custom-class="new_btn"
+								wx:if="{{item.status == 'UNPAID_ORDER'}}" data-pkey="{{item.pkey}}" data-index="{{index}}"
+								bind:click="handleCancel">取消订单</van-button>
+							<van-button plain hairline round type="danger" size="small" custom-class="new_btn"
+								wx:if="{{item.status == 'UNPAID_ORDER'}}" data-index="{{index}}" data-pkey="{{item.pkey}}"
+								bind:click="handleUnpaid">立即付款</van-button>						
+						</view>
+					</view>
+				</view>
+			</view>
+		</van-tab>
+		<!-- 待发货 -->
+		<van-tab title="待发货" name="DELIVERED_ORDER">
+			<!-- <view class="no_tips" wx:if="{{datalist4.length == 0}}">暂无订单</view> -->
+			<view class="card_list">
+				<view class="card_cell" wx:for="{{datalist6}}" wx:key="index" wx:for-item="item">
+					<view class="card_title">
+            <view class="card_icon">
+              <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+              <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+              <view class="tag tag-green" wx:else>配送</view>
+              <!-- <view class="tag tag-orange">自提</view> -->
+            </view>
+						<view class="card_l">
+            订单号：<text class="gray_clr">{{item.code}}</text>
+            </view>
+						<view class="card_r">
+							<text wx:if="{{item.status == 'UNPAID_ORDER'}}" class="color_red">未付款</text>
+							<text wx:elif="{{item.status == 'DELIVERED_ORDER'}}" class="color_orange">待发货</text>
+							<text wx:elif="{{item.status == 'SHIPPED_ORDER'}}" class="color_orange">待收货</text>
+							<text wx:elif="{{item.status == 'ARRIVED_ORDER'}}" class="color_green">已到货</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType!= 'GIFT_ORDER'}}" class="color_gray">已完成</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='USED'}}" class="color_gray">已核销</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='UNUSED'}}" class="color_red">未核销</text>
+							<text wx:elif="{{item.status == 'REFUND_APPLICATION_ORDER'}}" class="color_orange">退款中</text>
+							<text wx:elif="{{item.status == 'REFUNDED_ORDER'}}" class="color_gray">已退款</text>
+							<text wx:elif="{{item.status == 'VOID_ORDER'}}" class="color_gray">已作废</text>
+						</view>
+					</view>
+          <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length > 1 || item.list2.length > 1}}">
+						<view class="card_goods_list_multi" >
+              <van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}" wx:key="index" wx:for-item="subitem"/>
+						</view>
+            <view class="card_goods_amt">
+              <view class="card_goods_amt_price">￥{{item.amtn}}</view>
+              <view class="card_goods_amt_num">共{{item.orderNum}}件</view>
+            </view>
+					</view>
+					<view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail"  wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	>
+						<view class="card_goods_list" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}"
+							wx:key="index" wx:for-item="subitem" wx:if="{{item.list1.length == 1 || item.list2.length == 1}}">
+							<view class="card_l">
+								<van-image custom-class="goods_image"src="{{subitem.photo||'/images/no-pic.png'}}" />
+							</view>
+							<view class="card_c">
+								{{subitem.goodsName}}
+                <view class="card_c_specs" wx:if="{{subitem.spaceName}}">
+                  规格:{{subitem.spaceName}}
+                </view>
+							</view>
+							<view class="card_r">
+								<view class="price_clr">￥{{subitem.price}}</view>
+								<view class="gray_clr">x{{subitem.num}}</view>
+							</view>
+						</view>
+					</view>
+          <view class="card_date">
+            <view class="card_date_left">{{item.createdTime}}</view>
+            <view class="card_date_right" wx:if="{{item.distributionType !== 'PICKUP' && item.status == 'SHIPPED_ORDER' && item.pickupCode}}">
+            <text>收货码</text> 
+            <text class="code_green">{{item.pickupCode}}</text>
+            </view>
+          </view>
+          <!-- <view class="card_refund">
+            退款成功 退款成功￥8.00
+          </view> -->
+				</view>
+			</view>
+		</van-tab>
+		<!-- 待收货 -->
+		<van-tab title="待收货" name="SHIPPED_ORDER">
+			<!-- <view class="no_tips" wx:if="{{datalist3.length == 0}}">暂无订单</view> -->
+			<view class="card_list">
+				<view class="card_cell" wx:for="{{datalist3}}" wx:key="index" wx:for-item="item">
+					<view class="card_title">
+            <view class="card_icon">
+              <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+              <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+              <view class="tag tag-green" wx:else>配送</view>
+              <!-- <view class="tag tag-orange">自提</view> -->
+            </view>
+						<view class="card_l">订单号：<text class="gray_clr">{{item.code}}</text></view>
+						<view class="card_r">
+							<text wx:if="{{item.status == 'UNPAID_ORDER'}}" class="color_red">未付款</text>
+							<text wx:elif="{{item.status == 'DELIVERED_ORDER'}}" class="color_orange">待发货</text>
+							<text wx:elif="{{item.status == 'SHIPPED_ORDER'}}" class="color_orange">待收货</text>
+							<text wx:elif="{{item.status == 'ARRIVED_ORDER'}}" class="color_green">已到货</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType!= 'GIFT_ORDER'}}" class="color_gray">已完成</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='USED'}}" class="color_gray">已核销</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='UNUSED'}}"class="color_red">未核销</text>
+							<text wx:elif="{{item.status == 'REFUND_APPLICATION_ORDER'}}" class="color_orange">退款中</text>
+							<text wx:elif="{{item.status == 'REFUNDED_ORDER'}}" class="color_gray">已退款</text>
+							<text wx:elif="{{item.status == 'VOID_ORDER'}}" class="color_gray">已作废</text>
+						</view>
+					</view>
+          <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length > 1 || item.list2.length > 1}}">
+						<view class="card_goods_list_multi">
+							<van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}"	wx:key="index" wx:for-item="subitem"></van-image>
+						</view>
+            <view class="card_goods_amt">
+              <view class="card_goods_amt_price">￥{{item.amtn}}</view>
+              <view class="card_goods_amt_num">共{{item.orderNum}}件</view>
+            </view>
+					</view>
+					<view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail"  wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	>
+						<view class="card_goods_list" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}"
+							wx:key="index" wx:for-item="subitem">
+							<view class="card_l">
+								<van-image custom-class="goods_image" src="{{subitem.photo || '/images/no-pic.png'}}"></van-image>
+							</view>
+							<view class="card_c">
+								{{subitem.goodsName}}
+                <view class="card_c_specs" wx:if="{{subitem.spaceName}}">
+                  规格:{{subitem.spaceName}}
+                </view>
+							</view>
+							<view class="card_r">
+                <view class="price_clr">￥{{subitem.price}}</view>
+								<view class="gray_clr">x{{subitem.num}}</view>
+							</view>
+						</view>
+					</view>
+          <view class="card_date">
+            <view class="card_date_left">{{item.createdTime}}</view>
+            <view class="card_date_right" wx:if="{{item.distributionType !== 'PICKUP' && item.status == 'SHIPPED_ORDER' && item.pickupCode}}">
+            <text>收货码</text> 
+            <text class="code_green">{{item.pickupCode}}</text>
+            </view>
+          </view>
+          <!-- <view class="card_refund">
+            退款成功 退款成功￥8.00
+          </view> -->
+					<view class="card_footer">
+						<view class="card_l">
+							<!-- 合计：<text class="price_clr">￥{{item.amtn}}</text> -->
+						</view>
+						<view class="card_r">
+							<van-button plain hairline round type="primary" size="small" custom-class="new_btn"
+								wx:if="{{(item.status == 'SHIPPED_ORDER' &&  item.distributionType != 'PICKUP') || item.status =='ARRIVED_ORDER'}}" data-index="{{index}}"
+								data-pkey="{{item.pkey}}"  data-transactionid="{{item.transactionId}}" data-openbusinessview ="{{item.openBusinessView }}" bind:click="handleArrived">确认收货</van-button>
+						</view>
+					</view>
+				</view>
+			</view>
+		</van-tab>
+		<!-- 已完成 -->
+		<van-tab title="已完成" name="CONFIRM_ORDER">
+			<!-- <view class="no_tips" wx:if="{{datalist4.length == 0}}">暂无订单</view> -->
+			<view class="card_list">
+				<view class="card_cell" wx:for="{{datalist4}}" wx:key="index" wx:for-item="item">
+					<view class="card_title">
+            <view class="card_icon">
+              <view class="tag tag-orange" wx:if="{{item.distributionType == 'PICKUP'}}">自提</view>
+              <view class="tag tag-purple" wx:elif="{{item.distributionType == 'DINE_IN'}}">堂食</view>
+              <view class="tag tag-green" wx:else>配送</view>
+              <!--  -->
+            </view>
+						<view class="card_l">
+            订单号：<text class="gray_clr">{{item.code}}</text></view>
+						<view class="card_r">
+							<text wx:if="{{item.status == 'UNPAID_ORDER'}}" class="color_red">未付款</text>
+							<text wx:elif="{{item.status == 'DELIVERED_ORDER'}}" class="color_orange">待发货</text>
+							<text wx:elif="{{item.status == 'SHIPPED_ORDER'}}" class="color_orange">待收货</text>
+							<text wx:elif="{{item.status == 'ARRIVED_ORDER'}}" class="color_green">已到货</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType!= 'GIFT_ORDER'}}" class="color_gray">已完成</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='USED'}}" class="color_gray">已核销</text>
+							<text wx:elif="{{item.status == 'CONFIRM_ORDER'&&item.orderType== 'GIFT_ORDER'&&item.giftStatus=='UNUSED'}}" class="color_red">未核销</text>
+							<text wx:elif="{{item.status == 'REFUND_APPLICATION_ORDER'}}" class="color_orange">退款中</text>
+							<text wx:elif="{{item.status == 'REFUNDED_ORDER'}}" class="color_gray">已退款</text>
+							<text wx:elif="{{item.status == 'VOID_ORDER'}}" class="color_gray">已作废</text>
+						</view>
+					</view>
+          <view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length > 1 || item.list2.length > 1}}">
+						<view class="card_goods_list_multi" >
+							<van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}"	wx:key="index" wx:for-item="subitem"/>
+						</view>
+            <view class="card_goods_amt">
+              <view class="card_goods_amt_price">￥{{item.amtn}}</view>
+              <view class="card_goods_amt_num">共{{item.orderNum}}件</view>
+            </view>
+					</view>
+					<view class="card_con" data-pkey="{{item.pkey}}" data-index="{{index}}" bindtap="goDetail" wx:if="{{item.list1.length == 1 || item.list2.length == 1}}"	>
+						<view class="card_goods_list" wx:for="{{ item.orderOir == 'MARKET_MALL' ? item.list2 : item.list1}}" 	wx:key="index" wx:for-item="subitem" wx:if="{{item.list1.length == 1 || item.list2.length == 1}}">
+							<view class="card_l">
+								<van-image custom-class="goods_image" src="{{subitem.photo||'/images/no-pic.png'}}" />
+							</view>
+							<view class="card_c">
+								{{subitem.goodsName}}
+                <view class="card_c_specs" wx:if="{{subitem.spaceName}}">
+                  规格:{{subitem.spaceName}}
+                </view>
+							</view>
+							<view class="card_r">
+                <view class="price_clr">￥{{subitem.price}}</view>
+								<view class="gray_clr">x{{subitem.num}}</view>
+							</view>
+						</view>
+					</view>
+          <view class="card_date">
+            <view class="card_date_left">{{item.createdTime}}</view>
+            <view class="card_date_right" wx:if="{{item.distributionType !== 'PICKUP' && item.status == 'SHIPPED_ORDER' && item.pickupCode}}">
+            <text>收货码</text> 
+            <text class="code_green">{{item.pickupCode}}</text>
+            </view>
+          </view>
+          <!-- <view class="card_refund">
+            退款成功 退款成功￥8.00
+          </view> -->
+				</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<van-dialog id="van-dialog"></van-dialog>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

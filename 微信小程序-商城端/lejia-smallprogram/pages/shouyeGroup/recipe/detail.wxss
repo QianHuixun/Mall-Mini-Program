@@ -1,0 +1,242 @@
+/* pages/shouyeGroup/recipe/detail.wxss */
+.recipe-detail-main{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 44px;
+  overflow-y: auto;
+  padding-bottom: 100rpx;
+}
+/* 
+#recipe-detail swiper {
+  background-color:#FAFAFA;
+  height: 120px;
+}
+
+#recipe-detail swiper swiper-item image {
+  width: 100%;
+  height: 100%;
+} */
+
+#recipe-detail .lj-swipe {
+  position: relative;
+}
+
+#recipe-detail swiper {
+  background-color: #fafafa;
+  height: 100vw;
+}
+
+#recipe-detail swiper swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.like-view{
+  /* position:absolute;
+  height: 30px;
+  background:  rgba(0, 0, 0, 0.5);
+  right:0px;
+  top: 78px;
+  border-top-left-radius:  12px;
+  border-bottom-left-radius: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  display: flex;
+  align-items: center; */
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  height: 48rpx;
+  right: 0px;
+  bottom: 30rpx;
+  padding: 0 30rpx 0rpx 30rpx;
+  border-top-left-radius: 27rpx;
+  border-bottom-left-radius: 27rpx;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.like-num{
+  color: white;
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+.title{
+  display: block;
+  text-align: center;
+  margin: 24rpx;
+  margin-top: 48rpx;
+  font-size: 36rpx;
+  color: #5C5C5C;
+}
+
+.content{
+  display: inline-block;
+  margin: 24rpx;
+  font-size: 32rpx;
+  color: #5C5C5C;
+}
+
+.seg-view {
+  margin-top: 24rpx;
+  background-color: white;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+
+.seg-view .seg {
+  display: flex;
+  height: 29rpx;
+  /* background-color: #d7a73c; */
+  margin: 28rpx;
+  flex: 1;
+  overflow: hidden;
+}
+.seg-view .seg .van-image {
+  display: block;
+}
+
+.seg-view text {
+  flex: 1;
+  text-align: center;
+  color: #4dce78;
+  font-size: 28rpx;
+}
+
+.btn{
+  height: 60rpx !important;
+  margin-right: 24rpx;
+  font-size: 28rpx !important;
+  border-radius: 12rpx !important;
+}
+
+.goods-view{
+  margin: 24rpx;
+  border: 1px solid #d9d9d9;
+  border-radius: 12rpx;
+}
+
+.goods-view-top{
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+  height: 70rpx;
+  border-bottom: 1px solid #d9d9d9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #5C5C5C;
+}
+.goods-view-top_name{
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 600rpx;
+}
+
+.goods-view-bottom{
+  display: flex;
+  margin: 24rpx;
+}
+
+.goods-view-bottom .van-image__img{
+  border-radius: 6rpx;
+}
+
+.goods-view-bottom-rig{
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.goods-view-bottom-rig .rig-title{
+  color: #5C5C5C;
+  font-size: 30rpx;
+}
+.goods-view-bottom-rig .rig-label{
+  color: #969696;
+  font-size: 28rpx;
+}
+.goods-view-bottom-rig-bottom{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.goods-view-bottom-rig-bottom-small{
+  color: #f24539;
+  font-size: 24rpx;
+}
+
+.goods-view-bottom-rig-bottom-big{
+  color: #f24539;
+  font-size: 42rpx;
+}
+
+.stepper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stepper-num{
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+  color: #5C5C5C;
+  font-size: 28rpx;
+}
+
+.steps-view{
+  color: #5C5C5C;
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.steps-view-title{
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.steps-view-content{
+  font-size: 15px;
+}
+
+.buy-view{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  height: 44px;
+  border-top: 1px solid #FAFAFA;
+  display: flex;
+}
+
+.car-view{
+  padding-left: 12px;
+  padding-right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #fff;
+}
+
+.car-view-text{
+  color: #5C5C5C;
+  font-size: 10px;
+}
+
+.buy-btn{
+  width: 100%;
+  font-size: 16px !important;
+}

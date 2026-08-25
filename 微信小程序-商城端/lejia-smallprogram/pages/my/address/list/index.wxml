@@ -1,0 +1,55 @@
+<!-- 
+@url: pages/my/address/list/index.wxml
+@description: 收货地址
+@author: sx
+@date: 2020/07/13
+ -->
+<view id="address">
+	<view class="list_contaner">
+   <block wx:if="{{datalist.length == 0 }}">
+    <view class="no_tips">暂无收货地址，请新增收货地址</view>
+   </block>
+		<block wx:for="{{datalist}}" wx:key="index" wx:if="datalist.length > 0">
+			<van-swipe-cell id="swipe-cell" right-width="{{ item.defaultAddr ? 70 : 140 }}" left-width="{{ 0 }}" async-clos>
+				<van-cell-group>
+					<van-cell>
+						<view slot="title">
+							<view class="address_box">
+								<view class="address_left">								
+									<view class="addr_line">
+										{{item.addr}}{{item.addrDetail || ''}} 
+                    <van-tag type="danger" wx:if="{{item.defaultAddr}}">默认</van-tag>
+									</view>
+                  <view class="name_line">
+										<text>{{item.name}}</text>
+										<text>{{item.hideMobile}}</text>									
+									</view>
+								</view>
+								<view class="address_right">
+									<van-icon name="edit" size="20px" data-pickup="{{item.type == 'PICKUP' ? true : false}}" data-value="{{item.pkey}}" bindtap="handleEdit" custom-class="new_icon" color="#999999"/>
+								</view>
+							</view>
+						</view>
+					</van-cell>
+				</van-cell-group>
+				<view slot="right" class="van-swipe-cell__right">
+					<van-button type="default" data-value="{{item.pkey}}" bindtap="handleDefault" wx:if="{{!item.defaultAddr}}">设为默认</van-button>
+					<van-button type="danger" data-value="{{item.pkey}}" bindtap="handleDelete">删除</van-button>
+				</view>
+			</van-swipe-cell>
+		</block>
+	</view>
+
+	<view class="action_container">
+		<van-goods-action safe-area-inset-bottom="{{ true }}">
+			<!-- <van-goods-action-button icon="plus" text="+ 新增收货地址" bind:click="onClickButton" link-type="navigateTo" url="/pages/my/address/edit/index?type=add" /> -->
+      <van-button round block icon="plus" color="#0DAE4E" type="primary" bind:click="handleAddClick">
+        新增收货地址
+      </van-button>  
+		</van-goods-action>
+	</view>
+
+	<!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

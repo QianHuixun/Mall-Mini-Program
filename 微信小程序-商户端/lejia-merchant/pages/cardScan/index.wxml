@@ -1,0 +1,37 @@
+<!-- 
+@url: pages/cardScan/index.wxml
+@description:扫码核销卡券
+@author: sx
+@date: 2020-07-29
+ -->
+<view class="cardScan" wx:if="{{isSuccess}}">
+  <!-- 头部 -->
+  <view class="xcx-header">
+    <van-image round width="200rpx" height="200rpx" src="/images/sucess.png" />
+    <view class="txt">验证成功，是否核销卡券</view>
+  </view>
+  <view class="xcx-line"></view>
+  <!-- 中间 确认区 -->
+  <view class="xcx-main">
+    <view class="card_box">
+      <view class="card_name">
+        卡券名称：{{card.goodsName}}
+      </view>
+      <view class="card_name">
+        规格：{{card.spaceName}}
+      </view>
+    </view>
+    <view class="btn-cell">
+      <van-button type="info" custom-class="new-btn" bind:click="handleConfirm" loading="{{confirmLoading}}"
+        loading-text="核销中...">确认</van-button>
+      <van-button plain type="info" custom-class="new-plain-btn" bind:click="handleCancel">取消</van-button>
+    </view>
+  </view>
+</view>
+<view class="cardScan" wx:else>
+  <view class="xcx-header">
+    <van-image round width="200rpx" height="200rpx" src="/images/fail.png" />
+    <view class="txt">验证失败，请重新扫码</view>
+  </view>
+
+</view>

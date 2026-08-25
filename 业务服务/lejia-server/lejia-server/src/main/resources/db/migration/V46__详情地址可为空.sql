@@ -1,0 +1,1 @@
+alter table mkt_addr modify addr_detail VARCHAR(200) null;

@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-count-down":"@vant/weapp/count-down/index"
+  },
+  "navigationBarTitleText": "我的拼团"
+
+}

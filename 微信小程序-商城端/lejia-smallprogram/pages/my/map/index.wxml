@@ -1,0 +1,28 @@
+<!--pages/my/map/index.wxml-->
+<view class="map-container">
+   <map class="gaode-map" id="map" markers="{{markers}}" longitude="{{longitude}}" polyline="{{polyline}}" latitude="{{latitude}}" scale="14">
+    <cover-view slot="callout">
+      <cover-view class="customCallout" marker-id="{{1}}">
+        <cover-view class="content"> 
+            <cover-view class="content_title">骑手{{status == 'THIRD_PARTY_PICKING_UP' ? '取货中' : '配送中'}}</cover-view>
+            <cover-view class="content_distance" wx:if="{{distance}}">
+            距{{status == 'THIRD_PARTY_PICKING_UP' ? '商家' : '您'}}
+            <cover-view class="orange">{{distance > 1000 ? distanceKM+ 'km' : distance + 'm' }}</cover-view>
+            </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+   </map>
+   <view class="rider-container">
+    <van-icon name="replay" custom-class="refresh_icon" bind:click="refreshMap"/>
+    <view class="rider-content" wx:if="{{name}}">
+      <van-icon name="/images/my/i-rider.png" size="72rpx" round></van-icon>
+      <view class="name_mobile">
+        <text class="name">{{name}}</text>
+        <text wx:if="{{mobile}}">{{mobile}}</text>
+      </view>
+      <van-button icon="phone" type="primary" color="#0DAE4E" round wx:if="{{mobile}}" bind:tap="riderPhoneClick">联系骑手</van-button>
+    </view>
+   </view>
+   
+</view>

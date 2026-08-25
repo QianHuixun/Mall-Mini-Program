@@ -1,0 +1,93 @@
+<!--pages/shouyeGroup/presell/index.wxml-->
+<view id="presell">
+    <view class="navbar-back">
+        <image src="/images/presell/head_back.png" style="height:{{statusBarHeight+90}}px"></image>
+        <van-nav-bar custom-class="navbar" title="{{title}}" left-arrow bind:click-left="onClickLeft" />
+        <view class="time">
+            <view class="time-title">距离本场{{dayType=='0'?'结束仅剩':'开始还有'}}</view>
+            <view hidden="{{dayType=='1'}}">
+                <van-count-down use-slot time="{{time}}" bind:change="timeChange">
+                    <text class="time-top-item">
+                        <block wx:if="{{timeData.hours.length==1}}">0</block>{{ timeData.hours }}
+                    </text>
+                    <text class="time-top-item-text">:</text>
+                    <text class="time-top-item">
+                        <block wx:if="{{timeData.minutes.length==1}}">0</block>{{ timeData.minutes }}
+                    </text>
+                    <text class="time-top-item-text">:</text>
+                    <text class="time-top-item">
+                        <block wx:if="{{timeData.seconds.length==1}}">0</block>{{ timeData.seconds }}
+                    </text>
+                </van-count-down>
+            </view>
+            <view hidden="{{dayType=='0'}}">
+                <van-count-down use-slot time="{{startTime}}" bind:change="startTimeChange">
+                    <text class="time-top-item">
+                        <block wx:if="{{startTimeData.hours.length==1}}">0</block>{{ startTimeData.hours }}
+                    </text>
+                    <text class="time-top-item-text">:</text>
+                    <text class="time-top-item">
+                        <block wx:if="{{startTimeData.minutes.length==1}}">0</block>{{ startTimeData.minutes }}
+                    </text>
+                    <text class="time-top-item-text">:</text>
+                    <text class="time-top-item">
+                        <block wx:if="{{startTimeData.seconds.length==1}}">0</block>{{ startTimeData.seconds }}
+                    </text>
+                </van-count-down>
+            </view>
+        </view>
+    </view>
+    <view class="tab">
+        <image wx:if="{{dayType=='0'}}" src="/images/presell/tab_left_active.png"></image>
+        <image wx:else src="/images/presell/tab_right_active.png"></image>
+        <view class="tab-item {{dayType=='0'?'tab-item-active':''}}" catchtap="handleDayChange" data-type="0">
+            <text>今日</text>
+            <view class="jr-tips">抢购中</view>
+
+        </view>
+        <view class="tab-item {{dayType=='1'?'tab-item-active':''}}" catchtap="handleDayChange" data-type="1">明天开抢</view>
+    </view>
+    <view class="scroll-view-box">
+        <scroll-view class="scroll-view" scroll-y scroll-anchoring upper-threshold="0" bindscrolltoupper="bindscrolltop" bindscrolltolower="bindscrollbottom" style="height:calc(100vh - {{(statusBarHeight + 46)}}px - 166rpx );">
+            <view class="mall-goods" style="height: {{contetnHight}};">
+                <view class="tips">抢购结果以支付时间为准，抢完即止，结束后恢复原售价</view>
+                <view class="goods-item" wx:for="{{goodsList}}" wx:key="index" catchtap='goodsClick' data-id='{{item}}'>
+                    <view class="goods-image-box">
+                        <van-image custom-class="goods-image" width="200rpx" height="200rpx" src="{{item.wrapperPhoto||'/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                        <view class="no-num" wx:if="{{!item.kcNum}}">已售罄</view>
+                    </view>
+                    <view class="goods-info">
+                        <view>
+                            <view class="goods-name">{{item.title}}</view>
+                            <view class="goods-selling_points">
+                                <view class="item-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+                                <view class="item-selling_points">
+                                    <view class="selling-points" wx:for="{{item.sellingPoints}}" wx:for-item="sellingPoint">{{sellingPoint}}</view>
+                                </view>
+                            </view>
+                            <view class="goods-progress" wx:if="{{item.kcNum<=10&&dayType=='0'}}">
+                                <view class="progress-curre" style="width: {{ item.kcNum * 10 }}+'%'"></view>
+                                <view class="progress-num">{{item.kcNum?'仅剩'+item.kcNum+'份':'已售罄'}}</view>
+                            </view>
+                            <!-- <view class="goods-label">限时抢</view> -->
+                        </view>
+                        <wxs module="filter" src="./index.wxs"></wxs>
+                        <view class="goods-price">
+                            <view class="goods-price-box">
+                                <view class="price-normal">￥<text>{{filter.valueFormat(item.price)}}</text></view>
+                                <view class="price-old">￥<text>{{filter.valueFormat(item.priceOld)}}</text></view>
+                            </view>
+                            <view class="goods-btn {{dayType=='0'&&item.kcNum?'':'goods-btn-disabled'}}" catchtap="goodsClick" data-id='{{item}}'>
+                                <text>{{dayType=='0'?(item.kcNum?'马上抢':'已售罄'):'即将开抢'}}</text>
+                                <van-image custom-class="time-content-item-img" width="150rpx" height="64rpx" src="/images/presell/btn_back.png" lazy-load="{{ true }}" />
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore' finishText="- 我是有底线的 -"></load-more>
+                <view class="looking-more" bind:tap="lookingMore" wx:if="{{showLookingMore}}">查看更多</view>
+            </view>
+            <recommending-goods id="recommendGoods" zone="SPECIAL" bindnodata="lookingMore"></recommending-goods>
+        </scroll-view>
+    </view>
+</view>

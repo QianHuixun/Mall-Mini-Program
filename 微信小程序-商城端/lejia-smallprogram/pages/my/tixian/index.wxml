@@ -1,0 +1,29 @@
+<!-- 
+@url: pages/tixian/index.wxml
+@description: 提现申请
+@author: crj
+@date: 2020/09/22
+ -->
+<view class="tixian">
+
+  <view class="from-box">
+    <van-cell value-class="bank-info-box" title="转到银行卡" is-link url="/pages/my/info/index">
+      <view slot="" >
+        <text class="bank-name">{{userInfo.accountBank!=null?userInfo.accountBank:''}}</text><text class="bank-num">{{custCard}}</text>
+      </view>
+    </van-cell>
+    <van-cell title="提现金额" use-label-slot >
+      <view slot="label">
+        <van-field type="digit" bind:input="limitInput" custom-style="padding-left: 0 !important;" label-class="van-field--label" input-class="van-field--input" label="¥" model:value="{{ comms }}" placeholder="最小提现金额10元" border="{{ false }}" />
+      </view>
+    </van-cell>
+    <view class="submit-btn--box">
+      <van-button custom-class="submit-btn" round type="info" size="large" catchtap="onSubmit"> 确认提现</van-button>
+    </view>
+  </view>
+  <view class="tips-box">
+   <text class="label">温馨提示：</text>
+   <text class="txt">提现费率为0.3%，提现到账日期为7个工作日内，节假日顺延</text>
+  </view>
+
+</view>

@@ -1,0 +1,21 @@
+{
+    "usingComponents": {
+      "van-image": "@vant/weapp/image/index",
+      "van-grid": "@vant/weapp/grid/index",
+      "van-grid-item": "@vant/weapp/grid-item/index",
+      "van-search": "@vant/weapp/search/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-button": "@vant/weapp/button/index",
+      "load-more":"/components/load-more/index",
+      "authorize": "/components/login/index",
+      "space-dialog":"/components/space/index",
+      "go-cart": "/components/goCart/index",
+      "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "drag-ball": "/components/dragBall/index",
+    "search-bar": "/components/search-bar/index"
+    },
+    "navigationBarTitleText": "滨农优品"
+  }

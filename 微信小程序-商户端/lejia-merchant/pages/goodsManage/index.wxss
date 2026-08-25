@@ -1,0 +1,267 @@
+/* pages/goodsManage/index.wxss */
+page {
+    background-color: #F2F4F7;
+}
+
+.goods-manage .goods-search-view {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.goods-manage .goods-search-view .search-view {
+    flex: 1;
+}
+
+.goods-manage .goods-search-view .status-view {
+    padding-right: 24rpx;
+    width: 160rpx;
+    font-family: PingFang SC, PingFang SC;
+    font-weight: 400;
+    font-size: 30rpx;
+    color: #999999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.goods-list {
+    margin: 20rpx 24rpx;
+}
+
+.goods-item {
+    background-color: white;
+    margin-bottom: 20rpx;
+    padding: 24rpx;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+}
+
+.item-content {
+    display: flex;
+}
+
+.item-content .content {
+    flex: 1;
+    padding: 0 16rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-line .title {
+    font-weight: bold;
+    font-size: 30rpx;
+    color: #333333;
+    flex: 1;
+}
+
+.content-line .status {
+    text-align: right;
+    font-size: 24rpx;
+    width: 96rpx;
+    color: #999999;
+}
+
+.content-line .status-on {
+    text-align: right;
+    font-size: 24rpx;
+    width: 96rpx;
+    color: #06B671;
+}
+
+.content-line .price {
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #ED4528;
+}
+
+.content-line .kcNum {
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.btn-view {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 22rpx;
+}
+
+.edit-btn {
+    background: #FFFFFF;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    border: 2rpx solid #CCCCCC;
+    width: 144rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #333333;
+    margin-right: 16rpx;
+}
+
+.status-btn {
+    background: #5B94E1;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    width: 128rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #FFFFFF;
+}
+
+.status-btn-down {
+    background: #D28C5A;
+}
+
+.edit-view {
+    width: 654rpx;
+}
+
+.edit-view .title {
+    margin: 32rpx 0;
+    font-weight: bold;
+    font-size: 34rpx;
+    color: #333333;
+    text-align: center;
+}
+
+.edit-view .bottom {
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid #F1F1F1;
+    height: 96rpx;
+    text-align: center;
+}
+
+.edit-view .bottom .cancle {
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #333333;
+    width: 50%;
+    height: 96rpx;
+    line-height: 96rpx;
+    border-right: 1rpx solid #F1F1F1;
+}
+
+.edit-view .bottom .comfirm {
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #5B94E1;
+    width: 50%;
+    height: 96rpx;
+    line-height: 96rpx;
+}
+
+.edit-content {
+    margin: 32rpx 24rpx;
+}
+
+.edit-item {
+    margin-bottom: 24rpx;
+}
+
+.edit-top-view {
+    display: flex;
+    align-items: center;
+    color: #5B94E1;
+}
+
+.tag-view {
+    width: 6rpx;
+    height: 32rpx;
+    background: #5B94E1;
+    border-radius: 16rpx 16rpx 16rpx 16rpx;
+    margin-right: 8rpx;
+}
+
+.space {
+    font-size: 30rpx;
+    color: #5B94E1;
+}
+
+.edit-price-view {
+    display: flex;
+    justify-content: space-between;
+    margin: 24rpx 0;
+}
+
+.edit-price-item-view {
+    display: flex;
+    width: 47%;
+    align-items: center;
+}
+
+.edit-price-item-view text {
+    font-size: 30rpx;
+    color: #333333;
+    width: 160rpx;
+}
+.edit-price-item-view .van-cell{
+    background-color: #F7F7F7;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    flex: 1;
+    height: 80rpx;
+    padding: 8px 16px;
+}
+
+/* 定义输入焦点时的高亮样式 */
+.edit-price-item-view  .highlight .van-cell{
+    background-color: #FFFFFF;
+    border: 2rpx solid #5B94E1;
+  }
+
+.kc-view {
+    display: flex;
+    align-items: center;
+}
+
+.kc-view text {
+    font-size: 30rpx;
+    color: #333333;
+    margin-right: 20rpx;
+}
+
+.kc-view .van-stepper__input {
+    width: 255rpx;
+    height: 80rpx;
+}
+
+.kc-view .van-stepper__minus {
+    height: 80rpx;
+    width: 128rpx;
+}
+
+.kc-view .van-stepper__plus {
+    height: 80rpx;
+    width: 128rpx;
+}
+
+.edit-kc-view {
+    margin-top: 28rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 70rpx;
+}
+
+.edit-kc-view view {
+    flex: 1;
+    text-align: center;
+    background: #EEF4FC;
+    height: 58rpx;
+    line-height: 58rpx;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    font-size: 24rpx;
+    color: #5B94E1;
+    margin-left: 12rpx;
+}

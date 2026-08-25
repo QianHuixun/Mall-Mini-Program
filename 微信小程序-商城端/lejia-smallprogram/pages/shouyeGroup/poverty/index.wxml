@@ -1,0 +1,39 @@
+<!-- 
+@url: pages/shouyeGroup/poverty/index.wxml
+@description: 扶贫专区
+@author: zs
+ -->
+<view id="poverty-zone">
+	<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+		<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+			<image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}"  data-jump="{{item.jump}}" bindtap="goAds"></image>
+		</swiper-item>
+	</swiper>
+	<view class="seg-view">
+		<view class="seg">
+			<van-image src="/images/seg_green_left.png" width="216rpx" height="29rpx" />
+		</view>
+		<text>热销推荐</text>
+		<view class="seg">
+			<van-image src="/images/seg_green_right.png" width="216rpx" height="29rpx" />
+		</view>
+	</view>
+	<view class="content">
+		<view class="item" wx:for="{{goodslist}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+			<text class="item-tag">精准扶贫</text>
+			<van-image width="90%" height="{{height}}px" src="{{item.wrapperPhoto || '/images/no-pic.png'}}" />
+			<view class="van-multi-ellipsis--l2 item-title">{{item.title}}</view>
+			<view class="num-view">
+				<text class="tag">￥</text>
+				<text class="price">{{item.price}}</text>
+			</view>
+			<view class="num-view">
+				<view class="van-multi-ellipsis--l2 item-label">￥{{item.priceOld}}</view>
+				<text class="sale">销量：{{item.xsNum}}</text>
+			</view>
+			
+		</view>
+	</view>
+	<!-- 加载更多数据 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadData' bindclickLoadMore='loadData'></load-more>
+</view>

@@ -1,0 +1,52 @@
+<!-- 
+@url: pages/my/invite/index.wxml
+@description: 我的  邀请有礼 
+@author: crj
+@date: 2020/11/05
+ -->
+<view id="invite">
+  <view class="invite_head" wx:if="{{invitationPhoto}}">
+    <image class="top_img" src="{{invitationPhoto}}" mode="widthFix"></image>
+  </view>
+  
+  <view class="invite_btn-box">
+    <!-- <image src="/images/my/i_invite_btn.png" mode="widthFix" open-type="share"></image> -->
+    <button open-type="share">
+
+    </button>
+  </view>
+  <view class="invite_list-tit"> 我的邀请</view>
+
+  <view class="invite_list">
+    <block wx:if="{{tjrList.length}}">
+    <view class="list-box" wx:for="{{tjrList}}" wx:key="index">
+      <view class="item-left">
+        <view class="photo">
+          <image src="{{item.photo}}"></image>
+        </view>
+        <view class="invite_name">
+          <text class="name">{{item.name}}</text>
+          <text class="label">{{item.mobile}}</text>
+        </view>
+      </view>
+      <view class="item-right">
+        <view wx:if="{{item.tjComm==null}}">
+          <text>邀请成功</text>
+        </view>
+        <view wx:else>
+          <view>下单成功</view>
+          <view>已返佣金<text class="price">￥{{item.tjComm}}</text>元</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="invite_empty-tips">
+      暂无奖励，快去邀请好友吧
+    </view>
+
+  </block>
+  </view>
+  <authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+
+</view>

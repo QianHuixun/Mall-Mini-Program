@@ -1,0 +1,9 @@
+<!--components/shouye/prefectureBar/index.wxml-->
+<view class="prefecture-bar" wx:if="{{list && list.length}}">
+    <view class="prefecture-bar-scroll">
+        <view class="prefecture-bar-item" wx:for="{{list}}"  wx:key="index" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bind:tap="goAds">
+            <van-image custom-class="item-image" src="{{item.photos}}"></van-image>
+            <view class="item-name">{{item.name}}</view>
+        </view>
+    </view>
+</view>

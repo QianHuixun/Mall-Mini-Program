@@ -1,0 +1,85 @@
+/* pages/vendor/index.wxss */
+page {
+  background: #f5f5f5;
+}
+
+.top_container {
+  position: relative;
+  background: #0092FF;
+  height: 176rpx;
+  padding: 44rpx 48rpx 0 48rpx;
+  width: 100vw;
+  box-sizing: border-box;
+  
+}
+
+.avatar_bar {
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+}
+
+.logout_text {
+  height: 200rpx;
+  line-height: 200rpx;
+  text-align: center;
+}
+
+.avatar_box {
+  display: flex;
+  flex: 1;
+  z-index: 1;
+  width: 100%;
+}
+.avatar_box .flex_cell {
+  font-size: 34rpx;
+  line-height:60rpx;
+  padding-left: 20rpx;
+  color: #fff;
+}
+
+.btn_container {
+  position: relative;
+  top: -65rpx;
+  padding: 0 25rpx;
+}
+
+.btn_flex {
+  display:flex;
+}
+
+.btn_flex .btn_cell {
+  flex: 1;
+  margin: 0;
+}
+.btn_flex .btn_cell:first-child {
+  margin-right: 11rpx;
+}
+
+.btn_flex .btn_cell:last-child {
+  margin-left: 11rpx;
+}
+
+.btn_cell {
+  display: flex;
+  align-items: center;
+  margin: 21rpx 0;
+  padding: 48rpx 32rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+}
+
+.btn_cell__left {
+  margin-right: 40rpx;
+  height: 50rpx;
+  overflow: hidden;
+}
+
+.btn_cell__left .new-icon image {
+  display: block;
+}
+
+.btn_cell__right {
+  color: #333;
+  font-size: 32rpx;
+}

@@ -1,0 +1,29 @@
+var filter = {
+  /**
+   * @desc 获取小数点前的整数
+   * @param value 数字
+   */
+  pointAfter: function (value) {
+    return value.toFixed(2).split('.')[1]
+  },
+  /**
+   * @desc 获取小数点后的数值
+   * @param value 数字
+   */
+  pointFront: function (value) {
+    return value.toFixed(2).split('.')[0]
+  },
+  /**
+   * @desc 获取字符长度
+   * @param value 数字
+   */
+  getStringLen: function (value) {
+    return (value+'').length
+  }
+}
+
+module.exports = {
+  pointAfter: filter.pointAfter,
+  pointFront: filter.pointFront,
+  getStringLen: filter.getStringLen
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "load-more":"/components/load-more/index"
+  },
+  "navigationBarTitleText": "卡券兑换记录"
+}

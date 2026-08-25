@@ -1,0 +1,569 @@
+<!-- 
+@url: pages/buyCar/index.wxml
+@description: 购物车
+@author: sx
+@date: 2020/07/20
+ -->
+<van-config-provider theme-vars="{{ theme }}">
+ <view id="buyCar">
+  <drag-ball type="MARKET_MALL"></drag-ball>
+	<!-- 市场 商品 -->
+	<view class="buyCar_list market_list" wx:if="{{marketList.length != 0}}">
+		<view class="buyCar_title">
+			<image class="title-back" src="/images/buyCar/buycar_head.png"></image>
+			<van-checkbox value="{{ allMarket }}" name="a" checked-color="{{theme.iconColor}}" bind:change="allMarketCheckChange">
+				{{marketName}}
+			</van-checkbox>
+			<view class="collect-bill-box" wx:if="{{(isFree&&allMoney<freeDelivery) || isReductionOne&&allMoney<reachOne || isReductionTwo&&allMoney<reachTwo}}">
+				<view class="flex-layout">
+                    <van-tag wx:if="{{(isFree && ((isReductionOne &&(allMoney >= reachOne)) || !isReductionOne ) && ((isReductionTwo &&(allMoney >= reachTwo)) || !isReductionTwo ) )}}" custom-class="tag" color="{{theme.tagColor}}" text-color="#ffff" >免跑腿费</van-tag>
+					<text wx:if="{{(isFree && ((isReductionOne &&(allMoney >= reachOne)) || !isReductionOne ) && ((isReductionTwo &&(allMoney >= reachTwo)) || !isReductionTwo ) )}}" class="tag-title">满{{freeDelivery}}元包邮</text>
+					
+                    <text class="tag-title" style="margin-left:0px;" wx:else>满{{isReductionOne && (allMoney < reachOne) ? reachOne : reachTwo}}元，配送费减免{{isReductionOne && (allMoney < reachOne) ? reductionDeliveryOne : reductionDeliveryTwo}}元</text>
+				</view>
+				<view class="flex-layout " catchtap="gocollectBill"><text style="color: {{theme.primary}}">去凑单</text>
+					<van-icon color="{{theme.primary}}" name="arrow" size="1em" />
+				</view>
+			</view>
+		</view>
+		<view class="buyCar_content">
+			<van-checkbox-group value="{{ marketResult }}" bind:change="groupMarketCheckChange">
+				<view id="swipe-cell" wx:for="{{marketList}}" wx:key="pkey">
+					<view class="wx_card">
+						<view class="card_l" data-index="{{ index }}" data-pkey="{{ item.pkey }}" bindtap="marketToggle">
+							<van-checkbox custom-class="buycar-checkbox" name="{{item.pkey}}" checked-color="{{theme.iconColor}}"></van-checkbox>
+						</view>
+						<view class="card_c" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}"  bindtap="goGoods">
+							<image src="{{item.photo||'/images/no-pic.png'}}" class="card_img"></image>
+							<view class="tip" wx:if="{{item.kcNum<item.num&&item.lines.length<2}}">库存不足</view>
+						</view>
+						<view class="card_r">
+							<view class="card_title" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods">
+								<view class="card_title_txt">
+									<view class="icon-type" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'|| item.mtype == 'SPECIAL_GOODS'||item.mtype == 'SHARE_GOODS'}}">
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'}}">扶贫</van-tag>
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:elif="{{item.mtype == 'SPECIAL_GOODS'}}">特价</van-tag>
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:elif="{{item.mtype == 'SHARE_GOODS'}}">分享</van-tag>
+									</view>
+									{{ item.goodsTitle }}
+								</view>
+								<view class="card-space" wx:if="{{item.lines.length<2}}">
+									{{item.mtypeName == '加工商品' ? '加工:' +item.associationName : '规格:' + item.spaceName}}
+								</view>
+							</view>
+
+							<!-- 会员价格与原价 -->
+							<view class="price-cell" wx:if="{{item.lines.length<2}}">
+								<view>
+									<!-- 页面方法调用 -->
+									<wxs module="filter" src="./index.wxs"></wxs>
+									<view class="normal-price">
+										<view class="price_clr">
+											<text class="unit">￥</text>
+											<text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+										</view>
+										<view class="price-old">￥<text>{{item.priceOld}}</text></view>
+									</view>
+
+								</view>
+								<view class="card_step">
+									<van-stepper value="{{ item.lines[0].num }}" disable-input data-index="{{ index }}" data-space="{{item.lines[0].space}}" data-pkey="{{item.pkey}}" data-num="{{item.num}}" data-type="market" async-change bind:change="stepChange" integer min="0" button-size="64rpx"/>
+								</view>
+							</view>
+							<view class="price-mermber" wx:if="{{item.priceMember&&item.lines.length<2}}">
+								<text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+								<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+							</view>
+							<view class="price-sum" wx:if="{{item.lines.length>1}}">小计<text>￥{{item.sumPrice}}</text></view>
+							<!--end 会员价格与原价 -->
+						</view>
+					</view>
+					<view class="space-card" wx:if="{{item.lines.length>1}}">
+						<van-checkbox-group value="{{ item.marketResult }}" bind:change="marketSpaceChange" data-index="{{index}}">
+							<view id="swipe-cell" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="pkey">
+								<view class="wx_card">
+									<view class="card_l">
+										<van-checkbox custom-class="buycar-checkbox" name="{{subItem.pkey}}" checked-color="{{theme.iconColor}}"></van-checkbox>
+									</view>
+									<view class="card_c"  data-pkey="{{item.goods}}" data-space="{{subItem.space}}"  bindtap="goGoods">
+										<image src="{{subItem.photo1||'/images/no-pic.png'}}" class="card_img"></image>
+										<view class="tip" wx:if="{{subItem.kcNum<subItem.num}}">库存不足</view>
+									</view>
+									<view class="card_r">
+										<view class="card_title"  data-pkey="{{item.goods}}" data-space="{{subItem.space}}"  bindtap="goGoods">
+											<view class="card-space">
+                        {{subItem.mtypeName == '加工商品' ? '加工:' +subItem.associationName : '规格:' + subItem.spaceName}}
+											</view>
+										</view>
+
+										<!-- 会员价格与原价 -->
+										<view class="price-cell">
+											<view>
+												<!-- 页面方法调用 -->
+												<wxs module="filter" src="./index.wxs"></wxs>
+												<view class="normal-price">
+													<view class="price_clr">
+														<text class="unit">￥</text>
+														<text class="price_txt">{{filter.pointFront(subItem.price)}}</text>.{{filter.pointAfter(subItem.price)}}
+													</view>
+													<view class="price-old">￥<text>{{subItem.priceOld}}</text></view>
+												</view>
+
+											</view>
+											<view class="card_step">
+												<van-stepper value="{{ subItem.num }}" disable-input data-index="{{ index }}" data-pkey="{{item.pkey}}"  data-spacepkey="{{subItem.pkey}}" data-space="{{subItem.space}}" data-num="{{subItem.num}}" data-type="market" async-change bind:change="stepChange" integer min="0"  button-size="64rpx" />
+											</view>
+										</view>
+										<view class="price-mermber" wx:if="{{subItem.priceMember}}">
+											<text class="price-mermber-txt"><text class="unit">￥</text>{{subItem.priceMember}}</text>
+											<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+										</view>
+										<!--end 会员价格与原价 -->
+									</view>
+								</view>
+
+							</view>
+						</van-checkbox-group>
+					</view>
+
+				</view>
+			</van-checkbox-group>
+		</view>
+	</view>
+	<!-- 积分商城 商品 -->
+	<view class="buyCar_list market_list" wx:if="{{mallList.length != 0}}">
+		<view class="buyCar_title">
+			<image class="title-back" src="/images/buyCar/buycar_head.png"></image>
+			<van-checkbox value="{{ allMall }}" name="a" checked-color="{{theme.iconColor}}" bind:change="allMallCheckChange">{{title}}</van-checkbox>
+		</view>
+		<view class="buyCar_content">
+			<van-checkbox-group value="{{ mallResult }}" bind:change="groupMallCheckChange">
+				<view id="swipe-cell" wx:for="{{mallList}}" wx:key="pkey">
+					<view class="wx_card">
+						<view class="card_l" data-index="{{ index }}" data-pkey="{{ item.pkey }}" bindtap="mallToggle">
+							<van-checkbox custom-class="buycar-checkbox" name="{{ item.pkey }}" checked-color="{{theme.iconColor}}"></van-checkbox>
+						</view>
+						<view class="card_c"  data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods">
+							<image src="{{item.photo||'/images/no-pic.png'}}" class="card_img"></image>
+							<view class="tip" wx:if="{{item.kcNum<item.num}}">库存不足</view>
+						</view>
+						<view class="card_r">
+							<view class="card_title" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods"> 
+								<view class="card_title_txt">{{ item.goodsTitle }}</view>
+								<view class="card-space" wx:if="{{item.lines.length<2}}">
+                  {{item.mtypeName == '加工商品' ? '加工:' +item.associationName : '规格:' + item.spaceName}}
+								</view>
+							</view>
+
+							<!-- 会员价格与原价 -->
+							<view class="price-cell" wx:if="{{item.lines.length<2}}">
+								<view>
+									<!-- 页面方法调用 -->
+									<view class="normal-price">
+										<view class="price_clr">
+											<text class="unit">￥</text>
+											<text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+										</view>
+										<view class="price-old">￥<text>{{item.priceOld}}</text></view>
+									</view>
+									<view class="price-mermber" wx:if="{{item.priceMember}}">
+										<text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+										<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+									</view>
+								</view>
+								<view class="card_step">
+									<van-stepper value="{{ item.lines[0].num }}" disable-input data-index="{{ index }}" data-space="{{item.lines[0].space}}" data-pkey="{{item.pkey}}" data-num="{{item.num}}" data-type="mall" async-change bind:change="stepChange" integer min="0"  button-size="64rpx"/>
+								</view>
+							</view>
+							<view class="price-sum" wx:else>小计<text>￥{{item.sumPrice}}</text></view>
+							<!--end 会员价格与原价 -->
+						</view>
+					</view>
+					<view class="space-card" wx:if="{{item.lines.length>1}}">
+						<van-checkbox-group value="{{ item.mallResult }}" bind:change="mallSpaceChange" data-index="{{index}}">
+							<view id="swipe-cell" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="space">
+								<view class="wx_card">
+									<view class="card_l">
+										<van-checkbox custom-class="buycar-checkbox" name="{{subItem.pkey}}" checked-color="{{theme.iconColor}}"></van-checkbox>
+									</view>
+									<view class="card_c" data-pkey="{{item.goods}}" data-space="{{subItem.space}}"  bindtap="goGoods">
+										<image src="{{subItem.photo1||'/images/no-pic.png'}}" class="card_img"></image>
+										<view class="tip" wx:if="{{subItem.kcNum<subItem.num}}">库存不足</view>
+									</view>
+									<view class="card_r">
+										<view class="card_title" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" bindtap="goGoods">
+											<view class="card-space">
+                        {{subItem.mtypeName == '加工商品' ? '加工:' +subItem.associationName : '规格:' + subItem.spaceName}}
+											</view>
+										</view>
+
+										<!-- 会员价格与原价 -->
+										<view class="price-cell">
+											<view>
+												<!-- 页面方法调用 -->
+												<wxs module="filter" src="./index.wxs"></wxs>
+												<view class="normal-price">
+													<view class="price_clr">
+														<text class="unit">￥</text>
+														<text class="price_txt">{{filter.pointFront(subItem.price)}}</text>.{{filter.pointAfter(subItem.price)}}
+													</view>
+													<view class="price-old">￥<text>{{subItem.priceOld}}</text></view>
+												</view>
+
+											</view>
+											<view class="card_step">
+												<van-stepper value="{{ subItem.num }}" disable-input data-index="{{ index }}" data-space="{{subItem.space}}" data-pkey="{{item.pkey}}" data-spacepkey="{{subItem.pkey}}" data-num="{{subItem.num}}" data-type="mall" async-change bind:change="stepChange" integer min="0" button-size="64rpx"/>
+											</view>
+										</view>
+										<view class="price-mermber" wx:if="{{subItem.priceMember}}">
+											<text class="price-mermber-txt"><text class="unit">￥</text>{{subItem.priceMember}}</text>
+											<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+										</view>
+										<!--end 会员价格与原价 -->
+									</view>
+								</view>
+
+							</view>
+						</van-checkbox-group>
+					</view>
+				</view>
+
+			</van-checkbox-group>
+		</view>
+	</view>
+    <!-- 民生豆 商品 -->
+	<view class="buyCar_list market_list" wx:if="{{msdList.length != 0}}">
+		<view class="buyCar_title">
+			<image class="title-back" src="/images/buyCar/buycar_head.png"></image>
+			<van-checkbox value="{{ allMsd }}" name="a" checked-color="{{theme.iconColor}}" bind:change="allMsdCheckChange">{{msdTitle}}</van-checkbox>
+		</view>
+		<view class="buyCar_content">
+			<van-checkbox-group value="{{ msdResult }}" bind:change="groupMsdCheckChange">
+				<view id="swipe-cell" wx:for="{{msdList}}" wx:key="pkey">
+					<view class="wx_card">
+						<view class="card_l" data-index="{{ index }}" data-pkey="{{ item.pkey }}" bindtap="msdToggle">
+							<van-checkbox custom-class="buycar-checkbox" name="{{ item.pkey }}" checked-color="{{theme.iconColor}}"></van-checkbox>
+						</view>
+						<view class="card_c"  data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods">
+							<image src="{{item.photo||'/images/no-pic.png'}}" class="card_img"></image>
+							<view class="tip" wx:if="{{item.kcNum<item.num}}">库存不足</view>
+						</view>
+						<view class="card_r">
+							<view class="card_title" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods"> 
+								<view class="card_title_txt">{{ item.goodsTitle }}</view>
+								<view class="card-space" wx:if="{{item.lines.length<2}}">
+                  {{item.mtypeName == '加工商品' ? '加工:' +item.associationName : '规格:' + item.spaceName}}
+								</view>
+							</view>
+
+							<!-- 会员价格与原价 -->
+							<view class="price-cell" wx:if="{{item.lines.length<2}}">
+								<view>
+									<!-- 页面方法调用 -->
+									<view class="normal-price">
+										<view class="price_clr">
+											<text class="unit">￥</text>
+											<text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+										</view>
+										<view class="price-old">￥<text>{{item.priceOld}}</text></view>
+									</view>
+									<view class="price-mermber" wx:if="{{item.priceMember}}">
+										<text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+										<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+									</view>
+								</view>
+								<view class="card_step">
+									<van-stepper value="{{ item.lines[0].num }}" disable-input data-index="{{ index }}" data-space="{{item.lines[0].space}}" data-pkey="{{item.pkey}}" data-num="{{item.num}}" data-type="msd" async-change bind:change="stepChange" integer min="0"  button-size="64rpx"/>
+								</view>
+							</view>
+							<view class="price-sum" wx:else>小计<text>￥{{item.sumPrice}}</text></view>
+							<!--end 会员价格与原价 -->
+						</view>
+					</view>
+					<view class="space-card" wx:if="{{item.lines.length>1}}">
+						<van-checkbox-group value="{{ item.msdResult }}" bind:change="msdSpaceChange" data-index="{{index}}">
+							<view id="swipe-cell" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="space">
+								<view class="wx_card">
+									<view class="card_l">
+										<van-checkbox custom-class="buycar-checkbox" name="{{subItem.pkey}}" checked-color="{{theme.iconColor}}"></van-checkbox>
+									</view>
+									<view class="card_c" data-pkey="{{item.goods}}" data-space="{{subItem.space}}"  bindtap="goGoods">
+										<image src="{{subItem.photo1||'/images/no-pic.png'}}" class="card_img"></image>
+										<view class="tip" wx:if="{{subItem.kcNum<subItem.num}}">库存不足</view>
+									</view>
+									<view class="card_r">
+										<view class="card_title" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" bindtap="goGoods">
+											<view class="card-space">
+                        {{subItem.mtypeName == '加工商品' ? '加工:' +subItem.associationName : '规格:' + subItem.spaceName}}
+											</view>
+										</view>
+
+										<!-- 会员价格与原价 -->
+										<view class="price-cell">
+											<view>
+												<!-- 页面方法调用 -->
+												<wxs module="filter" src="./index.wxs"></wxs>
+												<view class="normal-price">
+													<view class="price_clr">
+														<text class="unit">￥</text>
+														<text class="price_txt">{{filter.pointFront(subItem.price)}}</text>.{{filter.pointAfter(subItem.price)}}
+													</view>
+													<view class="price-old">￥<text>{{subItem.priceOld}}</text></view>
+												</view>
+
+											</view>
+											<view class="card_step">
+												<van-stepper value="{{ subItem.num }}" disable-input data-index="{{ index }}" data-space="{{subItem.space}}" data-pkey="{{item.pkey}}" data-spacepkey="{{subItem.pkey}}" data-num="{{subItem.num}}" data-type="msd" async-change bind:change="stepChange" integer min="0" button-size="64rpx"/>
+											</view>
+										</view>
+										<view class="price-mermber" wx:if="{{subItem.priceMember}}">
+											<text class="price-mermber-txt"><text class="unit">￥</text>{{subItem.priceMember}}</text>
+											<image class="price-mermber-tag" src="/images/member_price_tag.png" />
+										</view>
+										<!--end 会员价格与原价 -->
+									</view>
+								</view>
+
+							</view>
+						</van-checkbox-group>
+					</view>
+				</view>
+
+			</van-checkbox-group>
+		</view>
+	</view>
+    <!-- 京东优选商品 -->
+    <view class="buyCar_list market_list" wx:if="{{jdList.length != 0}}">
+        <view class="buyCar_title">
+            <image class="title-back" src="/images/buyCar/buycar_head.png"></image>
+            <van-checkbox value="{{ allJd }}" name="a" checked-color="{{theme.iconColor}}" bind:change="allJdCheckChange">{{jdTitle}}</van-checkbox>
+        </view>
+        <view class="buyCar_content">
+            <van-checkbox-group value="{{ jdResult }}" bind:change="groupJdCheckChange">
+                <view id="swipe-cell" wx:for="{{jdList}}" wx:key="pkey">
+                    <view class="wx_card">
+                        <view class="card_l" data-index="{{ index }}" data-pkey="{{ item.pkey }}" bindtap="jdToggle">
+                            <van-checkbox custom-class="buycar-checkbox" name="{{ item.pkey }}" checked-color="{{theme.iconColor}}"></van-checkbox>
+                        </view>
+                        <view class="card_c" data-pkey="{{item.pkey}}" data-skuId="{{item.skuId}}" bindtap="goJdGoods">
+                            <image src="{{item.photo||'/images/no-pic.png'}}" class="card_img"></image>
+                            <view class="tip" wx:if="{{item.kcNum<item.num}}">库存不足</view>
+                        </view>
+                        <view class="card_r">
+                            <view class="card_title" data-pkey="{{item.pkey}}" data-skuId="{{item.skuId}}" bindtap="goJdGoods">
+                                <view class="card_title_txt">{{ item.title }}</view>
+                            </view>
+                            <!-- 会员价格与原价 -->
+                            <view class="price-cell">
+                                <view>
+                                    <!-- 页面方法调用 -->
+                                    <view class="normal-price">
+                                        <view class="price_clr">
+                                            <text class="unit">￥</text>
+                                            <text class="price_txt">{{item.salePrice}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="card_step">
+                                    <van-stepper value="{{ item.num }}" disable-input data-index="{{ index }}"
+                                    data-pkey="{{item.pkey}}" data-skuId="{{item.skuId}}" data-num="{{item.num}}" data-lowestBuy="{{item.lowestBuy}}"
+                                    async-change bind:change="jdStepChange" integer min="0" button-size="64rpx" />
+                                </view>
+                            </view>
+                            <!--end 会员价格与原价 -->
+                        </view>
+                    </view>
+                    <view class="space-card" wx:if="{{item.lines.length>1}}">
+                        <van-checkbox-group value="{{ item.msdResult }}" bind:change="msdSpaceChange" data-index="{{index}}">
+                            <view id="swipe-cell" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="space">
+                                <view class="wx_card">
+                                    <view class="card_l">
+                                        <van-checkbox custom-class="buycar-checkbox" name="{{subItem.pkey}}" checked-color="{{theme.iconColor}}"></van-checkbox>
+                                    </view>
+                                    <view class="card_c" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" bindtap="goGoods">
+                                        <image src="{{subItem.photo1||'/images/no-pic.png'}}" class="card_img"></image>
+                                        <view class="tip" wx:if="{{subItem.kcNum<subItem.num}}">库存不足</view>
+                                    </view>
+                                    <view class="card_r">
+                                        <view class="card_title" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" bindtap="goGoods">
+                                            <view class="card-space">
+                                                {{subItem.mtypeName == '加工商品' ? '加工:' +subItem.associationName : '规格:' + subItem.spaceName}}
+                                            </view>
+                                        </view>
+                                        <!-- 会员价格与原价 -->
+                                        <view class="price-cell">
+                                            <view>
+                                                <!-- 页面方法调用 -->
+                                                <wxs module="filter" src="./index.wxs"></wxs>
+                                                <view class="normal-price">
+                                                    <view class="price_clr">
+                                                        <text class="unit">￥</text>
+                                                        <text class="price_txt">{{filter.pointFront(subItem.price)}}</text>.{{filter.pointAfter(subItem.price)}}
+                                                    </view>
+                                                    <view class="price-old">￥<text>{{subItem.priceOld}}</text></view>
+                                                </view>
+    
+                                            </view>
+                                            <view class="card_step">
+                                                <van-stepper value="{{ subItem.num }}" disable-input data-index="{{ index }}" data-space="{{subItem.space}}" data-pkey="{{item.pkey}}" data-spacepkey="{{subItem.pkey}}" data-num="{{subItem.num}}" data-type="msd" async-change bind:change="stepChange" integer min="0" button-size="64rpx" />
+                                            </view>
+                                        </view>
+                                        <view class="price-mermber" wx:if="{{subItem.priceMember}}">
+                                            <text class="price-mermber-txt"><text class="unit">￥</text>{{subItem.priceMember}}</text>
+                                            <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+                                        </view>
+                                        <!--end 会员价格与原价 -->
+                                    </view>
+                                </view>
+    
+                            </view>
+                        </van-checkbox-group>
+                    </view>
+                </view>
+            </van-checkbox-group>
+        </view>
+    </view>
+	<view class="no-data" wx:if="{{!mallList.length&&!marketList.length&&!msdList.length&&!jdList.length}}">
+		<image class="no-data-back" src="/images/buyCar/no_data.png"></image>
+		<view>购物车空空如也</view>
+		<view>快去加购喜欢的商品吧~</view>
+	</view>
+	<!-- 不可购买商品 -->
+	<view class="unactive" wx:if="{{unActiveList.length}}">
+		<view class="title">
+			<text>不可购买商品</text>
+		</view>
+		<view class="buyCar_content">
+			<view class="tips">
+				<view class="tips-left">失效商品{{unActiveList.length?unActiveList.length+'件':''}}</view>
+				<view class="tips-right" catchtap="handleAllDelete" data-type="unactive">
+					<text>清空失效商品</text>
+					<van-icon name="/images/buyCar/delete_all_btn.png" size="24rpx" />
+				</view>
+			</view>
+			<van-checkbox-group>
+				<view id="swipe-cell" right-width="{{ 55 }}" left-width="{{ 0 }}" wx:for="{{unActiveList}}" wx:key="pkey">
+					<view class="wx_card">
+						<view class="card_l" >
+							<van-checkbox custom-class="buycar-checkbox" disabled name="{{item.pkey}}" checked-color="{{theme.iconColor}}" ></van-checkbox>
+						</view>
+						<view class="card_c" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods">
+							<image src="{{item.photo||'/images/no-pic.png'}}" class="card_img"></image>
+							<view class="tip" wx:if="{{item.lines.length<2}}">{{item.goodsEnabled?'无库存':'已下架'}}</view>
+						</view>
+						<view class="card_r">
+							<view class="card_title" data-pkey="{{item.goods}}" data-space="{{item.lines[0].space}}" bindtap="goGoods">
+								<view class="card_title_txt">
+									<view class="icon-type" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'|| item.mtype == 'SPECIAL_GOODS'||item.mtype == 'SHARE_GOODS'}}">
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'}}">扶贫</van-tag>
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:elif="{{item.mtype == 'SPECIAL_GOODS'}}">特价</van-tag>
+										<van-tag color="#ED4528" custom-class="icon-type_tag" plain round text-color="#ED4528" wx:elif="{{item.mtype == 'SHARE_GOODS'}}">分享</van-tag>
+									</view>
+									{{ item.goodsTitle }}
+								</view>
+								<view class="card-space" wx:if="{{item.lines.length<2}}">
+                  {{item.lines[0].mtypeName == '加工商品' ? '加工:' +item.lines[0].associationName : '规格:' + item.lines[0].spaceName}}
+								</view>
+							</view>
+							<!-- 会员价格与原价 -->
+							<view class="price-cell" wx:if="{{item.lines.length<2}}">
+								<view>
+									<!-- 页面方法调用 -->
+									<wxs module="filter" src="./index.wxs"></wxs>
+									<view class="normal-price">
+										<view class="price_clr">
+											<text class="unit">￥</text>
+											<text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+										</view>
+										<view class="price-old">￥<text>{{item.priceOld}}</text></view>
+									</view>
+								</view>
+								<view class="card_step">
+									<van-icon custom-class="delete-btn" name="/images/buyCar/delete_btn.png" catchtap="handleDelete" data-value="{{item.lines[0].pkey}}"  data-type="unactive" />
+								</view>
+							</view>
+						
+							<!--end 会员价格与原价 -->
+						</view>
+					</view>
+					<view class="space-card" wx:if="{{item.lines.length>1}}">
+						<van-checkbox-group value="{{ subItem.unActiveResult }}" bind:change="groupMarketCheckChange">
+							<view id="swipe-cell" wx:for="{{item.lines}}" wx:for-item="subItem" wx:for-index="subIndex" wx:key="pkey">
+								<view class="wx_card">
+									<view class="card_l" >
+										<van-checkbox custom-class="buycar-checkbox" disabled name="{{subItem.pkey}}" checked-color="{{theme.iconColor}}" ></van-checkbox>
+									</view>
+									<view class="card_c" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" data-skuid="{{item.skuid}}" bindtap="goGoods">
+										<image src="{{subItem.photo1||'/images/no-pic.png'}}" class="card_img"></image>
+										<view class="tip">{{item.goodsEnabled?'无库存':'已下架'}}</view>
+									</view>
+									<view class="card_r">
+										<view class="card_title" data-pkey="{{item.goods}}" data-space="{{subItem.space}}" data-skuid="{{item.skuid}}" bindtap="goGoods">
+											<view class="card-space">
+                        {{subItem.mtypeName == '加工商品' ? '加工:' +subItem.associationName : '规格:' + subItem.spaceName}}
+											</view>
+										</view>
+
+										<!-- 会员价格与原价 -->
+										<view class="price-cell">
+											<view>
+												<!-- 页面方法调用 -->
+												<wxs module="filter" src="./index.wxs"></wxs>
+												<view class="normal-price">
+													<view class="price_clr">
+														<text class="unit">￥</text>
+														<text class="price_txt">{{filter.pointFront(subItem.price)}}</text>.{{filter.pointAfter(subItem.price)}}
+													</view>
+													<view class="price-old">￥<text>{{subItem.priceOld}}</text></view>
+												</view>
+
+											</view>
+											<view class="card_step">
+												<van-icon custom-class="delete-btn" name="/images/buyCar/delete_btn.png" catchtap="handleDelete" data-value="{{subItem.pkey}}"  data-type="unactive" />
+											</view>
+										</view>
+										<!--end 会员价格与原价 -->
+									</view>
+								</view>
+
+							</view>
+						</van-checkbox-group>
+					</view>
+				</view>
+			</van-checkbox-group>
+		</view>
+	</view>
+
+    <!-- 推荐商品 -->
+    <view style="margin: 0 -24rpx;">
+        <recommending-goods id="recommendGoods" zone="GWC" bindrefresh="getData"></recommending-goods>
+    </view>
+    
+	<!-- 提交订单 -->
+	<van-submit-bar wx:if="{{!newTabbar}}" loading="{{ loading }}" price="{{ allPrice }}" custom-class="buycar-submit-bar"  button-text="去结算" bind:submit="onSubmit">
+		<van-checkbox value="{{ allCheck }}" checked-color="{{theme.iconColor}}" bind:change="allCheckChange">全选</van-checkbox>
+		<van-button size="small" custom-class="delete-btn" color="#FFF0ED" bind:click="handleAllDelete">删除</van-button>
+	</van-submit-bar>
+    <van-submit-bar wx:else loading="{{ loading }}" custom-class="new-buycar-submit-bar"  button-text="去结算" bind:submit="onSubmit">
+		<view class="content">
+            <van-checkbox value="{{ allCheck }}" checked-color="{{theme.iconColor}}" bind:change="allCheckChange"></van-checkbox>
+            <view>
+                <view>
+                    <text>全选</text>
+                    <van-button size="small" custom-class="delete-btn" color="#FFF0ED" bind:click="handleAllDelete">删除</van-button>
+                </view>
+                <view>
+                    <text>合计：</text>
+                    <text class="price">
+                        <text>￥</text>
+                        <text class="price-integer">{{filter.formatPointFront(allPrice)}}</text>
+                        <text>.{{filter.formatPointAfter(allPrice)}}</text>
+                    </text>
+                </view>
+            </view>
+        </view>
+	</van-submit-bar>
+  <van-toast id="van-toast" />
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>
+</van-config-provider>

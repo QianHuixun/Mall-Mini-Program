@@ -1,0 +1,235 @@
+{
+    "description": "项目配置文件",
+    "packOptions": {
+        "ignore": [],
+        "include": []
+    },
+    "setting": {
+        "urlCheck": false,
+        "es6": true,
+        "enhance": false,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": true,
+        "coverView": true,
+        "nodeModules": true,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "lazyloadPlaceholderEnable": false,
+        "useMultiFrameRuntime": true,
+        "useApiHook": true,
+        "useApiHostProcess": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "enableEngineNative": false,
+        "useIsolateContext": true,
+        "userConfirmedBundleSwitch": false,
+        "packNpmManually": true,
+        "packNpmRelationList": [
+            {
+                "packageJsonPath": "./package.json",
+                "miniprogramNpmDistDir": "./miniprogram/"
+            }
+        ],
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "minifyWXML": true,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false,
+        "ignoreDevUnusedFiles": false,
+        "ignoreUploadUnusedFiles": true,
+        "condition": false
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.20.2",
+    "appid": "wxf8e8ea188dd9d52c",
+    "projectname": "zy",
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "我的砍价",
+                    "pathName": "pages/my/bargain/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "积分商城",
+                    "pathName": "pages/home/integral/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "扶贫专区",
+                    "pathName": "pages/shouyeGroup/poverty/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "会员专区",
+                    "pathName": "pages/shouyeGroup/memberZone/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "预售专区",
+                    "pathName": "pages/shouyeGroup/openBook/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "抢购专区",
+                    "pathName": "pages/shouyeGroup/snap/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "拼团专区",
+                    "pathName": "pages/shouyeGroup/groupon/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "菜谱专区",
+                    "pathName": "pages/shouyeGroup/recipe/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "新增收货地址",
+                    "pathName": "pages/my/address/edit/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "积分抽奖",
+                    "pathName": "pages/lottery/lottery/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "我的奖品",
+                    "pathName": "pages/my/prize/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "会员办理",
+                    "pathName": "pages/my/openVip/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "外部链接",
+                    "pathName": "pages/my/link/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "我的拼团",
+                    "pathName": "pages/my/groupon/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "我的订单",
+                    "pathName": "pages/my/order/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "购物车",
+                    "pathName": "pages/home/buyCar/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "我的优惠券",
+                    "pathName": "pages/my/card/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "砍价详情",
+                    "pathName": "pages/my/bargainDetail/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "id": -1,
+                    "name": "邀请有礼",
+                    "pathName": "pages/my/invite/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "积分规则",
+                    "pathName": "pages/shouyeGroup/pointRule/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "我的优惠券",
+                    "pathName": "pages/my/card/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "商家风采列表",
+                    "pathName": "pages/merMien/merchantList/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "商家风采详情",
+                    "pathName": "pages/merMien/merchantDetail/index",
+                    "query": "pkey=141",
+                    "scene": null
+                }
+            ]
+        }
+    },
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    }
+}

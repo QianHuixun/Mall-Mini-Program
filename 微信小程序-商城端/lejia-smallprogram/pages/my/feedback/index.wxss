@@ -1,0 +1,70 @@
+/* pages/my/feedback/index.wxss */
+page{
+  height: 100%;
+  background-color: #f9f9f9;
+}
+
+#feedback .title {
+  /* margin-bottom: 30rpx; */
+  padding: 30rpx 45rpx 0 45rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  background: #fff;
+  color: #5c5c5c;
+}
+
+.lj-field-box {
+  background: #fff;
+  padding: 40rpx;
+}
+
+#feedback .van-cell {
+  background: #f9f9f9;
+  border-radius: 30rpx;
+}
+
+#feedback .van-cell textarea {
+  min-height: 280rpx;
+  font-size: 26rpx;
+}
+
+.box_text{
+  margin: auto;
+  background-color: white;
+  width: 90%;
+  padding: 6px;
+}
+
+.btn-div{
+  position: fixed;
+  left: 0;
+  bottom: 40rpx;
+  width: 100%;
+  box-sizing: border-box;
+  height: 95rpx;
+  padding: 0 40rpx;
+}
+
+#feedback .lj-new-button {
+  font-size: 40rpx;
+
+}
+.wechat{
+  padding-top: 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color:#333 ;
+}
+.code-label{
+   color: #999;
+   font-size: 24rpx;
+   margin-bottom: 40rpx;
+   display: block;
+}
+.label{
+  display: block;
+  padding-bottom: 16rpx;
+}
+.phone{
+  color: #00a0e9;
+}

@@ -1,0 +1,365 @@
+/* pages/shouyeGroup/merchant/index.wxss */
+
+#merchant .merchant-top {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: #fff;
+}
+
+#merchant .merchant-top .page-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+#merchant .merchant-top-title {
+  position: relative;
+  height: 104rpx;
+  line-height: 104rpx;
+  text-align: center;
+  font-size: 34rpx;
+}
+
+#merchant .merchant-top-title  van-icon {
+  position: absolute;
+  left: 32rpx;
+  top: calc( ( 52px - 28rpx ) / 2 );
+}
+
+#merchant .merchant-top-info {
+  display:  flex;
+  padding: 24rpx;
+}
+
+#merchant .merchant-top-info .van-image {
+  border-radius: 16rpx;
+}
+
+.merchant-top-info_right {
+  flex: 1;
+  padding-left: 16rpx;
+}
+
+.merchant-top-info_right__name {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  line-height: 46rpx;
+}
+
+.merchant-top-info_right__name___left {
+  flex: 1;
+}
+
+.merchant-top-info_right__staff {
+  display: flex;
+  margin-top: 8rpx;
+}
+
+.merchant-top-info_right__staff___left {
+  flex: 1;
+  color: #A56D41;
+  line-height: 38rpx;
+  font-size: 24rpx;
+}
+
+.merchant-top-info_right__staff___right {
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 38rpx;
+}
+
+.merchant-top-info_right__tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.merchant-top-info_right__tags .van-tag {
+  display: block;
+  /* color: #0DAE4E !important;
+  border-color: #0DAE4E !important; */
+  border-radius: 8rpx !important;
+  font-size: 22rpx !important;
+  height: 38rpx;
+  line-height: 38rpx !important;
+  padding: 0 12rpx !important;
+  background: none !important;
+  margin-right: 12rpx;
+  margin-top: 12rpx;
+}
+
+.merchant-top-info_right__img {
+    margin-top: 18rpx;
+}
+
+.merchant-top-info_right__img .van-image {
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.merchant-top-info_right__img .img + .img {
+    margin-left: 16rpx;
+}
+
+.merchant-center-search {
+  display: flex;
+  background-color: #fff;
+  padding: 24rpx;
+}
+
+.merchant-center-search  van-search {
+  flex: 1;
+}
+
+.merchant-center-search .van-search {
+  padding: 0 !important;
+  height: 56rpx;
+}
+
+.merchant-center-search_right {
+  display: flex;
+}
+
+.merchant-center-search_right__item {
+  line-height: 56rpx;
+  padding-left: 32rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.merchant-center-search_right__item.active {
+  color: #0DAE4E;
+}
+
+.custom .merchant-center-search_right__item.active {
+    color: #09AF84;
+}
+ 
+
+.merchanmt-goods {
+  display: flex;
+  position: fixed;
+  left: 0;
+}
+
+.wx_left {
+  z-index: 0;
+  width: 160rpx;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: #f6f6f6;
+  box-sizing: border-box;
+}
+
+.first-classify {
+  height: 100%;
+}
+
+.wx_left .item {
+  background: #f6f6f6;
+  padding: 36rpx 24rpx;
+  font-size: 26rpx;
+  color: #666666;
+  font-weight: 500;
+}
+
+.wx_left .active {
+  background: #fff;
+  font-weight: bold;
+  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #333333;
+}
+
+.wx_left .active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 6rpx;
+  height: 54rpx;
+  background: #0DAE4E;
+}
+
+.custom .wx_left .active::before {
+    background: #09AF84;
+  }
+
+
+.wx_right {
+  height: 100%;
+  background: #fff;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  width: calc(100vw - 160rpx);
+}
+
+
+.group-title {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333333;
+  padding: 16rpx 16rpx 0 16rpx;
+}
+
+.goods_list {
+  border-bottom: 1px solid #F0F0F0;
+  padding: 40rpx 0rpx 32rpx 0;
+  position: relative;
+  margin-left: 16rpx;
+}
+
+.goods_list_container {
+  display: flex;
+  box-sizing: border-box;
+}
+.sold-out {
+  width: 180rpx;
+  height: 180rpx;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+  font-size: 22rpx;
+}
+
+.goods_photo {
+  width: 180rpx;
+  height: 180rpx;
+  overflow: hidden;
+  border-radius: 16rpx;
+  margin-right: 16rpx;
+}
+
+.goods_photo image {
+  border-radius: 16rpx;
+}
+
+
+.goods_title {
+  margin-bottom: 28rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+} 
+
+.goods_title .title {
+  width: 350rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 40rpx;
+  overflow: hidden;
+}
+
+.goods_detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods_list .num {
+  font-size: 22rpx;
+  line-height: 22rpx;
+  font-weight: 500;
+  color: #999999;
+  margin-top: 16rpx;
+}
+
+.goods_price {
+  display: flex;
+  align-items: flex-end;
+  padding-right: 24rpx;
+  padding-bottom: 4rpx;
+}
+
+.goods_price .price {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.goods_price .price .normal-price {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #ED4528;
+  line-height: 32rpx;
+}
+
+.del_price {
+  text-decoration: line-through;
+  padding-left: 10rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  color: #999999;
+}
+
+.goods_price .price .big_price {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-left: 8rpx;
+}
+.goods_price .price .big-price-box{
+  color: #ED4528;
+  font-weight: bold;
+  font-size: 32rpx;
+
+}
+
+.custom .space-stepper_plus {
+    background: #09AF84;
+    border: 1px solid #09AF84;
+  }
+  
+.custom .space-stepper_minus{
+    border-color: #09AF84;
+    color: #09AF84;
+}
+
+.goods_price .btn {
+  padding: 0 20rpx;
+}
+
+.merchant-submit-bar {
+  display: flex;
+  z-index: 100;
+  position: fixed;
+  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 116rpx;
+  background: #fff;
+  padding: 20rpx 24rpx 20rpx 32rpx;
+  border-top: 1px solid #F0F0F0;
+}
+
+.merchant-submit-bar .price {
+  flex: 1;
+  font-weight: bold;
+  color: #ED4528;
+  line-height: 38rpx;
+  font-size: 40rpx;
+  margin-left: 16rpx;
+  line-height: 76rpx;
+}
+
+.merchant-submit-bar .van-button {
+  width: 200rpx;
+  height: 76rpx;
+  /* background: #0DAE4E; */
+  border-radius: 38rpx;
+  color: #fff;
+}

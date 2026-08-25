@@ -1,0 +1,108 @@
+/* components/login/index.wxss */
+page {
+  height: 100%;
+  display: table;
+}
+
+.Popup {
+  z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 70vh;
+  background: #fff;
+}
+
+.popup_cover {
+  z-index: 99;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0 ,0,0, .5);
+}
+
+.auth_title {
+  padding: 50rpx 24rpx 0 24rpx;
+}
+
+.auth_title_main {
+  font-size: 50rpx;
+}
+ 
+.auth {
+  width: 100%;
+  margin-top: 0;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 150rpx 0 60rpx 0;
+}
+ 
+.auth .img {
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  display: inline-block;
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 0;
+}
+ 
+.auth .title {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 60rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  color:#0d7341;
+}
+
+.auth .btn {
+  width: 450rpx;
+}
+ 
+.describe {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  color: #333;
+  font-size: 26rpx;
+  line-height: 40rpx;
+  padding: 0 45rpx;
+}
+
+ .describe .tit{
+  color:#3fcdfd;
+  padding:0 6rpx
+}
+.describe .txt{
+  color:#1989fa
+}
+
+
+.describe .checked-box {
+  display: block;
+  margin-right: 10rpx;
+}
+
+.dialog-content {
+  padding: 24rpx;
+  text-indent: 2em;
+  line-height: 1.5em;
+}
+.privacy-policy {
+  color: #1989fa;
+}
+
+.popup_close {
+    position: absolute;
+    top: 32rpx;
+    right: 32rpx;
+}

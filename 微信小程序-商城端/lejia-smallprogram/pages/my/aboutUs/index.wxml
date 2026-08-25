@@ -1,0 +1,22 @@
+<!-- 
+@url: pages/my/aboutUs/index.wxml
+@description: 我的
+@author: sx
+@date: 2020/07/28
+ -->
+<view id="aboutUs">
+<view class="xcx_header">
+	<van-image round width="192rpx" height="192rpx" src="{{AppInfo.photo}}" image-class="image"/>
+  <view class="title">{{AppInfo.userName}}</view>
+</view>
+  <van-cell title="微信公众号" value="{{AppInfo.wxName}}" header-class="new-panel"></van-cell>
+  <van-cell title="用户协议" is-link url="/pages/my/userAgreement/index" header-class="new-panel"></van-cell>
+  <van-cell title="隐私手册" is-link url="/pages/my/privacy/index" header-class="new-panel"></van-cell>
+  <view class="loginout">
+    <van-button type="primary" color="rgba(22, 155, 213, 1)" custom-class="loginout-btn" bind:click="handleLoginOut"	>{{userStatus == 'NORMAL' ? '用户注销' : '取消注销'}}</van-button>
+  </view>
+  <view class="xcx_footer">
+    <view>{{AppInfo.userName}} 版权所有</view>
+     <view>Copyright ©2020 zy.All Rights Reserver</view>
+  </view>
+</view>

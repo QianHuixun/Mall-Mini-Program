@@ -1,0 +1,64 @@
+/**可拖动悬浮按钮样式表**/
+.btn_Suspension {
+    position: fixed;
+    height: 100rpx;
+    width: 100rpx;
+    background-color: #fff;
+    border-radius:16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1111;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.Suspension_logo {
+    height: 60%;
+    width: 60%;
+    background-color: red;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Suspension_logo image {
+    height: 80%;
+    width: 80%;
+}
+.dialog-content {
+  margin: 40rpx 24rpx;
+}
+.dialog-row {
+  display: flex;
+  margin-top: 36rpx;
+  font-size: 30rpx;
+  line-height: 42rpx;
+}
+
+.dialog-row-title {
+    margin-right: 14rpx;
+    flex-shrink: 0;
+}
+
+.dialog-row-tips {
+    font-size: 22rpx;
+}
+
+.dialog-row-hr {
+    margin-top: 8rpx;
+    margin-bottom: 8rpx;
+    width: 366rpx;
+    height: 0rpx;
+    border: 2rpx solid #EEEEEE;
+}
+
+.dialog-row-link {
+    color: #0099FF;
+}
+
+.dialog-row van-button+van-button {
+  margin-left: 30rpx;
+}
+.dialog-market {
+  padding-bottom: 40rpx;
+}

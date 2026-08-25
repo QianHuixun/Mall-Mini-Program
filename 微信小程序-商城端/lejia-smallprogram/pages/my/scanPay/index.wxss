@@ -1,0 +1,44 @@
+/* pages/my/scanPay/index.wxss */
+page {
+  background: #f9f9f9;
+}
+
+#scanPay {
+  background: #fff;
+}
+
+.info-cell {
+  padding: 40rpx;
+  margin-bottom: 60rpx;
+  text-align: center;
+}
+
+.info-cell .name {
+  margin-top: 16rpx;
+  font-size: 32rpx;
+}
+
+#scanPay .new-btn {
+  background: #f9f9f9;
+  padding: 100rpx 30rpx;
+}
+
+#scanPay .new-btn button {
+  border-radius: 10rpx;
+}
+
+.pay-cell .title,
+.pay-cell .descript {
+  padding-left: 30rpx;
+  line-height: 70rpx;
+  font-size: 26rpx;
+}
+
+#scanPay .new-input {
+  font-size: 25px;
+}
+
+#scanPay .van-icon {
+  width: 25px;
+  height: 25px;
+}

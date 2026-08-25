@@ -1,0 +1,265 @@
+/* pages/my/index.wxss */
+page {
+  background: #f5f5f5;
+}
+
+.my-title {
+  height: 52px;
+  line-height: 52px;
+  text-align: center;
+}
+
+.top_container {
+  position: relative;
+  padding: 30rpx 24rpx 0rpx 24rpx;
+  
+  /* background-size: 100% 100%; */
+}
+
+.top_container .my-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar_box {
+  display: flex;
+  align-items: center;
+}
+
+.avatar_box .cell {
+  padding-right: 24rpx;
+}
+
+.avatar_box .flex_cell {
+  flex: 1;
+  font-size: 17px;
+  line-height: 54rpx;
+}
+.avatar_box .avatar_name{
+ display: flex;
+ align-items: center;
+}
+.avatar_box .avatar_name text{
+  display: inline-block;
+  padding-right: 20rpx;
+  font-size: 32rpx;
+  line-height: 44rpx;
+}
+.avatar_box .avatar_phone {
+  color: #999999;
+  font-size: 26rpx;
+  line-height: 44rpx;
+}
+
+
+.avatar_box .cell:last-child {
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 44rpx;
+  color: #0DAE4E;
+}
+
+.info_container {
+  display: flex;
+  position: relative;
+  border-radius: 16rpx;
+  overflow: hidden;
+  padding: 32rpx 0;
+
+}
+
+.info_container .info-grid-item {
+  flex: 1;
+  text-align: center;
+}
+
+.info_container .info-grid-item .num {
+  font-size: 36rpx;
+  color: #333333;
+  line-height: 44rpx;
+}
+
+.info_container .info-grid-item .tips {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}
+
+.info_container .info_box {
+  height: 67rpx;
+  padding: 0 20rpx;
+  line-height: 67rpx;
+  font-size: 24rpx;
+  background:#fff;
+}
+
+.info_container .van-grid-item {
+  position: relative;
+}
+
+
+.info_container .van-grid-item::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 1px;
+  height: 80%;
+  top: 10%;
+  border: 0;
+
+}
+
+.info_container .info_box text:first-child {
+  font-size: 28rpx;
+}
+
+.info_container .info_box text:first-child {
+  font-size: 28rpx;
+}
+.order_container .info_box .info_box_button {
+  float: right;
+  height: 34rpx;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.order_container {
+  background: #fff;
+  border-radius:24rpx;
+}
+.icon_container,.cell-container {
+  position: relative;
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.order_container .info_box,
+.icon_container .info_box {
+  height: 44rpx;
+  line-height: 44rpx;
+  padding: 16rpx 24rpx 0 24rpx;
+  color: #313131;
+  font-size: 28rpx;
+}
+
+.icon_container .info_box {
+  border-top-left-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+}
+
+#my .van-grid {
+  padding-top: 0 !important;
+}
+
+#my .van-grid-item__content {
+  padding-top: 0 !important;
+  padding-bottom: 28rpx  !important;
+}
+
+#my .van-grid-item__icon+.van-grid-item__text {
+  margin-top: 0rpx;
+}
+
+#my .van-grid-item__text {
+  word-wrap: break-word;
+  color: #333333;
+  font-size: 26rpx;
+}
+
+#my .van-grid-item__icon {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-bottom: 10rpx;
+  margin-top: 28rpx;
+}
+
+.icon_container .van-grid-item__icon {
+    margin-bottom: 40rpx !important;
+    margin-top: 40rpx !important;
+  }
+
+#my .van-grid-item {
+  position: relative;
+}
+
+.share_btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border: 0;
+  background: #fff;
+}
+.van-grid{
+  padding-top:20rpx ;
+  background: #fff;
+}
+/* 会员隐藏 */
+.member-ads {
+  height: 100rpx;
+  position: relative;
+  border: none;
+  box-sizing: border-box;
+  margin-bottom: -2rpx;
+}
+
+.cell-container .van-cell__title {
+  font-size: 30rpx;
+}
+
+.cell-container .van-icon--image {
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 16rpx;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12rpx;
+}
+
+.avatar_box .cell button {
+  width: 140rpx;
+  padding: 0;
+  border-radius: 28rpx;
+  border: 2rpx solid rgba(0,0,0,0);
+  border: 0;
+  color: #fff;
+  font-size: 28rpx;
+  height: 52rpx;
+  line-height: 52rpx; 
+  box-sizing: border-box;
+}
+
+.avatar_box .cell .signIned-btn {
+  background: none;
+} 
+
+.dialog-content {
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+  }
+  .dialog-row {
+    text-align: center;
+    margin-top: 10rpx;
+    font-size: 30rpx;
+  }
+  .dialog-row van-button+van-button {
+    margin-left: 30rpx;
+  }
+  .dialog-market {
+    padding-bottom: 40rpx;
+  }

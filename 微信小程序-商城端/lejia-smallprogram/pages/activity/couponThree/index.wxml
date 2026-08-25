@@ -1,0 +1,20 @@
+<!--pages/activity/couponTwo/index.wxml-->
+<view id="couponThree">
+<van-image src="{{imgUrl +'couponThree_02.png'}}" width="750rpx" height="1264rpx" wx:if="{{ff == 1}}"></van-image>
+<van-image src="{{imgUrl +'couponThree_01.png'}}" width="750rpx" height="1264rpx" wx:elif="{{ff == 2}}"></van-image>
+<van-image src="{{imgUrl +'couponThree_03.png'}}" width="750rpx" height="1264rpx" wx:elif="{{ff == 3}}"></van-image>
+<van-image src="{{imgUrl +'couponThree_04.png'}}" width="750rpx" height="1264rpx" wx:elif="{{ff == 4}}"></van-image>
+<view class="btn-bar">
+    <van-button custom-class="btn-confirm" round bind:click="goReceive">{{ff == 1 ? '￥9.9购买' : (ff == 2 ? '￥29.9购买' : (ff==3 ?'￥19.9购买' : '领取'))}}</van-button>
+  </view>
+  <view class="pop_cover" wx:if="{{ show }}">
+    <view id="activity-result">
+      <van-icon name="checked" size="80rpx" color="#0DAE4E"/>
+      <view class="success_text">{{ff == 4? '领取' : '购买'}}成功</view>
+      <van-button type="primary" bind:click="handeBack" round custom-class="back-btn">进入买菜小程序</van-button>
+    </view>
+  </view>
+  <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

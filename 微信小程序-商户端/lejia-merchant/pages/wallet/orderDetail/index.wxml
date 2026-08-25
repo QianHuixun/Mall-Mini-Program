@@ -1,0 +1,71 @@
+<!--pages/wallet/orderDetails/index.wxml-->
+<view id="bill-details">
+  <view class="top-container">
+  <view class="top-container_box">
+    <view class="ordernumber-bar">
+      <view class="ordernumber-bar_line ticket" wx:if="{{smallTicket}}">
+        {{smallTicket}}
+      </view>
+      <view class="ordernumber-bar_line">
+      订单号：{{code}}
+      </view>
+      <view class="ordernumber-bar_line">
+      订单时间：{{orderTime}}
+      </view>
+      <view class="ordernumber-bar_line">
+      期望送达时间：<text class="date">{{pstime}}</text>
+      </view>
+    </view>
+    <view class="money-pack-bar" wx:if="{{isPackingCharge}}">
+      <view class="left">
+        <view class="money-bar_title">结算金额</view>
+        <view class="money-bar_title_sub">=应结金额-打包物料费</view>
+      </view>
+      <view class="right">
+        <view class="money-bar_num">¥ {{amt}}</view>
+        <view class="money-bar_num_sub">应结金额：￥{{orderAmt}}</view>
+        <view class="money-bar_num_sub">打包物料费：<span style="color: #ED4528;">-￥{{packingCharge}}</span></view>
+      </view>
+    </view>
+    <view class="money-pack-bar" wx:elif="{{commissions || payComm}}">
+      <view class="left">
+        <view class="money-bar_title">结算金额</view>
+        <view class="money-bar_title_sub">=应结金额-佣金{{ commissionType === 'MERCHANT' && payComm ? '-手续费' : ''}}</view>
+      </view>
+      <view class="right">
+        <view class="money-bar_num">¥ {{amt}}</view>
+        <view class="money-bar_num_sub">应结金额：￥{{orderAmt}}</view>
+        <view class="money-bar_num_sub">佣金：<span style="color: #ED4528;">-￥{{commissions}}</span></view>
+        <view class="money-bar_num_sub" wx:if="{{commissionType === 'MERCHANT' && payComm}}">手续费：<span style="color: #ED4528;">-￥{{payComm}}</span></view>
+      </view>
+    </view>
+    <view class="money-bar" wx:else>
+      <view class="money-bar_title">结算金额</view>
+      <view class="money-bar_num">￥{{amt}}</view>
+    </view>
+  </view>
+  </view>
+  <view class="list-container">
+    <view class="list-header-item">
+      <view class="list-item-cell flex-1"> 商品</view>
+      <view class="list-item-cell">商品金额</view>
+      <view class="list-item-cell">退款金额</view>
+      <view class="list-item-cell">应结金额</view>
+    </view>   
+    <view class="list-table-item"  wx:for="{{list}}" wx:key="index">
+      <view class="list-item-cell flex-1">
+        <view>[{{index+1}}] {{item.goodsName}}</view>
+        <view class="color-999">{{item.spaceName}}   x {{item.num}}</view>
+</view>
+      <view class="list-item-cell">
+        ¥ {{item.goodsAmt}}
+      </view>
+      <view class="list-item-cell">
+        ¥ {{item.refundAmt}}
+      </view>
+      <view class="list-item-cell">
+        ¥ {{item.orderAmt}}
+      </view>
+    </view>
+  </view>
+</view>

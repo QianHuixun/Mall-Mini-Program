@@ -1,0 +1,73 @@
+<view id="my-wallet">
+  <view class="my-wallet_top">
+    <view class="my-wallet_top__number">
+      <view class="my-wallet_top__number___title">
+        <view class="flex-1">可提现余额(元)</view>
+        <view class="arrow-right" wx:if="{{ascription != 13}}" bind:tap="goAccount">提现账户设置 <van-icon name="arrow"></van-icon></view>
+      </view>
+      <view class="my-wallet_top__number___num">
+        <view class="flex-1">
+          <view class="num">{{walletAmt}}</view>
+          <view class="detail" bind:tap="goDetail">明细
+            <van-icon name="arrow"></van-icon>
+          </view>
+        </view>  
+          <van-button custom-class="top-button" bind:click="goWithdraw">立即提现</van-button>
+      </view>
+      <!-- <view class="my-wallet_top__number___settled">
+        <view class="my-wallet_top__number___settled_item">
+        待结算金额 <text class="num">99.00</text>
+        </view>
+        <view class="my-wallet_top__number___settled_item">
+        待结算活动补贴 <text class="num">99.00</text> 
+         <view class="link">查看 <van-icon name="arrow" size="16rpx"/></view>
+        </view>
+      </view> -->
+    </view>
+  </view>
+  <view class="my-wallet_list" style="height: calc(100vh - {{top}}px)">
+    <scroll-view id="scroll" scroll-y bind:scroll="onScroll" style="height:100%" 	enable-back-to-top="{{false}}" bindscrolltolower="scrollBottom"  enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="my-wallet_list_container" wx:if="{{noSettlementList.length>0}}">
+        <view class="my-wallet_list_container__title">待结算账单</view>
+        <view class="my-wallet_list_container__box">
+          <view class="my-wallet_list_item" wx:for="{{noSettlementList}}" wx:key="index" bind:tap="goBill" data-status="NOT_START, DOING, FAIL" data-date="{{item.orderTime}}">
+            <view class="my-wallet_list_item__left">
+              <view>{{item.orderTime}}</view>
+              <view class="date">{{item.settlementTime}}</view>
+            </view>
+            <view class="my-wallet_list_item__right">
+              <view>+{{item.amount}}</view>
+              <!-- <view class="num">活动补贴：+30</view> -->
+            </view>
+            <van-icon name="arrow" color="#999999" size="24rpx"></van-icon>
+          </view>
+        </view>
+      </view>
+
+      <view class="my-wallet_list_container">
+        <view class="my-wallet_list_container__title">
+        <view class="text">已结算账单</view>
+          <van-cell title="" is-link border="{{false}}" value="{{currentDate || '近一月账单'}}" arrow-direction="down" bind:click="showPopup" />
+        </view>
+        <view class="my-wallet_list_container__box">
+          <view class="my-wallet_list_item" wx:for="{{settlementList}}" wx:key="index" bind:tap="goBill"  data-status="SUCCESS"  data-date="{{item.orderTime}}">
+            <view class="my-wallet_list_item__left">
+              <view>{{item.orderTime}}</view>
+              <view class="date">{{item.settlementTime}}</view>
+            </view>
+            <view class="my-wallet_list_item__right blue-color">
+              <view>+{{item.amount}}</view>
+              <!-- <view class="num">活动补贴：+30</view> -->
+            </view>
+            <van-icon name="arrow" color="#999999" size="24rpx"></van-icon>
+          </view>
+        </view>
+      </view>
+      <van-divider contentPosition="center" fontSize="24rpx" customStyle="border:0;" textColor="#dddddd" borderColor="#dddddd">暂无其他数据</van-divider>
+    </scroll-view>
+  </view>
+ 
+  <van-popup round show="{{ show }}" position="bottom" bind:close="onClose">
+    <van-datetime-picker type="year-month" value="{{ chooseDate }}"  min-date="{{ minDate }}" bind:confirm="onConfirm" bind:cancel="onClose"/>
+  </van-popup>
+</view>

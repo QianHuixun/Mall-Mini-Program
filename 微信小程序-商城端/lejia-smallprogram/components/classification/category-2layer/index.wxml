@@ -1,0 +1,212 @@
+<!-- 
+@url: pages/classification/index.wxml
+@description: 分类2
+@author: sx
+@date: 2020/07/22
+ -->
+<view class="goods-container category-2layer {{theme.value}}">
+  <view  style="height: 100vh"></view> <!-- 用于解决婷婷手机空白为题，原因为tab高度为0 -->
+        <view class="my-bg" style="height: calc({{statusBarHeight + 52}}px + 86rpx + 176rpx);">
+          <van-image src="{{imgUrl + 'my_bg.png'}}" custom-class="my-bg-img"></van-image> 
+        </view> 
+          <view class="wx_top" style="top: {{statusBarHeight + 52 }}px; ">                  
+            <view class="calssify-search">
+              <view class="calssify-search-box">
+              <search-bar type="CATEGORY" style="width: 100%;"></search-bar>
+              </view>
+           </view>
+           <!-- 一级分类 -->
+           <view class="first-classify-contianer">
+            <scroll-view class="first-scroll" scroll-with-animation scroll-into-view="{{scrollActiveClassify}}"   enhanced="{{true}}" show-scrollbar="{{false}}" scroll-x="true">  
+                <view  wx:for="{{classifyList}}" wx:key="index" id="scroll-{{item.pkey}}" data-pkey="{{item.pkey}}" bind:tap="firstClassifyTab" class="scroll-{{item.pkey}} item {{activeClassify == item.pkey ? 'active' : ''}}"> 
+                <van-image src="{{item.photo ? item.photo : '/images/no-pic.png'}}" custom-class="first-classify-img"></van-image>
+                  <text class="classify-name">{{  item.name }}</text>
+                </view>  
+              </scroll-view>
+              <view class="first-classify-all" bind:tap="showAllClassify">
+                <view class="first-classify-all_main">
+                <van-icon name="arrow-down" color="#333" size="16rpx" >
+                </van-icon>
+                <view>全部</view>
+              </view>
+              </view>
+            
+              
+           </view>
+          </view>
+             <!-- 全部分类 -->
+             <view class="all-classify" wx:if="{{isShowAllClassify}}" style="top: calc(52px + 86rpx )">
+              <view class="all-classify-container">
+                <scroll-view class="first-scroll" scroll-with-animation  enhanced="{{true}}" show-scrollbar="{{false}}">  
+                <view  wx:for="{{classifyList}}" wx:key="index" id="scroll-{{item.pkey}}" data-pkey="{{item.pkey}}" bind:tap="firstClassifyTab" class="scroll-{{item.pkey}} item {{activeClassify == item.pkey ? 'active' : ''}}">
+                  <van-image src="{{item.photo ? item.photo : '/images/no-pic.png'}}" custom-class="first-classify-img"></van-image>
+                  <text class="classify-name">{{  item.name }}</text>
+                </view>  
+              </scroll-view>
+              <view class="hidden-bar" bind:tap="hideAllClassify">
+                收起 <van-icon name="arrow-up" color="#999" size="24rpx" ></van-icon>   
+              </view>
+            </view>
+            <view class="all-classify-cover" catch:tap="hideAllClassify" ></view>
+              </view>
+              <!-- end 全部 -->
+          <!-- 左侧2级分类 -->
+          <view class="wx_left" style="padding-top: calc({{statusBarHeight + 52}}px + 86rpx + 176rpx);">
+          <scroll-view class="first-classify second-scroller" scroll-with-animation scroll-into-view="{{ scrollActiveClassifyTwo}}" scroll-y="true"  enhanced="{{true}}" show-scrollbar="{{false}}" >  
+          <view wx:for="{{classifyTwoList}}" wx:key="index" id="scroll-{{activeClassify}}-{{item.pkey}}" data-pkey="{{item.pkey}}" bind:tap="secondClassifyTab" class="scroll-{{activeClassify}}-{{item.pkey}} item {{ activeClassifyTwo == item.pkey  ? 'active' : ''}}">
+           {{  item.name }}
+              </view>  
+          </scroll-view>
+        </view>
+          <!-- 右侧商品 -->
+            <view class="wx_right" style="top: calc({{statusBarHeight + 52}}px + 86rpx + 28rpx);">
+            <!-- 销量价格栏 -->
+            <view class="goods_popup_sort">
+               <view>
+                    <view class="goods_popup_delivery" wx:if="{{showDeliveryType}}">
+                        <view class="goods_popup_delivery__item {{deliveryType == '0' ? 'selected' : ''}}" data-type="0" bind:tap="handleDeliveryClick">全部</view>
+                        <view class="goods_popup_delivery__item {{deliveryType == '1' ? 'selected' : ''}}" data-type="1" bind:tap="handleDeliveryClick">快递配送</view>
+                        <view class="goods_popup_delivery__item {{deliveryType == '2' ? 'selected' : ''}}" data-type="2" bind:tap="handleDeliveryClick">骑手配送</view>
+                    </view>
+               </view>
+                <view class="goods_popup_delivery">
+                    <view class="goods_popup_sort__item {{goodsSortType == 'SALED' ? 'checked' : ''}}" data-type="SALED" bind:tap="handleSort">
+                        销量
+                    </view>
+                    <view class="goods_popup_sort__item {{goodsSortType == 'PRICE' ? 'checked' : ''}}"  data-type="PRICE" bind:tap="handleSort">
+                        价格 
+                    <van-icon name="/images/classification/i-sort.png" size="18rpx" wx:if="{{goodsSortType == 'SALED'}}"/>
+                    <van-icon name="/images/classification/i-sort-desc.png" size="18rpx" wx:if="{{goodsSortType == 'PRICE' && sortDesc == true}}"/>
+                    <van-icon name="/images/classification/i-sort-asc.png" size="18rpx" wx:if="{{goodsSortType == 'PRICE' && sortDesc == false}}"/>
+                    </view>
+                </view>
+                      
+                    
+                </view>
+                
+              
+            <scroll-view bind:scroll="onScroll" scroll-y id="scroller" class="scroller" custom-class="scoller"  scroll-top="{{scrollTop}}" 
+              bindtouchstart="handleTouchStart"
+              bindtouchend="handleTouchEnd" style="height: calc(100vh - {{statusBarHeight + 52}}px  - 68rpx - 110rpx);" 	enable-back-to-top="{{false}}" bindscrolltolower="scrollGoodsBottom"  enhanced="{{true}}" show-scrollbar="{{false}}">
+                <view class="scroller-container">
+                   <view class="classify-images" wx:if="{{imageList.length}}">
+                    <swiper class="ads-swiper" indicator-dots="true" circular="true" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#FFFFFF" autoplay>
+                    <swiper-item wx:for="{{imageList}}" wx:key="imageIndex" wx:key-="imageIndex" wx:for-item="imageItem" wx:for-index="imageIndex">
+                      <van-image src="{{imageItem.photo}}" data-url="{{imageItem.objKey}}" data-jump="{{imageItem.jump}}" data-urltype="{{imageItem.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                    </swiper-item>
+              </swiper>
+               </view>
+            <view wx:for="{{goodsList}}" wx:key="index" data-pkey="{{item.group.key}}" class="goodItem" id="scroll-{{ queryClassify+'-'}}{{ item.group.key }}">     
+              <block wx:if="{{ goodsList.length > 0 }}">     
+                  <view class="goods_list" wx:for="{{item.data}}" wx:key="subIndex" catchtap="goDetail" data-index="{{index}}"  wx:for-item="subItem" wx:for-index="subIndex" data-pkey="{{subItem.goods}}">
+                    <view class="goods_list_container">
+                      <van-image src="{{subItem.wrapperPhoto ? (subItem.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}" custom-class="goods_photo" />
+                      <view class="goods_detail">
+                        <view class="goods_title">
+                          <view class="title">
+                            <view class="title-tag market" wx:if="{{subItem.mtype == 'MARKET_GOODS' || subItem.mtype == 'SPECIAL_GOODS'}}">骑手配送</view>
+                            <view class="title-tag" wx:else>快递配送</view>
+                            {{subItem.title}}
+                          </view>
+                          <view class="num ellipsis" wx:if="{{subItem.sellingPoints.length}}">
+                            <text wx:for="{{subItem.sellingPoints}}" wx:key="pointsIndex"  wx:for-index="pointsIndex" wx:for-item="pointsItem" >{{pointsItem}}{{pointsIndex == subItem.sellingPoints.length-1 ? '' : " | "}}</text> 
+                          </view>
+                          <view class="tag">
+                            <van-tag  plain type="success" custom-class="tag-type" wx:if="{{subItem.tag}}">{{subItem.tag}}</van-tag>
+                          </view>
+                        </view>
+                        <view class="goods_price">
+                          <view class="price">
+                            <text class="big-price-box">￥{{subItem.bigPrice}}.{{subItem.smallPrice}}</text>
+                            <text class="del_price">￥{{ subItem.priceOld }}</text>
+                            <view class="member_price" wx:if="{{subItem.priceMember}}"><text class="member_price_txt">￥{{subItem.priceMember}}</text><image class="member_price_tag" src="/images/member_price_tag.png" /></view>
+                          </view>
+                          <van-icon wx:if="{{ subItem.processLines.length > 1 || subItem.spaces.length>1||(subItem.spaces.length==1&&!subItem.gwcNum)||(subItem.spaces.length==1&&!subItem.spaces[0].kcNum)}}" custom-class="cara-dd-icon" name="/images/carAdd_plus_{{theme.value}}.png" color="#449C55" size="64rpx" data-pkey="{{subItem.goods}}" data-process="{{ subItem.processLines.length }}" data-index="{{index}}" data-subIndex="{{subIndex}}" data-space="{{subItem.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                          <!--   防止van-stepper冒泡 -->
+                          <view catchtap="catchTap" wx:else  style="position:absolute;right:24rpx;"> 
+                          <van-stepper value="{{ subItem.gwcNum }}" min="0" max="{{subItem.spaces[0].kcNum}}" custom-class="classify-space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" data-index="{{index}}" data-subIndex="{{subIndex}}" bind:change="stepChange" disable-input async-change integer  button-size="64rpx"/>
+                        </view> 
+                        </view>
+                      </view>
+                      <view wx:if="{{subItem.kcNum <= 0}}" class="sold-out">已售罄</view>
+                    </view>
+                    <!-- 商铺 -->
+                    <view class="shop_bar" wx:if="{{marketType === 'VENDOR_SHOPPING_MALL'}}">
+                      <view class="shop_bar_left" >       
+                          <van-image width="48rpx" height="30rpx" src="/images/classification/i_cat_shop.png"></van-image>
+                          {{subItem.ownerName ? subItem.ownerName : '' }}
+                      </view>
+                      <view class="shop_bar_right" catchtap="handelGoodsOpenPop" data-threeGtype="{{subItem.threeGtype}}">
+                        更多同类商品 >
+                      </view>
+                    </view>
+                  </view>           
+              </block>    
+            </view> 
+            <van-divider contentPosition="center" fontSize="24rpx" borderColor="#fff">
+              <view wx:if="{{isLoading}}">加载中...</view>
+              <view wx:if="{{showHint && !isLoading}}">             
+                <view wx:if="{{!isEnd}}" class="switch-hint">
+                  上拉切换分类
+                </view>
+                <view wx:if="{{isEnd}}">已加载全部</view>
+              </view>
+            </van-divider>
+          </view>
+            </scroll-view>
+          </view>
+</view>
+
+
+ 
+<!-- 规格选择弹出层 -->
+<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart" isbindAddCart="{{true}}"></space-dialog>
+    <!-- 更多同类商品 -->      
+    <van-popup show="{{ moreGoodsPopup }}" position="bottom" closeable round bind:close="handelGoodsClosePop" custom-class="more_goods_popup" overlay-style="z-index: 500 !important;">
+            <view class="goods_popup_title">更多同类商品</view>
+            <scroll-view class="goods_popup_goodsList" 
+            bindscrolltolower="scrolltolower" scroll-y="true" scroll-with-animation="true"
+            enable-back-to-top="false"  enhanced="{{true}}" show-scrollbar="{{false}}">
+            <block wx:if="{{ sameGoodsList.length > 0 }}">
+
+                <view class="goods_list" wx:for="{{sameGoodsList}}" wx:key="index" style="padding: 16rpx 0 16rpx 16rpx;" data-index="{{index}}"  data-pkey="{{item.pkey}}" catchtap="goDetail" >
+                  <view class="goods_list_container" >
+                    <!-- <image src="{{ item.photo2 }}" class="goods_photo"></image> -->
+                    <van-image src="{{item.wrapperPhoto||'/images/no-pic.png'}}" custom-class="goods_photo" />
+                    <view class="goods_detail">
+                      <view class="goods_title">
+                        <view class="title">
+                          {{item.title}}
+                        </view>
+                        <view class="num">
+                          销量：{{item.xsNum}}  库存：{{item.kcNum}}
+                        </view>
+                      </view>
+
+                      <view class="goods_price">
+                        <view class="price">
+                          <text class="big-price-box">￥{{item.bigPrice}}.{{item.smallPrice}}</text>
+                          <text class="del_price">￥{{ item.priceOld }}</text>
+                          <view class="member_price" wx:if="{{item.priceMember}}"><text class="member_price_txt">￥{{item.priceMember}}</text><image class="member_price_tag" src="/images/member_price_tag.png" /></view>
+                        </view>
+                        <van-icon wx:if="{{item.processLines.length > 1 ||item.spaces.length>1||(item.spaces.length==1&&!item.gwcNum)||(item.spaces.length==1&&!item.spaces[0].kcNum)}}" custom-class="cara-dd-icon" name="/images/carAdd.png" color="#449C55" size="64rpx" data-item="{{item}}" data-pkey="{{item.pkey}}" data-process="{{ item.processLines.length }}" data-index="{{index}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" data-type="third"/>
+                          <view catchtap="catchTap" wx:else  style="position:absolute;right:24rpx;"> 
+                        <van-stepper  value="{{ item.gwcNum }}" min="0" max="{{item.spaces[0].kcNum}}" custom-class="classify-space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" data-index="{{index}}" bind:change="stepSameChange" disable-input async-change integer  button-size="64rpx"/>
+                        </view>
+                      </view>
+                    </view>
+                    <view wx:if="{{item.kcNum <= 0}}" class="sold-out">已售罄</view>
+                  </view>
+                  <!-- 商铺 -->
+                  <view class="shop_bar more_list" style="margin-top: 18rpx;" wx:if="{{marketType === 'VENDOR_SHOPPING_MALL'}}">
+                    <view class="shop_bar_left">
+                      <van-image width="48rpx" height="30rpx" src="/images/classification/i_cat_shop.png" custom-clss="shop-img"></van-image>                   
+                      {{item.vendorName}}
+                    </view>
+                  </view>
+                </view>
+            </block>
+            <!-- 加载更多数据 -->   
+            <van-divider wx:if="{{thirdNoList}}" contentPosition="center" customStyle="font-size: 24rpx; color: #ddd;">暂无其他数据</van-divider>
+            </scroll-view> 
+          </van-popup>

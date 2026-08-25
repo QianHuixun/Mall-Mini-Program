@@ -1,0 +1,13 @@
+{
+    "usingComponents": {
+      "authorize": "/components/login/index",
+      "load-more":"/components/load-more/index",
+      "van-icon": "@vant/weapp/icon/index",
+      "van-tab": "@vant/weapp/tab/index",
+      "van-tabs": "@vant/weapp/tabs/index",
+      "van-popup": "@vant/weapp/popup/index",
+      "van-field": "@vant/weapp/field/index",
+      "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "热力豆查询"
+  }

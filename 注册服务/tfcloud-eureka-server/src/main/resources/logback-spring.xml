@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+	<springProperty scope="context" name="springAppName" source="spring.application.name" />
+
+	<!--定义日志文件的存储地址和前缀名 -->
+	<property name="LOG_HOME" value="logs" />
+	<property name="LOG_PREFIX" value="eureka" />
+
+	<!-- 彩色日志 -->
+	<!-- 彩色日志依赖的渲染类 -->
+	<conversionRule conversionWord="clr"
+		converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+	<conversionRule conversionWord="wex"
+		converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+	<conversionRule conversionWord="wEx"
+		converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+	<!-- 彩色日志格式 -->
+	<property name="CONSOLE_LOG_PATTERN"
+		value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+	<!--日志输出格式：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+	<property name="FILE_LOG_PATTERN"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level ${PID} %logger %m ${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}%n" />
+		
+	<!-- Console 输出设置 ， 控制台输出 INFO 以上的日志-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<!--错误信息按照每天生成日志文件 -->
+	<appender name="ERROR_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${LOG_PREFIX}-error.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 每天一归档 -->
+			<fileNamePattern>${LOG_HOME}/${LOG_PREFIX}-error-%d{yyyyMMdd}.%i.log
+			</fileNamePattern>
+			<!-- 单个日志文件最多100MB, 30天的日志周期，最大不能超过10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<!--警告信息按照每天生成日志文件 -->
+	<appender name="WARN_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${LOG_PREFIX}-warn.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 每天一归档 -->
+			<fileNamePattern>${LOG_HOME}/${LOG_PREFIX}-warn-%d{yyyyMMdd}.%i.log
+			</fileNamePattern>
+			<!-- 单个日志文件最多100MB, 30天的日志周期，最大不能超过10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 一般信息按照每天生成日志文件 -->
+	<appender name="INFO_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${LOG_PREFIX}-info.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- 每天一归档 -->
+			<fileNamePattern>${LOG_HOME}/${LOG_PREFIX}-info-%d{yyyyMMdd}.%i.log
+			</fileNamePattern>
+			<!-- 单个日志文件最多100MB, 30天的日志周期，最大不能超过10GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<!-- DEBUG信息按照每天生成日志文件 -->
+	<appender name="DEBUG_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${LOG_PREFIX}-debug.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/${LOG_PREFIX}-debug-%d{yyyyMMdd}.%i.log
+			</fileNamePattern>
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>7</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- TRACE信息按照每天生成日志文件 -->
+	<appender name="TRACE_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_HOME}/${LOG_PREFIX}-trace.log</File>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>TRACE</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/${LOG_PREFIX}-trace-%d{yyyyMMdd}.%i.log
+			</fileNamePattern>
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>3</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>${FILE_LOG_PATTERN}</Pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+	<!-- 日志输出级别 -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ERROR_FILE" />
+		<appender-ref ref="WARN_FILE" />
+		<appender-ref ref="INFO_FILE" />
+		<appender-ref ref="DEBUG_FILE" />
+		<appender-ref ref="TRACE_FILE" />
+	</root>
+
+</configuration>

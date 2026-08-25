@@ -1,0 +1,33 @@
+<!--pages/my/supportApply/index.wxml-->
+<view id="supportApply">
+    <view class="types-box">
+        <view class="types-header">请选择售后类型</view>
+        <view class="types-cell">
+            <view class="type-item {{ supportType == 'RETURN_GOODS' ? 'selected' : ''}}" data-type="RETURN_GOODS" bind:tap="handleChangeType">退货</view>
+            <view class="type-item {{ supportType == 'EXCHANGE' ? 'selected' : ''}}" data-type="EXCHANGE" bind:tap="handleChangeType">换货</view>
+        </view>
+    </view>
+    <view class="goods-box">
+        <view class="goods-header">请选择商品</view>
+        <view class="goods-item" wx:for="{{orderInfo.infos}}">
+            <van-image custom-class="goods-image" src="{{item.photo || '/images/no-pic.png'}}"></van-image>
+            <view class="goods-content">
+                <view class="goods-title">{{item.goodsName}}</view>
+                <view class="goods-spec">
+                    {{item.lines[0].spaceName}}
+                    <view class="goods-spec__count">x{{item.lines[0].num}}</view>
+                </view>
+                <view class="goods-tip" wx:if="{{item.jdAttributes}}">{{item.jdAttributes}}</view>
+                <view class="goods-counts">
+                    <van-icon custom-class="goods-counts__icon" name="/images/icon/minus.png" data-goods="{{item}}" bind:click="handleMinusGoodsNum" />
+                    <view class="goods-counts__count">{{item.refundNum}}</view>
+                    <van-icon custom-class="goods-counts__icon" name="/images/icon/plus.png" data-goods="{{item}}" bind:click="handlePlusGoodsNum" />
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 底部操作栏 -->
+    <view class="footer">
+        <van-button  custom-class="footer-btn" type="primary" block hairline round bind:click="handleSubmit">下一步</van-button>
+    </view>
+</view>

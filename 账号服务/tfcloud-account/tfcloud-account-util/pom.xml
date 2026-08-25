@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 子项目名称 -->
+	<artifactId>tfcloud-account-util</artifactId>
+	<!-- 项目打包类型 -->
+	<packaging>jar</packaging>
+	<!-- 项目版本 -->
+	<version>1.0.2</version>
+
+	<description>tfcloud-account-util</description>
+	<!-- 引用父级项目公共POM配置 -->
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-boot</artifactId>
+		<version>3.5.3</version>
+		<relativePath />
+	</parent>
+
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.install.skip>true</maven.install.skip>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.shell</groupId>
+			<artifactId>spring-shell-starter</artifactId>
+		</dependency>
+		<!-- java快速开发组件 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-distributed-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-account-dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

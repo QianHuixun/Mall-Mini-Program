@@ -1,0 +1,136 @@
+/* pages/editInfo/index.wxss */
+page {
+  background: #f5f5f5;
+}
+.top_container {
+  position: relative;
+  /* padding: 30rpx 30rpx 200rpx 30rpx; */
+}
+.my_bg {
+  width: 100%;
+}
+
+.avatar_box {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 48rpx;
+  text-align: center;
+}
+
+.avatar_box .cell {
+  padding: 0 20rpx;
+}
+
+.avatar_box .flex_cell {
+  font-size: 40rpx;
+  margin-top: 43rpx;
+  color: #fff;
+}
+
+.editName {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.editName text {
+  margin-right: 6rpx;
+}
+
+.info_container {
+  position: relative;
+  top: -110rpx;
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.info_title {
+  height: 78rpx;
+  line-height: 78rex;
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx;
+  font-weight: bold;
+}
+/* .info_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24rpx 0;
+}
+.info_item .info_item_title {
+  color: #afb0b0;
+} */
+
+.mien_container {
+  position: relative;
+  top: -100rpx;
+  margin: 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  padding: 24rpx;
+}
+.mien_title {
+  height: 78rpx;
+  line-height: 78rex;
+  font-weight: bold;
+}
+.mien_video,
+.mien_image {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #949494;
+}
+.mien_image {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.mien_video .mien_video_title,
+.mien_image .mien_video_title {
+  font-size: 36rpx;
+}
+.mien_video .mien_video_suggest,
+.mien_image .mien_video_suggest {
+  font-size: 32rpx;
+}
+.mien_video .btn,
+.mien_image .btn {
+  width: 136rpx;
+  height: 78rpx;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+  border: none;
+  outline: none;
+}
+.mien_video .btn::after,
+.mien_image .btn::after {
+  border: none
+}
+.mien_video .look_video {
+  background: #f3fbff;
+  color: #6cb3e3;
+}
+.mien_image .upload_img {
+  background: #fffafa;
+  color: #cc3333;
+}
+.videoCenter {
+  /* display: none; */
+}
+.van-popup {
+  background: transparent !important;
+}
+.show{
+  display: block;
+}
+.hide {
+  display: none;
+}

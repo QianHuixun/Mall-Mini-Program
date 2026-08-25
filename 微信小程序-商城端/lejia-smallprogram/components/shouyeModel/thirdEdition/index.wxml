@@ -1,0 +1,86 @@
+<!--components/shouyeModel/thirdEdition/index.wxml-->
+<!-- 滚动正文 -->
+<scroll-view class="scroll-view" scroll-y bindscroll="bindscroll">
+    <view style="padding-bottom: 156rpx">
+        <!-- 导航栏 -->
+        <view class="navbar-back" style="padding-top:{{statusBarHeight}}px; background-color: rgba(8, 187, 141, {{navOpacity}});">
+            <view class="nav-content">
+                <view class="nav" bind:tap="addressSelect">
+                    <van-icon custom-class="nav-left" size="32rpx" name="/images/shouye/location.png" />
+                    <view class="nav-market_name">{{ location.name }}</view>
+                    <van-icon custom-class="nav-right" size="24rpx" name="/images/rig.png" />
+                </view>
+                <view class="search" bind:tap="goSearch">
+                    <van-icon size="32rpx" name="/images/shouye/search.png" />
+                </view>
+            </view>
+        </view>
+        <!-- 广告轮播图 -->
+        <view class="swiper-container">
+            <swiper class="ads-swiper swiper" wx:if="{{imageList && imageList.length}}" autoplay>
+                <swiper-item class="swiper-item" wx:for="{{imageList}}" wx:key="pkey">
+                    <van-image custom-class="swiper-item-image" src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                    {{item.photo}}
+                </swiper-item>
+            </swiper>
+        </view>
+        <!-- 商品分类 -->
+        <view class="class">
+            <view class="delivery-time" wx:if="{{timeShow}}">
+                <van-icon name="/images/shouye/warning.png" size="22" style="margin-right: 8rpx;" />
+                {{deliveryTime}}
+            </view>
+            <class-bar id="classBar" hasThirdLine="{{false}}"></class-bar>
+            <prefecture-bar list="{{menuList}}"></prefecture-bar>
+        </view>
+        <!-- 组合广告 -->
+        <view class="combo-adv" wx:if="{{ comboImageList && comboImageList.length}}">
+            <view class="combo-adv-left">
+                <swiper class="swiper" wx:if="{{leftImgList && leftImgList.length}}" autoplay>
+                    <swiper-item class="swiper-item" wx:for="{{leftImgList}}" wx:key="pkey" data-item="{{item}}" bind:tap="handleClick">
+                        <van-image custom-class="swiper-item-image" src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                        {{item.photo}}
+                    </swiper-item>
+                </swiper>
+            </view>
+            <view class="combo-adv-right">
+                <view class="combo-adv-right-top">
+                    <swiper class="swiper" wx:if="{{upRightImgList && upRightImgList.length}}" autoplay>
+                        <swiper-item class="swiper-item" wx:for="{{upRightImgList}}" wx:key="pkey">
+                            <van-image custom-class="swiper-item-image" src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                            {{item.photo}}
+                        </swiper-item>
+                    </swiper>
+                </view>
+                <view class="combo-adv-right-bottom">
+                    <view class="combo-adv-right-bottom-left">
+                        <swiper class="swiper" wx:if="{{centerImgList && centerImgList.length}}" autoplay>
+                            <swiper-item class="swiper-item" wx:for="{{centerImgList}}" wx:key="pkey">
+                                <van-image custom-class="swiper-item-image" src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                                {{item.photo}}
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                    <view class="combo-adv-right-bottom-right">
+                        <swiper class="swiper" wx:if="{{downRightImgList && downRightImgList.length}}" autoplay>
+                            <swiper-item class="swiper-item" wx:for="{{downRightImgList}}" wx:key="pkey">
+                                <van-image custom-class="swiper-item-image" src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                                {{item.photo}}
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 今日推荐 -->
+        <view class="today-recommend">
+            <view class="today-recommend-title">
+                <van-image custom-class="main-title" src="/images/shouye/今日推荐@2x.png"></van-image>
+                <van-image custom-class="sub-title" src="/images/shouye/滨海民生@2x.png"></van-image>
+            </view>
+            <view class="recommend-goods">
+                <recommending-goods id="recommendGoods" title="{{false}}" zone="HOME_PAGE" bindrefresh="getData"></recommending-goods>
+            </view>
+        </view>
+    </view>
+</scroll-view>

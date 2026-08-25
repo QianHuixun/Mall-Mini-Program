@@ -1,0 +1,1 @@
+ALTER TABLE `sys_app_menu` ADD COLUMN `default_show` bit not null default 1 COMMENT '是否默认可以访问';

@@ -1,0 +1,98 @@
+/* pages/shouyeGroup/search/index.wxss */
+#search .van-search__content {
+  border-radius: 32rpx;
+  border: 1px solid #0DAE4E;
+}
+
+#search .van-icon-search {
+  color: #0DAE4E;
+}
+
+.hot-view {
+  padding: 24rpx;
+  background-color: #FAFAFA;
+  color: #5C5C5C;
+}
+
+.van-tag--large {
+  margin: 24rpx 12rpx;
+  margin-bottom: 0;
+  padding: 24rpx 12rpx;
+}
+
+.his-view {
+  margin-top: 24rpx;
+  padding: 24rpx;
+  background-color: #FAFAFA;
+  color: #5C5C5C;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sear-good-view {
+  position: fixed;
+  left: 0;
+  top: 108rpx;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+.sear-good-view-topseg {
+  width: 100%;
+  height: 24rpx;
+  background-color: #FAFAFA;
+}
+
+.good-view {
+  margin: 24rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F0F0F0;
+  padding: 12rpx;
+}
+
+.good-view .van-image__img {
+  border-radius: 12rpx;
+}
+
+.good-view .goods_detail {
+  flex: 1;
+  color: #5C5C5C;
+  margin-left: 24rpx;
+  font-size: 26rpx;
+}
+
+.good-view .goods_detail .cell-title {
+  height: 72rpx;
+  line-height: 36rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  width: 510rpx;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 设置最大显示行数 */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+#search .hot_tag {
+  border-radius: 20rpx;
+}
+
+#search .his_tag,
+#search .hot_tag {
+  color: #6a6a6a;
+}
+
+#search .his_tag::after {
+  border-radius: 40rpx;
+  border-color: #e5e5e5;
+}
+
+.price-cell .price {
+  flex: 1;
+  font-size: 32rpx;
+}

@@ -1,0 +1,15 @@
+<!-- 
+@url: pages/login/index.wxml
+@description: 登录页
+@author: zs
+ -->
+<view id="login">
+	<van-image width="100" height="100" round src="{{AppInfo.photo}}" />
+  <van-cell-group border="{{ false }}">
+	<van-field value="{{ phone }}" clearable placeholder="请输入用户名" bind:change="onPhoneChange" />
+	<van-field value="{{ sms }}" center clearable placeholder="请输入短信验证码" bind:change="onSmsChange" use-button-slot>
+		<van-button bind:click="sendCode" disabled='{{getyzmDisabled}}' slot="button" color="linear-gradient(to left, #f7ac7f, #ec8343)" round size="small" type="primary">{{getyzmText}}</van-button>
+	</van-field>
+  </van-cell-group>
+  <van-button type="primary" color="linear-gradient(to left, #f7ac7f, #ec8343)" round block bind:click="loginClick" >登录</van-button>
+</view>

@@ -1,0 +1,161 @@
+name: lejia-apps
+
+x-common-environment: &common-environment
+  TZ: Asia/Shanghai
+  SPRING_CONFIG_ADDITIONAL_LOCATION: file:/app/config/
+  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:20000/eureka/
+  EUREKA_INSTANCE_PREFER_IP_ADDRESS: "true"
+  SPRING_REDIS_HOST: redis
+  SPRING_REDIS_PORT: "6379"
+  SPRING_REDIS_PASSWORD: ${REDIS_PASSWORD}
+  SPRING_REDIS_PREFIX: dev
+  TOFOCUS_PREFIX: dev
+  SPRING_RABBITMQ_HOST: rabbitmq
+  SPRING_RABBITMQ_PORT: "5672"
+  SPRING_RABBITMQ_ADDRESSES: rabbitmq:5672
+  SPRING_RABBITMQ_USERNAME: ${RABBITMQ_USER}
+  SPRING_RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+  SPRING_RABBITMQ_VIRTUAL_HOST: ${RABBITMQ_VHOST}
+  SPRING_ZIPKIN_ENABLED: "false"
+  JASYPT_ENCRYPTOR_PASSWORD: ${JASYPT_ENCRYPTOR_PASSWORD}
+  LOGGING_FILE_PATH: /app/logs
+
+services:
+  account:
+    image: lejia-account:${APP_RELEASE_ID}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: artifacts/account.jar
+    container_name: lejia-account
+    restart: unless-stopped
+    environment:
+      <<: *common-environment
+      JAVA_OPTS: -Xms128m -Xmx512m -Dfile.encoding=UTF-8
+      SPRING_PROFILES_ACTIVE: common,preProduct,running
+      SPRING_APPLICATION_NAME: account
+      SERVER_PORT: "21001"
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${ACCOUNT_DB_NAME}?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${ACCOUNT_DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${ACCOUNT_DB_PASSWORD}
+      SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI: http://lejia-account:21001/oauth/token
+      SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI: http://lejia-account:21001/oauth/authorize
+      SECURITY_OAUTH2_RESOURCE_USER_INFO_URI: http://lejia-account:21001/userinfo
+    ports:
+      - 127.0.0.1:21001:21001
+    volumes:
+      - ./config/account:/app/config:ro
+      - ./preflight-migrations/account:/app/migrations:ro
+      - ./data/account/logs:/app/logs
+      - ./data/account/runtime:/app/runtime
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:21001/actuator/info"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+    mem_limit: 768m
+    cpus: 1.0
+    networks:
+      lejia:
+        aliases:
+          - lejia-account
+
+  file:
+    image: lejia-file:${APP_RELEASE_ID}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: artifacts/file.jar
+    container_name: lejia-file
+    restart: unless-stopped
+    environment:
+      <<: *common-environment
+      JAVA_OPTS: -Xms128m -Xmx512m -Dfile.encoding=UTF-8
+      SPRING_PROFILES_ACTIVE: common,preProduct,running
+      SPRING_APPLICATION_NAME: file
+      SERVER_PORT: "21003"
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${FILE_DB_NAME}?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${FILE_DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${FILE_DB_PASSWORD}
+      SPRING_ELASTICSEARCH_URIS: http://elasticsearch:9200
+      SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI: http://lejia-account:21001/oauth/token
+      SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI: http://lejia-account:21001/oauth/authorize
+      SECURITY_OAUTH2_RESOURCE_USER_INFO_URI: http://lejia-account:21001/userinfo
+      TOFOCUS_FILE_ROOT: /data/uploads
+      TOFOCUS_FILE_BACKUP: /data/backup
+      TOFOCUS_FILE_BACKUP_ACTIVE: "false"
+      TOFOCUS_FILE_BASEURL: http://lejia-file:21003/
+      TOFOCUS_FILE_BASEINTRANETURL: http://lejia-file:21003/
+    ports:
+      - 127.0.0.1:21003:21003
+    volumes:
+      - ./config/file:/app/config:ro
+      - ./preflight-migrations/file:/app/migrations:ro
+      - ./data/file/logs:/app/logs
+      - ./data/file/uploads:/data/uploads
+      - ./data/file/backup:/data/backup
+      - ./data/file/runtime:/app/runtime
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:21003/actuator/info"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 90s
+    mem_limit: 768m
+    cpus: 1.0
+    networks:
+      lejia:
+        aliases:
+          - lejia-file
+
+  business:
+    image: lejia-business:${APP_RELEASE_ID}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: artifacts/business.jar
+    container_name: lejia-business
+    restart: unless-stopped
+    environment:
+      <<: *common-environment
+      JAVA_OPTS: -Xms256m -Xmx1024m -Dfile.encoding=UTF-8
+      SPRING_PROFILES_ACTIVE: common,release,running
+      SPRING_APPLICATION_NAME: zyysc-server
+      SERVER_PORT: "23505"
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${BUSINESS_DB_NAME}?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${BUSINESS_DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${BUSINESS_DB_PASSWORD}
+      SPRING_FLYWAY_IGNORE_FUTURE_MIGRATIONS: "true"
+      SECURITY_OAUTH2_CLIENT_ACCESS_TOKEN_URI: http://lejia-account:21001/oauth/token
+      SECURITY_OAUTH2_CLIENT_USER_AUTHORIZATION_URI: http://lejia-account:21001/oauth/authorize
+      SECURITY_OAUTH2_RESOURCE_USER_INFO_URI: http://lejia-account:21001/userinfo
+      TOFOCUS_FILE_BASEURL: http://lejia-file:21003/
+      TOFOCUS_FILE_BASEINTRANETURL: http://lejia-file:21003/
+    ports:
+      - 127.0.0.1:23505:23505
+    volumes:
+      - ./config/business:/app/config:ro
+      - ./validate-migrations/business:/app/migrations:ro
+      - ./data/business/logs:/app/logs
+      - ./data/business/runtime:/app/runtime
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:23505/actuator/info"]
+      interval: 15s
+      timeout: 5s
+      retries: 24
+      start_period: 120s
+    mem_limit: 1536m
+    cpus: 2.0
+    networks:
+      lejia:
+        aliases:
+          - lejia-business
+
+networks:
+  lejia:
+    external: true
+    name: lejia-infra

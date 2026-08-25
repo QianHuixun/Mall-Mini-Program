@@ -1,0 +1,1 @@
+ALTER TABLE `sys_farmer_config` ADD COLUMN `goods_type` tinyint COMMENT '商品展示类型' AFTER `member_commission_rate`;

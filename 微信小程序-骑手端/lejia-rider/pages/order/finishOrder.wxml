@@ -1,0 +1,28 @@
+<!-- 
+@url:pages/order/finishOrder.wxml
+@description: 已完成订单
+@author: zs
+ -->
+<view id="finishOrder">
+	<scroll id="scroll" requesting="{{requesting}}" end="{{end}}" listCount="{{dataList.length}}" bind:refresh="refresh" bind:more="more">
+		<view class="content" wx:for="{{dataList}}" wx:key="index">
+			<view class="top">
+				<text>{{item.code}}</text>
+				<text>{{item.weight}}kg</text>
+			</view>
+			<view class="item">
+				<text class="title">配送地址</text>
+				<text>{{item.addr}}</text>
+			</view>
+			<view class="item">
+				<text class="title">订单时间</text>
+				<text>{{item.orderTime}}</text>
+			</view>
+			<view class="item">
+				<text class="title">送达时间</text>
+				<text>{{item.qrTime}}</text>
+			</view>
+		</view>
+	</scroll>
+
+</view>

@@ -1,0 +1,36 @@
+/* pages/point/index.wxss */
+page {
+  background: #f9f9f9;
+}
+
+.list-cell {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 47rpx;
+  background: #fff;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.list-cell__left {
+  flex: 1;
+}
+
+.list-cell .title {
+  font-size: 36rpx;
+  color: #333;
+  line-height: 48rpx;
+}
+
+.list-cell .date {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 48rpx;
+}
+
+.list-cell__right {
+  font-size: 32rpx;
+}
+
+.list-cell__right text {
+  font-size: 48rpx;
+}

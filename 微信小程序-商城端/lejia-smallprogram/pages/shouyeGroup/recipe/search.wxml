@@ -1,0 +1,19 @@
+<!--pages/shouyeGroup/recipe/search.wxml-->
+<view id="search">
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" show-action bind:cancel="onCancel" bind:change="onChange">
+  </van-search>
+  <view class="hot-view">热门搜索</view>
+  <van-tag bindtap="hotClick" data-id='{{item}}' wx:for="{{hotList}}" wx:key="index" color="#f4faec" text-color="#5C5C5C" size="large">{{item.name}}</van-tag>
+  <scroll-view class="sear-good-view" scroll-y scroll-anchoring upper-threshold="0" bindscrolltolower="bindscrollbottom" wx:if="{{isShowGood}}">
+    <view class="sear-good-view-topseg"></view>
+    <view class="good-view" wx:for="{{goodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+      <van-image width="55px" height="55px" fit="cover" src="{{item.wrapperPhoto}}" />
+      <text>{{item.name}}</text>
+      <van-icon name="arrow" color="#5C5C5C"/>
+    </view>
+    <view style="text-align: center;margin: 24rpx;color:#5C5C5C;font-size:24rpx;" class="note_text">
+        <view wx:if="{{loadingBom}}">加载中...</view>
+        <view wx:if="{{noMoreBom}}">没有更多了</view>
+      </view>
+  </scroll-view>
+</view>

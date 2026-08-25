@@ -1,0 +1,86 @@
+<!--components/recommending-goods/index.wxml-->
+<view class="recommending-goods" wx:if="{{list && list.length}}">
+    <view class="recommending-goods-title" wx:if="{{title}}">
+        <image src="/images/presell/recommending.png"></image>
+        为你推荐
+    </view>
+    <view class="goodslist">
+        <view class="left-container">
+            <block wx:for="{{ list }}" wx:key="index">
+                <view class="goods-cell" wx:if="{{index%2==0}}">
+                    <view class="goods-con" data-id='{{item}}' bindtap="goodsClick" data-pkey="{{item.pkey}}">
+                        <van-image custom-class="goods-image" src="{{item.wrapperPhoto||'/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                        <view class="goods-content">
+                            <view class="title-cell"> {{item.title}} </view>
+                            <view class="item-selling_points">
+                                <view class="selling-points" wx:for="{{item.sellingPoints}}" wx:for-item="sellingPoint" wx:key="index">{{sellingPoint}}</view>
+                            </view>
+                            <view class="item-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+                            <!-- 会员价格与原价 -->
+                            <view class="price-cell">
+                                <view>
+                                    <!-- 页面方法调佣 -->
+                                    <wxs module="filter" src="../../pages/home/shouye/index.wxs"></wxs>
+                                    <view class="normal-price">
+                                        <view class="price_clr">
+                                            <text class="unit">￥</text>
+                                            <text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+                                        </view>
+                                        <view class="price-old">￥<text>{{item.priceOld}}</text></view>
+                                    </view>
+                                    <!-- 会员显示年卡价 -->
+                                    <view class="price-mermber" wx:if="{{item.priceMember}}">
+                                        <text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+                                        <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+                                    </view>
+                                </view>
+                                <van-icon custom-class="car-num" name="/images/carAdd_plus_{{theme.value}}.png" info="{{item.gwcNum?(item.gwcNum>99?'99+':item.gwcNum):''}}" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-index="{{index}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                            </view>
+                            <!--end 会员价格与原价 -->
+                        </view>
+
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="right-container">
+            <block wx:for="{{ list }}" wx:key="index">
+                <view class="goods-cell" wx:if="{{index%2==1}}">
+                    <view class="goods-con" data-id='{{item}}' bindtap="goodsClick" data-pkey="{{item.pkey}}">
+                        <van-image custom-class="goods-image" src="{{item.wrapperPhoto||'/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                        <view class="goods-content">
+                            <view class="title-cell"> {{item.title}} </view>
+                            <view class="item-selling_points">
+                                <view class="selling-points" wx:for="{{item.sellingPoints}}" wx:for-item="sellingPoint" wx:for-index="subIndex" wx:key="subIndex">{{sellingPoint}}</view>
+                            </view>
+                            <view class="item-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+                            <!-- 会员价格与原价 -->
+                            <view class="price-cell">
+                                <view>
+                                    <!-- 页面方法调佣 -->
+                                    <wxs module="filter" src="../../pages/home/shouye/index.wxs"></wxs>
+                                    <view class="normal-price">
+                                        <view class="price_clr">
+                                            <text class="unit">￥</text>
+                                            <text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+                                        </view>
+                                        <view class="price-old">￥<text>{{item.priceOld}}</text></view>
+                                    </view>
+                                    <view class="price-mermber" wx:if="{{item.priceMember}}">
+                                        <text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+                                        <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+                                    </view>
+                                </view>
+                                <van-icon custom-class="car-num" name="/images/carAdd_plus_{{theme.value}}.png" info="{{item.gwcNum?(item.gwcNum>99?'99+':item.gwcNum):''}}" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-index="{{index}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                            </view>
+                            <!--end 会员价格与原价 -->
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <!-- 规格选择弹出层 -->
+    <space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"></space-dialog>
+    <load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore' finishText="- 我是有底线的 -"></load-more>
+</view>

@@ -1,0 +1,21 @@
+/* pages/my/dispatchSlip/index.wxss */
+page {
+    background: #F2F4F7;
+}
+
+.dispatch-slip-content {
+    height: 266rpx;
+    margin: 24rpx;
+    background: #FFFFFF;
+    border-radius: 24rpx;
+}
+
+.dispatch-slip .dispatch-slip-btn {
+    width: 654rpx;
+    height: 76rpx;
+    margin: 80rpx 48rpx;
+    background: #09AF84;
+    border-radius: 40rpx;
+    font-weight: bold;
+    font-size: 30rpx;
+}

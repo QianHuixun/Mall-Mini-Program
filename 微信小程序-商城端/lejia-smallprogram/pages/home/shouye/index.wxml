@@ -1,0 +1,489 @@
+<!--pages/shouye/index.wxml-->
+<view id="shouye" wx:if="{{indexModel !== 3}}">
+    <view class="navbar-back" style="padding-top:{{statusBarHeight}}px; background-color: {{theme.background}}">
+        <!-- <image src="/images/bar_back.png" style="height:{{statusBarHeight+68}}px"></image> -->
+        <view class="nav">
+            <view class="nav-left" bindtap="addressSelect">
+                <!-- <van-image custom-class="nav-left-left" src="/images/loc.png" /> -->
+                <van-icon custom-class="nav-left-left" size="24rpx" name="location" />
+                <view class="nav-left-cer">{{ location.name }}</view>
+                <van-image custom-class="nav-left-rig" src="/images/shouye/changeMarket.png" />
+            </view>
+        </view>
+        <view class="search-bar">
+            <search-bar class="search-bar-box {{theme.value}}" border type="HOME"></search-bar>
+            <view class="scan-code">
+                <van-image custom-class="scan-code-img" src="/images/saoyisao_{{theme.value}}.png" bindtap="scanCode" />
+            </view>
+            <view class="search-bar-back"></view>
+        </view>
+    </view>
+    <scroll-view class="scroll-view" id="goTop" style="top:{{statusBarHeight+44+64}}px" scroll-top="{{topNum}}" scroll-y scroll-anchoring upper-threshold="0" bindscrolltoupper="bindscrolltop" bindscrolltolower="bindscrollbottom">
+        <!-- 民生豆专区 -->
+        <view class="card" wx:if="{{userData.isMsd}}">
+            <msd-mall displayName="{{displayName.integralMsdDisplayName}}" list="{{ zoneGoodsList.integralMsdList }}"></msd-mall>
+        </view>
+        <!-- 商品分类 -->
+        <class-bar id="classBar" wx:if="{{ indexModel === 2 }}" hasThirdLine></class-bar>
+        <!-- 轮播广告专区 -->
+        <swiper class="ads-swiper" wx:if="{{imageList && imageList.length}}" indicator-dots="true" circular="true" indicator-color="rgba(255, 255, 255, .6)" indicator-active-color="#FFFFFF" autoplay>
+            <swiper-item wx:for="{{imageList}}" wx:key="pkey">
+                <van-image src="{{item.photo}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" data-urltype="{{item.urlType}}" bindtap="goAds" lazy-load="{{ true }}" show-loading />
+                {{item.photo}}
+            </swiper-item>
+        </swiper>
+        <!--  会员 登录 -->
+        <view wx:if="{{ indexModel === 1 }}" class="member">
+            <van-image src="/images/member_bg.png" custom-class="member-bg"></van-image>
+            <view class="member-container">
+                <view class="member-title" wx:if="{{ isLogin }}">
+                    <view class="member-title-left">{{userData.nickName}} </view>
+                </view>
+                <view class="info_container">
+                    <view class="info-grid-item" bindtap="goCommsQuery">
+                      <van-image src="/images/member_qb.png"  width="68rpx" height="68rpx"></van-image>
+                    <view class="info-grid-item_right">
+                        <view class="num">{{userData.comms || 0}}</view>
+                        <text class="tips">{{walletName}}(元)</text>
+                      </view>
+                    </view>
+                    <view class="info-grid-item" bindtap="goPointQuery">
+                      <van-image src="/images/member_jf.png" width="68rpx" height="68rpx"></van-image>
+                      <view class="info-grid-item_right">
+                        <view class="num">{{userData.points  || 0}}</view>
+                        <text class="tips">积分</text>
+                      </view>
+                    </view>
+                    <view class="info-grid-item" bindtap="goCard">
+                      <van-image src="/images/member_kjb.png"  width="68rpx" height="68rpx"></van-image>
+                      <view class="info-grid-item_right">
+                        <view class="num">{{userData.cardNum  || 0}}</view>
+                        <text class="tips">卡券包</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="member-button" wx:if="{{ !isLogin }}">
+                    <van-button round type="primary" custom-class="member-button-login" bindtap="handleProtocolShow" wx:if="{{!protocol_check}}">登录</van-button>
+                    <van-button round type="primary" custom-class="member-button-login" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:else>登录</van-button>
+                </view>
+            </view>
+        </view>
+        <!-- 领券中心 -->
+        <coupon-center  wx:if="{{ indexModel === 2 }}"></coupon-center>
+        <!-- 限时秒杀 -->
+        <view class="time" wx:if="{{ miaoshaList.length > 0 &&  indexModel === 1}}">
+            <view class="time-top" bindtap="snapClick">
+                <view class="time-top-container">
+                    <text class="title">限时秒杀</text>
+                    <van-count-down use-slot time="{{ time }}" bind:change="onChange">
+                        <text wx:if="{{ timeData.days != 0 }}" class="time-top-item">{{ timeData.days }}</text>
+                        <text wx:if="{{ timeData.days != 0 }}" class="time-top-item-text">天</text>
+                        <text class="time-top-item">{{ timeData.hours }}</text>
+                        <text class="time-top-item-text">:</text>
+                        <text class="time-top-item">{{ timeData.minutes }}</text>
+                        <text class="time-top-item-text">:</text>
+                        <text class="time-top-item">{{ timeData.seconds }}</text>
+                    </van-count-down>
+                    <view class="time-top-rig">
+                        <van-icon name="arrow" color="#fff" size="24rpx" />
+                        <text class="time-top-rig-text">更多</text>
+                    </view>
+
+                </view>
+            </view>
+            <view class="time-content">
+                <view class="time-content-item" wx:key="index" wx:for="{{ miaoshaList }}" bindtap="goodsClick" data-id='{{item}}'>
+                    <van-image custom-class="time-content-item-img" width="154rpx" height="154rpx" src="{{item.wrapperPhoto ? (item.wrapperPhoto + '&thumb=small') : '/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                    <view class="time-content-item-title">{{item.title}}</view>
+                    <view class="price-view">
+                        <image class="price-view-back" src="/images/time_item_back.png"></image>
+                        <text class="time-content-item-price"><text class="unit">￥</text>{{item.price}}</text>
+                        <text class="time-content-item-price-ori">￥{{item.priceOld}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <flash-sale 
+            wx:if="{{  indexModel === 2 && zoneGoodsList.specialList && zoneGoodsList.specialList.length }}"
+            displayName="{{displayName.specialDisplayName}}" time="{{ time }}" list="{{ zoneGoodsList.specialList }}"
+        >
+        </flash-sale>
+        <!-- 积分商城/合作专区 -->
+        <points-mall wx:if="{{  indexModel === 1 }}"></points-mall>
+        <!-- 预售专区 -->
+        <presale-mall wx:if="{{  indexModel === 1 }}"></presale-mall>
+        <!-- 模板2合作专区+滨农优品+预售专区 -->
+        <view class="card" wx:if="{{  indexModel === 2 }}">
+            <points-mall-new
+                displayName="{{displayName.integralDisplayName}}"
+                list="{{ zoneGoodsList.integralList }}"
+            ></points-mall-new>
+            <view style="margin-top: 24rpx; display: flex;">
+            <!-- 滨农优品 -->
+                <view wx:if="{{ zoneGoodsList.integralBNYPList && zoneGoodsList.integralBNYPList.length}}"
+                    style="width: {{zoneGoodsList.integralPresaleList.length ? '50%' : '100%'}};"
+                >
+                    <bnyp-mall
+                        displayName="{{displayName.integralBNYPDisplayName}}"
+                        list="{{ zoneGoodsList.integralBNYPList }}"
+                        full="{{ !zoneGoodsList.integralPresaleList.length }}"
+                    ></bnyp-mall>
+                </view>
+                <!-- end 滨农优品 -->
+                <!-- 预售专区 -->
+                <view wx:if="{{zoneGoodsList.integralPresaleList.length }}"
+                    style="width: {{zoneGoodsList.integralBNYPList.length ? '50%' : '100%'}}; margin-left: {{zoneGoodsList.integralBNYPList.length ? '10rpx' : '0'}};"
+                >
+                    <presale-mall-new
+                        displayName="{{displayName.integralPresaleDisplayName}}"
+                        list="{{ zoneGoodsList.integralPresaleList }}"
+                        full="{{ !zoneGoodsList.integralBNYPList.length }}"
+                    ></presale-mall-new>
+                </view>
+                 <!-- end 预售专区 -->
+            </view>
+        </view>
+        <!-- 菜谱套餐 -->
+        <view class="menus" wx:if="{{recipeList.length}}">
+            <image class="menus-back" src="/images/menu_bg.png"></image>
+            <view class="menus-title" catchtap="goRecipe">
+                <view class="title-left">菜谱套餐</view>
+                <view class="title-right">查看更多
+                    <van-icon name="arrow" size="16rpx" />
+                </view>
+            </view>
+            <view class="menus-box">
+                <view class="menus-container">
+
+                    <view class="menus-box-item" wx:for="{{recipeList}}" wx:key="pkey" data-id='{{item}}' bind:tap="goRecipeDetail">
+                        <view class="menus-box-image">
+                            <van-image src="{{item.photo1[0] + '&thumb=small'}}" custom-class="images"></van-image>
+                        </view>
+                        <view class="menus-box-text">
+                            {{item.name}}
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+        <!-- 精选商户 -->
+        <view class="today-recommend" wx:if="{{marketType == 'VENDOR_SHOPPING_MALL' && goodsType == 'SINGLE_GOODS_RECOMMEND'}}">
+            <view class="today-recommend-title">
+                <van-image custom-class="main-title" src="/images/shouye/今日推荐@2x.png"></van-image>
+            </view>
+            <view class="recommend-goods">
+                <recommending-goods id="recommendGoods" title="{{false}}" zone="HOME_PAGE" bindrefresh="getData"></recommending-goods>
+            </view>
+        </view>
+        <view class="merchant" wx:elif="{{marketType == 'VENDOR_SHOPPING_MALL'}}">
+            <view class="merchant-title">
+                <view class="merchant-titile-left" style="color: {{theme.primary}}">
+                    {{  merchantTitleName }}
+                </view>
+                <!-- <view class="merchant-title-right" bind:tap="goMerchant">更多商户
+					<van-icon name="arrow" size="20rpx" />
+				</view> -->
+            </view>
+            <view class="merchant-container">
+                <view class="merchant-list-left">
+                    <view class="merchant-list-item" wx:for="{{leftVendor}}" wx:key="index">
+                        <view class="merchant-list-item_main">
+                            <view class="merchant-list-item__name" data-pkey="{{item.vendor}}" bind:tap="goMerchantDetail">
+                                <!-- <van-image src="/images/i-shop.png" custom-class="i-shop"></van-image> -->
+                                {{ item.vendorName }}
+                            </view>
+                            <view class="merchant-list-item_booth">
+                                摊位号: {{item.booth}}
+                            </view>
+                            <view class="merchant-list-item_area ellipsis">
+                                {{ item.businessScopesName }}
+                            </view>
+                            <view class="merchant-list-item_honor">
+                                <view class="honor-list-item" wx:for="{{item.labels}}" wx:key="index">
+                                    <van-image wx:if="{{index===0}}" src="/images/i-honor.png" custom-class="i-honor"></van-image>
+                                    {{item}}
+                                </view>
+                            </view>
+                            <view class="merchant-list-item_goods">
+                                <view class="merchant-list-item_goodes__item">
+                                    <van-image wx:if="{{item.showType1==='SHOW_PHOTO'}}" src="{{item.showContent1 + '&thumb=small'}}" custom-class="i-images" data-src="{{item.showContent1}}" bind:click="handleImageClock"></van-image>
+                                    <view wx:else data-id='{{item.goods1}}' bindtap="goodsClick">
+                                        <van-image src="{{item.goods1.wrapperPhoto}}" custom-class="i-goods-image"></van-image>
+                                        <view class="merchant-list-item_goodes__item___title ellipsis">{{item.goods1.title}}</view>
+                                        <view class="merchant-list-item_goodes__item___price">￥{{item.goods1.price}}</view>
+                                    </view>
+                                </view>
+                                <view class="merchant-list-item_goodes__item">
+                                    <van-image wx:if="{{item.showType2==='SHOW_PHOTO'}}" src="{{item.showContent2 + '&thumb=small'}}" custom-class="i-images" data-src="{{item.showContent2}}" bind:click="handleImageClock"></van-image>
+                                    <view wx:else data-id='{{item.goods2}}' bindtap="goodsClick">
+                                        <van-image src="{{item.goods2.wrapperPhoto + '&thumb=small'}}" custom-class="i-goods-image"></van-image>
+                                        <view class="merchant-list-item_goodes__item___title ellipsis">{{item.goods2.title}}</view>
+                                        <view class="merchant-list-item_goodes__item___price">￥{{item.goods2.price}}</view>
+                                    </view>
+                                </view>
+                            </view>
+
+                        </view>
+                    </view>
+                </view>
+                <view class="merchant-list-right">
+                    <view class="merchant-list-item" wx:for="{{rightVendor}}" wx:key="index">
+                        <view class="merchant-list-item_main">
+                            <view class="merchant-list-item__name" data-pkey="{{item.vendor}}" bind:tap="goMerchantDetail">
+                                <!-- <van-image src="/images/i-shop.png" custom-class="i-shop"></van-image> -->
+                                {{ item.vendorName }}
+                            </view>
+                            <view class="merchant-list-item_booth">
+                                摊位号: {{item.booth}}
+                            </view>
+                            <view class="merchant-list-item_area ellipsis">
+                                {{ item.businessScopesName }}
+                            </view>
+                            <view class="merchant-list-item_honor">
+                                <view class="honor-list-item" wx:for="{{item.labels}}" wx:key="index">
+                                    <van-image wx:if="{{index===0}}" src="/images/i-honor.png" custom-class="i-honor"></van-image>
+                                    {{item}}
+                                </view>
+                            </view>
+                            <view class="merchant-list-item_goods">
+                                <view class="merchant-list-item_goodes__item">
+                                    <van-image wx:if="{{item.showType1==='SHOW_PHOTO'}}" src="{{item.showContent1 + '&thumb=small'}}" custom-class="i-images" data-src="{{item.showContent1}}" bind:click="handleImageClock"></van-image>
+                                    <view wx:else data-id='{{item.goods1}}' bindtap="goodsClick">
+                                        <van-image src="{{item.goods1.wrapperPhoto}}" custom-class="i-goods-image"></van-image>
+                                        <view class="merchant-list-item_goodes__item___title ellipsis">{{item.goods1.title}}</view>
+                                        <view class="merchant-list-item_goodes__item___price">￥{{item.goods1.price}}</view>
+                                    </view>
+                                </view>
+                                <view class="merchant-list-item_goodes__item">
+                                    <van-image wx:if="{{item.showType2==='SHOW_PHOTO'}}" src="{{item.showContent2 + '&thumb=small'}}" custom-class="i-images" data-src="{{item.showContent2}}" bind:click="handleImageClock"></van-image>
+                                    <view wx:else data-id='{{item.goods2}}' bindtap="goodsClick">
+                                        <van-image src="{{item.goods2.wrapperPhoto}}" custom-class="i-goods-image"></van-image>
+                                        <view class="merchant-list-item_goodes__item___title ellipsis">{{item.goods2.title}}</view>
+                                        <view class="merchant-list-item_goodes__item___price">￥{{item.goods2.price}}</view>
+                                    </view>
+                                </view>
+                            </view>
+
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+        <!-- 市场推荐 -->
+        <view wx:if="{{marketType === 'MARKET_SHOPPING_MALL'}}">
+            <view class="like-top" bindtap="gtypeClick">
+                <text class="like-top-text">市场推荐</text>
+                <view class="like-top-rig">
+                    <text class="like-top-rig-text">发现更多</text>
+                    <van-icon name="arrow" color="##FFFFFF" size="24rpx" />
+                </view>
+            </view>
+            <view class="goodslist" hidden="{{firstLoading}}">
+                <view class="left-container">
+                    <block wx:for="{{ likeGoodsList }}" wx:key="index">
+                        <view class="goods-cell" wx:if="{{index%2==0}}">
+                            <view class="goods-con" data-id='{{item}}' bindtap="goodsClick">
+                                <van-image custom-class="goods-image" src="{{item.wrapperPhoto||'/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                                <view class="title-cell">
+                                    {{item.title}}
+                                </view>
+
+                                <!-- 会员价格与原价 -->
+                                <view class="price-cell">
+                                    <view>
+                                        <!-- 页面方法调佣 -->
+                                        <wxs module="filter" src="./index.wxs"></wxs>
+                                        <view class="normal-price">
+                                            <view class="price_clr">
+                                                <text class="unit">￥</text>
+                                                <text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+                                            </view>
+                                            <view class="price-old">￥<text>{{item.priceOld}}</text></view>
+                                        </view>
+                                        <!-- 会员显示年卡价 -->
+                                        <view class="price-mermber" wx:if="{{item.priceMember}}">
+                                            <text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+                                            <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+                                        </view>
+                                    </view>
+                                    <van-icon custom-class="car-num" name="/images/carAdd.png" info="{{item.gwcNum?(item.gwcNum>99?'99+':item.gwcNum):''}}" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-index="{{index}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                                </view>
+                                <!--end 会员价格与原价 -->
+
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <view class="right-container">
+                    <block wx:for="{{ likeGoodsList }}" wx:key="index">
+                        <view class="goods-cell" wx:if="{{index%2==1}}">
+                            <view class="goods-con" data-id='{{item}}' bindtap="goodsClick">
+                                <van-image custom-class="goods-image" src="{{item.wrapperPhoto||'/images/no-pic.png'}}" lazy-load="{{ true }}" show-loading />
+                                <view class="title-cell">
+                                    {{item.title}}
+                                </view>
+
+                                <!-- 会员价格与原价 -->
+                                <view class="price-cell">
+                                    <view>
+                                        <!-- 页面方法调佣 -->
+                                        <wxs module="filter" src="./index.wxs"></wxs>
+                                        <view class="normal-price">
+                                            <view class="price_clr">
+                                                <text class="unit">￥</text>
+                                                <text class="price_txt">{{filter.pointFront(item.price)}}</text>.{{filter.pointAfter(item.price)}}
+                                            </view>
+                                            <view class="price-old">￥<text>{{item.priceOld}}</text></view>
+                                        </view>
+                                        <view class="price-mermber" wx:if="{{item.priceMember}}">
+                                            <text class="price-mermber-txt"><text class="unit">￥</text>{{item.priceMember}}</text>
+                                            <image class="price-mermber-tag" src="/images/member_price_tag.png" />
+                                        </view>
+                                    </view>
+
+                                    <van-icon custom-class="car-num" name="/images/carAdd.png" info="{{item.gwcNum?(item.gwcNum>99?'99+':item.gwcNum):''}}" color="#449C55" size="50rpx" data-pkey="{{item.pkey}}" data-index="{{index}}" data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber" />
+                                </view>
+                                <!--end 会员价格与原价 -->
+
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<third-edition
+    id="thirdEdition" wx:else
+    statusBarHeight="{{statusBarHeight}}"
+    location="{{location}}"
+    imageList="{{imageList}}"
+    timeShow="{{timeShow}}"
+    deliveryTime="{{deliveryTime}}"
+>
+</third-edition>
+
+<!-- 客服悬浮球 -->
+<drag-ball type="MARKET_MALL"></drag-ball>
+
+<!-- 弹窗活动 -->
+<van-popup show="{{ couponActivityShow }}" custom-class="coupon-pop" data-index="index" bind:close="handleCloseCoupon" z-index="9999">
+    <view class="img-box">
+        <van-image src="{{couponActivityData.photo}}" width='502rpx' height="846rpx" catchtap="goCouponActivity"></van-image>
+    </view>
+    <view class="btn-box">
+        <van-button custom-class="btn-confirm" round bind:click="goCouponActivity">
+            {{couponActivityData.price > 0 ? '￥'+couponActivityData.price+'购买' : '领取'}}
+        </van-button>
+    </view>
+    <view class="close-btn-box" catchtap="handleCloseCoupon">
+        <van-icon custom-class="close-btn" name="cross" size="20" />
+    </view>
+</van-popup>
+<!--end 弹窗活动 -->
+
+<!-- 弹窗广告 -->
+<view v-if="{{popList.length}}">
+    <block wx:for="{{popList}}" wx:key="index">
+        <van-popup show="{{ show[index] }}" custom-class="ad-pop" z-index="9998" data-index="index" close-on-click-overlay="false" bind:close="handleClosePop" overlay="{{index==0}}">
+            <view>
+                <van-image image-class="ad-pop_img" src="{{item.photo}}" width='588rpx' height="995rpx" data-url="{{item.objKey}}" data-urltype="{{item.urlType}}" catchtap="goAds"></van-image>
+            </view>
+            <view class="ad-pop_choose">
+                <van-checkbox value="{{ adChecked }}" data-item="{{item}}" bind:change="adCheckedChange">
+                <text class="ad-pop_choose_label">不再显示此弹框</text>
+                </van-checkbox>
+            </view>
+            <view class="close-btn-box">
+                <van-icon custom-class="close-btn" name="cross" size="20" data-index="{{index}}" catchtap="handleClosePop" />
+            </view>
+        </van-popup>
+    </block>
+</view>
+<!--end 弹窗广告 -->
+
+<!-- 新手动发放卡券通知栏 -->
+<view>
+    <van-popup show="{{ hasNewCoupon }}" custom-class="ad-pop" data-index="index" bind:close="handleCloseCoupon">
+        <view class="ad-pop-contianer">
+            <image class="ad-pop-back" src="/images/coupon_new_back.png" />
+            <view class="ad-pop-title">{{AppInfo.userName}}送好礼</view>
+            <image class="ad-pop-back_bottom" src="{{ imgUrl + 'coupon_new_back_bottom.png'}}" />
+            <view class="new-coupon">
+                <view class="new-coupon-item" wx:for="{{newCouponList}}" wx:key="index">
+                    <image class="new-coupon-item_back" src="/images/copon_new_item_back.png" />
+                    <view class="new-coupon-item_box">
+                        <view class="new-coupon-item_left">
+                            <view class="price">
+                                <view class="unit">¥</view>
+                                <view>{{item.cost}}</view>
+                            </view>
+                            <view class="type">{{item.userTypeName?item.userTypeName:'全场'}}可用</view>
+                        </view>
+                        <view class="new-coupon-item_right">
+                            <view class="name">{{item.title}}</view>
+                            <view class="condition">满{{item.limitCost}}可用</view>
+                            <view class="validity">{{item.expireChoose?'领取后'+item.effective+'天内':item.startDate+'-'+item.endDate}}有效</view>
+                        </view>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+        <view class="close-btn-box back-close-btn" data-index="{{index}}" catchtap="handleCloseCoupon">
+            <van-icon custom-class="close-btn" name="cross" size="20" />
+        </view>
+    </van-popup>
+</view>
+<!--end  新手动发放卡券通知栏 -->
+
+<!-- 超出配送范围 -->
+<van-popup show="{{ rangeShow }}" round custom-class="range-popup">
+    <view class="range_title">提示</view>
+    <view class="range_market">
+        <view class="range_market_title">
+            <view class="range_market_title__name">{{ rangeData.name}}</view>
+            <view class="range_market_title__distance">{{rangeData.distance > 1000 ? rangeData.distanceKM+'km' : rangeData.distance+'m'}}</view>
+        </view>
+        <view class="range_market_address" wx:if="{{rangeData.addr}}">
+            {{rangeData.addr}}
+        </view>
+    </view>
+    <view class="range_tips">
+        您当前所在位置已超出该市场配送范围，是否继续浏览？
+    </view>
+    <view class="range_button">
+        <van-button round type="default" bind:click="rangeOtherMarket">选择其他市场</van-button>
+        <van-button round type="primary" bind:click="rangeClose">继续</van-button>
+    </view>
+</van-popup>
+
+<!-- 获取首页预约配送时间  在营业时间内 就不显示 -->
+<van-popup show="{{timeShow}}" custom-class="time-popup" position="bottom" overlay="{{false}}">
+    <view> {{deliveryTime }}</view>
+</van-popup>
+
+<!-- 用户协议 -->
+<van-overlay show="{{ protocolShow }}" z-index="999" class-name="protocal-overlay">
+    <view class="protocal-overlay-box">
+        <view class="protocal-overlay__title">温馨提示</view>
+        <scroll-view scroll-y show-scrollbar="{{false}}" enhanced="{{true}}" enable-back-to-top="{{false}}" class="protocal-overlay__content">
+            <view>尊敬的用户您好！</view>
+            <view>欢迎使用本商城小程序/APP！在您开始使用我们的产品服务之前，请务必仔细阅读《<navigator class="privacy-policy" url="/pages/my/privacyUser/index">用户服务协议</navigator>》及《<navigator class="privacy-policy" url="/pages/my/privacy/index">隐私政策</navigator>》。我们特别强调您在阅读过程中留意加粗标识的重要条款。</view>
+            <view>1、为向您提供相关基本业务功能，我们会处理您必要的个人信息；</view>
+            <view>2、为了向您提供更契合您需求的页面展示、产品或服务（比如展示所在位置附近的市场等），您需要授权我们获取您的位置权限，您有权拒绝或撤回授权；</view>
+            <view>3、我们会采取业界先进的安全措施保护您的信息安全；</view>
+            <view>4、未经您同意，我们不会从第三方获取、共享或向其提供您的信息；</view>
+            <view>5、您可以查询、更正、删除您的个人信息或注销您的账号。</view>
+            <view>为了您能够体验更好的产品和服务，我们建议您点击“同意”并继续使用我们完整的服务。</view>
+        </scroll-view>
+        <view class="protocal-overlay__footer">
+            <van-button type="default" bind:click="handleProtocolDisagree" wx:if="{{isLoginClick}}">不同意</van-button>
+            <van-button type="default" bind:click="handleProtocolDisagree" wx:else>不同意</van-button>
+            <van-button type="default" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" bindtap="handleProtocalAgree" wx:if="{{isLoginClick}}">同意</van-button>
+            <van-button type="default" bindtap="handleProtocalAgree" wx:else>同意</van-button>
+        </view>
+    </view>
+</van-overlay>

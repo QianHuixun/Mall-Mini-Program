@@ -1,0 +1,163 @@
+{
+    "pages": [
+        "pages/home/shouye/index",
+        "pages/my/card/index",
+        "pages/my/cardWhiteOff/index",
+        "pages/home/classification/index",
+        "pages/home/integral/index",
+        "pages/home/buyCar/index",
+        "pages/home/my/index",
+        "pages/my/refundOrder/index",
+        "pages/my/refundDetail/index",
+        "pages/activity/couponOne/index",
+        "pages/activity/couponTwo/index",
+        "pages/activity/couponThree/index",
+        "pages/activity/whiteOff/index",
+        "pages/activity/result/index",
+        "pages/activity/coupon/index",
+        "pages/my/collect/index",
+        "pages/my/feedback/index",
+        "pages/my/distribution/index",
+        "pages/my/address/list/index",
+        "pages/my/address/edit/index",
+        "pages/my/signIn/index",
+        "pages/my/info/index",
+        "pages/my/order/index",
+        "pages/my/orderDetail/index",
+        "pages/my/refundApply/index",
+        "pages/my/refundSubmit/index",
+        "pages/my/map/index",
+        "pages/my/orderRefund/index",
+        "pages/my/offlineOrder/index",
+        "pages/my/prize/index",
+        "pages/my/scanPay/index",
+        "pages/my/pointQuery/index",
+        "pages/my/pointDetail/index",
+        "pages/my/aboutUs/index",
+        "pages/my/openVip/index",
+        "pages/my/collectBill/collectBill",
+        "pages/my/goEvaluate/index",
+        "pages/my/lookEvaluate/index",
+        "pages/my/bargain/index",
+        "pages/my/bargainDetail/index",
+        "pages/my/groupon/index",
+        "pages/my/coupon/coupon",
+        "pages/my/tixian/index",
+        "pages/my/link/index",
+        "pages/my/invite/index",
+        "pages/merMien/merchantList/index",
+        "pages/merMien/merchantDetail/index",
+        "pages/my/privacy/index",
+        "pages/my/privacyUser/index",
+        "pages/my/userAgreement/index",
+        "pages/my/problem/index",
+        "pages/my/problem/problemDetail/index",
+        "pages/home/memberBenefits/index",
+        "pages/my/commsQuery/index",
+        "pages/my/expressRouter/index",
+        "pages/my/pickupWhiteOff/index",
+        "pages/home/bnyp/index",
+        "pages/home/msd/index",
+        "pages/home/jdGoods/index",
+        "pages/my/msdQuery/index",
+        "pages/my/supportApply/index",
+        "pages/my/supportSubmit/index",
+        "pages/my/dispatchSlip/index",
+        "pages/home/newMsd/index"
+    ],
+    "subPackages": [
+        {
+            "root": "pages/shouyeGroup",
+            "pages": [
+                "goodsDeatil/index",
+                "recipe/index",
+                "recipe/detail",
+                "recipe/collect",
+                "recipe/search",
+                "snap/index",
+                "shareZone/index",
+                "openBook/index",
+                "memberZone/index",
+                "search/index",
+                "searchMerchant/index",
+                "position/index",
+                "tranceSource/index",
+                "poverty/index",
+                "goodsList/index",
+                "groupon/index",
+                "merchant/index",
+                "bargain/index",
+                "integralClass/index",
+                "presell/index",
+                "buyCar/index",
+                "marketDetail/index",
+                "jdGoodsDetail/index"
+            ]
+        },
+        {
+            "root": "pages/pay",
+            "pages": [
+                "pay/index",
+                "result/index",
+                "card/index",
+                "addr/index",
+                "comboPay/index",
+                "pickupAddr/index"
+            ]
+        }
+    ],
+    "requiredPrivateInfos": [
+        "getLocation",
+        "chooseLocation"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#53AE50",
+        "borderStyle": "black",
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/home/shouye/index",
+                "text": "首页",
+                "iconPath": "images/tabbar/shouye.png",
+                "selectedIconPath": "images/tabbar/shouyeSelect_basics.png"
+            },
+            {
+                "pagePath": "pages/home/classification/index",
+                "text": "分类",
+                "iconPath": "images/tabbar/fenlei.png",
+                "selectedIconPath": "images/tabbar/fenleiSelect_basics.png"
+            },
+            {
+                "pagePath": "pages/home/memberBenefits/index",
+                "text": "会员福利",
+                "iconPath": "images/tabbar/memberBenefits.png",
+                "selectedIconPath": "images/tabbar/memberBenefitsSelect_basics.png"
+            },
+            {
+                "pagePath": "pages/home/buyCar/index",
+                "text": "购物车",
+                "iconPath": "images/tabbar/car.png",
+                "selectedIconPath": "images/tabbar/carSelect_basics.png"
+            },
+            {
+                "pagePath": "pages/home/my/index",
+                "text": "我的",
+                "iconPath": "images/tabbar/my.png",
+                "selectedIconPath": "images/tabbar/mySelect_basics.png"
+            }
+        ]
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序获取最近市场"
+        }
+    },
+    "sitemapLocation": "sitemap.json"
+}

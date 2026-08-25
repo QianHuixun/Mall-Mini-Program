@@ -1,0 +1,9 @@
+/* pages/order/detail.wxss */
+page{
+  background-color: #F2F2F4;
+  height: 100%;  
+}
+
+.van-hairline--top-bottom{
+  margin-bottom: 24rpx;
+}

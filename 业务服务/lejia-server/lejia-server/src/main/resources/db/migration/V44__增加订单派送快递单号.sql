@@ -1,0 +1,1 @@
+﻿ALTER TABLE `mkt_order` ADD COLUMN `third_party_order_no` varchar(64) COMMENT '第三方快递单号'  AFTER `ascription`;

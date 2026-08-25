@@ -1,0 +1,48 @@
+<!--pages/shouyeGroup/position/index.wxml-->
+<view id="position">
+  <view class="top">
+    <van-icon name="location-o" color="#5C5C5C" bindtap="searAddress" />
+    <text class="are-text" bindtap="searAddress">{{addressValue}}</text>
+    <van-icon name="arrow-down" color="#5C5C5C" bindtap="searAddress" />
+    <van-search value="{{ value }}" shape="round" placeholder="请输入搜索关键词"
+      style="flex: 1;margin-right: 12px;margin-left: 12px;" bind:change="onChange" />
+  </view>
+  <view class="curr-adress" bindtap="addressRefresh" wx:if="{{hasLocation}}">
+    <van-icon name="aim" color="#449C55" size="14px" />
+    <text class="curr-adress-text-con">{{addressDetailValue}}</text>
+    <text class="curr-adress-text-title">当前定位</text>
+    <van-icon name="replay" color="#5C5C5C" />
+  </view>
+  <view class="curr-adress" bindtap="getSetting" wx:else>
+    <van-icon name="aim" color="#449C55" size="14px" />
+    <text class="curr-adress-text-con"></text>
+    <text class="curr-adress-text-title">定位失败</text>
+    <van-icon name="replay" color="#5C5C5C" />
+  </view>
+  <scroll-view scroll-y upper-threshold="0" bindscrolltolower="bindscrollbottom" class="list-view">
+    <view bindtap="marketClick" data-id='{{item}}' class="item" wx:for="{{marketList}}"wx:key="index">
+        <van-image class="item-image" src="{{item.logo}}"></van-image>
+        <view style="overflow: hidden;">
+            <view class="item-name">{{item.name}}</view>
+            <view class="item-addr" wx:if="{{item.config.addr}}">{{item.config.addr}}</view>
+            <view class="item-time">{{item.weekTime}}{{item.dayTime}}</view>
+            <view>
+            <wxs module="filter" src="./index.wxs"></wxs>
+            距离{{filter.mToKm(item.distance)}}km
+            <text>{{item.pstime}}</text>
+            </view>
+            <view class="item-detail" data-phone="{{item.tel}}" data-item="{{item}}" catchtap="goDetail">
+                市场详情
+                <van-icon name="arrow" size="14" />
+            </view>
+        </view>
+    </view>
+    <view style="text-align: center;margin: 12px;color:#5C5C5C;font-size:12px;" class="note_text">
+      <view wx:if="{{loadingBom}}">加载中...</view>
+      <view wx:if="{{noMoreBom}}">没有更多了</view>
+    </view>
+  </scroll-view>
+  <van-popup show="{{ show }}" position="bottom" custom-style="height: 50%;" bind:close="onClose">
+    <van-area area-list="{{ areaList }}" bind:cancel="onClose" bind:confirm="areaCon" />
+  </van-popup>
+</view>

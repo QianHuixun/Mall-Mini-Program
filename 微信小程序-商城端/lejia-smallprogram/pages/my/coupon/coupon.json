@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"/components/load-more/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationBarTitleText": "领券中心",
+  "navigationBarTextStyle":"white",
+  "navigationBarBackgroundColor": "#e1082d"
+}

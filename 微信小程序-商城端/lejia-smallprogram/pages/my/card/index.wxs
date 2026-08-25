@@ -1,0 +1,47 @@
+var filter = {
+  /**
+   * @desc 获取小数点前的整数
+   * @param value 数字
+   */
+  height: function (item) {
+   var count = 6,
+    className = '';
+    if (!item.userTypeName) {
+      count = count - 1
+    }
+    if (!item.userGoodsName) {
+      count = count - 1
+    }
+    if (!item.userVendorName) {
+      count = count - 1
+    }
+    if(item.userOrderType != 'DELIVERY' && item.userOrderType != 'PICKUP') {
+      count = count - 1
+    }
+    if (item.type!='POSTAGE_COUPON') {
+      count = count - 1
+    }
+    switch (count){
+      case 5:
+      className ='fiv-box';
+      break;
+      case 4:
+      className ='forth-box';
+      break;
+      case 3:
+        className ='third-box';
+        break;
+       case 2:
+        className ='double-box';
+       break; 
+       case 1:
+        className ='single-box';
+       break; 
+    }
+    return className
+  },
+}
+
+module.exports = {
+  height: filter.height,
+}

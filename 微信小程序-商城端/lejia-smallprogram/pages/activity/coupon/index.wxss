@@ -1,0 +1,62 @@
+/* pages/activity/coupon/index.wxss */
+#couponThree {
+  min-height: 100vh;
+  background-color: #fff;
+}
+body {
+  background: #fff;
+}
+.btn-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 750rpx;
+  height: 116rpx;
+
+}
+.btn-confirm {
+  margin: 10rpx 24rpx;
+  width: 702rpx;
+  height: 96rpx !important;
+  background: #47AB15 !important;
+  border-radius: 48rpx;
+  font-weight: 800;
+  font-size: 34rpx !important;
+  color: #FFFFFF !important;
+  border: 0 !important;
+}
+
+.pop_cover {
+  z-index: 1000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+#activity-result {
+  background: #F2F4F7;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 144rpx;
+  text-align: center;
+}
+.success_text {
+  margin-top: 32rpx;
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #0DAE4E;
+}
+
+.back-btn {
+  width: 430rpx;
+  height: 76rpx;
+  margin-top: 96rpx;
+  background: #0DAE4E;
+  font-size: 28rpx;
+}

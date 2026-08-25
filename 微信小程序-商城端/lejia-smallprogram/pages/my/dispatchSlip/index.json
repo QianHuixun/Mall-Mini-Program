@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "van-cell": "@vant/weapp/cell/index",
+        "van-field": "@vant/weapp/field/index",
+        "van-popup": "@vant/weapp/popup/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-picker": "@vant/weapp/picker/index"
+    },
+    "navigationBarTitleText": "填写发货单"
+}

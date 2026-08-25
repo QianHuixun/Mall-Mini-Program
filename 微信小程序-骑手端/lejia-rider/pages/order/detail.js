@@ -1,0 +1,114 @@
+// pages/order/detail.js
+import http from '../../utils/http'
+const app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    pkey:"",
+    inputModel:{},
+    orderLines:[]
+  },
+
+  /**获取数据 */
+  getData(pkey){
+    var _this = this;
+    var parameter = {
+      pkey: pkey
+    };
+   http.request({
+     method: "POST",
+     url: app.globalData.ajax_url + '/v1/app/courier/express/get',
+     data: parameter,
+     header: {
+       'content-type': 'application/x-www-form-urlencoded',
+       "openid": app.globalData.openid,
+     },
+     success: function (res) {
+      if (res.data.success) {
+        if (res.data.code == "999") {
+          wx.reLaunch({
+            url: '../login/index',
+          });
+          return;
+        };
+        if(res.data.success){
+          _this.setData({
+            inputModel: res.data.result,
+            orderLines: res.data.result.orderLines
+           });
+        }
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        });
+      }
+     },
+    })
+  },
+
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var pkey = options.pkey;
+    console.log(pkey, "pkey");
+    this.setData({
+      pkey: pkey
+    });
+    this.getData(pkey);
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})

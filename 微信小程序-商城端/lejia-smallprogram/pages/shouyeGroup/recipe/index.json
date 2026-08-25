@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "load-more":"/components/load-more/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-image": "@vant/weapp/image/index"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "菜谱套餐"
+}

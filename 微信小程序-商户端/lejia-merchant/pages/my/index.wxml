@@ -1,0 +1,129 @@
+<!-- 
+@url: pages/my/index.wxml
+@description: 我的
+@author: sx
+@date: 2020-07-29
+ -->
+<view id="my">
+    <!-- 头部 -->
+    <view class="top_container">
+        <view class="avatar_bar">
+            <view class="avatar_box">
+                <!--  bindtap="goEditInfo" -->
+                <view class="cell">
+                    <van-image wx:if="{{ !merchantInfo.headIcon }}" round width="60rpx" height="60rpx" src="/images/deafult_logo.png" />
+                    <van-image wx:else round width="60rpx" height="60rpx" src="{{merchantInfo.headIcon}}" />
+                </view>
+                <view class="cell flex_cell">
+                    {{merchantInfo.name}}
+                </view>
+            </view>
+            <van-image src="/images/my/logout.png" width="80rpx" height="80rpx" class="logout" bindtap="handleLogout" />
+        </view>
+        <view class="wallet_bar">
+            <view class="wallet_title" bindtap="goWallet">
+                <view class="wallet_title_left">我的钱包</view>
+                <van-image src="/images/my/i-arrow-right.png" width="64rpx" height="64rpx"></van-image>
+            </view>
+            <view class="wallet_number">
+                <view class="wallet_number_item">
+                    <view class="wallet_number_item__title">可提现余额(元)</view>
+                    <view class="wallet_number_item__number">
+                        <view class="money">{{walletAmt}}</view>
+                        <van-button type="info" bind:click="goWithdraw">提现</van-button>
+                    </view>
+                </view>
+                <view class="wallet_number_item">
+                    <view class="wallet_number_item__title">待结算(元)</view>
+                    <view class="wallet_number_item__number">
+                        <view class="money">{{settlementAmt}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 信息栏 -->
+    <view class="info_container">
+        <view class="info_container_title">
+            营业数据(元)
+        </view>
+        <view class="info_container__grid">
+            <view class="info_container__grid__item">
+                <view class="info_container__gird___name">今日收入</view>
+                <view class="info_container__gird___value">{{merchantInfo.amtToday}}</view>
+            </view>
+            <view class="info_container__grid__item">
+                <view class="info_container__gird___name">本月收入</view>
+                <view class="info_container__gird___value">{{merchantInfo.amtMonth}}</view>
+            </view>
+            <view class="info_container__grid__item">
+                <view class="info_container__gird___name">核销卡券</view>
+                <view class="info_container__gird___value">{{merchantInfo.useCardNum}}</view>
+            </view>
+            <view class="info_container__grid__item">
+                <view class="info_container__gird___name">积分收益</view>
+                <view class="info_container__gird___value">{{merchantInfo.points}}</view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 4个按钮 -->
+    <view class="btn_container">
+        <view class="btn_flex" wx:if="{{false}}">
+            <view class="btn_cell" bindtap="goOrder">
+                <view class="btn_cell__left">
+                    <van-icon name="/images/my/i-order.png" size="50rpx" custom-class="new-icon" />
+                </view>
+                <view class="btn_cell__right">
+                    订单查询
+                </view>
+            </view>
+        </view>
+        <view class="btn_cell" wx:if="{{merchantInfo.goodsManage}}"  bindtap="goGoodsManage">
+            <view class="btn_cell__left">
+                <van-icon name="/images/my/i-goods.png" size="48rpx" custom-class="new-icon" />
+            </view>
+            <view class="btn_cell__right">
+                商品管理
+            </view>
+        </view>
+        <view class="btn_cell" bindtap="goCancel">
+            <view class="btn_cell__left">
+                <van-icon name="/images/my/i-scan.png" size="48rpx" custom-class="new-icon" />
+            </view>
+            <view class="btn_cell__right">
+                扫码核销卡券
+            </view>
+        </view>
+
+        <view class="btn_cell" bindtap="goPoint">
+            <view class="btn_cell__left">
+                <van-icon name="/images/my/i-point.png" size="48rpx" custom-class="new-icon" />
+            </view>
+            <view class="btn_cell__right">
+                店铺积分消费查询
+            </view>
+        </view>
+
+        <view class="btn_cell" bindtap="goCancelRecord">
+            <view class="btn_cell__left">
+                <van-icon name="/images/my/i-card.png" size="48rpx" custom-class="new-icon" />
+            </view>
+            <view class="btn_cell__right">
+                卡券核销记录查询
+            </view>
+        </view>
+        <view class="btn_cell" bindtap="handleMessage" wx:if="{{false}}">
+            <view class="btn_cell__left">
+                <van-icon name="/images/my/i-info.png" size="48rpx" custom-class="new-icon" />
+            </view>
+            <view class="btn_cell__right">
+                消息推送
+            </view>
+        </view>
+
+    </view>
+</view>
+<van-dialog use-slot show="{{ show }}" show-cancel-button bind:confirm="onConfirm">
+    <view class="logout_text">是否确认退出</view>
+</van-dialog>

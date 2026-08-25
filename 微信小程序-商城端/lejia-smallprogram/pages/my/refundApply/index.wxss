@@ -1,0 +1,247 @@
+/* pages/my/refundApply/index.wxss */
+body {
+  background-color: #F2F4F7;
+}
+#refund_apply {
+  padding: 20rpx 24rpx 180rpx 24rpx;
+  min-height: 100vh;
+  background-color: #F2F4F7;
+}
+
+.goods_list_card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 24rpx 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.goods_list_card_main {
+  display: flex;
+  align-items: center;
+}
+
+.goods_list_card_main .goods_image_container van-image {
+  overflow: hidden;
+  height: 120rpx;
+  width: 120rpx;
+  display: block;
+  margin-right: 16rpx;
+}
+
+.goods_list_card_center {
+  flex: 1;
+}
+
+.goods_image_container {
+  position: relative;
+}
+
+.is_none {
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  border-radius: 16rpx;
+  font-weight: 400;
+  font-size: 26rpx;
+  color: #FFFFFF;
+}
+.goods_list_card_main>van-checkbox {
+  width: 76rpx;
+}
+
+.custom-radio .van-checkbox__icon-wrap {
+  padding: 12rpx;
+}
+
+.custom-radio .van-checkbox__icon--checked {
+  background: #0DAE4E;
+  border-color: #0DAE4E !important;
+}
+
+.goods_list_card_center__title {
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 46rpx;
+}
+
+.goods_list_card_center__space {
+  font-weight: 400;
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 26rpx;
+}
+
+.goods_list_card_center__price {
+  margin-top: 12rpx;
+  font-weight: 400;
+  font-weight: bold;
+  font-size: 24rpx;
+  color: #333333;
+  line-height: 28rpx;
+}
+
+.goods_list_card_center__price.xiaoji {
+  display: inline-block;
+  height: 40rpx;
+  background: #F7F7F7;
+  border-radius: 40rpx;
+  line-height: 40rpx;
+  padding: 0 14rpx;
+  font-weight: 400;
+  font-size: 22rpx;
+  color: #333333;
+  margin-top: 42rpx;
+}
+
+.color_price {
+  font-weight: bold;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.color_red {
+  color: #ED4528;
+}
+
+.goods_list_card_right {
+  height: 120rpx;
+  padding-right: 12rpx;
+}
+
+
+.goods_list_card_right .space-stepper{
+  white-space: nowrap;
+}
+
+.goods_list_card_right .space-stepper_minus{
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #999999;
+}
+
+ .goods_list_card_right .space-stepper_plus,
+ .goods_list_card_right .space-stepper_minus {
+  width:50rpx;
+  height: 50rpx;
+  position: relative;
+}
+
+.goods_list_card_right .space-stepper_plus {
+  border-radius: 50%;
+  background: #0DAE4E;
+  border: 1px solid #0DAE4E;
+  color: #fff;
+
+}
+
+.goods_list_card_right .space-stepper_minus{
+  border-color: #0DAE4E;
+  color: #0DAE4E;
+}
+
+.goods_list_card_right .space-stepper_input {
+  background: #fff;
+  color: #333333;
+  height: 36rpx;
+  width: 52rpx;
+  line-height: 36rpx;
+  padding: 0;
+}
+.van-stepper .van-stepper__minus--disabled,.van-stepper .van-stepper__plus--disabled {
+  border-color: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
+  color: #cccccc !important;
+}
+
+.goods_residue {
+  font-weight: 400;
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 28rpx;
+  text-align: right;
+  margin-top: 12rpx;
+}
+
+.goods_list_card_subItem {
+  margin-top: 24rpx;
+  margin-left: 30rpx;
+}
+
+.goods_list_card_subItem .goods_list_card_main .goods_image_container van-image,
+.goods_list_card_subItem .is_none {
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+
+.goods_list_card_subItem .goods_list_card_right {
+  height: 90rpx;
+}
+
+.goods_list_card_subItem  .goods_list_card_center__price {
+  margin-top: 22rpx;
+}
+
+.goods_list_card_subItem .goods_list_card_main:not(:first-child) {
+  margin-top: 16rpx;
+}
+
+.refund_tips {
+  width: 100%;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #FFF9F0;
+  font-weight: 500;
+  font-size: 26rpx;
+  color: #EB8F0B;
+  position: fixed;
+  left: 0;
+  bottom: 184rpx;
+  padding-left: 24rpx;
+}
+
+.refund_button {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 184rpx;
+  display: flex;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20rpx 24rpx 88rpx 24rpx;
+  border-top: 1px solid #F0F0F0;
+}
+
+.refund_button .refund_button_left {
+  flex: 1;
+}
+
+.refund_button_right {
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #333333;
+  display: flex;
+  align-items: center;
+}
+
+.refund_button_right .refund_price {
+  margin-right: 16rpx;
+  font-weight: bold;
+  font-size: 40rpx;
+  color: #ED4528;
+}
+
+.refund_button_right .van-button {
+  width: 200rpx;
+  font-weight: bold;
+  font-size: 30rpx;
+  color: #FFFFFF;
+}

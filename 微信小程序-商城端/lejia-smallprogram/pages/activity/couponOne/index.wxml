@@ -1,0 +1,36 @@
+<!--pages/activity/couponOne/index.wxml-->
+<view id="couponOne">
+  <view class="coupon-head">
+    <van-image src="{{imgUrl +'coupon-head.png'}}" width="750rpx" height="814rpx"></van-image>
+  </view>
+  <view class="coupon-card">
+    <van-image src="{{imgUrl +'coupon-card.png'}}" width="702rpx" height="410rpx"></van-image>
+    <view class="coupon-icon" bindtap="showNotice">
+      <van-image src="/images/activity/couponOne/coupon-icon.png" width="140rpx" height="48rpx"></van-image>
+    </view>
+  </view>
+  <view class="btn-bar">
+    <van-button custom-class="btn-confirm" round bind:click="goPay">￥1购买</van-button>
+  </view>
+   
+  <view class="notice_coupon" wx:if="{{show}}">
+    <view class="notice_title">
+      活动须知
+      <van-icon name="close" size="48rpx" color="#fff" bind:tap="handleClose"/>
+    </view>
+    <view class="notice_cell">
+      <view class="notice_cell_left">有效期</view>
+      <view class="notice_cell_right">2024年4月30日止</view>
+    </view>
+    <view class="notice_cell">
+      <view class="notice_cell_left">使用规则</view>
+      <view class="notice_cell_right">全场通用，每天限用1张</view>
+    </view>
+    <view class="notice_tips">
+      * 活动期间线上买菜订单，免费加赠“星级代买服务”，由菜场经验丰富的“买手”（市场管理人员）代为选菜、打包，品质保障、售后无忧
+    </view>
+  </view>
+  <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

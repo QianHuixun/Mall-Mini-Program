@@ -1,0 +1,112 @@
+/* pages/shouyeGroup/shareZone/index.wxss */
+#shareZone swiper {
+  background-color: #fafafa;
+  height: calc( 100vw * 0.4266 );
+}
+
+#shareZone swiper swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #ffc428;
+  display: block;
+  text-align: center;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.item {
+  margin-top: 24rpx;
+  display: flex;
+  height: 240rpx;
+  align-items: flex-start;
+}
+
+.item-right {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2rpx solid #d9d9d9;
+  justify-content: space-between;
+  font-size: 28rpx;
+}
+
+.item-title {
+  font-size: 28rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item-center{
+  display: flex;
+  align-items: baseline;
+}
+
+.item-center-one{
+  font-size: 28rpx;
+}
+
+.item-center-two{
+  font-size: 28rpx;
+  color: #f24539;
+}
+
+.item-center-three{
+  font-size: 40rpx;
+  color: #f24539;
+}
+
+.item-bottom{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.item-bottom-left{
+  width: 220rpx;
+  height: 50rpx;
+  position: relative;
+}
+
+.item-bottom-left-title{
+  position: absolute;
+  left: 12rpx;
+  top: 7rpx;
+  color: #ffc428;
+  font-size: 24rpx;
+}
+
+.item-bottom-left-num{
+  position: absolute;
+  right: 12rpx;
+  top: 7rpx;
+  color: #5c5c5c;
+  font-size: 24rpx;
+}
+
+#shareZone .btn{
+  height: 57rpx;
+  padding: 0 18rpx;
+  margin-right: 28rpx;
+  line-height: 57rpx;
+  font-size: 23rpx;
+  background: #f24539;
+  color: #fff;
+  border: 0;
+}
+
+#shareZone .btn text {
+  font-size: 28rpx;
+}
+
+.item-bottom .gray_clr {
+  font-size: 28rpx;
+}

@@ -1,0 +1,76 @@
+/* pages/activity/result/index.wxss */
+#activity-result {
+  background: #F2F4F7;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 144rpx;
+  text-align: center;
+}
+.success_text {
+  margin-top: 32rpx;
+  font-weight: bold;
+  font-size: 32rpx;
+  color: #0DAE4E;
+}
+
+.back-btn {
+  width: 430rpx;
+  height: 76rpx;
+  margin-top: 96rpx;
+  background: #0DAE4E;
+  font-size: 28rpx;
+}
+
+.coupon_box {
+  background: #fff;
+  border-radius: 24rpx;
+  margin: 0 24rpx;
+  padding: 24rpx;
+  margin-top: 36rpx;
+  display: flex;
+}
+
+.coupon_box_left {
+  width: 190rpx;
+  height: 152rpx;
+  padding: 18rpx 0;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient( 90deg, #FF9E1D 0%, #FDB32F 100%);
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+  margin-right: 24rpx;
+}
+
+.coupon_box_left__price {
+  font-weight: bold;
+  font-size: 60rpx;
+  line-height: 72rpx;
+}
+
+.coupon_box_left__price text {
+  font-weight: 400;
+  font-size: 32rpx;
+}
+
+.coupon_box_left__tips {
+  font-weight: 400;
+  font-size: 22rpx;
+  line-height: 26rpx;
+}
+
+.coupon_box_right {
+  flex: 1;
+  text-align: left;
+}
+
+.coupon_box_right__title {
+  height: 114rpx;
+  line-height: 42rpx;
+}
+
+.coupon_box_right__date {
+  font-weight: 500;
+  font-size: 24rpx;
+  color: #999999;
+}

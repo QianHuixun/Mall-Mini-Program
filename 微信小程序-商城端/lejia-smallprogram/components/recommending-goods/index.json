@@ -1,0 +1,9 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-icon": "@vant/weapp/icon/index",
+        "van-image": "@vant/weapp/image/index",
+        "load-more":"/components/load-more/index",
+        "space-dialog":"/components/space/index"
+    }
+}

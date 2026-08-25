@@ -1,0 +1,172 @@
+/* components/jd-specs/index.wxss */
+.specs {
+    position: relative;
+    min-height: 400rpx;
+    padding: 30rpx;
+}
+
+.popup-close {
+    position: absolute;
+    top: 30rpx;
+    right: 30rpx;
+}
+
+.specs-selected {
+    display: flex;
+}
+
+.specs-selected-image {
+    width: 210rpx;
+    height: 210rpx;
+    margin-right: 10rpx;
+    background: #D8D8D8;
+    border-radius: 10rpx;
+}
+
+.specs-selected-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.specs-selected-info__amt {
+    font-family: PingFangSC, PingFang SC;
+    font-size: 52rpx;
+    color: #FA2C19;
+}
+
+.specs-selected-info__number {
+    font-size: 24rpx;
+    color: #8C8F97;
+}
+
+.specs-selected-info_count {
+    display: flex;
+    align-items: center;
+}
+
+.specs-selected-info_count__lowest {
+    font-size: 28rpx;
+    margin-left: 12rpx;
+    color: #FA2C19;
+}
+
+.specs-selected-info .stepper-btn {
+    width: 56rpx;
+    height: 56rpx;
+}
+.specs .specs-selected-info .stepper-plus-btn, .specs .specs-selected-info .stepper-minus-btn {
+    padding: 0;
+    background-color: #FFFFFF !important;
+}
+
+.van-stepper__input {
+    background-color: #fff;
+}
+
+.specs-view {
+    margin-top: 40rpx;
+}
+
+.specs-title {
+    font-size: 26rpx;
+    color: #333333;
+}
+
+.specs-items-view {
+    margin-top: 20rpx;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.specs-item {
+    width: 216rpx;
+    /* height: 304rpx; */
+    flex-shrink: 0;
+    margin-bottom: 16rpx;
+    background: #F7F8FC;
+    border-radius: 16rpx;
+    overflow: hidden;
+    border: 2rpx solid #F7F8FC;
+}
+
+.specs-item.selected {
+    border: 2rpx solid #09AF84;
+}
+
+.specs-item+.specs-item {
+    margin-left: 15rpx;
+}
+
+.specs-item:nth-child(3n + 1) {
+    margin-left: 0;
+}
+
+.specs-item-image {
+    width: 220rpx;
+    height: 220rpx;
+    background: #D8D8D8;
+}
+
+.specs-item-name {
+    width: 220rpx;
+    padding: 8rpx 16rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 32rpx;
+    font-size: 24rpx;
+    color: #333333;
+    box-sizing: border-box;
+}
+
+.specs-item.selected .specs-item-name {
+    color: #09AF84;
+    background: rgba(9, 175, 132, 0.1);
+}
+
+.specs-version-title {
+    font-weight: 500;
+    font-size: 26rpx;
+    color: #333333;
+}
+
+.specs-version-items__view {
+    margin-top: 20rpx;
+}
+
+.specs-version-item {
+    width: fit-content;
+    padding: 20rpx 22rpx 18rpx;
+    background: #F7F8FC;
+    border-radius: 8rpx;
+    font-size: 22rpx;
+    color: #333333;
+    border: 2rpx solid #F7F8FC;
+}
+
+.specs-version-item.selected {
+    color: #09AF84;
+    border: 2rpx solid #09AF84;
+    background: rgba(9, 175, 132, 0.1);
+}
+
+.specs-version-item + .specs-version-item {
+    margin-top: 12rpx;
+}
+
+.footer {
+    padding: 16rpx;
+    border-top: 1px solid #EDEDED;
+}
+
+.footer .footer-button {
+    background: #09AF84;
+    border-radius: 12rpx;
+    font-size: 32rpx;
+    color: #FFFFFF;
+    font-family: PingFangSC, PingFang SC;
+}

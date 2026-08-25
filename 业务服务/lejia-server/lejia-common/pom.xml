@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <artifactId>lejia-common</artifactId>
+  <packaging>jar</packaging>
+  
+  <parent>
+    <groupId>cn.tofocus.lejia</groupId>
+    <artifactId>lejia</artifactId>
+    <version>4.2.20.Dev-SNAPSHOT</version>
+  </parent>
+  
+  
+ 
+  <dependencies>
+	<dependency>
+  		<groupId>cn.tofocus</groupId>
+  		<artifactId>tfcloud-spring-common</artifactId>
+  	</dependency>
+	<dependency>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-excel</artifactId>
+	</dependency>
+<!-- 	<dependency>
+		<groupId>com.fasterxml.jackson.dataformat</groupId>
+		<artifactId>jackson-dataformat-xml</artifactId>
+	</dependency> -->
+  </dependencies>
+</project>

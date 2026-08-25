@@ -1,0 +1,13 @@
+<!--pages/my/problem/index.wxml-->
+<view class="problem">
+  <van-cell
+    title="{{item.name}}"
+    is-link
+    header-class="new-panel"
+    wx:for="{{list}}"
+    wx:key="pkey"
+    bind:click="goProblemDetail"
+    data-item="{{item}}"
+  >
+  </van-cell>
+</view>

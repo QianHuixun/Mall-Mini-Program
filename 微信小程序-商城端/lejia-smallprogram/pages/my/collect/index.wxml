@@ -1,0 +1,133 @@
+<!-- 
+@url: pages/my/collect/index.wxml
+@description: 我的收藏
+@author: sx
+@date: 2020/07/21
+ -->
+<view id="collect">
+	<van-tabs active="{{ active }}" sticky line-width="48rpx" color="#0DAE4E" title-inactive-color="#666666" title-active-color="#0DAE4E" bind:click="onChange">
+		<van-tab title="{{'商品' + '(' + numData.goodsNum +')'}}" name="1">
+			<view class="tab_content goods_content">
+				<view class="list_contaner">
+					<!-- <block wx:if="{{goodsData.length == 0 }}">
+            <view class="no_tips">暂无记录</view>
+          </block> -->
+					<block wx:for="{{goodsData}}" wx:key="index" wx:if="goodsData.length > 0">
+						<van-swipe-cell id="swipe-cell" right-width="{{ 60 }}" left-width="{{ 0 }}">
+							<van-cell-group>
+								<van-cell>
+									<view slot="title">
+										<view class="wx-cell">
+											<view class="wx-left">
+											
+												<image src="{{ item.photo || '/images/no-pic.png'}}" class="photo"></image>
+											</view>
+											<view class="wx-right">
+												<view class="wx-title">
+													<view class="icon-type">
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'POVERTY_ALLEVIATION_GOODS'}}">扶贫</van-tag>
+														<!-- <van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'MEMBER_GOODS'}}">会员</van-tag> -->
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SPECIAL_GOODS'}}">特价</van-tag>
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'SHARE_GOODS'}}">分享</van-tag>
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'CUT_GOODS'}}">砍价</van-tag>
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'COLLAGE_GOODS'}}">团购</van-tag>
+														<van-tag color="#f86166" plain round text-color="#f86166" wx:if="{{item.mtype == 'PRESALE_GOODS'}}">预售</van-tag>
+													</view>{{item.name}}
+												</view>
+
+												<view class="wx-active">
+													<view class="wx-price">￥{{ item.price }}</view>
+													<view class="wx-action">
+														<van-icon name="add" wx:if="{{item.mtype !== 'INTEGRAL_PRESALE_GOODS'}}" data-pkey="{{item.objKey}}" data-space="{{item.goodsSpace}}" bindtap="getSpaceNumber" size="24" color="#3ccf8a" />
+													</view>
+												</view>
+											</view>
+										</view>
+									</view>
+								</van-cell>
+							</van-cell-group>
+							<view slot="right" class="van-swipe-cell__right">
+								<van-button type="danger" data-pkey="{{item.pkey}}" data-index="{{ index }}" bindtap="handleDelete">删除</van-button>
+							</view>
+						</van-swipe-cell>
+					</block>
+				</view>
+			</view>
+		</van-tab>
+		<van-tab title="{{'摊位' + '(' + numData.boothNum +')'}}" name="2">
+			<view class="tab_content booth_content">
+				<view class="list_contaner">
+					<view wx:for="{{boothData}}" wx:key="index" wx:if="boothData.length > 0">
+						<van-swipe-cell id="swipe-cell" right-width="{{ 60 }}" left-width="{{ 0 }}">
+							<van-cell-group>
+								<van-cell data-pkey="{{ item.objKey }}" bindtap="handleBoothClick">
+									<view slot="title" class="merchant_list">
+										<van-image src="{{item.photo||'/images/classification/merchant-noPic.png'}}" custom-class="merchant_photo" data-index="{{index}}" />
+                    <view class="merchant_detail">
+                        <view class="title">
+                          <!-- <van-image width="52rpx" height="36rpx" src="/images/i-shop.png"></van-image> -->
+                          {{item.name}}
+                        </view>
+                        <view class="stall">摊位号：{{item.booth}}</view>
+                        <view class="sales_volume">
+                          <van-image width="40rpx" height="38rpx" src="/images/classification/i-fire.png"></van-image>销量:{{item.xsNum}}
+                        </view>
+                  </view>
+									</view>
+								</van-cell>
+							</van-cell-group>
+							<view slot="right" class="van-swipe-cell__right">
+								<van-button type="danger" data-pkey="{{item.pkey}}" data-index="{{ index }}" bindtap="handleDelete">删除</van-button>
+							</view>
+						</van-swipe-cell>
+					</view>
+				</view>
+			</view>
+		</van-tab>
+		<van-tab title="{{'菜谱' + '(' + numData.cookfdNum +')'}}" name="0">
+			<view class="tab_content goods_content">
+				<view class="list_contaner">
+					<!-- <block wx:if="{{menuData.length == 0 }}">
+            <view class="no_tips">暂无记录</view>
+          </block> -->
+					<view wx:for="{{menuData}}" wx:key="index" wx:if="menuData.length > 0">
+						<van-swipe-cell id="swipe-cell" right-width="{{ 60 }}" left-width="{{ 0 }}">
+							<van-cell-group>
+								<van-cell data-pkey="{{ item.objKey }}" bindtap="handleClick">
+									<view slot="title">
+										<view class="wx-cell">
+											<view class="wx-left">
+												<image src="{{ item.photo }}" class="photo"></image>
+											</view>
+											<view class="wx-right">
+												<view class="wx-title">{{item.name}}</view>
+												<view class="wx-active">
+													<van-icon name="like" color="red" size="18" />
+													<text class="mar_l_8">{{ item.collCount }}</text>
+												</view>
+											</view>
+											<van-icon name="arrow" size="18" color="#ddd" custom-style="arrow" />
+										</view>
+									</view>
+								</van-cell>
+							</van-cell-group>
+							<view slot="right" class="van-swipe-cell__right">
+								<van-button type="danger" data-pkey="{{item.pkey}}" data-index="{{ index }}" bindtap="handleDelete">删除</van-button>
+							</view>
+						</van-swipe-cell>
+					</view>
+				</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+	<!-- 加入购物车 动画效果 -->
+	<!-- <go-cart id="goCartView" isIcon="{{ true }}"></go-cart> -->
+	<!-- 加载更多数据 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<!-- 规格选择弹出层 -->
+	<space-dialog id="spaceView" isShow="{{ isShow }}" isIcon="{{ true }}" bind:addCart="handleAddTOCart"
+	isbindAddCart="{{true}}"></space-dialog>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

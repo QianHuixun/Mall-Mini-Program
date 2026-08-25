@@ -1,0 +1,67 @@
+<!--pages/my/pickupWhiteOff/index.wxml-->
+<view class="" wx:if="{{isError}}">
+  <view class="card-error" wx:if="{{isError}}">
+    <van-icon name="clear" size="80rpx" color="#666666"/>
+    <view class="card-error-msg">
+      {{errorMsg}}
+    </view>
+  </view>  
+</view>
+<view class="verification" wx:else>
+    <view class="header">
+        <view class="header-cell">
+            <view class="code">{{orderInfo.pickupCode}}</view>
+            <view class="status {{orderInfo.pickupFlag ? 'success' : 'unsuccess'}}" wx:if="{{orderInfo.status !== 'REFUNDED_ORDER'}}">{{orderInfo.pickupFlag ? '已核销' : '未核销'}}</view>
+        </view>
+        <view class="header-cell">
+            自提人：{{orderInfo.addr.name}} {{orderInfo.addr.mobile}}
+        </view>
+        <view class="header-cell">
+            自提时间：{{orderInfo.pstime}}
+        </view>
+    </view>
+    <!-- 商品栏 -->
+    <view class="goods_cell">
+        <view class="goods_cell_title">
+          {{orderInfo.farmerName}}
+        </view>
+        <view class="goods-list">
+            <view class="goods-list_item" wx:for="{{orderInfo.infos}}">
+                <view class="goods-list_item__left">
+                    <van-image width="140rpx" height="140rpx" radius="16rpx" src="{{ item.photo ||'/images/no-pic.png' }}"></van-image>
+                </view>
+                <view class="goods-list_item__right">
+                    <view class="goods-list_item__title">{{item.goodsName}}</view>
+                    <view class="goods-list_item__space">规格:{{item.spaceName}}</view>
+                </view>
+                <view class="goods-list_item__num">x {{item.num}}</view>
+                <view class="goods-list_item__refund" wx:if="{{item.refundAmt}}">已退 ¥{{item.refundAmt}}</view>
+            </view>
+        </view>
+    </view>
+    <!-- 订单信息 -->
+    <view class="order_cell">
+        <view class="order_cell_title">
+            订单信息
+        </view>
+        <view class="order_cell_cont">
+            <view class="order_cell_cell">
+                <view class="order_cell_cell__label">订单编号</view>
+                <view class="order_cell_cell__value">{{orderInfo.code}}</view>
+            </view>
+            <view class="order_cell_cell">
+                <view class="order_cell_cell__label">下单时间</view>
+                <view class="order_cell_cell__value">{{orderInfo.createdTime}}</view>
+            </view>
+            <view class="order_cell_cell">
+                <view class="order_cell_cell__label">备注信息</view>
+                <view class="order_cell_cell__value">{{orderInfo.remark || ''}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="footer" wx:if="{{!orderInfo.pickupFlag}}">
+      <view class="footer-button disabled" wx:if="{{orderInfo.status === 'REFUNDED_ORDER'}}">订单已退款</view>
+      <view class="footer-button" wx:else bind:tap="handleWriteOff">确认核销</view>
+    </view>
+</view>
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>

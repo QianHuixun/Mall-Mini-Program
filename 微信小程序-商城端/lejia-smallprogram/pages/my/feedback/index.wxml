@@ -1,0 +1,21 @@
+<!--pages/my/feedback/index.wxml-->
+<view id="feedback">
+	<view class="title">问题描述</view>
+	<view class="lj-field-box">
+		<van-field value="{{ message }}" label="" type="textarea" placeholder="请填写反馈，我们将尽快回复" autosize="{{ true }}" border="{{ false }}" maxlength="200" show-word-limit bindinput="changeMessage" />
+		<view class="wechat">
+			<van-image wx:if="{{wxchatAccount.wechatCode}}"  catchlongtap="handleSaveImage" width="130px" height="130px" src="{{wxchatAccount.wechatCode}}"></van-image>
+			<div wx:if="{{wxchatAccount.wechatCode}}"  class="code-label">长按保存图片添加好友</div>
+			<div wx:if="{{wxchatAccount.wechatNum}}" class="label">客服微信：{{wxchatAccount.wechatNum}}</div>
+			<div wx:if="{{wxchatAccount.tel}}" class="label">客服联系电话：<text class="phone" catchtap="handlePhone">{{wxchatAccount.tel}}</text></div>
+		</view>
+	</view>
+
+	<!-- <textarea placeholder="请填写反馈，我们将尽快回复" value='{{message}}' fixed='true'  maxlength="150" class="box_text" placeholder-class="t_color" ></textarea> -->
+	<view class="btn-div">
+		<van-button round type="primary" custom-class="lj-new-button" block color="#4dce78" disabled="{{ disabled }}" loading="{{ loading }}" bind:click="subClick">提交</van-button>
+	</view>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

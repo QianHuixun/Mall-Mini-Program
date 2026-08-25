@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "load-more":"../../../components/load-more/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "navigationBarTitleText": "订单明细"
+}

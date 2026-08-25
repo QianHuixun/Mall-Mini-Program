@@ -1,0 +1,36 @@
+/* pages/my/info/index.wxss */
+.avatar-wrapper {
+  width: fit-content;
+  padding: 0;
+  margin: 0;
+  float: right;
+  box-shadow: none;
+  background: transparent;
+}
+
+.avatar-wrapper::after{
+  border: none;
+}
+
+.van-cell {
+  align-items: center;
+}
+
+.van-image--round {
+  display: block;
+  float: right;
+}
+.van-field--input{
+  text-align: right !important;
+  color: #969799 !important;
+}
+/*下拉弹窗填写银行账户*/
+.pop-tit{
+  text-align: center;
+  padding:16px 20px
+}
+.pop-btn{
+  margin: 40rpx auto;
+  width: 90% !important;
+}
+/*end 下拉弹窗填写银行账户*/

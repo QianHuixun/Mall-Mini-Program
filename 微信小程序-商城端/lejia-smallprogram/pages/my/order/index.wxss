@@ -1,0 +1,262 @@
+/* pages/my/order/index.wxss */
+page {
+  background: #f6f6f6;
+}
+
+#order .van-tabs__wrap,
+#order .van-sticky {
+  position: fixed;
+  width: 100%;
+}
+
+.tab_content {
+  margin: 108rpx 10rpx 20rpx 10rpx;
+}
+
+#order .van-tabs__line {
+  width: 48rpx !important;
+  height: 6rpx !important;
+  height: var(--tabs-bottom-bar-height, 6rpx) !important;
+  border-radius: 6rpx !important;
+  border-radius: var(--tabs-bottom-bar-height, 6rpx) !important;
+  background-color: #0DAE4E;
+  background-color: var(--tabs-bottom-bar-color, #0DAE4E);
+}
+
+#order .van-tab {
+  color: #666;
+  font-size: 30rpx;
+}
+
+#order .van-tab--active {
+  color: #0DAE4E;
+  font-size: 30rpx;
+}
+.card_list {
+  margin-top: 110rpx;
+}
+
+.card_cell {
+  background: #fff;
+  margin: 0  24rpx 20rpx 24rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.card_title {
+  padding: 20rpx  24rpx  0 24rpx;
+  font-size: 26rpx; 
+}
+.color_gray {
+  color: #999999;
+}
+
+.color_red {
+  color: #ED4528;
+}
+
+.color_orange {
+  color: #EB8F0B;
+}
+
+.color_green {
+  color: #0DAE4E;
+}
+.card_refund {
+  height: 64rpx;
+  background: #F8F8F8;
+  border-radius: 8rpx;
+  line-height: 64rpx;
+  margin: 0 24rpx 24rpx 24rpx;
+  padding-left: 24rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.card_footer {
+  padding: 0 24rpx 24rpx 24rpx;
+  font-size: 26rpx; 
+}
+
+
+.card_title,
+.card_footer {
+  display: flex;
+  align-items: center;
+}
+
+.card_footer .card_r .van-button.new_btn {
+  border-radius: 32rpx;
+  height: 64rpx;
+  overflow: hidden;
+  padding: 0  36rpx;
+  margin-left: 16rpx;
+}
+.card_footer .card_r .van-button.van-button--primary  {
+  background-color: #0DAE4E;
+}
+
+.card_footer .card_r .van-button.van-button--primary.van-button--plain {
+  background:#fff;
+  border-color: #0DAE4E;
+}
+
+.card_goods_list {
+  padding: 10rpx 0;
+  display: flex;
+}
+
+.card_title .card_l,
+.card_footer .card_l {
+  flex: 1;
+}
+
+.card_icon .tag {
+  text-align: center;
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+}
+
+.card_icon .tag-green {
+  color: #0DAE4E;
+  background: rgba(13, 174, 78, 0.1);
+}
+
+.card_icon .tag-orange {
+  color: #EB8F0B;
+  background: rgba(235, 143, 11, 0.1);
+}
+
+.card_icon .tag-purple {
+    color: #D51D7F;
+    background: rgba(213,29,127, 0.1);
+  }
+
+#order .card_title .card_l {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+#order .card_con {
+  position: relative;
+  width: 655rpx;
+  padding: 24rpx 24rpx 0 24rpx;
+  overflow: hidden;
+}
+
+#order .card_c_specs {
+  margin-top: 8rpx;
+  color: #999999;
+  font-size: 24rpx;
+}
+
+#order .card_goods_list_multi {
+  height: 120rpx;
+  width: 1500rpx;
+}
+
+#order .card_goods_amt {
+  position: absolute;
+  right: 0;
+  top: 24rpx;
+  width: 168rpx;
+  height: 120rpx;
+  padding-right: 24rpx;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: right;
+}
+#order .card_goods_amt .card_goods_amt_price {
+  padding-top: 22rpx;
+  font-size: 28rpx;
+  line-height: 36rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+#order .card_goods_amt .card_goods_amt_num {
+  font-size: 26rpx;
+  color: #999999;
+  line-height: 36rpx;
+}
+
+.card_goods_list_multi .goods_image  {
+  margin-right: 12rpx;
+}
+
+.card_good_list:last-child {
+  border: 0;
+}
+
+.card_good_list .goods_image,
+.card_goods_list_multi .goods_image  {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.card_goods_list .card_c {
+  flex: 1;
+  font-size: 28rpx;
+  margin-right: 16rpx;
+  margin-top: 8rpx;
+  line-height: 36rpx;
+}
+
+.card_goods_list .card_r {
+  padding-top: 22rpx;
+  font-size: 26rpx;
+  text-align: right;
+
+}
+
+.card_cell .card_date {
+  color: #999999;
+  font-size: 26rpx;
+  padding: 16rpx 24rpx 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+  line-height: 50rpx;
+}
+
+.card_cell .card_date .card_date_left {
+  flex: 1;
+}
+
+.card_cell .card_date .card_date_right {
+  color: #333333;
+  font-size: 26rpx;
+}
+
+.card_cell .card_date .card_date_right .code_green {
+  color: #0DAE4E;
+  font-size: 36rpx;
+  margin-left: 8rpx;
+  float:right;
+}
+
+.card_goods_list .card_r .price_clr {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 36rpx;
+}
+.card_goods_list .card_r .gray_clr {
+  color: #999999;
+  line-height: 36rpx;
+  font-size: 26rpx;
+}
+
+.card_goods_list .van-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  display: block;
+  margin-right: 16rpx;
+}
+
+.no_tips {
+  padding: 120rpx 0;
+}

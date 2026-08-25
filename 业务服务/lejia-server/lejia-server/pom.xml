@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- 子项目名称 -->
+	<artifactId>lejia-server</artifactId>
+	<!-- 项目打包类型 -->
+	<packaging>jar</packaging>
+	<!-- 项目版本 -->
+	<version>4.2.20.Dev-SNAPSHOT</version>
+	<description>SAAS云商城微服务</description>
+	<!-- 引用父级项目公共POM配置 -->
+<!-- 	<parent>
+		<groupId>cn.tofocus.lejia</groupId>
+		<artifactId>lejia</artifactId>
+		<version>4.2.1.Dev-SNAPSHOT</version>
+	</parent> -->
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-boot</artifactId>
+		<version>3.5.15.Dev-SNAPSHOT</version>
+		<relativePath />
+	</parent>
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+		<!-- 百度富文本框引入 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.assembly.output>../distribution/server</maven.assembly.output>
+		<lejia.version>4.2.20.Dev-SNAPSHOT</lejia.version>
+	</properties>
+
+	<dependencies>
+		<!-- 云平台依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-distributed-cache</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-account-api</artifactId>
+		</dependency>
+		
+		<!-- <dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-distributed-cache</artifactId>
+			<version>2.5.0.Dev-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		
+
+		<!-- 云平台依赖 结束 -->
+
+		<!-- 对外接口项目引用 -->
+		<dependency>
+			<groupId>cn.tofocus.lejia</groupId>
+			<artifactId>lejia-server-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.tofocus.lejia</groupId>
+			<artifactId>lejia-core</artifactId>
+		</dependency>
+
+		<!-- excel相关jar包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tencent</groupId>
+			<artifactId>wxpay-scanpay-java-sdk</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.directory.studio</groupId>
+			<artifactId>org.apache.commons.collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-mp-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-excel</artifactId>
+		</dependency>
+		<!-- junit测试环境 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- 微信支付V3接口依赖 -->
+		<dependency>
+  			<groupId>com.github.wechatpay-apiv3</groupId>
+ 			<artifactId>wechatpay-java</artifactId>
+  			<version>0.2.7</version>
+		</dependency>
+		<dependency>
+  			<groupId>com.squareup.okhttp3</groupId>
+   			<artifactId>okhttp</artifactId>
+   			<version>3.9.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>2.3.2</version>
+		</dependency> 
+		<!-- 中信e管家 接口对接 -->
+		<!-- <dependency> <groupId>zx.bcmail</groupId> <artifactId>zx.bcmail</artifactId> 
+			<version>1.45</version> </dependency> <dependency> <groupId>zx.bcprov</groupId> 
+			<artifactId>zx.bcprov</artifactId> <version>1.45</version> <exclusions> <exclusion> 
+			<groupId>org.bouncycastle</groupId> <artifactId>bcprov-jdk14</artifactId> 
+			</exclusion> </exclusions> </dependency> <dependency> <groupId>zx.cncbcryptoPkg</groupId> 
+			<artifactId>zx.cncbcryptoPkg</artifactId> <version>1.45</version> </dependency> -->
+		<dependency>
+			<groupId>zx.commons</groupId>
+			<artifactId>zx.commons</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+
+		<!-- 中信支付 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcmail</artifactId>
+			<version>1.45</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/bcmail-jdk14-145.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk14</artifactId>
+			<version>145</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/bcprov-jdk14-145.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>CNCBCryptoPkg</groupId>
+			<artifactId>CNCBCryptoPkg</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/CNCBCryptoPkg.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.citicbank</groupId>
+			<artifactId>cryppkg</artifactId>
+			<version>1.12</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/cryppkg-1.12.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>cfca.common</groupId>
+			<artifactId>SADK-ECITIC</artifactId>
+			<version>3.0.0.2</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/SADK-CITICBANK-3.0.0.2-1.0.0.jar</systemPath>
+		</dependency>
+
+		<!-- 农商支付 -->
+		<dependency>
+			<groupId>oip-gateway</groupId>
+			<artifactId>oip-gateway</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${pom.basedir}/src/main/resources/lib/oip-gateway-server-sdk-1.0.0-SNAPSHOT.jar</systemPath>
+		</dependency>
+
+		<!-- 通联商务支付 -->
+		<dependency>
+			<groupId>com.chinaums.open</groupId>
+			<artifactId>open-api-sdk</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- 京东VOP支付 -->
+		<dependency>
+			<groupId>com.jd.open.api</groupId>
+			<artifactId>open-api-sdk</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>7.2.1</version>
+		</dependency>
+		
+<!-- 		
+		<dependency>
+			<groupId>cn.tofocus.farmMarket</groupId>
+			<artifactId>farmMarket-member-api</artifactId>
+			<version>1.2.1.saas.Dev-SNAPSHOT</version>
+		</dependency> -->
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>testLog</id>
+			<dependencies>
+				<dependency>
+					<groupId>cn.tofocus</groupId>
+					<artifactId>tfcloud-server-log</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<!-- 打包可执行jar包 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>src/main/assemble/package.xml</descriptor>
+					</descriptors>
+					<outputDirectory>../distribution</outputDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>cn.tofocus.lejia</groupId>
+				<artifactId>lejia</artifactId>
+				<version>${lejia.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+</project>

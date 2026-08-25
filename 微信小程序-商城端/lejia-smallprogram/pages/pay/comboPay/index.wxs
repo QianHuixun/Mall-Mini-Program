@@ -1,0 +1,13 @@
+var filter = {
+ /**
+   * @desc 保留两位小数 
+   * @param value 数字
+   */
+  formatValue: function (value) {
+    return value!=null?value.toFixed(2):value
+  },
+}
+
+module.exports = {
+  formatValue:filter.formatValue
+}

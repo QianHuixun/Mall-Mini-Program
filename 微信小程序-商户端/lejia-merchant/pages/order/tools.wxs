@@ -1,0 +1,6 @@
+var sub = function(str) {
+    return str.substring(0, 10)
+}
+module.exports = {
+    sub: sub,
+};

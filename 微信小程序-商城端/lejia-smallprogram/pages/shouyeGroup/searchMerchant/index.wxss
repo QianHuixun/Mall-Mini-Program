@@ -1,0 +1,155 @@
+/* pages/shouyeGroup/searchMerchant/index.wxss */
+/* pages/shouyeGroup/search/index.wxss */
+#merchant-search .van-search__content {
+  border-radius: 32rpx;
+  border: 1px solid #0DAE4E;
+}
+
+#merchant-search .van-icon-search {
+  color: #0DAE4E;
+}
+
+.hot-view {
+  padding: 24rpx;
+  background-color: #FAFAFA;
+  color: #5C5C5C;
+}
+
+.van-tag--large {
+  margin: 24rpx 12rpx;
+  margin-bottom: 0;
+  padding: 24rpx 12rpx;
+}
+
+.his-view {
+  margin-top: 24rpx;
+  padding: 24rpx;
+  background-color: #FAFAFA;
+  color: #5C5C5C;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sear-merchant-view {
+  position: fixed;
+  left: 0;
+  top: 108rpx;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+}
+
+.sear-merchant-view-topseg {
+  width: 100%;
+  height: 24rpx;
+  background-color: #FAFAFA;
+}
+
+.merchant-view {
+  margin: 24rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F0F0F0;
+  padding: 12rpx;
+}
+
+.merchant-view .van-image__img {
+  border-radius: 12rpx;
+}
+
+.merchant-view .merchant_detail {
+  flex: 1;
+  color: #5C5C5C;
+  margin-left: 24rpx;
+  font-size: 26rpx;
+}
+
+.merchant-view .merchant_detail .cell-title {
+  height: 72rpx;
+  line-height: 36rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+#merchant-search .hot_tag {
+  border-radius: 20rpx;
+}
+
+#merchant-search .his_tag,
+#merchant-search .hot_tag {
+  color: #6a6a6a;
+}
+
+#merchant-search .his_tag::after {
+  border-radius: 40rpx;
+  border-color: #e5e5e5;
+}
+
+.price-cell .price {
+  flex: 1;
+  font-size: 32rpx;
+}
+
+
+.merchant_list {
+  border-bottom: 1px solid #F0F0F0;
+  padding: 40rpx 0rpx 32rpx 0;
+  position: relative;
+  margin-left: 16rpx;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.merchant_photo {
+  width: 180rpx;
+  height: 180rpx;
+  overflow: hidden;
+  border-radius: 16rpx;
+  margin-right: 16rpx;
+}
+
+.merchant_list  .merchant_detail {
+  flex: 1;
+  position: relative;
+  padding-left: 16rpx;
+}
+
+.merchant_list .merchant_detail .title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.merchant_list .merchant_detail .title van-image {
+  float: left;
+  margin-right: 8rpx;
+  margin-top: 2rpx;
+}
+
+.merchant_list .merchant_detail .stall {
+  font-size: 24rpx;
+  color: #A56D41;
+  line-height: 38rpx;
+  margin-top: 10rpx;
+}
+
+.merchant_list .merchant_detail  .sales_volume {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  bottom: 0; 
+  background: #FCEAE6;
+  border-radius: 8rpx;
+  overflow: hidden;
+  line-height: 38rpx;
+  height: 38rpx;
+  font-size: 22rpx;
+  color: #ED4528;
+  padding-right: 12rpx;
+}
+.merchant_list .merchant_detail  .sales_volume van-image {
+  float: left;
+  margin-right: 12rpx;
+}

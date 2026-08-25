@@ -1,0 +1,49 @@
+<!--pages/wallet/billDetails/index.wxml-->
+<wxs module="indexofStr">
+  module.exports.includes = function(str, str_) {
+    return str.indexOf(str_);
+  }
+</wxs>
+<view id="bill-details">
+  <view class="top-container">
+    <view class="top-container__number">
+      <view class="date-bar">
+      <van-cell title="" is-link border="{{false}}" value="{{currentDate}}" bind:click="showPopup" />
+      <view class="date-bar_text color-orange" wx:if="{{indexofStr.includes(settlementTime,'预计') > -1 }}">{{settlementTime}}</view>
+      <view class="date-bar_text color-green" wx:else>{{settlementTime}}</view>
+    </view>
+    <view class="money-bar">
+      <view class="money-bar_title">结算金额</view>
+      <view class="money-bar_num">¥ {{amt}}</view>
+    </view>
+    </view>
+  </view>
+  <view class="list-container">
+    <view class="list-header-item">
+      <view class="list-item-cell flex-1">订单</view>
+      <view class="list-item-cell">结算金额</view>
+    </view>   
+    <view class="list-table-item" bindtap="goOrder" data-pkey="{{item.pkey}}" wx:for="{{orderList}}" wx:key="index">
+      <view class="list-item-line"> 
+        <view class="list-item-cell unFlex flex-1">
+        <view wx:if="{{item.distributionType == 'PICKUP' && item.pickupCode}}">{{'#'+item.pickupCode }}</view>
+        <view wx:elif="{{item.distributionType != 'PICKUP' && item.smallTicket && item.smallTicket != 'undefined'}}">{{'#'+item.smallTicket }}</view>
+          <view wx:else>{{ item.code }}</view>   
+        </view>
+        <view class="list-item-cell">¥ {{item.amount}}
+          <van-icon name="arrow" size="24rpx"></van-icon>
+        </view>
+        <!-- <view class="list-item-cell" wx:if="{{isPackingCharge}}">¥ {{item.packingCharge}}
+          <van-icon name="arrow" size="24rpx"></van-icon>
+        </view> -->
+      </view>
+      <view class="list-item-line"> 
+        <view class="date">{{item.orderTime}}</view>
+      </view>
+    </view>
+  </view>
+
+  <van-popup round show="{{ show }}" position="bottom" bind:close="onClose">
+    <van-datetime-picker type="date" value="{{ chooseDate }}"   min-date="{{ minDate }}"bind:confirm="onConfirm" bind:cancel="onClose"/>
+  </van-popup>
+</view>

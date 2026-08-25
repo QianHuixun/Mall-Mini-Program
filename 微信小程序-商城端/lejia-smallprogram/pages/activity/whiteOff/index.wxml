@@ -1,0 +1,17 @@
+<!--pages/activity/whiteOff/index.wxml-->
+<view id="whiteOff">
+  <view class="whiteOff_title">{{title}}</view>
+  <view class="whiteOff_button">
+    <van-button round type="primary" block color="#0DAE4E" disabled="{{isGet}}" bind:click="handleWriteOff">立即领取</van-button>
+  </view>
+  <view class="whiteOff_tips" wx:if="{{isGet}}">已领取，每人限领一份</view>
+  <!-- 领取成功 -->
+  <view class="whiteOff_popup" wx:if="{{show}}">
+    <van-icon name="checked" size="80rpx" color="#0DAE4E"/>
+    <view class="success_text">领取成功</view>
+    <view class="whiteOff_title">— {{title}} —</view>
+  </view>
+    <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

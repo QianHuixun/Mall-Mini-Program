@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>tfcloud-account-dao</artifactId>
+	<packaging>jar</packaging>
+
+	<name>tfcloud-account-dao</name>
+	<description>tfcloud account dao</description>
+	<version>1.3.3</version>
+
+	<parent>
+		<groupId>cn.tofocus</groupId>
+		<artifactId>tfcloud-account</artifactId>
+	    <version>3.5.4</version>
+	</parent>
+
+	<properties>
+	</properties>
+
+	<build>
+	</build>
+
+	<dependencies>
+	    <!-- 本地项目依赖 -->
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-db-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-distributed-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-account-api</artifactId>
+		</dependency>
+	    <!-- 本地项目依赖 结束-->
+
+	</dependencies>
+
+</project>

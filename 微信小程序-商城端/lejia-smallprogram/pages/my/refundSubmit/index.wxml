@@ -1,0 +1,137 @@
+<!--pages/my/refundSubmit/index.wxml-->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view id="refund_submit">
+  <!-- 退款产品 -->
+  <view class="refund_goods">
+    <van-cell is-link bind:tap="backToRefundApply">
+      <view slot="title">   
+        <view class="van-cell-text">
+          <text class="icon_star">*</text>
+          退款商品
+        </view>
+      </view>
+      <view slot="">
+        <view class="van-cell-value">
+        <view class="van-cell-value_flex">
+          <van-image width="90rpx" height="90rpx" src="{{item.photo || '/images/no-pic.png'}}" wx:for="{{refundData.lines}}" wx:key="index" wx:if="{{index < 2}}"></van-image>
+          <text>共{{refundData.lines.length}}种</text>
+        </view>
+        </view>
+      </view>
+    </van-cell>
+    <view class="price_box">
+    <van-cell >
+      <view slot="title">   
+      <view class="van-cell-text">
+        退款商品总价
+      </view>
+    </view>
+    <view slot="">
+      <view class="van-cell-value">
+        ￥{{filter.valueFormat(refundData.refundGoodsAmt)}}
+      </view>
+    </view>
+    </van-cell>
+    <van-cell wx:if="{{refundData.orderType != 'INTEGRAL_JD_ORDER'}}">
+      <view slot="title">   
+      <view class="van-cell-text">
+        积分
+      </view>
+    </view>
+    <view slot="">
+      <view class="van-cell-value">
+        {{filter.valueFormat_1(refundData.refundPoint)}}
+      </view>
+    </view>
+    </van-cell>
+    <van-cell >
+      <view slot="title">   
+      <view class="van-cell-text">
+        配送费
+      </view>
+    </view>
+    <view slot="">
+      <view class="van-cell-value">
+        ￥{{filter.valueFormat(refundData.refundPostage)}}
+      </view>
+    </view>
+    </van-cell>
+    <van-cell >
+      <view slot="title">   
+      <view class="van-cell-text">
+        退款合计
+      </view>
+    </view>
+    <view slot="">
+      <view class="van-cell-value">
+        ￥{{filter.valueFormat(refundData.refundAmt)}}{{refundData.refundPoint ? "+"+filter.valueFormat_1(refundData.refundPoint)+'积分' : ''}}
+      </view>
+    </view>
+    </van-cell>
+    <view class="price_tips" wx:if="{{refundData.hasRefundCard || refundData.hasRefundCardPostage}}">本单使用的{{refundData.hasRefundCard && refundData.hasRefundCardPostage ? 2 : 1}}张优惠券将原路退回</view>
+  </view>
+  </view>
+  <!-- 原因 -->
+  <view class="refund_box refund_reason">
+    <view class="refund_box_title">
+      <text class="icon_star">*</text>
+      退款原因
+    </view>
+    <view class="refund_box_list">
+      <van-radio-group  value="{{ radioResult }}" bind:change="onChange">    
+      <van-cell-group border="{{false}}">
+        <van-cell title="{{item}}" border="{{false}}" clickable data-name="{{item}}" bind:click="onClick" wx:for="{{reasonList}}" wx:key="index" bind:click="onCellClick">
+          <van-radio slot="right-icon" name="{{item}}" icon-size="40rpx"/>
+        </van-cell>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </view>
+  <!-- 凭证 -->
+  <view class="refund_box refund_voucher">
+    <view class="refund_box_title">
+      <text class="icon_star">*</text>
+      补充描述和凭证
+    </view>
+    <view class="refund_box_form">
+      <van-field
+        value="{{describe}}"
+        label=""
+        type="textarea"
+        placeholder="补充详细退款原因，上传商品图片，方便商家更快帮你处理"
+        bind:change="onTextareaChange"
+        border="{{ false }}"
+  />
+  <van-uploader
+  file-list="{{ photo }}"
+  deletable="{{ true }}" 
+  max-count="6"
+  bind:after-read="afterRead"
+  bind:delete="uploaderDelete"
+> 
+<view slot="" class="upload-icon">
+  <van-icon name="photograph" size="36rpx"></van-icon>
+  <view>上传凭证</view>
+  <view>（最多6张）</view>
+</view>
+</van-uploader>
+    </view>
+  </view>
+<!-- 售后电话 -->
+  <view class="info_phone"  bind:tap="phoneClick">
+  售后电话：{{refundData.tel}}
+  <van-icon name="phone" size="40rpx" color="#666666"></van-icon>
+ </view> 
+  <!-- 按钮栏 -->
+  <view class="refund_button">
+    <van-button loading="{{loading}}" disabled="{{disabled}}" bind:click="handleSubmit" custom-class="refund_btn">申请退款</van-button>
+   </view>
+
+   <!-- 成功提示 -->
+   <view class="success_tips" wx:if="{{showTips}}">
+    <van-icon name="checked" size="80rpx" color="#0DAE4E"/>
+    <view class="success_text">退款申请提交成功</view>
+    <view class="success_wait_text">等待商家处理</view>
+    <van-button type="primary" bind:click="handeBack" round custom-class="back-btn">确 定</van-button>
+   </view>
+</view>

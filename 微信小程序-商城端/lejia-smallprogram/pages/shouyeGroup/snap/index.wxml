@@ -1,0 +1,50 @@
+<!--pages/shouyeGroup/snap/index.wxml-->
+<view id="snap">
+	<view class="top">
+  <!-- 轮播图 -->
+		<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+			<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+				<image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}" bindtap="goAds"></image>
+			</swiper-item>
+		</swiper>
+		<view class="time-list">
+			<view bindtap="tapIndex" data-index="{{index}}" class="time-item {{selectIndex === index ? 'time-item-selected' : ''}}" wx:for="{{dateList}}" wx:key="index">
+				<text class="time-date">{{item.date}}</text>
+				<text class="time-state">{{item.state}}</text>
+				<view class="state-border" wx:if="{{selectIndex === index}}"></view>
+			</view>
+		</view>
+		<text class="top-text">抢购中 先下单先得哦</text>
+	</view>
+	<scroll-view scroll-y scroll-anchoring upper-threshold="0" bindscrolltolower="bindscrollbottom" class="main">
+		<view class="item" wx:for="{{goodsList}}" wx:key="index">
+			<view class="item-left">
+				<van-image width="160rpx" height="160rpx" src="{{item.wrapperPhoto}}" />
+				<van-image wx:if="{{selectIndex < 2}}" custom-class="icon-image" round width="100rpx" height="100rpx" src="/images/yjs.png" />
+				<van-image wx:if="{{selectIndex == 2 && item.kcNumPer == 100}}" custom-class="icon-image" round width="100rpx" height="100rpx" src="/images/yqg.png" />
+			</view>
+			<view class="item-right">
+				<text class="van-ellipsis item-right-title">{{item.title}}</text>
+				<view class="progress" wx:if="{{selectIndex == 2}}">
+					<view class="progress-curre" style="width:{{item.kcNumPer}}+ '%';"></view>
+					<text class="progress-num">{{item.kcNumPer}}%</text>
+				</view>
+				<view class="item-right-bottom">
+					<view>
+						<text class="num-curre">￥{{item.price}}</text>
+						<text class="num-ori">￥{{item.priceOld}}</text>
+					</view>
+					<van-button wx:if="{{selectIndex < 2}}" color="#999999" custom-class="buy-btn" style="margin-right: 24rpx;">已结束</van-button>
+					<van-button wx:if="{{selectIndex > 2}}" color="#d7a73c" custom-class="buy-btn" style="margin-right: 24rpx;">即将开抢</van-button>
+					<van-button wx:if="{{selectIndex == 2 && item.kcNumPer != 100}}" color="#f24539" custom-class="buy-btn" style="margin-right: 24rpx;" bind:click="goodsClick" data-id='{{item}}'>立即抢购</van-button>
+					<van-button wx:if="{{selectIndex == 2 && item.kcNumPer == 100}}" color="#999999" custom-class="buy-btn" style="margin-right: 24rpx;">已抢光</van-button>
+				</view>
+			</view>
+		</view>
+		<view style="text-align: center;margin: 24rpx;color:#5C5C5C;font-size:24rpx;" class="note_text">
+			<view wx:if="{{loadingBom}}">加载中...</view>
+			<view wx:if="{{noMoreBom}}">没有更多了</view>
+		</view>
+	</scroll-view>
+
+</view>

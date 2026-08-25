@@ -1,0 +1,149 @@
+/* pages/wallet/orderDetail/index.wxss */
+body,#bill-details {
+  /* height: 100vh;
+  overflow: hidden; */
+  background: #F2F4F7;
+}
+.top-container {
+  position: relative;
+  padding-top:40rpx;
+}
+
+.top-container_box {
+  z-index: 111;
+  position: relative;
+  margin: 0 24rpx 24rpx 24rpx;
+  background: linear-gradient( 180deg, #EDF0F6 0%, #FFFFFF 100%);
+  border-radius: 8rpx;
+}
+
+.top-container::after { 
+  z-index: 0;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height: 144rpx;
+  background: #0990FF;
+}
+
+.ordernumber-bar {
+  padding: 16rpx 24rpx 16rpx 24rpx;
+}     
+
+.ordernumber-bar_line {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 8rpx;
+}
+
+.ordernumber-bar_line .date {
+  font-weight: bold;
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.ordernumber-bar_line.ticket {
+  font-weight: bold;
+  font-size: 40rpx;
+  color: #333333;
+}
+
+.list-container {
+  background: #fff;
+  margin-top: 20rpx;
+  padding: 0 24rpx;
+}
+
+.money-bar {
+  border-top:1px solid #ebedf0;
+  text-align: center;
+  padding: 0 24rpx;
+}
+
+.money-bar_title {
+  font-size: 26rpx;
+  padding: 32rpx 0 20rpx 0;
+  color: #5B94E1;
+}
+
+.money-bar_num {
+    font-size: 64rpx;
+    color: #333333;
+    font-weight: 800;
+    padding-bottom: 18rpx;
+}
+
+.money-pack-bar{
+    border-top:1px solid #ebedf0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24rpx;
+}
+
+.money-pack-bar .left .money-bar_title_sub{
+    font-size: 12px;
+    color: #666666;
+}
+
+.money-pack-bar .right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.money-pack-bar .right .money-bar_num_sub{
+    font-size: 13px;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+.list-header-item,.list-table-item {
+  display: flex;
+  border-bottom: 1px solid #ebedf0;
+}
+
+.list-header-item {
+  font-size: 26rpx;
+  color: #999999;
+  border-bottom: 0;
+}
+
+.list-header-item .list-item-cell {
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.list-item-cell  {
+  width: 128rpx;
+  padding-top: 24rpx;
+  padding-right: 24rpx;
+  box-sizing: border-box;
+}
+.list-table-item {
+  font-size: 28rpx;
+}
+
+.list-table-item:last-child {
+  border-bottom: 0;
+}
+.list-table-item .list-item-cell {
+  color: #333;
+}
+
+.list-table-item .list-item-cell:first-child {
+  padding: 24rpx 5rpx 24rpx 0;
+}
+
+.color-999 {
+  color: #999;
+  margin-top: 5rpx;
+  font-size: 26rpx;
+}

@@ -1,0 +1,239 @@
+/* pages/shouyeGroup/recipe/index.wxss */
+page{
+  background-color: #fafafa;
+}
+
+#recipe {
+  background-color: #fafafa;
+}
+
+#recipe swiper {
+  background-color: #fafafa;
+  height: calc( 100vw * 0.4266 );
+}
+
+#recipe swiper swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.top {
+  display: flex;
+  height: 90rpx;
+  align-items: center;
+}
+
+.top-rig {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90rpx;
+}
+
+.top-rig text {
+  color: #5c5c5c;
+  font-size: 24rpx;
+}
+
+.recom {
+  background-color: white;
+  padding-bottom: 24rpx;
+}
+
+.recom-top {
+  margin: 24rpx;
+  margin-bottom: 0;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.recom-top-tag {
+  background-color: #449c55;
+  height: 40%;
+  width: 6rpx;
+}
+
+.recom-top text {
+  color: #5c5c5c;
+  margin-left: 12rpx;
+}
+
+.recom-content {
+  display: flex;
+  justify-content: space-around;
+}
+
+.recom-content-item {
+  flex: 1;
+  height: 170rpx;
+  margin: 16rpx;
+  position: relative;
+}
+
+.van-image {
+  width: 100%;
+  height: 100%;
+}
+
+.img-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40rpx;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+}
+
+.img-bottom .title {
+  color: white;
+  font-size: 28rpx;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.img-bottom .num {
+  font-size: 24rpx;
+  color: white;
+  margin-right: 12rpx;
+}
+
+.seg-view {
+  background-color: white;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+}
+
+.seg-view .seg {
+  display: flex;
+  height: 29rpx;
+  /* background-color: #d7a73c; */
+  margin: 28rpx;
+  flex: 1;
+  overflow: hidden;
+}
+.seg-view .seg .van-image {
+  display: block;
+}
+
+.seg-view text {
+  flex: 1;
+  text-align: center;
+  color: #5c5c5c;
+  font-size: 28rpx;
+}
+
+
+.content {
+  margin-top: 16rpx;
+  background-color: #fafafa;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.item {
+  padding: 10rpx 10rpx 0 10rpx;
+  width: calc( 50vw - 12rpx );
+  /* height: 260rpx; */
+  background-color: white;
+  margin:  6rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.item .van-image {
+  width: calc( 50vw - 32rpx );
+  height: calc( 50vw - 32rpx );
+}
+
+.item-bottom {
+  height: 60rpx;
+  width: 100%;
+  text-align: center;
+  position:relative;  
+}
+
+.item-bottom-title {
+  color: #5c5c5c;
+  font-size: 30rpx;
+  line-height: 52rpx;
+  height: 52rpx;
+  display: inline-block;
+  width: 55%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.item-bottom-num {
+  position:absolute;
+  height: 52rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  right: 25rpx;
+  top: 0;
+  font-size: 24rpx;
+  color: #5c5c5c;
+}
+
+.item-bottom-num .van-icon {
+  margin-left: 8rpx;
+}
+
+.classify {
+  display: flex;
+  height: 80rpx;
+  background: #fff;
+  padding: 0 20rpx;
+  overflow-x: auto;
+}
+
+.classify .class-tab-item {
+  position: relative;
+  display: inline-block;
+  flex: 1 0 auto;
+  padding: 0 10rpx;
+  margin: 0 10rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #999;
+  text-align: center;
+}
+
+.classify .class-tab-item::after {
+  z-index: 1;
+  content: "";
+  display: block;
+  height: 2rpx; 
+  width: 100%;
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+}
+
+
+.classify .class-tab-item.active {
+  color: #3ccf8a;
+}
+
+.classify .class-tab-item.active::after {
+  background: #3ccf8a;
+}
+

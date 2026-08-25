@@ -1,0 +1,369 @@
+/* pages/my/card/index.wxss */
+#card {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    flex-direction: column;
+    background-color: #f2f4f7;
+}
+
+#card .card-tabs .van-tabs__wrap {
+    height: 80rpx;
+}
+
+#card .card-tabs .van-tabs__wrap .van-tabs__nav--line {
+    height: 80rpx;
+}
+
+#card .van-tab {
+    font-size: 14px;
+    line-height: 14px;
+    padding-top: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #666;
+}
+
+#card .card-tabs .van-tab--active,
+#card .card-gift-tabs .van-tab--active {
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #0DAE4E;
+}
+
+#card .card-tabs .van-tabs__line {
+    width: 64rpx;
+    height: 6rpx;
+    background: #0DAE4E;
+    border-radius: 4rpx;
+}
+
+#card .card-gift-tabs .van-tabs__line {
+  background: none;
+}
+
+#card .card-gift-tabs .van-tabs__nav .van-tab:last-child .van-ellipsis:before {
+  content: '';
+  width: 2rpx;
+  height: 24rpx;
+  background: #F0F0F0;
+  left:0;
+  position: absolute;
+  display: block;
+}
+
+/* end tab样式修改 */
+#card .scroll-view-box {
+    flex: 1;
+}
+
+#card .scroll-view .nodata-back {
+    width: 100%;
+    height: 100%;
+    padding-top: 224rpx;
+    text-align: center;
+    font-size: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #BDBDBD;
+    line-height: 26rpx;
+}
+
+#card .scroll-view .nodata-back image {
+    width: 184rpx;
+    height: 184rpx;
+    margin-bottom: 40rpx;
+}
+
+#card .scroll-view .card-item {
+    width: 702rpx;
+    background: #FFFFFF;
+    border-radius: 24rpx;
+    padding: 24rpx;
+    margin: 20rpx 24rpx 0 24rpx;
+    box-sizing: border-box;
+
+}
+
+
+
+#card .scroll-view .card-box {
+    display: flex;
+}
+
+.card-price {
+    width: 190rpx;
+    height: 152rpx;
+    background: linear-gradient(90deg, #FF9E1D, #FDB32F);
+    border-radius: 16rpx;
+    padding-top: 32rpx;
+    margin-right: 24rpx;
+    box-sizing: border-box;
+}
+.card-price .card-price-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 24rpx;
+}
+
+.card-price .card-price-title .unit {
+    font-size: 32rpx;
+    line-height: 32rpx;
+
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.card-price .card-price-title view {
+    display: inline-block;
+    font-size: 56rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 46rpx;
+}
+.card-price .card-price-title .free {
+  font-size: 34rpx;
+}
+.card-price .card-price-label {
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.card-box .card-info {
+    flex: 1;
+    width: 0;
+}
+
+.card-box .card-info .card-title {
+    padding-top: 8rpx;
+    padding-bottom: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 30rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #333333;
+    line-height: 30rpx;
+}
+
+.card-box .card-info .card-time {
+    font-size: 24rpx;
+    line-height: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
+    padding-bottom: 22rpx;
+}
+
+.card-box .card-info .card-rule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-box .card-info .card-rule .card-rule-title {
+    display: flex;
+    align-items: center;
+}
+
+.card-box .card-info .card-rule .card-rule-title text {
+    display: inline-block;
+    line-height: 24rpx;
+    font-size: 24rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
+    padding-right: 12rpx;
+}
+
+.card-box .card-info .card-rule .card-rule-title .van-icon {
+    color: #999999;
+    transition: transform 0.3s
+}
+
+.card-box .card-info .card-rule .card-rule-title .rule {
+    transform: rotate(180deg);
+}
+
+.card-box .card-info .card-rule .card-button {
+    width: 120rpx;
+    height: 48rpx;
+    background: #FFFFFF;
+    border: 2rpx solid #63BF57;
+    border-radius: 24rpx;
+    font-size: 22rpx;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #63BF57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0
+}
+
+.card-item .card-rule-box {
+    height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: height 0.3s ease-in-out;
+
+}
+
+.card-item .card-rule-box view, .card-item .card-rule-box text {
+    font-size: 24rpx;
+    line-height: 26rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #999999;
+    overflow-wrap: break-word;
+    word-wrap: break-word; /* 允许在长单词或URL中间换行 */
+}
+
+.card-item .card-rule-box view+view {
+    margin-top: 10rpx;
+}
+
+.card-item .card-rule-box view:first-child {
+    padding-top: 24rpx;
+}
+
+.card-item .card-rule-box.not-collapse.height-auto {
+  height: auto;
+}
+
+.card-item .card-rule-box.not-collapse {
+    height: fit-content;
+}
+
+.card-item .card-rule-box.not-collapse.fiv-box {
+  height: 200rpx;
+}
+ .card-item .card-rule-box.not-collapse.forth-box {
+  height: 160rpx;
+}
+.card-item .card-rule-box.not-collapse.third-box{
+    height: 120rpx;
+}
+.card-item .card-rule-box.not-collapse.double-box{
+    height: 90rpx;
+}
+.card-item .card-rule-box.not-collapse.single-box{
+    height: 60rpx;
+}
+
+.card-box .card-noactive {
+    display: flex;
+    align-items: center;
+}
+
+.card-box .card-noactive image {
+    width: 94rpx;
+    height: 94rpx;
+}
+
+.card-invalid .card-info .card-title {
+    color: #999999;
+}
+
+#card .scroll-view .card-invalid .card-price {
+    background: linear-gradient(90deg, #B8B8B8, #CECECE);
+}
+
+#card .popup-cover {
+  z-index:  1000;
+  background: rgba(0,0,0,.6);
+  width: 100vw;
+  height: 100vh;
+  position:fixed;
+  left: 0;
+  top: 0;
+}
+
+#card .popup-container {
+  z-index:  1001;
+  position:fixed;
+  left: 65rpx;
+  top: 154rpx;
+  width: 620rpx;
+  
+}
+
+#card .popup-main {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+#card .popup-close {
+  padding-top: 68rpx;
+  text-align: center;
+}
+
+.popup-main-top {
+  width: 620rpx;
+  height: 192rpx;
+  padding: 32rpx;
+  display: flex;
+  background: #0DAE4E;
+  border-radius: 24rpx 24rpx 0rpx 0rpx;
+  box-sizing: border-box;
+}
+
+.popup-main-top__left {
+  margin-right: 16rpx;
+}
+
+.popup-main-top__right {
+  flex: 1;
+  color: #fff;
+}
+
+.popup-main-top__right__title {
+  height: 94rpx;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 30rpx;
+  line-height: 36rpx;
+}
+
+.popup-main-top__right__tips {
+  font-size: 24rpx;
+}
+
+.popup-main-middle {
+  padding: 64rpx 0;
+}
+.popup-main-middle canvas {
+  margin: auto;
+}
+
+.popup-main-bottom {
+  box-sizing: border-box;
+  width: 620rpx;
+  padding: 32rpx;
+  font-weight: 500;
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 45rpx;
+  background: #F8F8F8;
+  border-radius: 0rpx 0rpx 24rpx 24rpx;
+  word-wrap: break-word; /* 允许在长单词或URL中间换行 */
+  overflow-wrap: break-word; /* 同word-wrap，但是更为现代 */
+}
+
+.card-item .van-image {
+  margin-right: 24rpx;
+}
+
+.popup-main-top__left .card-price {
+  margin-right: 0;
+}

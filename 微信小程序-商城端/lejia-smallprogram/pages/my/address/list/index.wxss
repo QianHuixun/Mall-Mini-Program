@@ -1,0 +1,78 @@
+/* pages/my/address/list/index.wxss */
+page {
+  background: #F2F4F7;
+}
+
+.van-swipe-cell .van-button {
+  width: 140rpx;
+  font-size: 24rpx;
+  padding: 0 20rpx;
+}
+
+.address_box {
+  display: flex;
+  align-items: center;
+}
+
+.address_box .address_left {
+  flex: 1;
+}
+.address_box .name_line text {
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
+  color: #666666;
+}
+
+.address_box .addr_line {
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 42rpx;
+  color: #333333;
+}
+
+.address_box .van-tag {
+  position: relative;
+  top: -2rpx;
+  padding: 4rpx 18rpx;
+  font-size: 22rpx;
+  border-radius: 4rpx;
+  background: rgba(13, 174, 78, 0.1);
+  color: #0DAE4E;
+  margin-left: 10rpx;
+}
+
+.van-swipe-cell__right,
+.van-swipe-cell__right .van-button {
+  height: 100%;
+}
+
+.van-goods-action {
+  height: 120rpx;
+  padding: 0 30rpx;
+}
+
+.no_tips {
+  color: #ddd;
+  text-align: center;
+  margin: 60rpx auto;
+  font-size: 24rpx;
+}
+
+.address_right .new_icon {
+  margin-left: 10rpx;
+}
+
+
+.action_container van-button {
+  width: 100%;
+  height: 76rpx;
+}
+
+.action_container .van-van-icon-plus {
+  font-size: 28rpx;
+}
+
+.action_container .van-button__text {
+  font-size: 30rpx;
+}

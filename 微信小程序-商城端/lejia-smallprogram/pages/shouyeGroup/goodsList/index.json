@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "space-dialog":"/components/space/index",
+    "go-cart": "/components/goCart/index",
+    "load-more":"/components/load-more/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-icon": "@vant/weapp/icon/index"
+  },
+  "navigationBarTitleText": "泽起邻里"
+}

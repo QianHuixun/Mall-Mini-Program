@@ -1,0 +1,139 @@
+/* pages/merMien/merchantList/index.wxss */
+page {
+  background: #f5f5f5;
+}
+
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 560rpx;
+  background: linear-gradient(#72cb80, #f5f5f5);
+  z-index:-1;
+}
+
+.nav-bar .van-hairline--bottom::after {
+  border: none !important;
+}
+.nav-bar .navbar .van-icon-arrow-left:before {
+  color: #fff;
+  font-size: 36rpx;
+}
+.nav-bar .van-nav-bar__title {
+  color: #fff;
+}
+
+.nav-bar .van-nav-bar {
+  background: transparent;
+}
+
+.nav-bar .van-icon-arrow-left {
+  color: #fff;
+}
+
+.nav-bar .van-icon-search {
+  color: #72cb80;
+}
+
+.nav-bar .van-field__body .van-field__input {
+  color: #72cb80 !important;
+}
+
+.van-field__placeholder {
+  color: #72cb80 !important;
+}
+
+.nav-bar .van-tabs__scroll {
+  background: transparent !important;
+}
+
+.nav-bar .van-ellipsis {
+  color: #fff;
+}
+
+.nav-bar .van-tabs__line {
+  background: #fff;
+}
+
+.nav-bar .van-hairline--top-bottom:after {
+  border-width: 0 !important;
+}
+
+#merchant-list {
+  /* padding-top: 64px; */
+}
+
+.marchant-main {
+  overflow-y: scroll;
+  padding-bottom:20px;
+}
+
+.marchant-main load-more .loadmore text {
+  color: #72cb80 !important;
+}
+
+.marchant-main .merchant-row {
+  display: flex;
+}
+
+.marchant-main .merchant-row {
+  padding: 16rpx;
+  margin: 0 20rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.merchant-row .row-right-top {
+  /* white-space: nowrap; */
+  margin-bottom:12rpx;
+}
+.row-tag{
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.marchant-main .merchant-row .van-tag {
+  color: #bfbfbf;
+  margin-right: 10px;
+}
+
+.marchant-main .merchant-row .van-image {
+  margin-right: 32rpx;
+}
+
+.marchant-main .merchant-row .van-image .van-image__img {
+  border-radius: 10rpx !important;
+}
+
+.marchant-main .merchant-row .row-right {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.marchant-main .merchant-row .row-right .row-name {
+  padding-right: 20rpx;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 120px;
+}
+
+.marchant-main .merchant-row .row-right .row-right-bottom {
+  color: #a1a1a1;
+  font-size: 28rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top:12rpx;
+}

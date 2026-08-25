@@ -1,0 +1,100 @@
+<!-- 
+@url: pages/my/signIn/index.wxml
+@description: 我的  个人信息 
+@author: sx
+@date: 2020/07/14
+ -->
+<view id="SignIn">
+	<view class="topContainer">
+		<button class="top_btn" bindtap="signIn">
+      {{signData.nowDays ? '已签到' : '签到'}}
+    </button>
+		<text class="top_text">您已连签到{{signData.signNum}}天，请继续加油哦!</text>
+		<image class="top_bg" src="{{imgUrl+'bg.png'}}"></image>
+	</view>
+	<view class="numContaner">
+		<view class="num_cell">
+			<view class="num">{{signData.points}}</view>
+			<view class="tips">
+				<image class="i_icon" src="../../../images/signIn/i_star.png"></image>
+				<text class="i_txt">积分</text>
+			</view>
+		</view>
+		<view class="num_cell">
+			<view class="num">{{signData.signNum}}</view>
+			<view class="tips">
+				<image class="i_icon" src="../../../images/signIn/i_list.png"></image>
+				<text class="i_txt">签到天数</text>
+			</view>
+		</view>
+	</view>
+	<view class="dateContainer">
+
+		<view class="calendar">
+			<view class="calen_header">
+				<button class='calendar_month_prev' bindtap="sign_prev">
+					<van-icon name="play" size="15px" />
+				</button>
+				<text class="txt">{{showYear}}年{{showMonth}}月</text>
+				<button class='calendar_month_next' bindtap="sign_next">
+					<van-icon name="play" size="15px" />
+				</button>
+			</view>
+
+			<view class="calendar_wrapper">
+				<view class="week_day">
+					<view class="weeklist">日</view>
+					<view class="weeklist">一</view>
+					<view class="weeklist">二</view>
+					<view class="weeklist">三</view>
+					<view class="weeklist">四</view>
+					<view class="weeklist">五</view>
+					<view class="weeklist">六</view>
+				</view>
+				<view>
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[0]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+							<view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view>
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[1]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+							<view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view>
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[2]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+							<view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view>
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[3]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+           <view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view>
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[4]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+							<view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view> 
+					<view class="month_day">
+						<view class="day_list" wx:for="{{signDays[5]}}" wx:key="un" wx:for-index="index" wx:for-item="item">
+							<view class="{{item.signday=='is' ? 'day_hover' : ''}}">{{item == null ? '' : item.normalday}}</view>
+						</view>
+					</view>
+				</view>
+				<!--控制月份日历输出-->
+			</view>
+
+
+
+		</view>
+
+	</view>
+	<view class="listContaner">
+
+	</view>
+    <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+  <authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

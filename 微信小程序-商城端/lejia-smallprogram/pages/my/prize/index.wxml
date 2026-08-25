@@ -1,0 +1,34 @@
+<!-- 
+@url: pages/my/prize/index.wxml
+@description: 我的奖品
+@author: sx
+@date: 2020/07/25
+ -->
+<view id="prize">
+	<view class="prize_list">
+		<view class="prize_cell" wx:for="{{datalist}}" wx:key="index">
+			<view class="cell_l">
+				<van-image width="50" height="50" src="{{item.wrapperPhoto}}" image-class="new-image" />
+			</view>
+			<view class="cell_r">
+				<view class="cell_r_top">
+					<view class="title">{{item.name}}</view>
+					<view class="date">中奖日期：{{item.createdTime}}</view>
+				</view>
+				<view class="cell_r_bottom">
+					<view wx:if="{{item.status=='ISSUED'&&item.ptype!='GIFT_PRIZE'}}">已发货</view>
+					<view wx:elif="{{item.status=='NOT_ISSUED'&& !item.isAddr}}">未发货</view>
+					<van-button wx:elif="{{item.status=='NOT_ISSUED'&& item.isAddr}}" custom-class="cell_r_bottom_btn"
+						color="#4dce78" plain round size="mini" bind:click="goAdress" data-pkey="{{item.pkey}}">填写收货地址</van-button>
+					<view wx:elif="{{item.status=='ISSUED'&&item.ptype=='GIFT_PRIZE'}}">{{item.logistics+'单号'+item.express}}
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

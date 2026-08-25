@@ -1,0 +1,41 @@
+<!-- 
+@url: pages/shouyeGroup/groupon/index.wxml
+@description: 拼团
+@author: sx
+@date: 2020/08/12
+ -->
+<view id="groupon">
+	<!-- <van-image width="100%" fit="widthFix" src="{{imgSrc}}" /> -->
+	<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" wx:if="{{imageList.length}}" autoplay>
+		<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+			<image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" bindtap="goAds"></image>
+		</swiper-item>
+	</swiper>
+	<!-- <text class="title">分享商品，享佣金</text> -->
+	<view class="item" wx:for="{{goodsList}}" wx:key="index"  data-id='{{item}}' bindtap="goodsClick">
+		<van-image style="margin: 0 30rpx;" width="240rpx" height="240rpx" src="{{item.wrapperPhoto ||'/images/no-pic.png'}}"/>
+		<view class="item-right">
+			<view style="width:90%" class="van-multi-ellipsis--l2">
+				{{item.title}}
+			</view>
+			<view class="item-center">
+				<view class="gray_clr">￥{{item.priceOld}}</view>
+			</view>
+			<view class="item-bottom">
+				<!-- <image src="../../../images/shareBg.png" class="item-bottom-left">
+          <text class="item-bottom-left-title">分享赚</text>
+          <text class="item-bottom-left-num">{{item.comm}}元</text>
+        </image> -->
+				<view>
+					<text class="item-center-two">￥</text>
+					<text class="item-center-three">{{item.price}}</text>
+					<van-tag type="warning" color="#fff4e1" text-color="#fea372">剩余{{item.extendCon==null?0:item.extendCon}}人成团</van-tag>
+				</view>
+				<button color="#f24539" class="btn" >
+					拼团中
+				</button>
+			</view>
+		</view>
+	</view>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

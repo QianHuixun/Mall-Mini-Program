@@ -1,0 +1,114 @@
+<!-- 
+@url:pages/my/bargainDetail/index
+@description: 砍价详情
+@author: crj
+@date: 2020/08/25
+-->
+<view id="bargainDetail">
+	<view class="navbar-back">
+		<view class="navbar" style="padding-top:{{statusBarHeight}}px;height:{{titleBarHeight}}px;">
+			<view class="back-home" catchtap="backhome">
+				<image src="/images/backHome.png"></image>
+			</view>
+			<text class="navbar-tit" style="color:#fff;">砍价详情</text>
+		</view>
+		<view class="content">
+			<view class="originator">
+				<van-image src="{{cutData.memberPhoto}}" width="100rpx" height="100rpx"></van-image>
+				<view class="name">{{cutData.memberName}} </view>
+				<view class="tag">我发现一件好货，来一起砍价优惠拿</view>
+			</view>
+			<view class="goods-detail">
+				<view class="img-box">
+					<van-image src="{{cutData.photo}}" width="100%" height="100%"></van-image>
+
+				</view>
+				<view class="item-right">
+					<view class="item-top" style="width:90%" class="van-multi-ellipsis--l2">
+						{{cutData.goodsName}}
+					</view>
+					<view class="item-center">
+						<text>￥</text>
+						<text class="big-price">{{cutData.bigPrice}}</text>
+						<text class="small-price">.{{cutData.smallPrice}}</text>
+						<text class="tag">{{cutData.cutSuccessNum}}人已砍价成功</text>
+					</view>
+				</view>
+			</view>
+
+		</view>
+	</view>
+	<view class="btn-box">
+		<view class="prcie-box">
+			已砍价<text class="ptice-txt">{{cutData.cutAmt}}</text>元
+		</view>
+		<view class="btn" wx:if="{{!cutData.isMember&&cutData.rcutAmt}}">
+			<van-button wx:if="{{!cutData.isCut}}" round custom-class="operate-btn"
+				color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));" bindclick="handleCut"
+				disabled="{{!cutData.time}}">帮好友砍一刀</van-button>
+			<button wx:elif="{{cutData.isCut}}" class="operate-btn cut-btn" open-type="getUserInfo"
+				catch:getuserinfo="handelGetUserInfo">我也想砍</button>
+			<!-- <button wx:elif="{{cutData.isCut&& userInfo }}" class="operate-btn cut-btn" open-type="share"
+				hover-class='none'>我也想砍</button> -->
+			<!-- <van-button round custom-class="operate-btn" color="linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36));" bindclick="" >我也想砍</van-button> -->
+		</view>
+		<view class="count-down" wx:if="{{cutData.time&&cutData.rcutAmt}}">
+			<van-count-down use-slot time="{{ cutData.time }}" bind:change="onChange" format="HH:mm:ss">
+				<view class="count-down-box">
+					<text class="time-top-item-text margin-right">还剩</text>
+					<text wx:if="{{ timeData.days}}"
+						class="time-top-item">{{ timeData.days<10?'0'+timeData.days:timeData.days }}</text>
+					<text wx:if="{{ timeData.days}}" class="time-top-item-text">天</text>
+					<text class="time-top-item">{{ timeData.hours<10?'0'+timeData.hours:timeData.hours }}</text>
+					<text class="time-top-item-text">:</text>
+					<text class="time-top-item">{{timeData.minutes<10?'0'+timeData.minutes:timeData.minutes}}</text>
+					<text class="time-top-item-text">:</text>
+					<text class="time-top-item">{{ timeData.seconds<10?'0'+timeData.seconds:timeData.seconds }}</text>
+					<text class="time-top-item-text margin-left">结束，快来砍价吧</text>
+				</view>
+			</van-count-down>
+
+		</view>
+		<view class="count-down" wx:else>活动已结束</view>
+
+	</view>
+	<view class="cut-list">
+		<view class="tit"> 砍价帮</view>
+		<view class="list-box" wx:for="{{cutData.cutMemberList}}" wx:key="index">
+			<view class="item-left">
+				<view class="photo">
+					<image src="{{item.photo}}"></image>
+				</view>
+				<view class="cut-name">
+					<text class="name">{{item.memberName}}</text>
+					<text class="label"> 砍一刀是一刀，刀刀见血</text>
+				</view>
+			</view>
+			<view class="item-right">
+				<view class="cut-price">
+					<text class="name">砍掉{{item.cutAmt}}元</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<van-popup show="{{ show }}" round custom-class="van-popup" bind:close="handlePopClose">
+		<view class="popup-box">
+			<view class="tit">
+				<view wx:if="{{!cutLabel.length}}">您已砍<text class="price">{{cutAmt}}</text>元</view>
+				<view wx:else>{{cutLabel}}</view>
+			</view>
+			<view class="label">
+				听说分享次数越多，砍价成功机会越大
+			</view>
+			<van-button wx:if="{{!cutLabel.length}}" round
+				color="linear-gradient(to bottom, rgb(251, 125, 38), rgb(237, 83, 52))" size="noraml" custom-class="share-btn"
+				bindclick="closePopup">确定</van-button>
+			<van-button wx:else round color="linear-gradient(to bottom, rgb(251, 125, 38), rgb(237, 83, 52))" size="noraml"
+				custom-class="share-btn" open-type="share">发起砍价</van-button>
+
+		</view>
+
+
+	</van-popup>
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

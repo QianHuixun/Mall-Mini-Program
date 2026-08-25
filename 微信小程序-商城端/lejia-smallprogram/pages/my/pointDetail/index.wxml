@@ -1,0 +1,75 @@
+<!-- 
+@url: pages/my/pointDetail/index.wxml
+@description: 我的钱包  明细
+@author: sx
+@date: 2020/07/28
+-->
+<view id="pointDetail">
+	<van-tabs active="{{ active }}" bind:change="onChange" color="#4dce78" tab-active-class="active-tab">
+		<van-tab title="全部" name="0">
+			<view class="tab_content">
+				<!-- <view class="no_tips" wx:if="{{listData1.length == 0}}">暂无数据</view> -->
+				<view class="list-li" wx:for="{{listData1}}" wx:key="index" wx:if="{{listData1.length > 0}}">
+					<view class="list-l">
+						<view class="list-l_tips">
+							<view class="list-l_tips__date gray_clr">{{item.createdTime}}</view>
+							<view class="list-l_tips_code gray_clr">
+								<text wx:if="{{item.source =='COMM_BUY'}}">消费</text>
+								<text wx:elif="{{item.source =='COMM_SHARE'}}">分享</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_ADD'}}">手动增加</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_LESS'}}">手动减少</text>
+								<text wx:elif="{{item.source =='COMM_RETURN'}}">退款</text>
+							</view>
+						</view>
+					</view>
+					<view class="list-r {{item.direct ? 'plus' : 'minus'}}">{{item.direct ? '+' : '-'}}{{item.comms}}</view>
+				</view>
+			</view>
+		</van-tab>
+		<van-tab title="支出" name="1">
+			<view class="tab_content">
+				<!-- <view class="no_tips" wx:if="{{listData2.length == 0}}">暂无数据</view> -->
+				<view class="list-li" wx:for="{{listData2}}" wx:key="index" wx:if="{{listData2.length > 0}}">
+					<view class="list-l">
+						<view class="list-l_tips">
+							<view class="list-l_tips__date gray_clr">{{item.createdTime}}</view>
+							<view class="list-l_tips_code gray_clr">
+								<text wx:if="{{item.source =='COMM_BUY'}}">消费</text>
+								<text wx:elif="{{item.source =='COMM_SHARE'}}">分享</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_ADD'}}">手动增加</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_LESS'}}">手动减少</text>
+								<text wx:elif="{{item.source =='COMM_RETURN'}}">退款</text>
+							</view>
+						</view>
+					</view>
+					<view class="list-r {{item.direct ? 'plus' : 'minus'}}">{{item.direct ? '+' : '-'}}{{item.comms}}</view>
+				</view>
+			</view>
+		</van-tab>
+		<van-tab title="收入" name="2">
+			<view class="tab_content">
+				<!-- <view class="no_tips" wx:if="{{listData3.length == 0}}">暂无数据</view> -->
+				<view class="list-li" wx:for="{{listData3}}" wx:key="index" wx:if="{{listData3.length > 0}}">
+					<view class="list-l">
+						<view class="list-l_tips">
+							<view class="list-l_tips__date gray_clr">{{item.createdTime}}</view>
+							<view class="list-l_tips_code gray_clr">
+								<text wx:if="{{item.source =='COMM_BUY'}}">消费</text>
+								<text wx:elif="{{item.source =='COMM_SHARE'}}">分享</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_ADD'}}">手动增加</text>
+								<text wx:elif="{{item.source =='POINTS_MANUAL_LESS'}}">手动减少</text>
+								<text wx:elif="{{item.source =='COMM_RETURN'}}">退款</text>
+							</view>
+						</view>
+					</view>
+					<view class="list-r {{item.direct ? 'plus' : 'minus'}}">{{item.direct ? '+' : '-'}}{{item.comms}}</view>
+				</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

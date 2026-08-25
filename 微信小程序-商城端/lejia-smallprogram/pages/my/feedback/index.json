@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "authorize": "/components/login/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-image":"@vant/weapp/image/index"
+  },
+  "navigationBarTitleText": "反馈意见"
+}

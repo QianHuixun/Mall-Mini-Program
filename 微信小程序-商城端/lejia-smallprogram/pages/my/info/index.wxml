@@ -1,0 +1,41 @@
+<!-- 
+@url: pages/my/info/index.wxml
+@description: 我的  个人信息 
+@author: sx
+@date: 2020/07/14
+ -->
+<view id="info">
+  <van-cell title="头像">
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <van-image round width="2.5rem" height="2.5rem" src="{{userInfo.photo}}" />
+    </button> 
+    <!-- <van-image round width="2.5rem" height="2.5rem" src="{{userInfo.photo}}" /> -->
+  </van-cell>
+  <van-cell title="用户名">
+    <input type="nickname" class="weui-input" value="{{userInfo.name}}" bindchange="handleNamChange" placeholder="请输入昵称"/>
+  </van-cell>
+  <!-- <van-cell title="性别" value="{{userInfo.gender== 0 ? '未知' : (userInfo.sex == 1 ? '男' : '女')}}"></van-cell> -->
+  <van-cell title="绑定手机" value="{{userInfo.mobile}}"></van-cell>
+  <!-- <van-cell title="会员类型" value="{{userInfo.level=='ORDINARY_MEMBER' ? '普通会员' : '年费会员'}}"></van-cell> -->
+  <!-- <van-cell title="到期日期" value="{{userInfo.endDate}}" wx:if="userInfo.level!='ORDINARY_MEMBER'"></van-cell> -->
+  <!-- <van-cell title="银行卡号" value="{{userInfo.custCard&&userInfo.custCard!=null?userInfo.custCard:'请输入银行卡号'}}" catchtap="handleEdit"></van-cell>
+  <van-cell title="开户行" value="{{userInfo.accountBank&&userInfo.accountBank!=null?userInfo.accountBank:'请输入开户行'}}" catchtap="handleEdit"></van-cell>
+  <van-cell title="姓名" value="{{userInfo.custName&&userInfo.custName!=null?userInfo.custName:'请输入姓名'}}" catchtap="handleEdit"></van-cell> -->
+
+
+
+  <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+  <van-popup show="{{ show }}" bind:close="onClose" closeable position="bottom" round >
+    <view class="pop-tit">填写银行账户</view>
+    <van-field  input-class="van-field--input" model:value="{{custCard}}" label="银行卡号"
+      placeholder="请输入银行卡号" bind:focus="inputFocus" cursor-spacing="0" bind:change="cardChange"/>
+    <van-field  input-class="van-field--input" model:value="{{accountBank}}" label="开户行"
+      placeholder="请输入开户行" bind:focus="inputFocus" cursor-spacing="0"/>
+    <van-field  input-class="van-field--input" model:value="{{custName}}" label="姓名"
+      placeholder="请输入姓名" bind:focus="inputFocus" cursor-spacing="0"/>
+    <van-button custom-class="pop-btn" catchtap="onSubmit" size="large" type="primary" block round>保存</van-button>
+
+  </van-popup>
+  <authorize bind:onLoadFun="onLoadFun" isAuto="{{isAuto}}" iShidden="{{iShidden}}"></authorize>
+</view>

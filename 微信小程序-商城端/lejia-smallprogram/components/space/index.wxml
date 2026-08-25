@@ -1,0 +1,62 @@
+<!---->
+<!-- 
+@url: components/space/index.wxml
+@description: 规格选择
+@author: sx
+@date: 2020/07/21
+ -->
+<view id="space">
+  <van-overlay show="{{ isShow }}" z-index="500">
+    <view class="wrapper">
+      <view class="wrapper-container">
+        <view class="wrapper-container_header">
+          <span class="title">{{ title }}</span>
+        </view>
+        <scroll-view class="wrapper-container_main" scroll-y>
+          <view class="wrapper-container_main_title">商品规格</view>
+          <view class="space_list">
+            <view class="space_li {{ spacePkey == item.pkey ? 'checked' : '' }} {{item.kcNum < 1 ? 'noNum' : ''}}" data-pkey="{{item.pkey}}" data-price="{{ item.price }}" data-num="{{item.gwcNum}}" data-kcnum="{{item.kcNum}}" bindtap="handleChecked" wx:for="{{ spaceList }}" wx:key="index">
+              {{item.space}} | ￥{{item.price}}</view>
+          </view>
+          <view wx:if="{{processLines.length > 0}}">
+          <view class="wrapper-container_main_title">加工服务</view>
+          <view class="wrapper-container_main_tip">免烧菜，二楼加工点为您完成加工</view>
+          <van-radio-group value="{{ ProcessRadio }}" >
+          <view class="process_list">      
+           <view class="process_item {{item.process == ProcessRadio ? 'checked' : ''}}" wx:for="{{processLines}}"  wx:key="index" bindtap="handleProcessChecked" data-process="{{item.process}}" data-price="{{ item.price }}">
+            <van-image src="{{item.photo}}" width="128rpx" height="128rpx"/>
+            <view class="process_item_title">{{item.processName}}</view>
+            <view class="process_item_price">
+              <view class="process_item_price__left">
+              ￥{{ item.price }}
+              </view>
+              <view class="process_item_price__right">
+                <van-radio name="{{item.process}}" size="40rpx" checked-color="#0DAE4E"></van-radio>
+              </view>
+            </view>
+           </view>
+        
+          </view>
+        </van-radio-group>
+         </view>
+      </scroll-view>
+        <view class="wrapper-container_footer">
+          <view class="footer_price"><text class="symbol">￥</text>{{ price }}</view>
+          <van-stepper wx:if="{{gwcNum>=1}}" value="{{ gwcNum }}" min="0" max="{{kcNum}}" custom-class="space-stepper" input-class="space-stepper_input" plus-class="space-stepper_plus" minus-class="space-stepper_minus" bind:change="stepChange" disable-input async-change integer button-size="64rpx"/>
+          <van-button wx:else round icon="plus" type="primary" bindtap="handleAddTOCart" loading-text="加载中..." disabled="{{disabled}}" loading="{{loading}}" custom-class="new_van_button">加入购物车
+          </van-button>
+        </view>
+      </view>
+   
+      <view class="close-btn-box" catchtap="onClickHide">
+        <van-icon custom-class="close-btn" name="cross" size="20" />
+      </view>
+    </view>
+
+    <!-- 加入购物车 动画效果 -->
+    <!-- <go-cart id="goCartView" isIcon="{{ isIcon }}"></go-cart> -->
+  </van-overlay>
+  <!-- 在页面的任意位置加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+  <authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

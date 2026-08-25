@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+
+body {
+    width:100%;
+    margin:0 auto  !important;
+    font-family: "Microsoft yahei","Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    background:#fff;
+    height:auto;
+    min-height:100%;
+    padding:0;
+    font-size: 16px;
+}
+a{
+    text-decoration: underline;
+    color:#ff6600;
+}
+ul,ul li{
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+/*让旧版本显示这些元素*/
+header,main,aside,nav,footer,section,article,figure{
+    display:block;
+}
+
+body {
+    background:url(../images/bg.png) center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.logo-bar {
+    background: rgba(0,0,0,.2);
+    height: 80px;
+    line-height: 80px;
+    padding: 0 50px;
+}
+
+.logo {
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    background: url(../images/logo.png) left center no-repeat;
+    background-size: auto 40px;
+    padding-left: 100px;
+}
+
+main > h1 {
+    text-align: center;
+    color: #fff;
+    font-weight: normal;
+    font-size: 50px;
+    padding-top: 250px;
+    padding-bottom: 150px;
+}
+
+.login-btn {
+    background: #86ce2f;
+    border-radius: 3px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color:#fff;
+    display: inline-block;
+    text-decoration: none;
+    border: 0;
+    font-size: 18px;
+    margin:auto;
+}
+
+.box{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.flex{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.login-bar {
+    background: #fff;
+    margin-right: 150px;
+    width: 350px;
+}
+
+.login-header h1 {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.login-body form {
+    margin: 0 50px;
+}
+
+.login-body  input[type=text],.login-body  input[type=password] {
+    border: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    display: block;
+}
+
+.forget {
+    text-align:right;
+    height: 25px;
+    line-height: 25px;;
+    margin-bottom: 30px;
+}
+
+.forget a {
+    color: #ccc;
+    font-size: 13px;
+}
+
+.wrong-bar {
+    background: url(../images/0_07.png) left center no-repeat;
+    background-size: 15px 15px;
+    color: #f60;
+    line-height: 18px;
+    padding: 5px 0 5px 20px;
+    font-size: 12px;
+    margin: 0 50px;
+}
+

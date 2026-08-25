@@ -1,0 +1,60 @@
+<!-- 
+@url: pages/shouyeGroup/bargain/index
+@description: 砍价
+@author: crj
+@date: 2020/08/24
+ -->
+<view id="bargain">
+	<!-- <van-image width="100%" fit="widthFix" src="{{imgSrc}}" /> -->
+	<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" wx:if="{{imageList.length}}">
+		<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+			<image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" bindtap="goAds"></image>
+		</swiper-item>
+	</swiper>
+	<!-- <text class="title">分享商品，享佣金</text> -->
+	<view class="item" wx:for="{{goodsList}}" wx:key="index" data-id='{{item}}' catchtap="goodsClick">
+		<van-image style="margin: 0 30rpx;" width="240rpx" height="240rpx" src="{{item.wrapperPhoto ||'/images/no-pic.png'}}" />
+		<view class="item-right">
+			<view style="width:90%" class="van-multi-ellipsis--l2">
+				{{item.title}}
+			</view>
+			<view class="item-center">
+				<view class="gray_clr"><text class="label">砍价成功</text>{{item.cutMemberNum}}件</view>
+			</view>
+			<view class="item-bottom">
+				<!-- <image src="../../../images/shareBg.png" class="item-bottom-left">
+          <text class="item-bottom-left-title">分享赚</text>
+          <text class="item-bottom-left-num">{{item.comm}}元</text>
+        </image> -->
+				<view class="price-box">
+					<text class="item-center-two">￥</text>
+					<text class="item-center-three">{{item.bigPrice}}</text>.{{item.smallPrice}}
+					<!-- <van-tag type="warning" color="#fff4e1" text-color="#fea372">{{item.extendCon}}人拼团</van-tag> -->
+				</view>
+				<view class="btn-box">
+				
+					<button  class="btn"   catchtap="handlePopup"  data-pkey="{{item.spaces[0].pkey}}" data-img="{{item.wrapperPhoto}}" >{{item.btnTxt}}</button>
+				</view>
+
+
+				<!-- <button color="#f24539" class="btn" >
+					发起砍价
+				</button> -->
+
+			</view>
+		</view>
+	</view>
+	<van-popup show="{{ show }}" bind:close="onClose" round closeable close-icon-position="top-right" custom-class="van-popup">
+		<view class="popup-box">
+			<view class="img-box">
+				<image src="{{imgUrl + 'cut_share.png'}}" mode="aspectFit"></image>
+			</view>
+			<view class="label">
+				分享砍价，可多砍一刀
+			</view>
+			<button open-type="share" class="share-btn">邀请好友去砍价</button>
+		</view>
+	</van-popup>
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+</view>

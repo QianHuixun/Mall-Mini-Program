@@ -1,0 +1,58 @@
+<!--pages/shouyeGroup/memberZone/index.wxml-->
+<view id="memer-zone">
+	<!-- <van-image custom-class="top-image" width="100%" height="300rpx" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+  <view class="on-member"> -->
+	<swiper indicator-dots="true" circular="true" indicator-color="#fff" indicator-active-color="#4dce78" autoplay>
+		<swiper-item wx:for="{{imageList}}" wx:key="pkey">
+			<image src="{{item.photo}}" data-urltype="{{item.urlType}}" data-url="{{item.objKey}}" data-jump="{{item.jump}}" bindtap="goAds"></image>
+		</swiper-item>
+	</swiper>
+	<!-- <view class="img-cell">
+		<van-image wx:if="{{userData.level == 'ORDINARY_MEMBER'}}" lazy-load fit="cover" width="693rpx" height="95rpx"
+			src="/images/memberzone_member_ads.png" custom-class="lj-image" bind:click="goVip"></van-image>
+		<van-image wx:else lazy-load fit="cover" width="693rpx" height="95rpx" src="/images/memberzone_member_ads_xufei.png"
+			custom-class="lj-image" bind:click="goVip"></van-image>
+	</view> -->
+	<van-grid column-num="5" border="{{false}}" icon-size="100rpx" custom-class="lj-grid">
+		<van-grid-item wx:for="{{gtypeList}}" wx:key="index" icon="{{item.photo}}" text="{{item.name}}"
+			link-type="navigateTo" url="/pages/shouyeGroup/goodsList/index?pkey={{item.pkey}}&mType=MEMBER_GOODS" />
+	</van-grid>
+	<view class="seg-view">
+		<view class="seg">
+			<van-image src="/images/integral/seg_orange_left.png" width="216rpx" height="29rpx" />
+		</view>
+		<text>精选年卡商品</text>
+		<view class="seg">
+			<van-image src="/images/integral/seg_orange_right.png" width="216rpx" height="29rpx" />
+		</view>
+	</view>
+	<view class="content">
+		<view class="item" wx:for="{{goodsList}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+			<view class="top-view">
+				<van-icon name="/images/jp.png" size="24rpx" />
+				<text>年卡精选</text>
+			</view>
+			<van-image width="95%" height="200rpx" src="{{item.wrapperPhoto || '/images/no-pic.png'}}" />
+			<view class="item-title">{{item.title}}</view>
+			<view class="price-member">
+				<text>会员价:￥</text>
+				<text class="num-member">{{item.priceMember}}</text>
+			</view>
+			<view class="price-ori">
+				<text>原价:</text>
+				<text class="num-ori">￥{{item.priceOld}}</text>
+			</view>
+			<van-button custom-class="btn" color="#d7a73c" round type="info" data-pkey="{{item.pkey}}"
+				data-space="{{item.spaces[0].pkey}}" catchtap="getSpaceNumber">加入购物车</van-button>
+		</view>
+	</view>
+	<view style="text-align: center;margin: 24rpx;color:#5C5C5C;font-size:24rpx;" class="note_text">
+		<view wx:if="{{loadingBom}}">加载中...</view>
+		<view wx:if="{{noMoreBom}}">没有更多了</view>
+	</view>
+	<!-- 加入购物车 动画效果 -->
+	<!-- <go-cart id="goCartView" isIcon="{{ true }}"></go-cart> -->
+	<!-- 规格选择弹出层 -->
+	<space-dialog id="spaceView" isVip="{{true}}" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+		isbindAddCart="{{true}}"></space-dialog>
+</view>

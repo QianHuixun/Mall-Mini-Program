@@ -1,0 +1,111 @@
+/* components/shouye/flash-sale/index.wxss */
+.flash-sale {
+    overflow: hidden;
+    margin: 12rpx 24rpx;
+    border-radius: 24rpx;
+    background: linear-gradient(136deg, #FEE4E6 0%, #FFFFFE 64%, #FFFFFF 100%);
+}
+
+.title-bar {
+    height: 72rpx;
+    padding: 0 24rpx;
+    display: flex;
+    align-items: center;
+    /* background: linear-gradient(0, #FFFFFF 0%, #FFE2E4 100%); */
+}
+
+.title {
+    margin-right: 16rpx;
+    font-family: 黑体;
+    font-weight: bold;
+    font-size: 32rpx;
+    font-style: italic;
+    color: #333333;
+    letter-spacing: 2rpx;
+}
+
+.time-top-item {
+    display: inline-block;
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+    border-radius: 6rpx;
+    text-align: center;
+    background-color: #ED4528;
+    color: #FFFFFF;
+    font-size: 26rpx;
+    line-height: 40rpx;
+}
+
+.time-top-item-text {
+    margin-right: 14rpx;
+    font-size: 30rpx;
+    color: #ED4528;
+    line-height: 40 rpx;
+}
+
+.content {
+    background: transparent;
+    padding: 2rpx 0 16rpx;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    padding: 0 16rpx;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item + .item {
+    margin-left: 10rpx;
+}
+
+.item-image {
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.item-image .image {
+    width: 100%;
+    height: 100%;
+    border-radius: 12rpx;
+}
+
+.item-discount_price {
+    width: 128rpx;
+    height: 32rpx;
+    margin-top: 8rpx;
+    position: relative;
+}
+.item-discount_price .amt {
+    padding-right: 32rpx;
+    text-align: center;
+    font-weight: bold;
+    font-size: 26rpx;
+    color: #ED4528;
+    position: relative;
+    z-index: 1;
+}
+.item-discount_price .image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.item-original_price {
+    margin-top: 2rpx;
+    font-size: 20rpx;
+    color: #999999;
+    text-decoration-line: line-through;
+}
+
+.yuan-sign-20 {
+  font-size: 20rpx;
+}

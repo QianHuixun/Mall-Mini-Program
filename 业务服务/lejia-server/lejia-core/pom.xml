@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <artifactId>lejia-core</artifactId>
+  <packaging>jar</packaging>
+  
+  <parent>
+    <groupId>cn.tofocus.lejia</groupId>
+    <artifactId>lejia</artifactId>
+    <version>4.2.20.Dev-SNAPSHOT</version>
+  </parent>
+  
+ 
+<dependencies>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-db-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus</groupId>
+			<artifactId>tfcloud-server-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.tofocus.lejia</groupId>
+			<artifactId>lejia-common</artifactId>
+		</dependency>
+  </dependencies>
+</project>

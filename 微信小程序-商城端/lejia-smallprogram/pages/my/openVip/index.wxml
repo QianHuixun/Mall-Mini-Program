@@ -1,0 +1,74 @@
+<!-- 
+@url: pages/my/openVip/index.wxml
+@description: 开通会员
+@author: sx
+@date: 2020/07/28
+ -->
+<view id="openVip">
+	<view class="xcx_header">
+		<!-- <image src="/images/my/vip_top.png" class="top_image" mode="widthFix"></image> -->
+		<image src="{{price.memberPhoto1}}" class="top_image" mode="widthFix"></image>
+		<view class="xcx_header__content">
+			<image src="{{price.memberPhoto2}}" class="top_image" mode="widthFix"></image>
+			<image src="{{price.memberPhoto3}}" class="top_image" mode="widthFix"></image>
+			<view class="xcx_header__date" wx:if="{{ userInfo.level == 'PAID_MEMBER' }}">
+				到期时间：{{userInfo.endDate }}
+			</view>
+		</view>
+
+	</view>
+
+	<view class="seg-view">
+		<view class="seg">
+			<van-image src="/images/integral/seg_orange_left.png" width="216rpx" height="29rpx" />
+		</view>
+		<text>精选年卡商品</text>
+		<view class="seg">
+			<van-image src="/images/integral/seg_orange_right.png" width="216rpx" height="29rpx" />
+		</view>
+	</view>
+	<view class="content">
+		<view class="item" wx:for="{{listData}}" wx:key="index" bindtap="goodsClick" data-id='{{item}}'>
+			<view class="top-view">
+				<van-icon name="/images/jp.png" size="24rpx" />
+				<text>年卡精选</text>
+			</view>
+			<van-image width="95%" height="200rpx" src="{{item.wrapperPhoto}}" />
+			<view class="item-title">{{item.title}}</view>
+			<view class="price-member">
+				<text>会员价:￥</text>
+				<text class="num-member">{{item.price}}</text>
+			</view>
+			<view class="price-ori">
+				<text>原价:</text>
+				<text class="num-ori">￥{{item.priceOld}}</text>
+			</view>
+			<van-button custom-class="btn" color="#d7a73c" round type="info" catchtap="getSpaceNumber"
+				data-pkey="{{item.pkey}}" data-space="{{item.spaces[0].pkey}}">加入购物车</van-button>
+		</view>
+	</view>
+	<!-- 底部按钮 -->
+	<view class="xcx_bottom__btn">
+		<view class="xcx_header__btn___text">
+			￥<text class="price">{{price.memberPriceN}}</text>
+			<text class="del_text">原价:{{price.memberPrice}}</text>
+		</view>
+		<van-goods-action custom-class="new-action" text-class="new-action-text">
+			<van-goods-action-button text="" color="linear-gradient(180deg,	#f5dbaa 0%,	#d6b681 100%);" type="warning"
+				bind:click="handlePay" />
+			<van-goods-action-button text="{{ userInfo.level == 'PAID_MEMBER' ? '马上续费' : '立即开通' }}"
+				color="linear-gradient(180deg,	#515253 0%, #333435 100%);" bind:click="handlePay" />
+		</van-goods-action>
+		<view class="xcx_header__btn__icon">
+			<image src="/images/my/i_vip_zhuanxiang.png" class="top_icon" mode="widthFix"></image>
+		</view>
+	</view>
+	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<space-dialog id="spaceView" isShow="{{ isShow }}" iShidden="{{ iShidden }}" bind:addCart="handleAddTOCart"
+		isbindAddCart="{{true}}"></space-dialog>
+	<!-- <go-cart id="goCartView" isIcon="{{ true }}"></go-cart> -->
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

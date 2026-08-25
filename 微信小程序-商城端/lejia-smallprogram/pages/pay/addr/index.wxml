@@ -1,0 +1,56 @@
+<!-- 
+@url: pages/pay/addr/index.wxml
+@description: 可选地址
+@author: sx
+@date: 2020/07/23
+ -->
+<view id="address">
+	<view class="list_contaner">
+		<block wx:if="{{datalist.length == 0 }}">
+			<view class="no_tips">暂无收货地址，请新增收货地址</view>
+		</block>
+		<block wx:for="{{datalist}}" wx:key="index" wx:if="datalist.length > 0">
+			<van-cell-group bindtap="addrChoose" data-index="{{index}}">
+				<van-cell class="{{!isPrize?( hasMarket && !item.enabled && !isPickup ? 'unabled' : ''):''}}">
+					<view slot="title">
+						<view class="address_box">
+							<view class="address_icon" wx:if="{{item.checked}}">
+								<van-icon name="checked" color="#3ccf8a" size="40rpx" />
+							</view>
+							<view class="address_icon" wx:else>
+								<van-icon name="circle" size="40rpx"/>
+							</view>
+							<view class="address_left">
+							
+								<view class="addr_line">
+									{{isPickup ? item.name : (item.addrDetail ? item.addrDetail : '')}} 
+                  	<van-tag type="success" wx:if="{{item.defaultAddr }}">默认</van-tag>
+								</view>
+                <view class="name_line">
+									<text wx:if="{{!isPickup}}">{{item.name}}</text>
+									<text>{{item.mobile}}</text>
+								</view>
+							</view>
+							<view class="address_right" catchtap="handleEdit" data-value="{{item.pkey}}">
+								<van-icon name="/images/pay/edit_icon.png"  size="32rpx"/>
+							</view>
+						</view>
+					</view>
+				</van-cell>
+			</van-cell-group>
+
+		</block>
+	</view>
+
+	<view class="action_container">
+		<van-goods-action safe-area-inset-bottom="{{ true }}">
+			<!-- <van-goods-action-button icon="plus" text="新增收货地址" bind:click="onClickButton" link-type="navigateTo" url="/pages/my/address/edit/index?type=add" /> -->
+      <van-button round block icon="plus" color="#0DAE4E" type="primary" bind:click="handleAddClick">
+       {{ isPickup ? '新增自提人' : '新增收货地址'}}
+      </van-button>  
+		</van-goods-action>
+	</view>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

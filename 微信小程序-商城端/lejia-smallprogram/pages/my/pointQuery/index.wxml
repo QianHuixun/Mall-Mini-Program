@@ -1,0 +1,60 @@
+<!-- 
+@url: pages/my/pointQuery/index.wxml
+@description: 积分查询
+@author: sx
+@date: 2020/07/28
+ -->
+<view id="pointQuery">
+	<!-- 头部积分数 -->
+	<view class="header-cell">
+		<view class="tips">可用积分</view>
+		<view class="point">{{pointData.points}}</view>
+		<view class="tips">累计积分{{pointData.accumulatedPoints}}</view>
+		<image src="{{imgUrl + 'pointQuery_bg.png'}}" class="header-bg"></image>
+	</view>
+	<!-- 中间图标 -->
+	<view class="icon-cell">
+		<view class="icon-li" bindtap="goIntegral">
+			<van-icon name="/images/my/i_shangcheng.png" size="95rpx" />
+			<view class="text">
+				积分商城
+			</view>
+		</view>
+		<view class="icon-li" bindtap="goSignin">
+			<van-icon name="/images/my/i_qiandao.png" size="95rpx" />
+			<view class="text">
+				签到领积分
+			</view>
+		</view>
+		<!-- <view class="icon-li" bindtap="goLottery">
+			<van-icon name="/images/my/i_jifen.png" size="95rpx" />
+			<view class="text">
+				积分抽奖
+			</view>
+		</view> -->
+	</view>
+	<!-- 积分记录 -->
+	<view class="list-cell">
+		<view class="list-container">
+			<view class="list-li" wx:for="{{datalist}}" wx:key="index">
+				<view class="list-l">
+					<view class="list-l_title">
+						<text>{{item.sourceName}}</text>
+					</view>
+					<view class="list-l_tips">
+						<view class="list-l_tips__date gray_clr">{{item.createdTime}}</view>
+						<view class="list-l_tips_code gray_clr" wx:if="{{item.source == 'POINTS_BUY' || item.source =='POINTS_CONSUMPTION'}}">
+							订单编号: {{item.formId}}
+						</view>
+					</view>
+				</view>
+				<view class="list-r {{item.direct ? 'plus' : 'minus'}}">{{item.direct ? '+' : '-'}}{{item.points}}</view>
+			</view>
+		</view>
+	</view>
+	<!-- 加载更多 -->
+	<load-more id="loadMoreView" bindloadMoreListener='loadMoreListener' bindclickLoadMore='clickLoadMore'></load-more>
+	<!-- 在页面的任意位置 加上这个组件并绑定 onLoadFun函数 和 isAuto 为授权不会自动登录默认值为：false
+iShidden=true 隐藏授权 -->
+	<authorize bind:onLoadFun="onLoadFun" isAuto="{{ isAuto }}" iShidden="{{ iShidden }}"></authorize>
+</view>

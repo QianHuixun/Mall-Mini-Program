@@ -1,0 +1,56 @@
+
+.tixian{
+  padding:0 30rpx
+}
+
+.from-box{
+  margin-top: 40rpx;
+  padding: 20rpx 20rpx 40rpx 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  color:#333;
+  background: #ffffff;
+}
+.from-box .bank-num{
+  display: inline-block;
+  padding-left: 16rpx;
+  color: #1989fa;
+}
+
+.van-field{
+  padding-left: 0 !important;
+}
+.van-field--label{
+  min-width: auto !important;
+  max-width: auto !important;
+  flex: 0 !important;
+  padding-right: 20rpx;
+  font-size:40rpx;
+  text-align: center;
+}
+.van-cell--label{
+  padding-left: 0 !important;
+}
+.from-box .submit-btn--box{
+  padding-top: 60rpx;
+  text-align: center;
+}
+.submit-btn{
+  width: 90% !important;
+  
+}
+.tips-box{
+  margin-top:30rpx;
+  font-size: 32rpx;
+  line-height: 40rpx;
+}
+.tips-box .label{
+  color: #e1082d;
+}
+.tips-box .txt{
+  color: #999999;
+}
+.bank-info-box{
+  white-space:nowrap;
+  flex:0 1 auto !important;
+}

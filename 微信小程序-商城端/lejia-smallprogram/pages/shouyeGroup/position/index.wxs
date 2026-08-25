@@ -1,0 +1,13 @@
+var filter = {
+  /**
+   * @desc 米转化成千米
+   * @param value 数字
+   */
+  mToKm: function (value) {
+    return (value / 1000).toFixed(2)
+  },
+}
+
+module.exports = {
+  mToKm: filter.mToKm,
+}
